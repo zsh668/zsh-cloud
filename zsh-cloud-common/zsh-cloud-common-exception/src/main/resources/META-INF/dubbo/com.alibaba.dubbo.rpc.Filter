@@ -1,0 +1,1 @@
+dubboExceptionFitler=com.zsh.cloud.common.exception.dubbo.DubboExceptionFilter

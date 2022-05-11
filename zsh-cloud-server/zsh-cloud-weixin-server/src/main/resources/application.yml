@@ -1,0 +1,27 @@
+server:
+  port: 9000
+  servlet:
+    context-path: /
+
+
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /statics/**
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zsh-cloud?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+mybatis-plus:
+  mapper-locations: classpath*:com/zsh/cloud/wx/infrastructure/persistence/mapper/xml/*Mapper.xml
+  type-aliases-package: entity
+  global-config:
+    db-config:
+      id-type: assign_id
+    banner: false

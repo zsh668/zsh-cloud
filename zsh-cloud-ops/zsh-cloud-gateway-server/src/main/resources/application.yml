@@ -1,0 +1,80 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /
+
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # 获取JWT验签公钥请求路径
+          jwk-set-uri: 'http://localhost:8100/getPublicKey'
+
+  cloud:
+    gateway:
+      routes:
+        # 认证中心
+        - id: zsh-cloud-auth-server
+          uri: lb://zsh-cloud-auth-server
+          predicates:
+            - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<segment>.*), /$\{segment}
+
+        # 用户
+        - id: zsh-cloud-system-server
+          uri: lb://zsh-cloud-system-server
+          predicates:
+            - Path=/system/**
+          filters:
+            - RewritePath=/system/(?<segment>.*), /$\{segment}
+
+        # 微信
+        - id: zsh-cloud-weixin-server
+          uri: lb://zsh-cloud-weixin-server
+          predicates:
+            - Path=/wechat/**
+          filters:
+            - RewritePath=/wechat/(?<segment>.*), /$\{segment}
+
+        # 监控admin
+        - id: zsh-cloud-monitor-server
+          uri: lb://zsh-cloud-monitor-server
+          predicates:
+            - Path=/monitor/**
+          filters:
+            - RewritePath=/monitor/(?<segment>.*), /$\{segment}
+
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+
+  sleuth:
+    sampler:
+      probability: 1 # 采样率100%
+
+  zipkin:
+    base-url: http://localhost:9411/ # Zipkin Server 地址
+    discovery-client-enabled: false #让nacos把它当成一个URL，而不要当做服务名
+    message-timeout: 5
+    sender:
+      type: web
+
+# 配置白名单路径
+secure:
+  white:
+    urls:
+      - "/auth/**"
+      - "/actuator/**"
+      - "/*/v3/api-docs/**"
+      - "/doc.html"
+      - "/webjars/**"
+      - "/swagger-resources"
+      - "/assets/**"
+      - "/favicon.ico"
