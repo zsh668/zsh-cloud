@@ -1,0 +1,54 @@
+// 明文消息
+<xml><ToUserName><![CDATA[gh_235a01562754]]></ToUserName>
+<FromUserName><![CDATA[oPH0X55uXOiUSA_Sp7pxySEEc0cQ]]></FromUserName>
+<CreateTime>1647420101</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[/::)/::)]]></Content>
+<MsgId>23585383854118150</MsgId>
+</xml>
+// 兼容模式
+<xml>
+    <ToUserName><![CDATA[gh_235a01562754]]></ToUserName>
+    <FromUserName><![CDATA[oPH0X55uXOiUSA_Sp7pxySEEc0cQ]]></FromUserName>
+    <CreateTime>1647420036</CreateTime>
+    <MsgType><![CDATA[text]]></MsgType>
+    <Content><![CDATA[/::)/::)/::)]]></Content>
+    <MsgId>23585384958881066</MsgId>
+    <Encrypt><![CDATA[BxF/7YhlzYNVcecey8GOMaANySGzNVWxc+YywV+Zj/qeq2K5k9KsSCnSOJV/08wKoTEK4wlpOJ16t8Z2LTgR3DT9Cuvh2hBl8QalJiK/vxZpsIKh3KyuA+QHOm00rUD/MJ3cfGT+yEg7uufVGI6/3U3K0MFKOkQXwgEhMt8EiLyj3CZVlRUT0/fnKFIeRSj7VDguMERq25Z7tE+UaUQm8Nragxo/8bB+9qtDOMyhC19hro0naUQrLP2LQPi4K8sZzCHvvWGuT62w4eSei6e9+jS4jgxKsLD1fbTXeJeqjMASf8zvjSv9Fl/LAayQfi0yrbnoziY960YxoKbYVQnv86By9HLODIlNHNSm432xuy3MJy3Q2cbCV8v8FgYv9jqiBK/guGaFQpCVU86zLyICBRaCaqPbRIOL8A/FvbC3GT0/z1sg3U9m76fzLYg+0ZIH/cLLrHX9zC4gTefTo5KpcA==]]></Encrypt>
+</xml>
+
+// 安全模式
+<xml>
+    <ToUserName><![CDATA[gh_235a01562754]]></ToUserName>
+    <Encrypt><![CDATA[oC37xRJKF+9FIZQv930eHjzPsqUQElA9EcEtCv0tZBKa0Iy0eaCdFyOeDD1WZK79N+oaWplXm1au+A2EaG/vQa38uV12ww9yOm2R34j/BU5u6WW0NrlgTDiuahf0xFWypzyI/PBWFJsdDxl0CC+MheCa1U27NXca+ltaiCk/e3/RzJtisLBogd6wNbhz6gma4JUMfzpLXcsZlbJeEkK/sWX/luvNzK6TsIKXx+2gBXF5ciLFXGGHeHa9TFUvjM8YWsmCHMUXix5qfVc6OCkq9ARr3pTG9o4g8Yxph/Ri2BuOveywDc1MzEBN2p0h3hKzw9O3uvPhC103JO0vszK5yJbjtbx/n8QXj4gUVK9/MMK3UduhthBHSJX3V9l277DvI+eizP+jqHIi1ZUj57s6GBkeSwBfGWEoyCqvWj4Ezb8=]]></Encrypt>
+</xml>
+
+
+// 取消关注
+<xml><ToUserName><![CDATA[gh_235a01562754]]></ToUserName>
+<FromUserName><![CDATA[oPH0X55uXOiUSA_Sp7pxySEEc0cQ]]></FromUserName>
+<CreateTime>1647420171</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[unsubscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+
+// 关注
+<xml><ToUserName><![CDATA[gh_235a01562754]]></ToUserName>
+<FromUserName><![CDATA[oPH0X55uXOiUSA_Sp7pxySEEc0cQ]]></FromUserName>
+<CreateTime>1647420265</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+
+//上报地理位置事件
+<xml><ToUserName><![CDATA[gh_f203c4d1372a]]></ToUserName>
+<FromUserName><![CDATA[o-En76kt4BbgDPyzJpUXPkHcuBKw]]></FromUserName>
+<CreateTime>1647420676</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[LOCATION]]></Event>
+<Latitude>39.996937</Latitude>
+<Longitude>116.477356</Longitude>
+<Precision>35.000000</Precision>
+</xml>

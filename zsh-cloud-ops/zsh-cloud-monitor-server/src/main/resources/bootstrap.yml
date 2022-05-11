@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: zsh-cloud-monitor-server
+
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      config:
+        # 分组名称
+        group: DEFAULT_GROUP
+        # 命名空间ID
+        namespace: 9af03680-d667-47c6-9b1d-bc5f88bfd5fd
+        file-extension: yaml
+      discovery:
+        namespace: 9af03680-d667-47c6-9b1d-bc5f88bfd5fd
+
+management:
+  health:
+    redis:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"

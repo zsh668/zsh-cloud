@@ -1,0 +1,15 @@
+server:
+  port: 5001
+  servlet:
+    context-path: /
+
+spring:
+  security:
+    user:
+      name: "admin"
+      password: "admin"
+
+  boot:
+    admin:
+      ui:
+        title: ZshCloud监控服务

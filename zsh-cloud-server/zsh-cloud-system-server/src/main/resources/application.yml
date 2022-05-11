@@ -1,0 +1,63 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+  sleuth:
+    sampler:
+      probability: 1 # 采样率100%
+
+  zipkin:
+    enabled: false
+    base-url: http://localhost:9411/ # Zipkin Server 地址
+    discovery-client-enabled: false #让nacos把它当成一个URL，而不要当做服务名
+    message-timeout: 5
+    sender:
+      type: web
+
+dubbo:
+  application:
+    id: zsh-cloud-system-server
+    name: zsh-cloud-system-server
+    qos-enable: false
+  registry:
+    address: nacos://localhost:8848
+    check: false
+    parameters:
+      # 命名空间ID
+      namespace: 9af03680-d667-47c6-9b1d-bc5f88bfd5fd
+  protocol:
+    name: dubbo
+    port: -1
+  provider:
+    filter: dubboExceptionFitler,-exception
+  scan:
+    basePackages: com.zsh.cloud.system.application
+
+zsh:
+  cloud:
+    tenant:
+      ignore-urls:
+        - /auth/*
+      ignore-tables:
+        - "sys_tenant"
+        - "sys_account"
+        - "sys_menu"
+        - "sys_resource"
+    swagger:
+      title: zsh-cloud
+      description: zsh-cloud是一款基于DDD领域模型设计并支持SaaS平台的微服务框架
+      terms-of-service-url: https://www.zsh6.com
+      author: zsh
+      version: 1.0.0
+      base-package: com.zsh.cloud

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.zsh.cloud</groupId>
+        <artifactId>zsh-cloud</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>zsh-cloud-common</artifactId>
+    <packaging>pom</packaging>
+    
+    <name>${project.artifactId}</name>
+    <description>
+        通用模块
+    </description>
+    
+    <modules>
+        <module>zsh-cloud-common-core</module>
+        <module>zsh-cloud-common-exception</module>
+        <module>zsh-cloud-common-log</module>
+        <module>zsh-cloud-common-mybatis</module>
+        <module>zsh-cloud-common-redis</module>
+        <module>zsh-cloud-common-swagger</module>
+        <module>zsh-cloud-common-tenant</module>
+        <module>zsh-cloud-common-web</module>
+        <module>zsh-cloud-common-weixin</module>
+    </modules>
+    
+    <dependencies>
+        <dependency>
+            <!-- 用于生成自定义的 Spring @ConfigurationProperties 配置类的说明文件 -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+</project>
