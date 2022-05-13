@@ -20,12 +20,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DataScopeAutoConfiguration {
     
-    @Bean
-    public SpringUtils getSpringUtils(ApplicationContext applicationContext) {
-        SpringUtils.setApplicationContext(applicationContext);
-        return new SpringUtils();
-    }
-    
     /**
      * 数据权限插件.
      *

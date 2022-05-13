@@ -1,5 +1,6 @@
 package com.zsh.cloud.common.core.exception.code.enums;
 
+import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.exception.code.BaseErrorCode;
 
 /**
@@ -9,7 +10,7 @@ import com.zsh.cloud.common.core.exception.code.BaseErrorCode;
  * @version 1.0
  * @date 2022/03/14 10:28
  */
-public enum GlobalErrorCode implements BaseErrorCode {
+public enum GlobalErrorCode implements BaseErrorCode, IDict<Integer> {
     
     SUCCESS(0, "成功"),
     
@@ -20,6 +21,8 @@ public enum GlobalErrorCode implements BaseErrorCode {
     NOT_FOUND(404, "请求未找到"),
     
     METHOD_NOT_ALLOWED(405, "请求方法不正确"),
+    
+    REPETITIVE_OPERATION(408, "重复操作"),
     
     INTERNAL_SERVER_ERROR(500, "服务繁忙"),
     
@@ -35,17 +38,18 @@ public enum GlobalErrorCode implements BaseErrorCode {
     
     MISS_HEADER(529, "请求头缺失");
     
-    private int code;
+    private Integer code;
     
     private String msg;
     
     GlobalErrorCode(int code, String msg) {
+        init(code, msg);
         this.code = code;
         this.msg = msg;
     }
     
     @Override
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
     

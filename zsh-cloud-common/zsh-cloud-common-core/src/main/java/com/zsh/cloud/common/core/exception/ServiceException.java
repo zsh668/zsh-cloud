@@ -1,5 +1,7 @@
 package com.zsh.cloud.common.core.exception;
 
+import com.zsh.cloud.common.core.exception.code.BaseErrorCode;
+
 /**
  * 业务逻辑异常.
  *
@@ -9,11 +11,15 @@ package com.zsh.cloud.common.core.exception;
  */
 public class ServiceException extends BaseUncheckedException {
     
-    public ServiceException(int code, String message) {
+    public ServiceException(BaseErrorCode errorCode) {
+        super(errorCode);
+    }
+    
+    public ServiceException(Integer code, String message) {
         super(code, message);
     }
     
-    public ServiceException(int code, String format, Object... args) {
+    public ServiceException(Integer code, String format, Object... args) {
         super(code, format, args);
     }
 }

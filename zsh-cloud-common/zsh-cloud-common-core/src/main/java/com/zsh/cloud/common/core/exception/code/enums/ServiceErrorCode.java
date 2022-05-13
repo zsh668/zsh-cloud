@@ -1,5 +1,6 @@
 package com.zsh.cloud.common.core.exception.code.enums;
 
+import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.exception.code.BaseErrorCode;
 
 /**
@@ -19,23 +20,24 @@ import com.zsh.cloud.common.core.exception.code.BaseErrorCode;
  * @version 1.0
  * @date 2022/3/24 17:30
  */
-public enum ServiceErrorCode implements BaseErrorCode {
+public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     // 模块 system 【000】 用户 【000】错误码 【000~999】
     USER_NOT_EXISTS(1000000000, "用户不存在"),
     USER_PASSWORD_ERROR(1000000001, "密码不正确"),
     ;
     
-    private int code;
+    private Integer code;
     
     private String msg;
     
-    ServiceErrorCode(int code, String msg) {
+    ServiceErrorCode(Integer code, String msg) {
+        init(code, msg);
         this.code = code;
         this.msg = msg;
     }
     
     @Override
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
     

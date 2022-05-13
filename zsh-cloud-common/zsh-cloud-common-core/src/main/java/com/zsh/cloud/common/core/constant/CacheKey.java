@@ -33,6 +33,11 @@ public interface CacheKey {
     String TOKEN_BLACKLIST_PREFIX = "auth:token:blacklist";
     
     /**
+     * 重复请求 前缀
+     */
+    String REPEAT_REQUEST_REDIS_KEY = "repeat_request_redis_key:";
+    
+    /**
      * 构建key
      */
     static String buildKey(Object... args) {

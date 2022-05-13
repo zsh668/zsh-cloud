@@ -46,7 +46,7 @@ public class ResourceQueryServiceImpl implements ResourceQueryService {
         List<SysResourceDO> sysResourceDOList;
         if (new UserId(userId).isSysAdmin()) {
             sysResourceDOList = sysResourceMapper.selectList(
-                    new LbqwExt<SysResourceDO>().eq(SysResourceDO::getStatus, StatusEnum.ENABLE.getValue()));
+                    new LbqwExt<SysResourceDO>().eq(SysResourceDO::getStatus, StatusEnum.ENABLE.getCode()));
         } else {
             sysResourceDOList = sysResourceMapper.queryResourceByUserId(userId);
         }

@@ -14,7 +14,7 @@ public interface BaseErrorCode {
      *
      * @return
      */
-    int getCode();
+    Integer getCode();
 
     /**
      * 异常消息
