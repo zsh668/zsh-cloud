@@ -1,4 +1,4 @@
-package com.zsh.cloud.common.mybatis.constant;
+package com.zsh.cloud.common.mybatis.core.constant;
 
 /**
  * SQL常量

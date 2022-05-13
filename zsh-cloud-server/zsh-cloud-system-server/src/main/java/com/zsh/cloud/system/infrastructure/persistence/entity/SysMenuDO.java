@@ -3,7 +3,7 @@ package com.zsh.cloud.system.infrastructure.persistence.entity;
 import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.zsh.cloud.common.mybatis.entity.BaseDO;
+import com.zsh.cloud.common.mybatis.core.entity.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

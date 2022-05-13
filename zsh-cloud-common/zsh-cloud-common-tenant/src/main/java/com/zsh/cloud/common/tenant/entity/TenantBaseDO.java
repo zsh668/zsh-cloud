@@ -1,6 +1,6 @@
 package com.zsh.cloud.common.tenant.entity;
 
-import com.zsh.cloud.common.mybatis.entity.BaseDO;
+import com.zsh.cloud.common.mybatis.core.entity.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

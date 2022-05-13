@@ -1,14 +1,15 @@
-package com.zsh.cloud.common.mybatis.mapper;
+package com.zsh.cloud.common.mybatis.core.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import com.zsh.cloud.common.core.dto.PageQuery;
-import com.zsh.cloud.common.mybatis.conditions.query.LbqwExt;
-import com.zsh.cloud.common.mybatis.conditions.query.QwExt;
 import com.zsh.cloud.common.core.domain.Page;
+import com.zsh.cloud.common.core.dto.PageQuery;
+import com.zsh.cloud.common.mybatis.core.query.LbqwExt;
+import com.zsh.cloud.common.mybatis.core.query.QwExt;
+import com.zsh.cloud.common.mybatis.datascope.annotations.DataScope;
 import com.zsh.cloud.common.mybatis.util.MyBatisUtils;
 import com.zsh.cloud.common.mybatis.util.PageAssembler;
 import org.apache.ibatis.annotations.Param;

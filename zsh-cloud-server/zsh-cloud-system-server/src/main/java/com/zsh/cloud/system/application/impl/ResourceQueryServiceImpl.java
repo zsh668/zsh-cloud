@@ -1,9 +1,7 @@
 package com.zsh.cloud.system.application.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.zsh.cloud.common.core.enums.StatusEnum;
-import com.zsh.cloud.common.mybatis.conditions.query.LbqwExt;
+import com.zsh.cloud.common.mybatis.core.query.LbqwExt;
 import com.zsh.cloud.system.application.ResourceQueryService;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysResourceDO;
@@ -11,7 +9,6 @@ import com.zsh.cloud.system.infrastructure.persistence.mapper.SysResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;

@@ -11,8 +11,10 @@
     <artifactId>zsh-cloud-common-j2cache</artifactId>
     
     <name>zsh-cloud-common-j2cache</name>
-    <description>zsh-cloud-common-j2cache</description>
-
+    <description>
+        j2cache缓存
+    </description>
+    
     
     <dependencies>
         <dependency>
@@ -20,12 +22,12 @@
             <artifactId>zsh-cloud-common-core</artifactId>
             <version>${revision}</version>
         </dependency>
-    
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-    
+        
         <dependency>
             <groupId>net.oschina.j2cache</groupId>
             <artifactId>j2cache-spring-boot2-starter</artifactId>
@@ -45,14 +47,5 @@
             </exclusions>
         </dependency>
     </dependencies>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

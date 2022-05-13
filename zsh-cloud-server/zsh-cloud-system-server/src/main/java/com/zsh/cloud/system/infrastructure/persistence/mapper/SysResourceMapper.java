@@ -1,6 +1,6 @@
 package com.zsh.cloud.system.infrastructure.persistence.mapper;
 
-import com.zsh.cloud.common.mybatis.mapper.BaseMapperExt;
+import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysResourceDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

@@ -4,6 +4,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 配置.
+ *
  * @author zhangshuhang
  * @version 1.0
  * @date 2022/5/11 16:18
