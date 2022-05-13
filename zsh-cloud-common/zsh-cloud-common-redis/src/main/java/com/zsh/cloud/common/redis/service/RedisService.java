@@ -13,7 +13,9 @@ import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -34,15 +36,16 @@ import java.util.function.Consumer;
  * @date 2022/4/19 17:16
  */
 @Slf4j
+@Component
 public class RedisService {
     
-    @Autowired
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
     
-    @Autowired
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
     
-    @Autowired
+    @Resource
     private RedissonClient redissonClient;
     
     /**

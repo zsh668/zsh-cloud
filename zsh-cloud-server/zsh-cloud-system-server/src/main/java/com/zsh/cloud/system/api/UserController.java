@@ -7,6 +7,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.excel.ExportExcel;
 import com.zsh.cloud.common.web.group.AddGroup;
 import com.zsh.cloud.common.web.group.UpdateGroup;
+import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.UserQueryService;
 import com.zsh.cloud.system.application.command.PasswordCommand;
@@ -51,6 +52,7 @@ public class UserController {
     /**
      * 用户分页查询
      */
+    @Translator
     @ApiOperation("分页查询用户")
     @ExportExcel(fileName = "用户")
     @GetMapping("page")

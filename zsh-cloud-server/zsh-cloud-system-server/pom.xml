@@ -61,6 +61,12 @@
         </dependency>
         
         <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-redis</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>

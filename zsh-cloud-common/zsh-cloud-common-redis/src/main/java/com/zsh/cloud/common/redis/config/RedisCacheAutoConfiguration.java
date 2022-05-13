@@ -9,15 +9,17 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import com.zsh.cloud.common.redis.service.RedisService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
@@ -39,11 +41,14 @@ import java.util.stream.Stream;
  */
 @EnableCaching
 @Configuration
-@Import(RedisService.class)
+@ConditionalOnBean(RedisCacheManager.class)
 public class RedisCacheAutoConfiguration extends CachingConfigurerSupport {
     
     @Value("${spring.application.name:unknown}")
     private String appName;
+    
+    @Autowired
+    private RedisCacheManager redisCacheManager;
     
     /**
      * 注入RedisTemplate.
@@ -74,6 +79,11 @@ public class RedisCacheAutoConfiguration extends CachingConfigurerSupport {
         redisTemplate.setHashValueSerializer(genericJackson2JsonRedisSerializer);
         redisTemplate.setConnectionFactory(factory);
         return redisTemplate;
+    }
+    
+    @Override
+    public CacheManager cacheManager() {
+        return redisCacheManager;
     }
     
     /**
