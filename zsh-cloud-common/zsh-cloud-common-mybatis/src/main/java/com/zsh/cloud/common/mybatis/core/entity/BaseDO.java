@@ -1,4 +1,4 @@
-package com.zsh.cloud.common.mybatis.entity;
+package com.zsh.cloud.common.mybatis.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;

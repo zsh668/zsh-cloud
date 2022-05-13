@@ -1,4 +1,4 @@
-package com.zsh.cloud.common.mybatis.handler;
+package com.zsh.cloud.common.mybatis.core.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.zsh.cloud.common.core.util.RequestUtils;

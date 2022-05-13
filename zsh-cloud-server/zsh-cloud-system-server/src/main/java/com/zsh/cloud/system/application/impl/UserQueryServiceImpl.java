@@ -1,6 +1,7 @@
 package com.zsh.cloud.system.application.impl;
 
-import com.zsh.cloud.common.mybatis.conditions.query.LbqwExt;
+import com.zsh.cloud.common.mybatis.datascope.domain.DataPermission;
+import com.zsh.cloud.common.mybatis.core.query.LbqwExt;
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.system.application.UserQueryService;
 import com.zsh.cloud.system.application.assembler.UserDTOAssembler;
@@ -13,6 +14,10 @@ import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 用户查询服务实现类.
@@ -32,7 +37,9 @@ public class UserQueryServiceImpl implements UserQueryService {
     
     @Override
     public Page<SysUserDO> queryPage(UserPageQuery query) {
-        Page<SysUserDO> page = sysUserMapper.selectPage(query, new LbqwExt<SysUserDO>());
+        Set<String> orgIds = new HashSet<>();
+        orgIds.add(query.getOrgId());
+        Page<SysUserDO> page = sysUserMapper.selectPage(query, orgIds);
         return page;
     }
     
@@ -40,11 +47,19 @@ public class UserQueryServiceImpl implements UserQueryService {
     public UserDTO find(String userId) {
         User user = userRepository.find(new UserId(userId));
         UserDTO userDTO = UserDTOAssembler.fromUser(user);
-//        SysTenantDO tenantDO = sysTenantMapper.selectById(user.getTenantId());
-//        userDTO.setTenantName(tenantDO.getTenantName());
-//        userDTO.setPermissionCodes(permissionQueryService.getPermissionCodes(userId));
-//        userDTO.setPermissionIds(permissionQueryService.getPermissionIds(userId));
-//        userDTO.setTenants(getUserTenants(userId));
+        //        SysTenantDO tenantDO = sysTenantMapper.selectById(user.getTenantId());
+        //        userDTO.setTenantName(tenantDO.getTenantName());
+        //        userDTO.setPermissionCodes(permissionQueryService.getPermissionCodes(userId));
+        //        userDTO.setPermissionIds(permissionQueryService.getPermissionIds(userId));
+        //        userDTO.setTenants(getUserTenants(userId));
         return userDTO;
+    }
+    
+    @Override
+    public DataPermission getDataScopeById(String userId) {
+        DataPermission dataPermission = new DataPermission();
+        dataPermission.setOrgIds(Arrays.asList("2", "3", "4"));
+        dataPermission.setDsType(2);
+        return dataPermission;
     }
 }

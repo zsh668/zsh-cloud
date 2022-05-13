@@ -1,9 +1,8 @@
-package com.zsh.cloud.common.mybatis.conditions.query;
+package com.zsh.cloud.common.mybatis.core.query;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import org.springframework.util.StringUtils;
 
 import java.util.Collection;
@@ -15,9 +14,9 @@ import java.util.Collection;
  *
  * @author zhangshuhang
  * @version 1.0
- * @date 2022/3/23 15:17
+ * @date 2022/3/23 15:36
  */
-public class LbqwExt<T> extends LambdaQueryWrapper<T> {
+public class QwExt<T> extends QueryWrapper<T> {
     
     /**
      * like 字段值是否为空
@@ -26,9 +25,9 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param val    值
      * @return this
      */
-    public LbqwExt<T> likeIfPresent(SFunction<T, ?> column, String val) {
+    public QwExt<T> likeIfPresent(String column, String val) {
         if (StringUtils.hasText(val)) {
-            return (LbqwExt<T>) super.like(column, val);
+            return (QwExt<T>) super.like(column, val);
         }
         return this;
     }
@@ -40,9 +39,9 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param values 值集合
      * @return
      */
-    public LbqwExt<T> inIfPresent(SFunction<T, ?> column, Collection<?> values) {
+    public QwExt<T> inIfPresent(String column, Collection<?> values) {
         if (!CollectionUtils.isEmpty(values)) {
-            return (LbqwExt<T>) super.in(column, values);
+            return (QwExt<T>) super.in(column, values);
         }
         return this;
     }
@@ -54,9 +53,9 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param values 值数组
      * @return
      */
-    public LbqwExt<T> inIfPresent(SFunction<T, ?> column, Object... values) {
+    public QwExt<T> inIfPresent(String column, Object... values) {
         if (!ArrayUtils.isEmpty(values)) {
-            return (LbqwExt<T>) super.in(column, values);
+            return (QwExt<T>) super.in(column, values);
         }
         return this;
     }
@@ -68,9 +67,9 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param val    值
      * @return
      */
-    public LbqwExt<T> eqIfPresent(SFunction<T, ?> column, Object val) {
+    public QwExt<T> eqIfPresent(String column, Object val) {
         if (val != null) {
-            return (LbqwExt<T>) super.eq(column, val);
+            return (QwExt<T>) super.eq(column, val);
         }
         return this;
     }
@@ -82,9 +81,9 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param val    值
      * @return
      */
-    public LbqwExt<T> neIfPresent(SFunction<T, ?> column, Object val) {
+    public QwExt<T> neIfPresent(String column, Object val) {
         if (val != null) {
-            return (LbqwExt<T>) super.ne(column, val);
+            return (QwExt<T>) super.ne(column, val);
         }
         return this;
     }
@@ -96,9 +95,9 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param val    值
      * @return
      */
-    public LbqwExt<T> gtIfPresent(SFunction<T, ?> column, Object val) {
+    public QwExt<T> gtIfPresent(String column, Object val) {
         if (val != null) {
-            return (LbqwExt<T>) super.gt(column, val);
+            return (QwExt<T>) super.gt(column, val);
         }
         return this;
     }
@@ -110,9 +109,9 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param val    值
      * @return
      */
-    public LbqwExt<T> geIfPresent(SFunction<T, ?> column, Object val) {
+    public QwExt<T> geIfPresent(String column, Object val) {
         if (val != null) {
-            return (LbqwExt<T>) super.ge(column, val);
+            return (QwExt<T>) super.ge(column, val);
         }
         return this;
     }
@@ -124,9 +123,9 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param val    值
      * @return
      */
-    public LbqwExt<T> ltIfPresent(SFunction<T, ?> column, Object val) {
+    public QwExt<T> ltIfPresent(String column, Object val) {
         if (val != null) {
-            return (LbqwExt<T>) super.lt(column, val);
+            return (QwExt<T>) super.lt(column, val);
         }
         return this;
     }
@@ -138,9 +137,9 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param val    值
      * @return
      */
-    public LbqwExt<T> leIfPresent(SFunction<T, ?> column, Object val) {
+    public QwExt<T> leIfPresent(String column, Object val) {
         if (val != null) {
-            return (LbqwExt<T>) super.le(column, val);
+            return (QwExt<T>) super.le(column, val);
         }
         return this;
     }
@@ -153,46 +152,46 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @param val2   值2
      * @return
      */
-    public LbqwExt<T> betweenIfPresent(SFunction<T, ?> column, Object val1, Object val2) {
+    public QwExt<T> betweenIfPresent(String column, Object val1, Object val2) {
         if (val1 != null && val2 != null) {
-            return (LbqwExt<T>) super.between(column, val1, val2);
+            return (QwExt<T>) super.between(column, val1, val2);
         }
         if (val1 != null) {
-            return (LbqwExt<T>) ge(column, val1);
+            return (QwExt<T>) ge(column, val1);
         }
         if (val2 != null) {
-            return (LbqwExt<T>) le(column, val2);
+            return (QwExt<T>) le(column, val2);
         }
         return this;
     }
     
     // ========== 重写父类方法，方便链式调用 ==========
     @Override
-    public LbqwExt<T> eq(boolean condition, SFunction<T, ?> column, Object val) {
+    public QwExt<T> eq(boolean condition, String column, Object val) {
         super.eq(condition, column, val);
         return this;
     }
     
     @Override
-    public LbqwExt<T> eq(SFunction<T, ?> column, Object val) {
+    public QwExt<T> eq(String column, Object val) {
         super.eq(column, val);
         return this;
     }
     
     @Override
-    public LbqwExt<T> orderByDesc(SFunction<T, ?> column) {
+    public QwExt<T> orderByDesc(String column) {
         super.orderByDesc(true, column);
         return this;
     }
     
     @Override
-    public LbqwExt<T> last(String lastSql) {
+    public QwExt<T> last(String lastSql) {
         super.last(lastSql);
         return this;
     }
     
     @Override
-    public LbqwExt<T> in(SFunction<T, ?> column, Collection<?> coll) {
+    public QwExt<T> in(String column, Collection<?> coll) {
         super.in(column, coll);
         return this;
     }
