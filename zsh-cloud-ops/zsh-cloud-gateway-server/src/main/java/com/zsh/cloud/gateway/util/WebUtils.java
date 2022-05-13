@@ -1,8 +1,9 @@
 package com.zsh.cloud.gateway.util;
 
+import com.zsh.cloud.common.core.domain.IDict;
+import com.zsh.cloud.common.core.domain.Result;
 import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
 import com.zsh.cloud.common.core.util.JsonUtils;
-import com.zsh.cloud.common.core.domain.Result;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -39,8 +40,8 @@ public class WebUtils {
         response.getHeaders().add("Access-Control-Expose-Headers", ALLOWED_EXPOSE);
         response.getHeaders().add("Access-Control-Max-Age", MAX_AGE);
         response.getHeaders().add("Access-Control-Allow-Credentials", "true");
-        byte[] responseByte = JsonUtils.toJsonString(Result.error(code, GlobalErrorCode.getMsgByCode(code)))
-                .getBytes(StandardCharsets.UTF_8);
+        byte[] responseByte = JsonUtils.toJsonString(
+                Result.error(code, IDict.getTextByCode(GlobalErrorCode.class, code))).getBytes(StandardCharsets.UTF_8);
         DataBuffer buffer = response.bufferFactory().wrap(responseByte);
         return response.writeWith(Flux.just(buffer));
     }

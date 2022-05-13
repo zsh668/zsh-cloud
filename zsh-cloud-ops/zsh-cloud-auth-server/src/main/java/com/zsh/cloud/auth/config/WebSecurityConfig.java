@@ -6,7 +6,6 @@ import com.zsh.cloud.common.core.util.JsonUtils;
 import com.zsh.cloud.common.core.domain.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,8 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Cache-Control", "no-cache");
             response.getWriter().print(JsonUtils.toJsonString(
-                    Result.error(GlobalErrorCode.UNAUTHORIZED.getCode(),
-                            GlobalErrorCode.UNAUTHORIZED.getMsg())));
+                    Result.error(GlobalErrorCode.UNAUTHORIZED.getCode(), GlobalErrorCode.UNAUTHORIZED.getMsg())));
             response.getWriter().flush();
         };
     }

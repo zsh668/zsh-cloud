@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * 登录用户信息.
@@ -37,7 +38,7 @@ public class User implements UserDetails {
         this.setId(authenticationDTO.getUserId());
         this.setUsername(authenticationDTO.getUserName());
         this.setPassword(AuthConstants.BCRYPT + authenticationDTO.getPassword());
-        this.setEnabled(StatusEnum.ENABLE.getValue() == authenticationDTO.getStatus());
+        this.setEnabled(Objects.equals(StatusEnum.ENABLE.getCode(), authenticationDTO.getStatus()));
         this.setTenantId(authenticationDTO.getTenantId());
         this.authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(
                 StringUtils.join(authenticationDTO.getPermissionCodes(), ","));

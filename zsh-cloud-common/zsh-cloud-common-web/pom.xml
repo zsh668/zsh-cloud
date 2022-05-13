@@ -28,6 +28,13 @@
             <version>${revision}</version>
             <optional>true</optional>
         </dependency>
+        
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-redis</artifactId>
+            <version>${revision}</version>
+            <optional>true</optional>
+        </dependency>
     
         <dependency>
             <groupId>org.springframework</groupId>

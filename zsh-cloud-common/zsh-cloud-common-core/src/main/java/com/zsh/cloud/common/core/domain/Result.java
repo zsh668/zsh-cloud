@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.Assert;
 
 import java.io.Serializable;
 

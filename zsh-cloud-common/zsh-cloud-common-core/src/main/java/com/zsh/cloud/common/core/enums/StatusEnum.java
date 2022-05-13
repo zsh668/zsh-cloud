@@ -1,5 +1,6 @@
 package com.zsh.cloud.common.core.enums;
 
+import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.ValueObject;
 
 /**
@@ -9,7 +10,7 @@ import com.zsh.cloud.common.core.domain.ValueObject;
  * @version 1.0
  * @date 2022/4/29 10:18
  */
-public enum StatusEnum implements ValueObject<StatusEnum> {
+public enum StatusEnum implements ValueObject<StatusEnum>, IDict<Integer> {
     
     /**
      * 有效.
@@ -21,51 +22,8 @@ public enum StatusEnum implements ValueObject<StatusEnum> {
      */
     DISABLE(0, "禁用");
     
-    private final int value;
-    
-    private final String label;
-    
-    StatusEnum(int value, String label) {
-        this.value = value;
-        this.label = label;
-    }
-    
-    public String getLabel() {
-        return label;
-    }
-    
-    public int getValue() {
-        return value;
-    }
-    
-    /**
-     * 根据匹配value的值获取Label.
-     *
-     * @param value
-     * @return
-     */
-    public static String getLabelByValue(int value) {
-        for (StatusEnum s : StatusEnum.values()) {
-            if (value == s.getValue()) {
-                return s.getLabel();
-            }
-        }
-        return "";
-    }
-    
-    /**
-     * 获取StatusEnum
-     *
-     * @param value
-     * @return
-     */
-    public static StatusEnum getStatusEnum(int value) {
-        for (StatusEnum s : StatusEnum.values()) {
-            if (value == s.getValue()) {
-                return s;
-            }
-        }
-        return null;
+    StatusEnum(Integer code, String text) {
+        init(code, text);
     }
     
     @Override

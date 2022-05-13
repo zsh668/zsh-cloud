@@ -20,6 +20,7 @@
         <module>zsh-cloud-common-exception</module>
         <module>zsh-cloud-common-log</module>
         <module>zsh-cloud-common-mybatis</module>
+        <module>zsh-cloud-common-j2cache</module>
         <module>zsh-cloud-common-redis</module>
         <module>zsh-cloud-common-swagger</module>
         <module>zsh-cloud-common-tenant</module>

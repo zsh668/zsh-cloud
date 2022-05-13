@@ -21,5 +21,5 @@ public interface BaseException {
      *
      * @return
      */
-    int getCode();
+    Integer getCode();
 }

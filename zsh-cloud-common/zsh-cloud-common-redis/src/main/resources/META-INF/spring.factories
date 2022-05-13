@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.zsh.cloud.common.redis.config.RedisConfiguration
+  com.zsh.cloud.common.redis.config.RedisCacheAutoConfiguration,\
+  com.zsh.cloud.common.redis.config.RedissonAutoConfiguration

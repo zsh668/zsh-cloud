@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = "com.zsh.cloud.system")
+@SpringBootApplication(scanBasePackages = "com.zsh.cloud")
 public class SystemServerApplication {
     
     public static void main(String[] args) {

@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -63,13 +64,13 @@ public class OrgDataPermissionHandler implements DataPermissionHandler {
                     return where;
                 }
                 // 全部
-                if (DataScopeTypeEnum.ALL.getValue() == dataPermission.getDsType()) {
+                if (Objects.equals(DataScopeTypeEnum.ALL.getCode(), dataPermission.getDsType())) {
                     return where;
                 } else {
                     String alias = dataScope.alias();
                     alias = StringUtils.isBlank(alias) ? "" : alias + ".";
                     // 个人
-                    if (DataScopeTypeEnum.SELF.getValue() == dataPermission.getDsType()) {
+                    if (Objects.equals(DataScopeTypeEnum.SELF.getCode(), dataPermission.getDsType())) {
                         // 使用EqualsTo
                         EqualsTo equalsTo = new EqualsTo();
                         equalsTo.setLeftExpression(new Column(alias + dataPermission.getSelfScopeName()));

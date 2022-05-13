@@ -1,6 +1,8 @@
 package com.zsh.cloud.common.core.constant;
 
 /**
+ * 权限常量.
+ *
  * @author zhangshuhang
  * @version 1.0
  * @date 2022/4/13 11:12
