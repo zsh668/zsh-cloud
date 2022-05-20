@@ -8,6 +8,7 @@ import com.zsh.cloud.common.core.domain.Result;
 import com.zsh.cloud.common.core.util.JsonUtils;
 import com.zsh.cloud.common.core.util.RequestUtils;
 import com.zsh.cloud.common.log.dto.OptLogDTO;
+import com.zsh.cloud.common.log.enums.LogTypeEnum;
 import com.zsh.cloud.common.log.event.SysLogEvent;
 import com.zsh.cloud.common.log.util.LogUtil;
 import io.swagger.annotations.Api;
@@ -174,12 +175,12 @@ public class SysLogAspect {
         Result r = Convert.convert(Result.class, ret);
         OptLogDTO sysLog = get();
         if (r == null) {
-            sysLog.setType("OPT");
+            sysLog.setType(LogTypeEnum.OPT.getCode());
         } else {
             if (r.getIsSuccess()) {
-                sysLog.setType("OPT");
+                sysLog.setType(LogTypeEnum.OPT.getCode());
             } else {
-                sysLog.setType("EX");
+                sysLog.setType(LogTypeEnum.EX.getCode());
                 sysLog.setExDetail(r.getMsg());
             }
             sysLog.setResult(getText(r.toString()));

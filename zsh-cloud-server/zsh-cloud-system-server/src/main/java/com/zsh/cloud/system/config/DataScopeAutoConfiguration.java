@@ -6,7 +6,6 @@ import com.zsh.cloud.common.core.util.SpringUtils;
 import com.zsh.cloud.common.mybatis.datascope.handler.OrgDataPermissionHandler;
 import com.zsh.cloud.common.mybatis.util.MyBatisUtils;
 import com.zsh.cloud.system.application.UserQueryService;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

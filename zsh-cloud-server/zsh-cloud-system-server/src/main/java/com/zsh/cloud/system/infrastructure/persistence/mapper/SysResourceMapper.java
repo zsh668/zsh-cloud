@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
+ * 资源Mapper.
+ *
  * @author zhangshuhang
  * @version 1.0
  * @date 2022/4/29 11:06

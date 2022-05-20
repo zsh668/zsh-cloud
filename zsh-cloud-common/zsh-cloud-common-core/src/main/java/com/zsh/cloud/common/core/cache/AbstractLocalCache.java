@@ -97,7 +97,7 @@ public abstract class AbstractLocalCache<K, V> implements LocalCache, Scheduling
     @Nullable
     public V getCache(K cacheId) {
         if (cacheId == null) {
-            log.warn("UserCache查询用户缓存时传入的userId为null，请确认是否传参正确");
+            log.warn("UserCache查询用户缓存时传入的cacheId为null，请确认是否传参正确");
             return null;
         }
         return Optional.ofNullable(cache.get(cacheId)).orElse(ifNull(cacheId));

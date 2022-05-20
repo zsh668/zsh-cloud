@@ -5,7 +5,7 @@ import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
 import com.zsh.cloud.system.api.dto.AuthenticationDTO;
 import com.zsh.cloud.system.api.dubbo.AuthenticationDubboService;
 import com.zsh.cloud.system.application.ResourceQueryService;
-import com.zsh.cloud.system.application.assembler.AuthenticationDTOAssembler;
+import com.zsh.cloud.system.application.assembler.AuthenticationDtoAssembler;
 import com.zsh.cloud.system.domain.model.user.Account;
 import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
@@ -30,6 +30,9 @@ public class AuthenticationDubboServiceImpl implements AuthenticationDubboServic
     @Autowired
     private ResourceQueryService resourceQueryService;
     
+    @Autowired
+    private AuthenticationDtoAssembler authenticationDtoAssembler;
+    
     @Override
     public AuthenticationDTO loginByUserName(String userName) {
         List<User> users = userRepository.find(new Account(userName));
@@ -37,8 +40,12 @@ public class AuthenticationDubboServiceImpl implements AuthenticationDubboServic
             throw new ServiceException(ServiceErrorCode.USER_NOT_EXISTS.getCode(), "用户或密码不正确");
         }
         User user = users.get(0);
-        AuthenticationDTO authenticationDTO = AuthenticationDTOAssembler.fromUser(user);
-        authenticationDTO.setPermissionCodes(resourceQueryService.getPermissionCodes(user.getUserId().getId()));
-        return authenticationDTO;
+        // 密码过期
+        user.checkPasswordExpireTime();
+        // 用户禁用
+        user.isEnable();
+        AuthenticationDTO authentication = authenticationDtoAssembler.fromUser(user);
+        authentication.setPermissionCodes(resourceQueryService.getPermissionCodes(user.getUserId().getId()));
+        return authentication;
     }
 }

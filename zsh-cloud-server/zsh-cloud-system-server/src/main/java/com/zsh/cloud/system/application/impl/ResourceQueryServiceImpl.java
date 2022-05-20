@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * 权限查询服务实现类.
+ * 资源查询服务实现类.
  *
  * @author zhangshuhang
  * @version 1.0

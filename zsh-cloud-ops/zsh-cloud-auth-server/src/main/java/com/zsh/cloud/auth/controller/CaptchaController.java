@@ -1,7 +1,7 @@
 package com.zsh.cloud.auth.controller;
 
 import cn.hutool.core.io.IoUtil;
-import com.zsh.cloud.auth.sevice.CaptchaApplicationService;
+import com.zsh.cloud.auth.sevice.CaptchaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -31,7 +31,7 @@ import java.io.IOException;
 public class CaptchaController {
     
     @Autowired
-    private CaptchaApplicationService captchaApplicationService;
+    private CaptchaService captchaApplicationService;
     
     /**
      * 获取验证码.

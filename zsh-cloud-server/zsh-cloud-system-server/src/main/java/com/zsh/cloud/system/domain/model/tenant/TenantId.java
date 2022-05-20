@@ -17,6 +17,9 @@ public class TenantId implements ValueObject<TenantId> {
      */
     public static final String PLATFORM_TENANT = "1";
     
+    /**
+     * 租户ID
+     */
     private final String id;
     
     public TenantId(final String id) {

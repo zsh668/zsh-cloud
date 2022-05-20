@@ -2,7 +2,9 @@ package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.command.PasswordCommand;
-import com.zsh.cloud.system.application.command.UserCommand;
+import com.zsh.cloud.system.application.command.ResetPasswordCommand;
+import com.zsh.cloud.system.application.command.UserCreateCommand;
+import com.zsh.cloud.system.application.command.UserUpdateCommand;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +22,12 @@ import java.util.List;
 public class UserApplicationServiceImpl implements UserApplicationService {
     
     @Override
-    public void save(UserCommand userCommand) {
+    public void save(UserCreateCommand userCommand) {
     
     }
     
     @Override
-    public void update(UserCommand userCommand) {
+    public void update(UserUpdateCommand userCommand) {
     
     }
     
@@ -41,6 +43,11 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     
     @Override
     public void changePassword(PasswordCommand passwordCommand) {
+    
+    }
+    
+    @Override
+    public void resetPassword(ResetPasswordCommand command) {
     
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserGroupMapper">
+    
+    <select id="queryUserGroup" resultType="com.zsh.cloud.system.infrastructure.persistence.entity.SysUserGroupDO">
+        SELECT ug.*
+        FROM sys_user_group ug
+        INNER JOIN sys_user_group_user ugu on ugu.group_id = ug.id
+        WHERE ugu.user_id = #{userId}
+          AND ug.del_flag = 0
+          AND ug.status = 0
+    </select>
+</mapper>

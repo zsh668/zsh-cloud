@@ -32,12 +32,12 @@ public class SysRoleDO extends TenantBaseDO {
     /**
      * 是否内置角色.
      */
-    private Boolean readonly;
+    private Integer readonly;
     
     /**
      * 数据权限类型 1,全部;2,本级;3,本级以及子级;4,自定义;5,个人.
      */
-    private Boolean dsType;
+    private Integer dsType;
     
     /**
      * 互斥角色.

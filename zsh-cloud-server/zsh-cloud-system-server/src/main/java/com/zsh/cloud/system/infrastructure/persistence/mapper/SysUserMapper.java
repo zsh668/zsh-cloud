@@ -2,7 +2,6 @@ package com.zsh.cloud.system.infrastructure.persistence.mapper;
 
 import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
 import com.zsh.cloud.common.mybatis.core.query.LbqwExt;
 import com.zsh.cloud.common.mybatis.datascope.annotations.DataScope;
@@ -31,8 +30,7 @@ public interface SysUserMapper extends BaseMapperExt<SysUserDO> {
      */
     @InterceptorIgnore(tenantLine = "true")
     default List<SysUserDO> queryUserNoTenantByAccount(String account) {
-        return selectList(new LbqwExt<SysUserDO>().eq(SysUserDO::getAccount, account)
-                .eq(SysUserDO::getStatus, StatusEnum.ENABLE.getCode()));
+        return selectList(new LbqwExt<SysUserDO>().eq(SysUserDO::getAccount, account));
     }
     
     /**

@@ -1,5 +1,7 @@
 package com.zsh.cloud.common.tenant.contex;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
+
 /**
  * 多租户上下文.
  *
@@ -12,12 +14,12 @@ public class TenantContext {
     /**
      * 当前租户编号
      */
-    private static final ThreadLocal<String> TENANT_ID = new ThreadLocal<>();
+    private static final ThreadLocal<String> TENANT_ID = new TransmittableThreadLocal<>();
     
     /**
      * 是否忽略租户
      */
-    private static final ThreadLocal<Boolean> IGNORE = new ThreadLocal<>();
+    private static final ThreadLocal<Boolean> IGNORE = new TransmittableThreadLocal<>();
     
     /**
      * 获得租户编号。

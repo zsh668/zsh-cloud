@@ -1,9 +1,9 @@
 package com.zsh.cloud.auth.filter;
 
-import com.zsh.cloud.auth.sevice.CaptchaApplicationService;
+import com.zsh.cloud.auth.sevice.CaptchaService;
 import com.zsh.cloud.common.core.constant.AuthConstants;
-import com.zsh.cloud.common.core.util.JsonUtils;
 import com.zsh.cloud.common.core.domain.Result;
+import com.zsh.cloud.common.core.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ import java.io.IOException;
 public class CaptchaFilter extends OncePerRequestFilter {
     
     @Autowired
-    private CaptchaApplicationService captchaApplicationService;
+    private CaptchaService captchaService;
     
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -42,7 +42,7 @@ public class CaptchaFilter extends OncePerRequestFilter {
                 AuthConstants.PASSWORD)) {
             String code = request.getParameter(AuthConstants.VALIDATE_CODE_CODE);
             String key = request.getParameter(AuthConstants.VALIDATE_CODE_KEY);
-            if (!captchaApplicationService.validateCaptcha(key, code)) {
+            if (!captchaService.validateCaptcha(key, code)) {
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.getOutputStream().write(JsonUtils.toJsonString(Result.error("验证码不正确")).getBytes());
