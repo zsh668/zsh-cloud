@@ -1,7 +1,9 @@
 package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.system.application.command.PasswordCommand;
-import com.zsh.cloud.system.application.command.UserCommand;
+import com.zsh.cloud.system.application.command.ResetPasswordCommand;
+import com.zsh.cloud.system.application.command.UserCreateCommand;
+import com.zsh.cloud.system.application.command.UserUpdateCommand;
 
 import java.util.List;
 
@@ -19,14 +21,14 @@ public interface UserApplicationService {
      *
      * @param userCommand
      */
-    void save(UserCommand userCommand);
+    void save(UserCreateCommand userCommand);
     
     /**
      * 更新用户
      *
      * @param userCommand
      */
-    void update(UserCommand userCommand);
+    void update(UserUpdateCommand userCommand);
     
     /**
      * 批量删除
@@ -48,4 +50,6 @@ public interface UserApplicationService {
      * @param passwordCommand
      */
     void changePassword(PasswordCommand passwordCommand);
+    
+    void resetPassword(ResetPasswordCommand command);
 }

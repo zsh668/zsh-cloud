@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 public class Password implements ValueObject<Password> {
     
-    public static final String DEFAULT = "123456";
+    public static final String DEFAULT = "123#456";
     
     /**
      * 密码

@@ -4,10 +4,18 @@ import com.zsh.cloud.common.core.domain.Entity;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.core.exception.ServiceException;
 import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
+import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.role.RoleId;
+import com.zsh.cloud.system.domain.model.role.RoleName;
+import com.zsh.cloud.system.domain.model.station.StationId;
 import com.zsh.cloud.system.domain.model.tenant.TenantId;
-import lombok.Getter;
+import com.zsh.cloud.system.domain.model.usergroup.UserGroupName;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
+import lombok.Data;
+import org.apache.commons.lang3.Validate;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -17,7 +25,8 @@ import java.util.List;
  * @version 1.0
  * @date 2022/4/25 11:47
  */
-@Getter
+@Data
+@Builder
 public class User implements Entity<User> {
     
     /**
@@ -26,19 +35,24 @@ public class User implements Entity<User> {
     private UserId userId;
     
     /**
+     * 账号.
+     */
+    private final Account account;
+    
+    /**
      * 用户名.
      */
-    private UserName userName;
+    private final UserName userName;
     
     /**
      * 手机号.
      */
-    private Mobile mobile;
+    private final Mobile mobile;
     
     /**
      * 邮箱.
      */
-    private Email email;
+    private final Email email;
     
     /**
      * 密码.
@@ -46,9 +60,49 @@ public class User implements Entity<User> {
     private Password password;
     
     /**
+     * 性别。
+     */
+    private GenderEnum gender;
+    
+    /**
      * 状态.
      */
     private StatusEnum status;
+    
+    /**
+     * 上级领导.
+     */
+    private UserId superior;
+    
+    /**
+     * 密码过期时间.
+     */
+    private LocalDateTime passwordExpireTime;
+    
+    /**
+     * 最后登录时间.
+     */
+    private LocalDateTime lastLoginTime;
+    
+    /**
+     * 头像.
+     */
+    private String avatar;
+    
+    /**
+     * 工作描述.
+     */
+    private String workDescribe;
+    
+    /**
+     * 组织ID.
+     */
+    private OrgId orgId;
+    
+    /**
+     * 岗位ID.
+     */
+    private StationId stationId;
     
     /**
      * 当前租户.
@@ -58,57 +112,25 @@ public class User implements Entity<User> {
     /**
      * 角色Id列表.
      */
-    private List<RoleId> roleIds;
+    private final List<RoleId> roleIds;
     
     /**
-     * 构造器.
-     *
-     * @param userName
-     * @param mobile
-     * @param email
-     * @param password
-     * @param roleIds
+     * 角色名称列表.
      */
-    public User(UserName userName, Mobile mobile, Email email, Password password, List<RoleId> roleIds) {
-        this.userName = userName;
-        this.mobile = mobile;
-        this.email = email;
-        this.password = password;
-        this.status = StatusEnum.ENABLE;
-        this.roleIds = roleIds;
-    }
+    private List<RoleName> roleNames;
     
     /**
-     * 构造器.
-     *
-     * @param userId
-     * @param userName
-     * @param mobile
-     * @param email
-     * @param password
-     * @param status
-     * @param tenantId
-     * @param roleIds
+     * 用户组名称列表.
      */
-    public User(UserId userId, UserName userName, Mobile mobile, Email email, Password password, StatusEnum status,
-            TenantId tenantId, List<RoleId> roleIds) {
-        this.userId = userId;
-        this.userName = userName;
-        this.mobile = mobile;
-        this.email = email;
-        this.password = password;
-        this.status = status;
-        this.tenantId = tenantId;
-        this.roleIds = roleIds;
-    }
+    private final List<UserGroupName> userGroupsNames;
     
     /**
      * 是否有效.
      *
      * @return
      */
-    public boolean isEnable() {
-        return status == StatusEnum.ENABLE;
+    public void isEnable() {
+        Validate.isTrue(StatusEnum.ENABLE == status, "用户被禁用，请联系管理员！");
     }
     
     /**
@@ -140,6 +162,17 @@ public class User implements Entity<User> {
             throw new ServiceException(ServiceErrorCode.USER_PASSWORD_ERROR.getCode(), "原密码不正确");
         }
         this.password = Password.create(newPasswordStr);
+    }
+    
+    /**
+     * 密码是否过期.
+     *
+     * @return
+     */
+    public void checkPasswordExpireTime() {
+        if (this.passwordExpireTime != null) {
+            Validate.isTrue(LocalDateTime.now().isBefore(this.passwordExpireTime), "用户密码已过期，请修改密码或者联系管理员重置!");
+        }
     }
     
     @Override

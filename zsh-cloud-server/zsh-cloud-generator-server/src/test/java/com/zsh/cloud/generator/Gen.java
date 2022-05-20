@@ -16,7 +16,7 @@ import java.util.Collections;
 public class Gen {
     
     public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql://localhost:3306/zsh_cloud", "root", "root").globalConfig(builder -> {
+        FastAutoGenerator.create("jdbc:mysql://127.0.0.1:3306/zsh_cloud", "root", "root").globalConfig(builder -> {
                     builder.author("zhangshuhang") // 设置作者
                             //.enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
@@ -26,7 +26,7 @@ public class Gen {
                             .moduleName("system") // 设置父包模块名
                             .pathInfo(Collections.singletonMap(OutputFile.xml, "./tmp")); // 设置mapperXml生成路径
                 }).strategyConfig(builder -> {
-                    builder.addInclude("cw_order_extends") // 设置需要生成的表名
+                    builder.addInclude("sys_login_log", "sys_opt_log") // 设置需要生成的表名
                             .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 }).templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();

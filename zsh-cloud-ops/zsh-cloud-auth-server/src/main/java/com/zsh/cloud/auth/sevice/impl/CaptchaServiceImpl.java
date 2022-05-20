@@ -1,7 +1,7 @@
 package com.zsh.cloud.auth.sevice.impl;
 
 import com.google.code.kaptcha.Producer;
-import com.zsh.cloud.auth.sevice.CaptchaApplicationService;
+import com.zsh.cloud.auth.sevice.CaptchaService;
 import com.zsh.cloud.common.core.constant.CacheKey;
 import net.oschina.j2cache.CacheChannel;
 import net.oschina.j2cache.CacheObject;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 import java.awt.image.BufferedImage;
 
 /**
- * 验证码应用服务实现类.
+ * 验证码服务实现类.
  *
  * @author zhangshuhang
  * @version 1.0
  * @date 2022/4/19 18:22
  */
 @Service
-public class CaptchaApplicationServiceImpl implements CaptchaApplicationService {
+public class CaptchaServiceImpl implements CaptchaService {
     
     @Autowired
     private Producer producer;

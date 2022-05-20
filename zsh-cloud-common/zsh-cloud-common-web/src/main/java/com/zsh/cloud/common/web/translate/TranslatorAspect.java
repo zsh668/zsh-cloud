@@ -110,29 +110,21 @@ public class TranslatorAspect {
             if (Objects.isNull(fieldValue)) {
                 return;
             }
+            String translate;
             if (IDict.class.isAssignableFrom(aClass)) {
-                String translate = new EnumTranslatable().translate(fieldValue, aClass, null);
-                if (translate == null) {
-                    return;
-                }
-                ReflectUtils.invokeSet(vo, field, translate);
+                translate = new EnumTranslatable().translate(fieldValue, aClass, null);
             } else if (LocalCache.class.isAssignableFrom(annotation.dataSource())) {
                 LocalCacheTranslator<Object, Object> localCacheTranslator = SpringUtils.getBean(
                         LocalCacheTranslator.class);
-                String translate = localCacheTranslator.translate(fieldValue, annotation.dataSource(),
-                        annotation.param());
-                if (translate == null) {
-                    return;
-                }
-                ReflectUtils.invokeSet(vo, field, translate);
+                translate = localCacheTranslator.translate(fieldValue, annotation.dataSource(), annotation.param());
             } else {
                 Translatable<Object> translatable = SpringUtils.getBean(annotation.translator());
-                String translate = translatable.translate(fieldValue, annotation.dataSource(), annotation.param());
-                if (translate == null) {
-                    return;
-                }
-                ReflectUtils.invokeSet(vo, field, translate);
+                translate = translatable.translate(fieldValue, annotation.dataSource(), annotation.param());
             }
+            if (translate == null) {
+                return;
+            }
+            ReflectUtils.invokeSet(vo, field, translate);
         } catch (Exception e) {
             log.error("翻译错误", e);
         }

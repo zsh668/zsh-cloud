@@ -37,7 +37,7 @@ public class SysOrgDO extends TenantBaseDO {
     /**
      * 部门类型 1为分公司，2为一级转运中心 3为二级转运中心 4为网点.
      */
-    private Boolean orgType;
+    private Integer orgType;
     
     /**
      * 省.

@@ -4,7 +4,6 @@ import com.zsh.cloud.auth.domain.User;
 import com.zsh.cloud.system.api.dto.AuthenticationDTO;
 import com.zsh.cloud.system.api.dubbo.AuthenticationDubboService;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

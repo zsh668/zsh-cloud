@@ -50,12 +50,12 @@ public class SysUserDO extends TenantBaseDO {
     private String mobile;
     
     /**
-     * 性别 1 男 0 女.
+     * 性别 1：男 2 女 3 未知.
      */
-    private Boolean sex;
+    private Integer gender;
     
     /**
-     * 启用状态 1启用 0禁用.
+     * 状态 1启用 0禁用.
      */
     private Integer status;
     
@@ -73,16 +73,6 @@ public class SysUserDO extends TenantBaseDO {
      * 密码.
      */
     private String password;
-    
-    /**
-     * 最后一次输错密码时间.
-     */
-    private LocalDateTime passwordErrorLastTime;
-    
-    /**
-     * 密码错误次数.
-     */
-    private Integer passwordErrorNum;
     
     /**
      * 密码过期时间.

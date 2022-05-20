@@ -12,6 +12,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class RoleId implements ValueObject<RoleId> {
     
+    /**
+     * 角色ID.
+     */
     private final String id;
     
     public RoleId(final String id) {

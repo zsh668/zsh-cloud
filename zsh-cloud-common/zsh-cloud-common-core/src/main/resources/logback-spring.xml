@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+scan: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
+scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+debug: 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false
+-->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!-- 每个文件的最大限制 -->
+    <property name="maxFileSize" value="100MB"/>
+    <!-- 保留多少天的日志 -->
+    <property name="maxHistory" value="30"/>
+    <!-- 异步缓冲队列的深度,该值会影响性能.默认值为256 -->
+    <property name="queueSize" value="256"/>
+    <!-- 日志的总大小 -->
+    <property name="totalSizeCap" value="20GB"/>
+    <!-- 异步日志提取调用者数据标识 true/false -->
+    <property name="includeCallerData" value="true"/>
+
+    <!-- 需要定义服务的名字 -->
+    <springProperty scope="context" name="app_name" source="spring.application.name"/>
+    <springProperty scope="context" name="log_level" source="logging.level.root"/>
+    <!-- 日志路径 -->
+    <property name="log_path" value="data/logs/${app_name}"/>
+
+    <!-- 日志格式，颜色配置参考ColorConverter,%-50.50代表左对齐，最小50，最大50，%logger{40}代表缩写类路径，且长度不超过40（类名永远不会被缩写）-->
+    <property name="console_log_pattern"
+              value="%cyan(%d{HH:mm:ss.SSS}) [%thread] [%X{tid}] %highlight(%level) %yellow(%-50.50(%logger{40}:%line)):%msg%n"/>
+    <property name="file_log_pattern"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS}|%thread|%X{tid}|%level|%logger{40}:%line|%method|%msg%n"/>
+    <!-- 控制台日志 -->
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+                <Pattern>${console_log_pattern}</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <!-- 文件输出日志 -->
+    <appender name="FILE_CONSOLE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${log_path}/console.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${file_log_pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 错误文件日志  START -->
+    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <file>${log_path}/error.log</file>
+        <!-- 滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 如果按天来回滚，则最大保存时间为365天，365天之前的都将被清理掉 -->
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <maxHistory>${maxHistory}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${file_log_pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC_LOG_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FILE_CONSOLE"/>
+    </appender>
+
+    <appender name="ASYNC_LOG_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FILE_ERROR"/>
+    </appender>
+
+    <root level="${log_level}">
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="ASYNC_LOG_CONSOLE"/>
+        <appender-ref ref="ASYNC_LOG_ERROR"/>
+    </root>
+
+</configuration>
