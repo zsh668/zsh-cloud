@@ -73,4 +73,29 @@ public class UserConverter {
                 .tenantId(tenantId).orgId(orgId).stationId(stationId).roleIds(roleIds).roleNames(roleNames)
                 .userGroupsNames(groupNames).build();
     }
+    
+    /**
+     * 转换.
+     *
+     * @param user
+     * @return
+     */
+    public static SysUserDO fromUser(User user) {
+        SysUserDO sysUserDO = new SysUserDO();
+        sysUserDO.setId(user.getUserId() == null ? null : user.getUserId().getId());
+        sysUserDO.setAccount(user.getAccount() == null ? null : user.getAccount().getAccount());
+        sysUserDO.setUserName(user.getUserName() == null ? null : user.getUserName().getName());
+        sysUserDO.setMobile(user.getMobile() == null ? null : user.getMobile().getMobile());
+        sysUserDO.setEmail(user.getEmail() == null ? null : user.getEmail().getEmail());
+        sysUserDO.setPassword(user.getPassword() == null ? null : user.getPassword().getPassword());
+        sysUserDO.setGender(user.getGender() == null ? null : user.getGender().getCode());
+        sysUserDO.setStatus(user.getStatus() == null ? null : user.getStatus().getCode());
+        sysUserDO.setSuperior(user.getSuperior() == null ? null : user.getSuperior().getId());
+        sysUserDO.setPasswordExpireTime(user.getPasswordExpireTime());
+        sysUserDO.setAvatar(user.getAvatar());
+        sysUserDO.setWorkDescribe(user.getWorkDescribe());
+        sysUserDO.setOrgId(user.getOrgId() == null ? null : user.getOrgId().getId());
+        sysUserDO.setStationId(user.getStationId() == null ? null : user.getStationId().getId());
+        return sysUserDO;
+    }
 }

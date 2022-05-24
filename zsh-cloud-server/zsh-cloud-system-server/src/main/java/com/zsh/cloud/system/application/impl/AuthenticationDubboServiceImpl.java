@@ -11,6 +11,7 @@ import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -36,14 +37,14 @@ public class AuthenticationDubboServiceImpl implements AuthenticationDubboServic
     @Override
     public AuthenticationDTO loginByUserName(String userName) {
         List<User> users = userRepository.find(new Account(userName));
-        if (users == null || users.isEmpty()) {
+        if (CollectionUtils.isEmpty(users)) {
             throw new ServiceException(ServiceErrorCode.USER_NOT_EXISTS.getCode(), "用户或密码不正确");
         }
         User user = users.get(0);
-        // 密码过期
-        user.checkPasswordExpireTime();
         // 用户禁用
         user.isEnable();
+        // 密码过期
+        user.checkPasswordExpireTime();
         AuthenticationDTO authentication = authenticationDtoAssembler.fromUser(user);
         authentication.setPermissionCodes(resourceQueryService.getPermissionCodes(user.getUserId().getId()));
         return authentication;

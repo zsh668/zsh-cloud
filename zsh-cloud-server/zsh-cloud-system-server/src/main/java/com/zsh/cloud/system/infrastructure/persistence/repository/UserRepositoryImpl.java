@@ -2,6 +2,7 @@ package com.zsh.cloud.system.infrastructure.persistence.repository;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zsh.cloud.system.domain.model.role.RoleId;
 import com.zsh.cloud.system.domain.model.user.Account;
 import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserId;
@@ -10,9 +11,11 @@ import com.zsh.cloud.system.infrastructure.persistence.converter.UserConverter;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleDO;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserGroupDO;
+import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserRoleDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysRoleMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserGroupMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserMapper;
+import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -37,6 +40,9 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     @Autowired
     private SysUserGroupMapper sysUserGroupMapper;
     
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
+    
     @Override
     public List<User> find(Account account) {
         List<SysUserDO> sysUserDOList = baseMapper.queryUserNoTenantByAccount(account.getAccount());
@@ -59,6 +65,28 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
             return null;
         }
         return UserConverter.toUser(sysUserDO, getUserRoles(sysUserDO.getId()), getUserGroups(sysUserDO.getId()));
+    }
+    
+    @Override
+    public UserId store(User user) {
+        SysUserDO sysUserDO = UserConverter.fromUser(user);
+        this.saveOrUpdate(sysUserDO);
+        String userId = sysUserDO.getId();
+        //先删除用户与角色关系
+        List<String> userIds = new ArrayList<>();
+        userIds.add(userId);
+        sysUserRoleMapper.deleteByUserIds(userIds);
+        List<RoleId> roleIds = user.getRoleIds();
+        if (roleIds != null && !roleIds.isEmpty()) {
+            //保存角色与菜单关系
+            for (RoleId roleId : roleIds) {
+                SysUserRoleDO sysUserRoleDO = new SysUserRoleDO();
+                sysUserRoleDO.setUserId(userId);
+                sysUserRoleDO.setRoleId(roleId.getId());
+                sysUserRoleMapper.insert(sysUserRoleDO);
+            }
+        }
+        return new UserId(userId);
     }
     
     /**

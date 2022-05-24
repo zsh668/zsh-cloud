@@ -10,7 +10,6 @@ import com.zsh.cloud.system.domain.model.role.RoleName;
 import com.zsh.cloud.system.domain.model.station.StationId;
 import com.zsh.cloud.system.domain.model.tenant.TenantId;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupName;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.lang3.Validate;
@@ -170,8 +169,8 @@ public class User implements Entity<User> {
      * @return
      */
     public void checkPasswordExpireTime() {
-        if (this.passwordExpireTime != null) {
-            Validate.isTrue(LocalDateTime.now().isBefore(this.passwordExpireTime), "用户密码已过期，请修改密码或者联系管理员重置!");
+        if (this.passwordExpireTime != null && LocalDateTime.now().isAfter(this.passwordExpireTime)) {
+            throw new ServiceException(ServiceErrorCode.USER_PASSWORD_EXPIRATION.getCode(), "用户密码已过期，请修改密码或者联系管理员重置");
         }
     }
     
