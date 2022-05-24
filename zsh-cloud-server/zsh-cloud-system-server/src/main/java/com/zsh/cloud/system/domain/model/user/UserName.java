@@ -18,7 +18,7 @@ public class UserName implements ValueObject<UserName> {
     private final String name;
     
     public UserName(final String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (StringUtils.isBlank(name)) {
             throw new IllegalArgumentException("用户名不能为空");
         }
         this.name = name;

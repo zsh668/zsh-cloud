@@ -26,4 +26,12 @@ public interface UserRepository {
      * @return
      */
     User find(UserId userId);
+    
+    /**
+     * 保存.
+     *
+     * @param user
+     * @return
+     */
+    UserId store(User user);
 }

@@ -13,6 +13,7 @@ import com.zsh.cloud.common.log.event.SysLogEvent;
 import com.zsh.cloud.common.log.util.LogUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -100,7 +101,7 @@ public class SysLogAspect {
         }
         
         String controllerMethodDescription = LogUtil.getControllerMethodDescription(joinPoint);
-        if (StrUtil.isEmpty(controllerDescription)) {
+        if (StringUtils.isBlank(controllerDescription)) {
             sysLog.setDescription(controllerMethodDescription);
         } else {
             sysLog.setDescription(controllerDescription + "-" + controllerMethodDescription);

@@ -24,6 +24,8 @@ public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     // 模块 system 【000】 用户 【000】错误码 【000~999】
     USER_NOT_EXISTS(1000000000, "用户不存在"),
     USER_PASSWORD_ERROR(1000000001, "密码不正确"),
+    USER_PASSWORD_EXPIRATION(1000000002, "密码过期"),
+    USER_ACCOUNT_EXISTS(1000000003, "账号已存在"),
     ;
     
     private Integer code;
