@@ -1,7 +1,9 @@
 package com.zsh.cloud.system.domain.model.user;
 
 import com.zsh.cloud.common.core.domain.ValueObject;
-import org.apache.commons.lang3.Validate;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
+import com.zsh.cloud.common.core.util.ServiceAssert;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Pattern;
 
@@ -23,8 +25,9 @@ public final class Email implements ValueObject<Email> {
             "^([a-z0-9A-Z]+[-|.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
     
     public Email(final String email) {
-        if (email != null) {
-            Validate.isTrue(VALID_PATTERN.matcher(email).matches(), "邮箱格式不正确");
+        if (StringUtils.isNotBlank(email)) {
+            ServiceAssert.isTrue(VALID_PATTERN.matcher(email).matches(), GlobalErrorCode.BAD_REQUEST.getCode(),
+                    "账号不能为空");
         }
         this.email = email;
     }

@@ -1,6 +1,8 @@
 package com.zsh.cloud.system.domain.model.user;
 
 import com.zsh.cloud.common.core.domain.ValueObject;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -21,9 +23,7 @@ public class Password implements ValueObject<Password> {
     private final String password;
     
     public Password(String password) {
-        if (StringUtils.isEmpty(password)) {
-            throw new IllegalArgumentException("密码不能为空");
-        }
+        ServiceAssert.isTrue(StringUtils.isNotBlank(password), GlobalErrorCode.BAD_REQUEST.getCode(), "密码不能为空");
         this.password = password;
     }
     

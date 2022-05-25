@@ -2,8 +2,9 @@ package com.zsh.cloud.system.domain.model.user;
 
 import com.zsh.cloud.common.core.domain.Entity;
 import com.zsh.cloud.common.core.enums.StatusEnum;
-import com.zsh.cloud.common.core.exception.ServiceException;
 import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
+import com.zsh.cloud.common.core.util.Assert;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.role.RoleId;
 import com.zsh.cloud.system.domain.model.role.RoleName;
@@ -12,7 +13,6 @@ import com.zsh.cloud.system.domain.model.tenant.TenantId;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupName;
 import lombok.Builder;
 import lombok.Data;
-import org.apache.commons.lang3.Validate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -129,7 +129,7 @@ public class User implements Entity<User> {
      * @return
      */
     public void isEnable() {
-        Validate.isTrue(StatusEnum.ENABLE == status, "用户被禁用，请联系管理员！");
+        Assert.isTrue(StatusEnum.ENABLE == status, ServiceErrorCode.USER_NOT_ENABLE);
     }
     
     /**
@@ -157,9 +157,7 @@ public class User implements Entity<User> {
      * @return
      */
     public void changePassword(String oldPasswordStr, String newPasswordStr) {
-        if (!checkPassword(oldPasswordStr)) {
-            throw new ServiceException(ServiceErrorCode.USER_PASSWORD_ERROR.getCode(), "原密码不正确");
-        }
+        ServiceAssert.isTrue(checkPassword(oldPasswordStr), ServiceErrorCode.USER_PASSWORD_ERROR.getCode(), "原密码不正确");
         this.password = Password.create(newPasswordStr);
     }
     
@@ -169,9 +167,23 @@ public class User implements Entity<User> {
      * @return
      */
     public void checkPasswordExpireTime() {
-        if (this.passwordExpireTime != null && LocalDateTime.now().isAfter(this.passwordExpireTime)) {
-            throw new ServiceException(ServiceErrorCode.USER_PASSWORD_EXPIRATION.getCode(), "用户密码已过期，请修改密码或者联系管理员重置");
-        }
+        Assert.notTrue(this.passwordExpireTime != null && LocalDateTime.now().isAfter(this.passwordExpireTime),
+                ServiceErrorCode.USER_PASSWORD_EXPIRATION);
+    }
+    
+    /**
+     * 延长密码过期时间.
+     */
+    public void expand() {
+        this.passwordExpireTime = createExpireTime();
+    }
+    
+    /**
+     * 密码过期时间.
+     */
+    public static LocalDateTime createExpireTime() {
+        // 默认 1 年 有效
+        return LocalDateTime.now().plusYears(1);
     }
     
     @Override

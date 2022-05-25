@@ -1,6 +1,8 @@
 package com.zsh.cloud.system.domain.model.role;
 
 import com.zsh.cloud.common.core.domain.ValueObject;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -18,9 +20,7 @@ public class RoleId implements ValueObject<RoleId> {
     private final String id;
     
     public RoleId(final String id) {
-        if (StringUtils.isEmpty(id)) {
-            throw new IllegalArgumentException("角色id不能为空");
-        }
+        ServiceAssert.isTrue(StringUtils.isNotBlank(id), GlobalErrorCode.BAD_REQUEST.getCode(), "角色id不能为空");
         this.id = id;
     }
     

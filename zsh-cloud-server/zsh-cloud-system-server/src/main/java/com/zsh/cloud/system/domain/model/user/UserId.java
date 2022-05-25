@@ -1,6 +1,8 @@
 package com.zsh.cloud.system.domain.model.user;
 
 import com.zsh.cloud.common.core.domain.ValueObject;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -13,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 public class UserId implements ValueObject<UserId> {
     
     /**
-     * 超级管理员角色
+     * 超级管理员角色.
      */
     public static final String SYS_ADMIN = "1";
     
@@ -23,9 +25,7 @@ public class UserId implements ValueObject<UserId> {
     private final String id;
     
     public UserId(final String id) {
-        if (StringUtils.isEmpty(id)) {
-            throw new IllegalArgumentException("用户id不能为空");
-        }
+        ServiceAssert.isTrue(StringUtils.isNotBlank(id), GlobalErrorCode.BAD_REQUEST.getCode(), "用户id不能为空");
         this.id = id;
     }
     

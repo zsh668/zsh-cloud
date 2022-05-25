@@ -21,7 +21,7 @@ public class TenantHandlerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String tenantId = request.getHeader(CommonConstant.TENANT_ID);
-        if (StringUtils.isNoneBlank(tenantId)) {
+        if (StringUtils.isNotBlank(tenantId)) {
             TenantContext.setTenantId(tenantId);
         }
         return true;

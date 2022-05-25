@@ -1,6 +1,8 @@
 package com.zsh.cloud.system.domain.model.user;
 
 import com.zsh.cloud.common.core.domain.ValueObject;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -15,9 +17,7 @@ public class Account implements ValueObject<Account> {
     private final String account;
     
     public Account(final String account) {
-        if (StringUtils.isEmpty(account)) {
-            throw new IllegalArgumentException("账号不能为空");
-        }
+        ServiceAssert.isTrue(StringUtils.isNotBlank(account), GlobalErrorCode.BAD_REQUEST.getCode(), "账号不能为空");
         this.account = account;
     }
     

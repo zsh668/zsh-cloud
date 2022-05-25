@@ -8,5 +8,12 @@ package com.zsh.cloud.system.domain.model.tenant;
  * @date 2022/5/20 13:45
  */
 public interface TenantRepository {
-
+    
+    /**
+     * 通过租户id获取租户.
+     *
+     * @param tenantId
+     * @return
+     */
+    Tenant find(TenantId tenantId);
 }

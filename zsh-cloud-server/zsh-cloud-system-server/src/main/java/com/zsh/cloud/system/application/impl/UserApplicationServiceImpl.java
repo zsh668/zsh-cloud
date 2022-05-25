@@ -3,13 +3,15 @@ package com.zsh.cloud.system.application.impl;
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.assembler.UserDtoAssembler;
 import com.zsh.cloud.system.application.command.PasswordCommand;
-import com.zsh.cloud.system.application.command.ResetPasswordCommand;
 import com.zsh.cloud.system.application.command.UserCreateCommand;
 import com.zsh.cloud.system.application.command.UserUpdateCommand;
-import com.zsh.cloud.system.domain.model.role.RoleId;
+import com.zsh.cloud.system.domain.model.tenant.TenantRepository;
 import com.zsh.cloud.system.domain.model.user.User;
+import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
 import com.zsh.cloud.system.domain.specification.UserCreateSpecification;
+import com.zsh.cloud.system.domain.specification.UserDeleteSpecification;
+import com.zsh.cloud.system.domain.specification.UserUpdateSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,15 +36,12 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     @Autowired
     private UserDtoAssembler userDtoAssembler;
     
+    @Autowired
+    private TenantRepository tenantRepository;
+    
     @Override
     public void save(UserCreateCommand userCommand) {
-        List<RoleId> roleIdList = new ArrayList<>();
-        if (userCommand.getRoleIdList() != null) {
-            userCommand.getRoleIdList().forEach(roleId -> {
-                roleIdList.add(new RoleId(roleId));
-            });
-        }
-        User user = userDtoAssembler.toUser(userCommand, roleIdList);
+        User user = userDtoAssembler.toUser(userCommand);
         UserCreateSpecification specification = new UserCreateSpecification(userRepository);
         specification.isSatisfiedBy(user);
         userRepository.store(user);
@@ -50,26 +49,43 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     
     @Override
     public void update(UserUpdateCommand userCommand) {
-    
+        User user = userDtoAssembler.toUser(userCommand);
+        UserUpdateSpecification specification = new UserUpdateSpecification(userRepository);
+        specification.isSatisfiedBy(user);
+        userRepository.store(user);
     }
     
     @Override
     public void deleteBatch(List<String> ids) {
-    
+        List<UserId> userIds = new ArrayList<>();
+        ids.forEach(id -> userIds.add(new UserId(id)));
+        UserDeleteSpecification specification = new UserDeleteSpecification(tenantRepository);
+        for (UserId userId : userIds) {
+            User user = userRepository.find(userId);
+            specification.isSatisfiedBy(user);
+        }
+        userRepository.remove(userIds);
     }
     
     @Override
     public void disable(String id) {
-    
+        User user = userRepository.find(new UserId(id));
+        UserDeleteSpecification specification = new UserDeleteSpecification(tenantRepository);
+        specification.isSatisfiedBy(user);
+        user.disable();
+        userRepository.store(user);
     }
     
     @Override
     public void changePassword(PasswordCommand passwordCommand) {
-    
+        User user = userRepository.find(new UserId(passwordCommand.getUserId()));
+        user.changePassword(passwordCommand.getPassword(), passwordCommand.getNewPassword());
+        user.expand();
+        userRepository.store(user);
     }
     
     @Override
-    public void resetPassword(ResetPasswordCommand command) {
-    
+    public void resetPassword(List<String> ids) {
+        userRepository.reset(ids);
     }
 }
