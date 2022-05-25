@@ -1,6 +1,8 @@
 package com.zsh.cloud.system.domain.model.org;
 
 import com.zsh.cloud.common.core.domain.ValueObject;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -18,9 +20,7 @@ public class OrgName implements ValueObject<OrgName> {
     private final String name;
     
     public OrgName(final String name) {
-        if (StringUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("组织名称不能为空");
-        }
+        ServiceAssert.isTrue(StringUtils.isNotBlank(name), GlobalErrorCode.BAD_REQUEST.getCode(), "组织名称不能为空");
         this.name = name;
     }
     

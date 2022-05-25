@@ -21,11 +21,20 @@ import com.zsh.cloud.common.core.exception.code.BaseErrorCode;
  * @date 2022/3/24 17:30
  */
 public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
-    // 模块 system 【000】 用户 【000】错误码 【000~999】
-    USER_NOT_EXISTS(1000000000, "用户不存在"),
-    USER_PASSWORD_ERROR(1000000001, "密码不正确"),
-    USER_PASSWORD_EXPIRATION(1000000002, "密码过期"),
-    USER_ACCOUNT_EXISTS(1000000003, "账号已存在"),
+    
+    // 模块 system 【000】 租户 【000】错误码 【000~999】
+    TENANT_NOT_EXISTS(1000000000, "租户不存在"),
+    TENANT_NAME_EXISTS(1000000001, "租户名称已存在"),
+    TENANT_CODE_EXISTS(1000000002, "租户编码已存在"),
+    TENANT_CREATOR_CHANGE(1000000003, "关联租户创建者无法删除或禁用"),
+    
+    // 模块 system 【000】 用户 【001】错误码 【000~999】
+    USER_NOT_EXISTS(1000001000, "用户不存在"),
+    USER_PASSWORD_ERROR(1000001001, "密码不正确"),
+    USER_PASSWORD_EXPIRATION(1000001002, "密码已过期，请修改密码"),
+    USER_ACCOUNT_EXISTS(1000001003, "账号已存在"),
+    USER_VERIFICATION_ERROR(1000001004, "验证不通过"),
+    USER_NOT_ENABLE(1000001005, "用户被禁用，请联系管理员"),
     ;
     
     private Integer code;

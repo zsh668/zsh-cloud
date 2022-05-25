@@ -1,6 +1,8 @@
 package com.zsh.cloud.system.domain.model.tenant;
 
 import com.zsh.cloud.common.core.domain.ValueObject;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -18,9 +20,7 @@ public class TenantName implements ValueObject<TenantName> {
     private final String name;
     
     public TenantName(final String name) {
-        if (StringUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("租户名称不能为空");
-        }
+        ServiceAssert.isTrue(StringUtils.isNotBlank(name), GlobalErrorCode.BAD_REQUEST.getCode(), "租户名称不能为空");
         this.name = name;
     }
     

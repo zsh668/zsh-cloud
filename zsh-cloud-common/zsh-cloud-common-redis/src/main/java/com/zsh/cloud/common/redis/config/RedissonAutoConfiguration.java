@@ -24,7 +24,7 @@ public class RedissonAutoConfiguration {
             @Value("${spring.redis.database:0}") int database) {
         Config config = new Config();
         config.useSingleServer().setAddress("redis://" + host + ":" + port);
-        if (StringUtils.isNoneBlank(password)) {
+        if (StringUtils.isNotBlank(password)) {
             config.useSingleServer().setPassword(password);
         }
         config.useSingleServer().setConnectionMinimumIdleSize(1);

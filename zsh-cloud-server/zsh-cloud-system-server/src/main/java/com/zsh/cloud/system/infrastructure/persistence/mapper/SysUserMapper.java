@@ -3,8 +3,8 @@ package com.zsh.cloud.system.infrastructure.persistence.mapper;
 import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
-import com.zsh.cloud.common.mybatis.core.query.LbqwExt;
 import com.zsh.cloud.common.mybatis.datascope.annotations.DataScope;
+import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.application.query.UserPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
 import org.apache.ibatis.annotations.Mapper;
@@ -30,7 +30,7 @@ public interface SysUserMapper extends BaseMapperExt<SysUserDO> {
      */
     @InterceptorIgnore(tenantLine = "true")
     default List<SysUserDO> queryUserNoTenantByAccount(String account) {
-        return selectList(new LbqwExt<SysUserDO>().eq(SysUserDO::getAccount, account));
+        return selectList(Wraps.<SysUserDO>lbQ().eq(SysUserDO::getAccount, account));
     }
     
     /**
@@ -42,7 +42,17 @@ public interface SysUserMapper extends BaseMapperExt<SysUserDO> {
      */
     @DataScope
     default Page<SysUserDO> selectPage(UserPageQuery query, Collection<String> orgIds) {
-        return selectPage(query, new LbqwExt<SysUserDO>().likeIfPresent(SysUserDO::getAccount, query.getAccount())
+        return selectPage(query, Wraps.<SysUserDO>lbQ().likeIfPresent(SysUserDO::getAccount, query.getAccount())
                 .likeIfPresent(SysUserDO::getUserName, query.getUserName()).inIfPresent(SysUserDO::getOrgId, orgIds));
+    }
+    
+    /**
+     * 根据superior查询用户.
+     *
+     * @param superior
+     * @return
+     */
+    default List<SysUserDO> queryUserBySuperior(String superior) {
+        return selectList(Wraps.<SysUserDO>lbQ().eq(SysUserDO::getSuperior, superior));
     }
 }

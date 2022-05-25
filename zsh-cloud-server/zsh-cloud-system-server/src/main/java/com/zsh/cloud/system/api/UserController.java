@@ -149,14 +149,14 @@ public class UserController {
     /**
      * 重置密码.
      *
-     * @param command
+     * @param userIds
      * @return
      */
     @ApiOperation(value = "重置密码", notes = "重置密码")
     @SysLog("重置密码")
     @PutMapping("reset")
-    public Boolean resetPassword(@Valid @RequestBody ResetPasswordCommand command) {
-        userApplicationService.resetPassword(command);
+    public Boolean resetPassword(@RequestBody String[] userIds) {
+        userApplicationService.resetPassword(Arrays.asList(userIds));
         return Boolean.TRUE;
     }
 }

@@ -71,13 +71,6 @@ public class UserUpdateCommand {
     private Integer gender;
     
     /**
-     * 状态 1启用 0禁用.
-     */
-    @ApiModelProperty(value = "状态")
-    @NotBlank(message = "状态不能为空")
-    private Integer status;
-    
-    /**
      * 头像.
      */
     @ApiModelProperty(value = "头像")

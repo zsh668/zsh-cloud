@@ -5,6 +5,7 @@ import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.tenant.contex.TenantContext;
 import com.zsh.cloud.system.application.command.UserCreateCommand;
+import com.zsh.cloud.system.application.command.UserUpdateCommand;
 import com.zsh.cloud.system.application.dto.UserDTO;
 import com.zsh.cloud.system.application.dto.UserPageDTO;
 import com.zsh.cloud.system.domain.model.org.OrgId;
@@ -69,66 +70,94 @@ public interface UserDtoAssembler {
      * @return
      */
     default UserDTO fromUser(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getUserId() == null ? "" : user.getUserId().getId());
-        userDTO.setAccount(user.getAccount() == null ? "" : user.getAccount().getAccount());
-        userDTO.setUserName(user.getUserName() == null ? "" : user.getUserName().getName());
-        userDTO.setEmail(user.getEmail() == null ? "" : user.getEmail().getEmail());
-        userDTO.setMobile(user.getMobile() == null ? "" : user.getMobile().getMobile());
-        userDTO.setGender(user.getGender() == null ? null : user.getGender().getCode());
-        userDTO.setStatus(user.getStatus() == null ? null : user.getStatus().getCode());
-        userDTO.setOrgId(user.getOrgId() == null ? "" : user.getOrgId().getId());
-        userDTO.setStationId(user.getStationId() == null ? "" : user.getStationId().getId());
-        userDTO.setAvatar(user.getAvatar());
-        userDTO.setWorkDescribe(user.getWorkDescribe());
-        userDTO.setPasswordExpireTime(user.getPasswordExpireTime());
-        userDTO.setLastLoginTime(user.getLastLoginTime());
-        userDTO.setSuperior(user.getSuperior() == null ? "" : user.getSuperior().getId());
+        UserDTO userDto = new UserDTO();
+        userDto.setId(user.getUserId() == null ? "" : user.getUserId().getId());
+        userDto.setAccount(user.getAccount() == null ? "" : user.getAccount().getAccount());
+        userDto.setUserName(user.getUserName() == null ? "" : user.getUserName().getName());
+        userDto.setEmail(user.getEmail() == null ? "" : user.getEmail().getEmail());
+        userDto.setMobile(user.getMobile() == null ? "" : user.getMobile().getMobile());
+        userDto.setGender(user.getGender() == null ? null : user.getGender().getCode());
+        userDto.setStatus(user.getStatus() == null ? null : user.getStatus().getCode());
+        userDto.setOrgId(user.getOrgId() == null ? "" : user.getOrgId().getId());
+        userDto.setStationId(user.getStationId() == null ? "" : user.getStationId().getId());
+        userDto.setAvatar(user.getAvatar());
+        userDto.setWorkDescribe(user.getWorkDescribe());
+        userDto.setPasswordExpireTime(user.getPasswordExpireTime());
+        userDto.setLastLoginTime(user.getLastLoginTime());
+        userDto.setSuperior(user.getSuperior() == null ? "" : user.getSuperior().getId());
         List<String> roleIdList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(user.getRoleIds())) {
             user.getRoleIds().forEach(roleId -> {
                 roleIdList.add(roleId.getId());
             });
         }
-        userDTO.setRoleIdList(roleIdList);
+        userDto.setRoleIdList(roleIdList);
         List<String> roleNameList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(user.getRoleNames())) {
             user.getRoleNames().forEach(roleName -> {
                 roleNameList.add(roleName.getName());
             });
         }
-        userDTO.setRoleNameList(roleNameList);
+        userDto.setRoleNameList(roleNameList);
         List<String> groupsNameList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(user.getUserGroupsNames())) {
             user.getUserGroupsNames().forEach(groupName -> {
                 groupsNameList.add(groupName.getName());
             });
         }
-        userDTO.setUserGroupsNames(groupsNameList);
-        return userDTO;
+        userDto.setUserGroupsNames(groupsNameList);
+        return userDto;
     }
     
     /**
-     * 转换.
+     * 创建用户转换.
      *
      * @param userCommand
      * @return
      */
-    default User toUser(UserCreateCommand userCommand, List<RoleId> roleIdList) {
+    default User toUser(UserCreateCommand userCommand) {
+        List<RoleId> roleIdList = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(userCommand.getRoleIdList())) {
+            userCommand.getRoleIdList().forEach(roleId -> {
+                roleIdList.add(new RoleId(roleId));
+            });
+        }
         String superior = userCommand.getSuperior();
         if (StringUtils.isBlank(superior)) {
-            superior = "0";
+            superior = "-1";
         }
-        // 默认 1 年 有效
-        LocalDateTime passwordExpireTime = LocalDateTime.now().plusYears(1);
         return User.builder().account(new Account(userCommand.getAccount()))
                 .userName(new UserName(userCommand.getUserName())).mobile(new Mobile(userCommand.getMobile()))
                 .email(new Email(userCommand.getEmail())).password(Password.create(Password.DEFAULT))
-                .gender(IDict.getByCode(GenderEnum.class, userCommand.getGender()))
-                .status(IDict.getByCode(StatusEnum.class, userCommand.getStatus())).superior(new UserId(superior))
-                .passwordExpireTime(passwordExpireTime).avatar(userCommand.getAvatar())
-                .workDescribe(userCommand.getWorkDescribe()).orgId(new OrgId(userCommand.getOrgId()))
-                .stationId(new StationId(userCommand.getStationId()))
+                .gender(IDict.getByCode(GenderEnum.class, userCommand.getGender())).status(StatusEnum.ENABLE)
+                .superior(new UserId(superior)).passwordExpireTime(User.createExpireTime())
+                .avatar(userCommand.getAvatar()).workDescribe(userCommand.getWorkDescribe())
+                .orgId(new OrgId(userCommand.getOrgId())).stationId(new StationId(userCommand.getStationId()))
                 .tenantId(new TenantId(TenantContext.getTenantId())).roleIds(roleIdList).build();
+    }
+    
+    /**
+     * 更新用户转换.
+     *
+     * @param userCommand
+     * @return
+     */
+    default User toUser(UserUpdateCommand userCommand) {
+        List<RoleId> roleIdList = new ArrayList<>();
+        if (userCommand.getRoleIdList() != null) {
+            userCommand.getRoleIdList().forEach(roleId -> {
+                roleIdList.add(new RoleId(roleId));
+            });
+        }
+        String superior = userCommand.getSuperior();
+        if (StringUtils.isBlank(superior)) {
+            superior = "-1";
+        }
+        return User.builder().userId(new UserId(userCommand.getId())).userName(new UserName(userCommand.getUserName()))
+                .mobile(new Mobile(userCommand.getMobile())).email(new Email(userCommand.getEmail()))
+                .gender(IDict.getByCode(GenderEnum.class, userCommand.getGender())).superior(new UserId(superior))
+                .avatar(userCommand.getAvatar()).workDescribe(userCommand.getWorkDescribe())
+                .orgId(new OrgId(userCommand.getOrgId())).stationId(new StationId(userCommand.getStationId()))
+                .roleIds(roleIdList).build();
     }
 }

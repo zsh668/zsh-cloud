@@ -51,5 +51,10 @@ public interface UserApplicationService {
      */
     void changePassword(PasswordCommand passwordCommand);
     
-    void resetPassword(ResetPasswordCommand command);
+    /**
+     * 批量重置密码.
+     *
+     * @param ids
+     */
+    void resetPassword(List<String> ids);
 }

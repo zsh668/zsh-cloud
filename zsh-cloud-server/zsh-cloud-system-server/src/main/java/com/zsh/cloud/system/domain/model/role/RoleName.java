@@ -1,6 +1,8 @@
 package com.zsh.cloud.system.domain.model.role;
 
 import com.zsh.cloud.common.core.domain.ValueObject;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -23,9 +25,7 @@ public class RoleName implements ValueObject<RoleName> {
     private final String name;
     
     public RoleName(final String name) {
-        if (StringUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("角色名称不能为空");
-        }
+        ServiceAssert.isTrue(StringUtils.isNotBlank(name), GlobalErrorCode.BAD_REQUEST.getCode(), "角色名称不能为空");
         this.name = name;
     }
     

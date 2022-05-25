@@ -34,4 +34,26 @@ public interface UserRepository {
      * @return
      */
     UserId store(User user);
+    
+    /**
+     * 通过superior获取用户.
+     *
+     * @param superior
+     * @return
+     */
+    List<User> findBySuperior(UserId superior);
+    
+    /**
+     * 删除.
+     *
+     * @param userIds
+     */
+    void remove(List<UserId> userIds);
+    
+    /**
+     * 重置密码.
+     *
+     * @param ids
+     */
+    void reset(List<String> ids);
 }

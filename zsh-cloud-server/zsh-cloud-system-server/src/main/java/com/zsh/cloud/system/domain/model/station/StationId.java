@@ -1,6 +1,8 @@
 package com.zsh.cloud.system.domain.model.station;
 
 import com.zsh.cloud.common.core.domain.ValueObject;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -18,9 +20,7 @@ public class StationId implements ValueObject<StationId> {
     private final String id;
     
     public StationId(final String id) {
-        if (StringUtils.isEmpty(id)) {
-            throw new IllegalArgumentException("岗位id不能为空");
-        }
+        ServiceAssert.isTrue(StringUtils.isNotBlank(id), GlobalErrorCode.BAD_REQUEST.getCode(), "岗位id不能为空");
         this.id = id;
     }
     

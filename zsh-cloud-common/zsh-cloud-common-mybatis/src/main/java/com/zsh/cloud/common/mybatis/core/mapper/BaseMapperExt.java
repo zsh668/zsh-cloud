@@ -7,11 +7,9 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.core.dto.PageQuery;
-import com.zsh.cloud.common.mybatis.core.query.LbqwExt;
-import com.zsh.cloud.common.mybatis.core.query.QwExt;
-import com.zsh.cloud.common.mybatis.datascope.annotations.DataScope;
 import com.zsh.cloud.common.mybatis.util.MyBatisUtils;
 import com.zsh.cloud.common.mybatis.util.PageAssembler;
+import com.zsh.cloud.common.mybatis.util.Wraps;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Collection;
@@ -35,7 +33,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return T
      */
     default T selectOne(String field, Object value) {
-        return selectOne(new QwExt<T>().eq(field, value));
+        return selectOne(Wraps.<T>qw().eq(field, value));
     }
     
     /**
@@ -46,7 +44,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return T
      */
     default T selectOne(SFunction<T, ?> field, Object value) {
-        return selectOne(new LbqwExt<T>().eq(field, value));
+        return selectOne(Wraps.<T>lbQ().eq(field, value));
     }
     
     /**
@@ -59,7 +57,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return T
      */
     default T selectOne(String field1, Object value1, String field2, Object value2) {
-        return selectOne(new QwExt<T>().eq(field1, value1).eq(field2, value2));
+        return selectOne(Wraps.<T>qw().eq(field1, value1).eq(field2, value2));
     }
     
     /**
@@ -72,7 +70,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return T
      */
     default T selectOne(SFunction<T, ?> field1, Object value1, SFunction<T, ?> field2, Object value2) {
-        return selectOne(new LbqwExt<T>().eq(field1, value1).eq(field2, value2));
+        return selectOne(Wraps.<T>lbQ().eq(field1, value1).eq(field2, value2));
     }
     
     /**
@@ -81,7 +79,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return Long
      */
     default Long selectCount() {
-        return selectCount(new QwExt<T>());
+        return selectCount(Wraps.qw());
     }
     
     /**
@@ -92,7 +90,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return Long
      */
     default Long selectCount(String field, Object value) {
-        return selectCount(new QwExt<T>().eq(field, value));
+        return selectCount(Wraps.<T>qw().eq(field, value));
     }
     
     /**
@@ -103,7 +101,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return Long
      */
     default Long selectCount(SFunction<T, ?> field, Object value) {
-        return selectCount(new LbqwExt<T>().eq(field, value));
+        return selectCount(Wraps.<T>lbQ().eq(field, value));
     }
     
     /**
@@ -112,7 +110,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return list
      */
     default List<T> selectList() {
-        return selectList(new QwExt<>());
+        return selectList(Wraps.qw());
     }
     
     /**
@@ -123,7 +121,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return list
      */
     default List<T> selectList(String field, Object value) {
-        return selectList(new QwExt<T>().eq(field, value));
+        return selectList(Wraps.<T>qw().eq(field, value));
     }
     
     /**
@@ -134,7 +132,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return list
      */
     default List<T> selectList(SFunction<T, ?> field, Object value) {
-        return selectList(new LbqwExt<T>().eq(field, value));
+        return selectList(Wraps.<T>lbQ().eq(field, value));
     }
     
     /**
@@ -145,7 +143,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return list
      */
     default List<T> selectList(String field, Collection<?> values) {
-        return selectList(new QwExt<T>().in(field, values));
+        return selectList(Wraps.<T>qw().in(field, values));
     }
     
     /**
@@ -156,7 +154,7 @@ public interface BaseMapperExt<T> extends BaseMapper<T> {
      * @return list
      */
     default List<T> selectList(SFunction<T, ?> field, Collection<?> values) {
-        return selectList(new LbqwExt<T>().in(field, values));
+        return selectList(Wraps.<T>lbQ().in(field, values));
     }
     
     /**

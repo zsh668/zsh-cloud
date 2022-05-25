@@ -1,7 +1,7 @@
 package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.common.core.enums.StatusEnum;
-import com.zsh.cloud.common.mybatis.core.query.LbqwExt;
+import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.application.ResourceQueryService;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysResourceDO;
@@ -31,9 +31,8 @@ public class ResourceQueryServiceImpl implements ResourceQueryService {
     public Set<String> getPermissionCodes(String userId) {
         // 获取权限资源
         List<SysResourceDO> sysPermissionDOList = getSysResourceDOList(userId);
-        Set<String> permissionCodes = sysPermissionDOList.stream().filter(Objects::nonNull)
-                .map(SysResourceDO::getResourceCode).collect(Collectors.toSet());
-        return permissionCodes;
+        return sysPermissionDOList.stream().filter(Objects::nonNull).map(SysResourceDO::getResourceCode)
+                .collect(Collectors.toSet());
     }
     
     /**
@@ -46,7 +45,7 @@ public class ResourceQueryServiceImpl implements ResourceQueryService {
         List<SysResourceDO> sysResourceDOList;
         if (new UserId(userId).isSysAdmin()) {
             sysResourceDOList = sysResourceMapper.selectList(
-                    new LbqwExt<SysResourceDO>().eq(SysResourceDO::getStatus, StatusEnum.ENABLE.getCode()));
+                    Wraps.<SysResourceDO>lbQ().eq(SysResourceDO::getStatus, StatusEnum.ENABLE.getCode()));
         } else {
             sysResourceDOList = sysResourceMapper.queryResourceByUserId(userId);
         }
