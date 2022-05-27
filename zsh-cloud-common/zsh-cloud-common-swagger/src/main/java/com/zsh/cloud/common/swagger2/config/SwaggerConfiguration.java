@@ -1,20 +1,17 @@
 package com.zsh.cloud.common.swagger2.config;
 
-import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.google.common.net.HttpHeaders;
 import com.zsh.cloud.common.core.constant.CommonConstant;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Api;
 import io.swagger.models.auth.In;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.RequestParameterBuilder;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.schema.ScalarType;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
@@ -27,13 +24,10 @@ import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 
 /**
  * Swagger配置
@@ -43,36 +37,26 @@ import static springfox.documentation.builders.RequestHandlerSelectors.basePacka
  * @date 2022/4/11 12:06
  */
 @Configuration
-@EnableSwagger2
-@EnableKnife4j
-@ConditionalOnClass({Docket.class, ApiInfoBuilder.class})
-// 允许使用 swagger.enable=false 禁用 Swagger
-@ConditionalOnProperty(prefix = "zsh.cloud.swagger", value = "enable", matchIfMissing = true)
-@EnableConfigurationProperties(SwaggerProperties.class)
+@EnableOpenApi
 public class SwaggerConfiguration {
     
-    @Bean
-    @ConditionalOnMissingBean
-    public SwaggerProperties swaggerProperties() {
-        return new SwaggerProperties();
-    }
+    @Value("${spring.application.name}")
+    private String applicationName;
     
     @Bean
     public Docket createRestApi() {
-        SwaggerProperties properties = swaggerProperties();
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo(properties)).select()
-                .apis(basePackage(properties.getBasePackage())).paths(PathSelectors.any()).build()
+        return new Docket(DocumentationType.OAS_30).apiInfo(apiInfo()).select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class)).paths(PathSelectors.any()).build()
                 .securitySchemes(security()).globalRequestParameters(getGlobalRequestParameters())
                 .securityContexts(securityContexts());
     }
     
     /**
-     * API 摘要信息
+     * API 摘要信息.
      */
-    private static ApiInfo apiInfo(SwaggerProperties properties) {
-        return new ApiInfoBuilder().title(properties.getTitle()).description(properties.getDescription())
-                .termsOfServiceUrl(properties.getTermsOfServiceUrl())
-                .contact(new Contact(properties.getAuthor(), null, null)).version(properties.getVersion()).build();
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder().title(applicationName).description(applicationName + "接口文档。")
+                .contact(new Contact("zsh", "https://www.zsh6.com", "zhangshuhang@zsh6.com")).version("1.0").build();
     }
     
     private List<SecurityScheme> security() {

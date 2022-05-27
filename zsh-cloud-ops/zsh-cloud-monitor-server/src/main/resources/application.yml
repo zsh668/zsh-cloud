@@ -1,7 +1,7 @@
 server:
   port: 5001
   servlet:
-    context-path: /
+    context-path: /monitor
 
 spring:
   security:

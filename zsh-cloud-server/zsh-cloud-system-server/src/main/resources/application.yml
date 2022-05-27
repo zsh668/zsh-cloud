@@ -1,7 +1,7 @@
 server:
   port: 8080
   servlet:
-    context-path: /
+    context-path: /system
 
 spring:
   mvc:
@@ -54,10 +54,3 @@ zsh:
         - "sys_account"
         - "sys_menu"
         - "sys_resource"
-    swagger:
-      title: zsh-cloud
-      description: zsh-cloud是一款基于DDD领域模型设计并支持SaaS平台的微服务框架
-      terms-of-service-url: https://www.zsh6.com
-      author: zsh
-      version: 1.0.0
-      base-package: com.zsh.cloud

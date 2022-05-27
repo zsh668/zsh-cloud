@@ -12,7 +12,7 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:5001
+        url: http://localhost:5001/monitor
         username: admin
         password: admin
         instance:

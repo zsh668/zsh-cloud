@@ -1,7 +1,6 @@
 package com.zsh.cloud.common.exception.config;
 
-import com.zsh.cloud.common.exception.handler.GlobalExceptionHandler;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -12,10 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2022/5/9 11:41
  */
 @Configuration
+@ComponentScan(basePackages = "com.zsh.cloud.common.exception")
 public class ExceptionConfig {
-    
-    @Bean
-    public GlobalExceptionHandler globalExceptionHandler() {
-        return new GlobalExceptionHandler();
-    }
+
 }

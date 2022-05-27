@@ -44,8 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll().and().authorizeRequests()
-                .antMatchers("getPublicKey", "/oauth/logout").permitAll()
-                .antMatchers("/oauth/**", "/webjars/**", "/doc.html", "/swagger-resources/**", "/v3/api-docs")
+                .antMatchers("/getPublicKey", "/oauth/logout", "/captcha").permitAll()
+                .antMatchers("/oauth/**", "/webjars/**", "/**.html", "/swagger-resources/**", "/v3/**")
                 .permitAll().antMatchers("/error").permitAll().anyRequest().authenticated().and().csrf().disable();
     }
     
