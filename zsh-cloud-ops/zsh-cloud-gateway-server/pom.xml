@@ -14,11 +14,19 @@
         网关
     </description>
     
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-    
     <dependencies>
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-swagger</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-j2cache</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
@@ -49,25 +57,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
-    
-        <dependency>
-            <groupId>com.zsh.cloud</groupId>
-            <artifactId>zsh-cloud-common-swagger</artifactId>
-            <version>${revision}</version>
-        </dependency>
-    
-        <dependency>
-            <groupId>com.zsh.cloud</groupId>
-            <artifactId>zsh-cloud-common-j2cache</artifactId>
-            <version>${revision}</version>
-        </dependency>
-    
-        <dependency>
-            <groupId>com.zsh.cloud</groupId>
-            <artifactId>zsh-cloud-common-web</artifactId>
-            <version>${revision}</version>
-        </dependency>
-    
+        
         <!--添加Sleuth依赖 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

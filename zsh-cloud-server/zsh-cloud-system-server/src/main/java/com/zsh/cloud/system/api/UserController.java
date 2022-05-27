@@ -8,7 +8,6 @@ import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.UserQueryService;
 import com.zsh.cloud.system.application.command.PasswordCommand;
-import com.zsh.cloud.system.application.command.ResetPasswordCommand;
 import com.zsh.cloud.system.application.command.UserCreateCommand;
 import com.zsh.cloud.system.application.command.UserUpdateCommand;
 import com.zsh.cloud.system.application.dto.UserDTO;
@@ -24,11 +23,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 用户管理.
@@ -40,7 +40,6 @@ import java.util.Arrays;
 @Api(tags = "用户管理")
 @Slf4j
 @RestController
-@RequestMapping("user")
 public class UserController {
     
     @Autowired
@@ -58,7 +57,7 @@ public class UserController {
     @ApiOperation("分页查询用户")
     @Translator
     @ExportExcel(fileName = "用户")
-    @GetMapping("page")
+    @GetMapping("users")
     public Page<UserPageDTO> page(UserPageQuery userPageQuery) {
         return userQueryService.queryPage(userPageQuery);
     }
@@ -70,7 +69,7 @@ public class UserController {
      * @return
      */
     @ApiOperation(value = "查询用户", notes = "查询用户")
-    @GetMapping("{id}")
+    @GetMapping("users/{id}")
     public UserDTO get(@PathVariable String id) {
         return userQueryService.find(id);
     }
@@ -83,7 +82,7 @@ public class UserController {
      */
     @ApiOperation("保存用户")
     @SysLog("保存用户")
-    @PostMapping
+    @PostMapping("users")
     public Boolean save(@Valid @RequestBody UserCreateCommand userCommand) {
         userApplicationService.save(userCommand);
         return Boolean.TRUE;
@@ -97,7 +96,7 @@ public class UserController {
      */
     @ApiOperation("修改用户")
     @SysLog("修改用户")
-    @PutMapping
+    @PutMapping("users/{id}")
     public Boolean update(@Valid @RequestBody UserUpdateCommand userCommand) {
         userApplicationService.update(userCommand);
         return Boolean.TRUE;
@@ -111,9 +110,9 @@ public class UserController {
      */
     @ApiOperation("删除用户")
     @SysLog("删除用户")
-    @DeleteMapping
-    public Boolean delete(@RequestBody String[] userIds) {
-        userApplicationService.deleteBatch(Arrays.asList(userIds));
+    @DeleteMapping("users")
+    public Boolean delete(@RequestParam List<String> userIds) {
+        userApplicationService.deleteBatch(userIds);
         return Boolean.TRUE;
     }
     
@@ -125,7 +124,7 @@ public class UserController {
      */
     @ApiOperation("开启、禁用用户")
     @SysLog("开启、禁用用户")
-    @PutMapping("disable")
+    @PutMapping("users/disable")
     public Boolean disable(String id) {
         userApplicationService.disable(id);
         return Boolean.TRUE;
@@ -139,7 +138,7 @@ public class UserController {
      */
     @ApiOperation("修改密码")
     @SysLog("修改密码")
-    @PutMapping("password")
+    @PutMapping("users/password")
     public Boolean changePassword(@Valid @RequestBody PasswordCommand passwordCommand) {
         passwordCommand.setUserId(RequestUtils.getUserId());
         userApplicationService.changePassword(passwordCommand);
@@ -154,9 +153,9 @@ public class UserController {
      */
     @ApiOperation(value = "重置密码", notes = "重置密码")
     @SysLog("重置密码")
-    @PutMapping("reset")
-    public Boolean resetPassword(@RequestBody String[] userIds) {
-        userApplicationService.resetPassword(Arrays.asList(userIds));
+    @PutMapping("users/reset")
+    public Boolean resetPassword(@RequestParam List<String> userIds) {
+        userApplicationService.resetPassword(userIds);
         return Boolean.TRUE;
     }
 }

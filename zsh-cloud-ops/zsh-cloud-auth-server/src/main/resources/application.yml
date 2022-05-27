@@ -1,6 +1,7 @@
-nacos
 server:
   port: 8100
+  servlet:
+    context-path: /auth
 
 spring:
   mvc:
@@ -46,12 +47,3 @@ dubbo:
   cloud:
     subscribed-services: 'zsh-cloud-system-server'
 
-zsh:
-  cloud:
-    swagger:
-      title: zsh-cloud
-      description: zsh-cloud是一款基于DDD领域模型设计并支持SaaS平台的微服务框架
-      terms-of-service-url: https://www.zsh6.com
-      author: zsh
-      version: 1.0.0
-      base-package: com.zsh.cloud

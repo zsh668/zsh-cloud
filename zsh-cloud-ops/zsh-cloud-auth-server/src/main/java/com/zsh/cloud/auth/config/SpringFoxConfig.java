@@ -19,10 +19,10 @@ import java.util.List;
  * @version 1.0
  * @date 2022/4/21 18:14
  */
-//@Configuration
+@Configuration
 public class SpringFoxConfig {
     
-    //@Bean
+    @Bean
     public static BeanPostProcessor springfoxHandlerProviderBeanPostProcessor() {
         return new BeanPostProcessor() {
             

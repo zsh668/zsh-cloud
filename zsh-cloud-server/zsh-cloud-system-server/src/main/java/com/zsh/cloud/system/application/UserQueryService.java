@@ -5,7 +5,6 @@ import com.zsh.cloud.common.mybatis.datascope.domain.DataPermission;
 import com.zsh.cloud.system.application.dto.UserDTO;
 import com.zsh.cloud.system.application.dto.UserPageDTO;
 import com.zsh.cloud.system.application.query.UserPageQuery;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
 
 /**
  * 用户查询服务接口.

@@ -1,7 +1,6 @@
 package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.system.application.command.PasswordCommand;
-import com.zsh.cloud.system.application.command.ResetPasswordCommand;
 import com.zsh.cloud.system.application.command.UserCreateCommand;
 import com.zsh.cloud.system.application.command.UserUpdateCommand;
 
@@ -17,28 +16,28 @@ import java.util.List;
 public interface UserApplicationService {
     
     /**
-     * 保存用户
+     * 保存用户.
      *
      * @param userCommand
      */
     void save(UserCreateCommand userCommand);
     
     /**
-     * 更新用户
+     * 更新用户.
      *
      * @param userCommand
      */
     void update(UserUpdateCommand userCommand);
     
     /**
-     * 批量删除
+     * 批量删除.
      *
      * @param ids
      */
     void deleteBatch(List<String> ids);
     
     /**
-     * 禁用
+     * 禁用.
      *
      * @param id
      */
