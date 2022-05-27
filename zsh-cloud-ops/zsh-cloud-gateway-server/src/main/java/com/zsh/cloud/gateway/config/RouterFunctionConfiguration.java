@@ -30,7 +30,7 @@ public class RouterFunctionConfiguration {
     
     private static final String ALLOWED_METHODS = "GET,POST,PUT,DELETE,OPTIONS,HEAD";
     
-    private static final String ALLOWED_ORIGIN = "http://localhost:8001";
+    private static final String ALLOWED_ORIGIN = "http://127.0.0.1:8001";
     
     private static final String ALLOWED_EXPOSE = "*";
     

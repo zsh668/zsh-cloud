@@ -11,7 +11,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: 127.0.0.1:8848
 
   sleuth:
     sampler:
@@ -19,7 +19,7 @@ spring:
 
   zipkin:
     enabled: false
-    base-url: http://localhost:9411/ # Zipkin Server 地址
+    base-url: http://127.0.0.1:9411/ # Zipkin Server 地址
     discovery-client-enabled: false #让nacos把它当成一个URL，而不要当做服务名
     message-timeout: 5
     sender:
@@ -31,7 +31,7 @@ dubbo:
     name: zsh-cloud-system-server
     qos-enable: false
   registry:
-    address: nacos://localhost:8848
+    address: nacos://127.0.0.1:8848
     check: false
     parameters:
       # 命名空间ID

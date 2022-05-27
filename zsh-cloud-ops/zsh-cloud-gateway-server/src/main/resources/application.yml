@@ -3,7 +3,6 @@ server:
   servlet:
     context-path: /
 
-
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -13,7 +12,7 @@ spring:
       resourceserver:
         jwt:
           # 获取JWT验签公钥请求路径
-          jwk-set-uri: 'http://localhost:8100/auth/getPublicKey'
+          jwk-set-uri: 'http://127.0.0.1:8100/auth/getPublicKey'
 
   cloud:
     gateway:

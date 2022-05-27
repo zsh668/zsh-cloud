@@ -1,6 +1,8 @@
 package com.zsh.cloud.auth.sevice.impl;
 
 import com.google.code.kaptcha.Producer;
+import com.wf.captcha.ArithmeticCaptcha;
+import com.wf.captcha.base.Captcha;
 import com.zsh.cloud.auth.sevice.CaptchaService;
 import com.zsh.cloud.common.core.constant.CacheKey;
 import net.oschina.j2cache.CacheChannel;
@@ -28,12 +30,22 @@ public class CaptchaServiceImpl implements CaptchaService {
     private CacheChannel cache;
     
     @Override
-    public BufferedImage getCaptcha(String uuid) {
+    public BufferedImage getCaptchaImage(String uuid) {
         //生成文字验证码
         String code = producer.createText();
         // 保存
         cache.set(CacheKey.CAPTCHA, uuid, code, 5 * 60L);
         return producer.createImage(code);
+    }
+    
+    @Override
+    public Captcha getCaptcha(String uuid) {
+        //生成验证码
+        Captcha captcha = new ArithmeticCaptcha(115, 42);
+        captcha.setCharType(2);
+        // 保存
+        cache.set(CacheKey.CAPTCHA, uuid, StringUtils.lowerCase(captcha.text()), 5 * 60L);
+        return captcha;
     }
     
     @Override

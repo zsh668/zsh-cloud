@@ -1,5 +1,7 @@
 package com.zsh.cloud.auth.sevice;
 
+import com.wf.captcha.base.Captcha;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -17,7 +19,15 @@ public interface CaptchaService {
      * @param uuid
      * @return
      */
-    BufferedImage getCaptcha(String uuid);
+    BufferedImage getCaptchaImage(String uuid);
+    
+    /**
+     * 生成验证码.
+     *
+     * @param uuid
+     * @return
+     */
+    Captcha getCaptcha(String uuid);
     
     /**
      * 校验 验证码
