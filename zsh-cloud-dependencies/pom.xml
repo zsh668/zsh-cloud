@@ -19,10 +19,11 @@
         <spring-boot.version>2.6.8</spring-boot.version>
         <spring-cloud.version>2021.0.2</spring-cloud.version>
         <com-alibaba-cloud.version>2021.0.1.0</com-alibaba-cloud.version>
-        
+        <dubbo-spring-boot.version>2.7.15</dubbo-spring-boot.version>
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
+    
         <spring-boot-admin.version>2.6.5</spring-boot-admin.version>
         <druid.version>1.2.9</druid.version>
-        <mybatis-plus.version>3.5.1</mybatis-plus.version>
         
         <xstream.version>1.4.19</xstream.version>
         <dom4j.version>2.1.3</dom4j.version>
@@ -31,15 +32,15 @@
         <swagger-annotations.version>1.5.22</swagger-annotations.version>
         
         <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
-        
-        <kaptcha.version>2.3.2</kaptcha.version>
-        
+    
         <cglib.version>3.3.0</cglib.version>
-        
+    
         <j2cache.version>2.8.0-release</j2cache.version>
         <j2cache-core.version>2.8.5-release</j2cache-core.version>
         <redisson.version>3.16.8</redisson.version>
-        
+    
+        <kaptcha.version>2.3.2</kaptcha.version>
+        <easy-captcha.version>1.6.2</easy-captcha.version>
         <hutool.version>5.7.22</hutool.version>
         <ip2region.version>1.7.2</ip2region.version>
         <bitwalker.version>1.21</bitwalker.version>
@@ -98,7 +99,7 @@
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>2.7.15</version>
+                <version>${dubbo-spring-boot.version}</version>
             </dependency>
             
             <dependency>
@@ -157,7 +158,13 @@
                 <artifactId>kaptcha</artifactId>
                 <version>${kaptcha.version}</version>
             </dependency>
-            
+            <!-- https://mvnrepository.com/artifact/com.github.whvcse/easy-captcha -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
+            </dependency>
+    
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>

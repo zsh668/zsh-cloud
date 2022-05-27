@@ -24,9 +24,13 @@ public class KaptchaConfig {
         // 图片边框
         properties.setProperty(Constants.KAPTCHA_BORDER, "no");
         // 字体颜色
-        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, "black");
+        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, "blue");
+        // 干扰颜色
+        properties.setProperty(Constants.KAPTCHA_NOISE_COLOR, "orange");
         // 文字间隔
-        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_CHAR_SPACE, "5");
+        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_CHAR_SPACE, "4");
+        // 文本字符长度
+        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_CHAR_LENGTH, "4");
         // 字体
         properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_NAMES, "Arial,Courier,cmr10,宋体,楷体,微软雅黑");
         Config config = new Config(properties);

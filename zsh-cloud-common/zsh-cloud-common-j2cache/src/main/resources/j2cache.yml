@@ -82,7 +82,7 @@ jgroups:
 # 广播相关配置： rabbitmq 配置 （当 j2cache.broadcast=rabbitmq 时，才需要配置）
 rabbitmq:
   exchange: j2cache
-  host: localhost
+  host: 127.0.0.1
   port: 5672
   username: guest
   password: guest
