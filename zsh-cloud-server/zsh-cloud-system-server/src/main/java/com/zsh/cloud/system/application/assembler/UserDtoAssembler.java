@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
 import org.springframework.util.CollectionUtils;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +69,9 @@ public interface UserDtoAssembler {
      * @return
      */
     default UserDTO fromUser(User user) {
+        if (user == null) {
+            return null;
+        }
         UserDTO userDto = new UserDTO();
         userDto.setId(user.getUserId() == null ? "" : user.getUserId().getId());
         userDto.setAccount(user.getAccount() == null ? "" : user.getAccount().getAccount());

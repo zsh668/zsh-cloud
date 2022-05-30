@@ -7,7 +7,7 @@ import cn.hutool.extra.servlet.ServletUtil;
 import com.zsh.cloud.common.core.domain.Result;
 import com.zsh.cloud.common.core.util.JsonUtils;
 import com.zsh.cloud.common.core.util.RequestUtils;
-import com.zsh.cloud.common.log.dto.OptLogDTO;
+import com.zsh.cloud.system.api.dto.OptLogDTO;
 import com.zsh.cloud.common.log.enums.LogTypeEnum;
 import com.zsh.cloud.common.log.event.SysLogEvent;
 import com.zsh.cloud.common.log.util.LogUtil;
@@ -178,7 +178,7 @@ public class SysLogAspect {
         if (r == null) {
             sysLog.setType(LogTypeEnum.OPT.getCode());
         } else {
-            if (r.getIsSuccess()) {
+            if (r.validateCode()) {
                 sysLog.setType(LogTypeEnum.OPT.getCode());
             } else {
                 sysLog.setType(LogTypeEnum.EX.getCode());

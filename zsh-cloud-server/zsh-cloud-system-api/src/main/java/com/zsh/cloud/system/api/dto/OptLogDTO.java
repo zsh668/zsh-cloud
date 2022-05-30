@@ -1,4 +1,4 @@
-package com.zsh.cloud.common.log.dto;
+package com.zsh.cloud.system.api.dto;
 
 import lombok.Data;
 

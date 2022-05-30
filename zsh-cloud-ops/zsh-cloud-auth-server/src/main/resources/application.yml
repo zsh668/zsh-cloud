@@ -13,18 +13,6 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
 
-  sleuth:
-    sampler:
-      probability: 1 # 采样率100%
-
-  zipkin:
-    enabled: false
-    base-url: http://127.0.0.1:9411/ # Zipkin Server 地址
-    discovery-client-enabled: false #让nacos把它当成一个URL，而不要当做服务名
-    message-timeout: 5
-    sender:
-      type: web
-
 dubbo:
   application:
     id: zsh-cloud-auth-server

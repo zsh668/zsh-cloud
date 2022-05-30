@@ -1,9 +1,9 @@
 package com.zsh.cloud.common.exception.handler;
 
+import com.zsh.cloud.common.core.domain.Result;
 import com.zsh.cloud.common.core.exception.BaseUncheckedException;
 import com.zsh.cloud.common.core.exception.ServiceException;
 import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
-import com.zsh.cloud.common.core.domain.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -157,7 +157,7 @@ public class GlobalExceptionHandler {
      * @author hang
      * @date 2022/03/14 13:46
      */
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(value = Exception.class)
     public Result<?> handleException(Exception e) {
         log.error(e.getMessage(), e);
         return Result.error(GlobalErrorCode.INTERNAL_SERVER_ERROR.getCode(),

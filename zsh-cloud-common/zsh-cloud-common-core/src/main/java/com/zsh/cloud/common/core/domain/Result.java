@@ -110,11 +110,11 @@ public class Result<T> implements Serializable {
     }
     
     /**
-     * 逻辑处理是否成功
+     * 是否是成功code
      *
      * @return 是否成功
      */
-    public Boolean getIsSuccess() {
+    public Boolean validateCode() {
         return this.code == GlobalErrorCode.SUCCESS.getCode() || this.code == HttpStatus.OK.value();
     }
     

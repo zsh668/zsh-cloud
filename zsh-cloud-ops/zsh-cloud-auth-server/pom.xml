@@ -71,18 +71,6 @@
             <version>${revision}</version>
         </dependency>
     
-        <!--添加Sleuth依赖 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-sleuth</artifactId>
-        </dependency>
-    
-        <!--zipkin依赖-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
-        </dependency>
-    
         <!-- kaptcha验证码 -->
         <dependency>
             <groupId>com.github.penggle</groupId>

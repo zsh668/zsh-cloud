@@ -1,8 +1,8 @@
-package com.zsh.cloud.system.config;
+package com.zsh.cloud.common.log.config;
 
-import com.zsh.cloud.common.log.dto.OptLogDTO;
 import com.zsh.cloud.common.log.event.SysLogListener;
-import com.zsh.cloud.system.application.OptLogApplicationService;
+import com.zsh.cloud.system.api.dto.OptLogDTO;
+import com.zsh.cloud.system.api.dubbo.OptLogDubboService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -24,8 +24,8 @@ public class SysLogConfiguration {
      * 创建日志记录监听器对象.
      */
     @Bean
-    public SysLogListener sysLogListener(OptLogApplicationService optLogApplicationService) {
-        Consumer<OptLogDTO> consumer = optLogApplicationService::save;
+    public SysLogListener sysLogListener(OptLogDubboService optLogDubboService) {
+        Consumer<OptLogDTO> consumer = optLogDubboService::save;
         return new SysLogListener(consumer);
     }
 }

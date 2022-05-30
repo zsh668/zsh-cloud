@@ -57,6 +57,7 @@ public class UserController {
     @ApiOperation("分页查询用户")
     @Translator
     @ExportExcel(fileName = "用户")
+    @SysLog("用户列表")
     @GetMapping("users")
     public Page<UserPageDTO> page(UserPageQuery userPageQuery) {
         return userQueryService.queryPage(userPageQuery);
