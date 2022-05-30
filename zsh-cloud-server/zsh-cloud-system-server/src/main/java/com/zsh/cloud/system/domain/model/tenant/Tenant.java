@@ -1,10 +1,14 @@
 package com.zsh.cloud.system.domain.model.tenant;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.zsh.cloud.common.core.domain.Entity;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import lombok.Builder;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  * 租户.
@@ -41,6 +45,32 @@ public class Tenant implements Entity<Tenant> {
      * 创建者Id
      */
     private UserId creatorId;
+    
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createdTime;
+    
+    /**
+     * 功能描述。
+     */
+    private String describe;
+    
+    /**
+     * 是否有效.
+     *
+     * @return
+     */
+    public boolean isEnable() {
+        return status == StatusEnum.ENABLE;
+    }
+    
+    /**
+     * 启用、禁用.
+     */
+    public void disable() {
+        this.status = this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
+    }
     
     @Override
     public boolean sameIdentityAs(Tenant other) {

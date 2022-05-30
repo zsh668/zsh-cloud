@@ -28,7 +28,7 @@ public class ServiceAssert {
     }
     
     /**
-     * false抛异常.
+     * true 抛异常.
      *
      * @param expression
      * @param code

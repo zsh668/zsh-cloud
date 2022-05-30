@@ -27,6 +27,7 @@ public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     TENANT_NAME_EXISTS(1000000001, "租户名称已存在"),
     TENANT_CODE_EXISTS(1000000002, "租户编码已存在"),
     TENANT_CREATOR_CHANGE(1000000003, "关联租户创建者无法删除或禁用"),
+    TENANT_PLATFORM_DELETE(1000000004, "平台租户无法删除"),
     
     // 模块 system 【000】 用户 【001】错误码 【000~999】
     USER_NOT_EXISTS(1000001000, "用户不存在"),
