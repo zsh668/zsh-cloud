@@ -48,8 +48,7 @@ public class UserQueryServiceImpl implements UserQueryService {
     @Override
     public UserDTO find(String userId) {
         User user = userRepository.find(new UserId(userId));
-        UserDTO userDto = userDtoAssembler.fromUser(user);
-        return userDto;
+        return userDtoAssembler.fromUser(user);
     }
     
     @Override

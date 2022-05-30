@@ -1,6 +1,6 @@
 package com.zsh.cloud.common.log.event;
 
-import com.zsh.cloud.common.log.dto.OptLogDTO;
+import com.zsh.cloud.system.api.dto.OptLogDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
