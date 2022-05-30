@@ -30,11 +30,6 @@ public class SysTenantDO extends BaseDO {
     private String tenantName;
     
     /**
-     * 创建者ID.
-     */
-    private String creatorId;
-    
-    /**
      * 状态 1启用 0禁用.
      */
     private Integer status;
