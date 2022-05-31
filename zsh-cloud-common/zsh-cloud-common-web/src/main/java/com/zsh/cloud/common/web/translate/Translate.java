@@ -18,12 +18,32 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Translate {
     
+    /**
+     * 转换策略.
+     *
+     * @return
+     */
     Class<? extends Translatable> translator() default Translatable.class;
     
+    /**
+     * 取值来源.
+     *
+     * @return
+     */
     Class<?> dataSource() default Void.class;
     
+    /**
+     * 查询字段.
+     *
+     * @return
+     */
     String from();
     
+    /**
+     * 取值字段
+     *
+     * @return
+     */
     String param() default "";
     
 }

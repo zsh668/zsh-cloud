@@ -2,7 +2,6 @@ package com.zsh.cloud.system.api;
 
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.log.annotations.SysLog;
-import com.zsh.cloud.common.web.excel.ExportExcel;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.TenantApplicationService;
 import com.zsh.cloud.system.application.TenantQueryService;
@@ -53,7 +52,6 @@ public class TenantController {
      */
     @ApiOperation("分页查询租户")
     @Translator
-    @ExportExcel(fileName = "租户")
     @GetMapping("tenants")
     public Page<TenantPageDTO> page(TenantPageQuery tenantPageQuery) {
         return tenantQueryService.queryPage(tenantPageQuery);

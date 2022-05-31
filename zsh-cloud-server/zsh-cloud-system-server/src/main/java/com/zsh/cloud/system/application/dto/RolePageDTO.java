@@ -12,49 +12,36 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * 租户信息DTO.
+ * 角色分页信息DTO.
  *
  * @author zhangshuhang
  * @version 1.0
- * @date 2022/5/26 11:14
+ * @date 2022/5/31 10:51
  */
-@ApiModel(value = "TenantDTO", description = "租户信息DTO")
 @Data
-public class TenantDTO extends DTO {
+@ApiModel(value = "RolePageDTO", description = "角色分页信息")
+public class RolePageDTO extends DTO {
     
     /**
-     * id.
+     * id
      */
-    @ApiModelProperty(value = "租户ID")
+    @ApiModelProperty(value = "角色ID")
     private String id;
     
     /**
-     * 租户编码.
+     * 角色编码
      */
-    @ApiModelProperty(value = "租户编码")
-    private String tenantCode;
+    @ApiModelProperty(value = "角色编码")
+    private String roleCode;
     
     /**
-     * 租户名称
+     * 角色名称
      */
-    @ApiModelProperty(value = "租户名称")
-    private String tenantName;
+    @ApiModelProperty(value = "角色名称")
+    private String roleName;
     
     /**
-     * 租户创建者
-     */
-    @ApiModelProperty(value = "租户ID")
-    private String creatorId;
-    
-    /**
-     * 租户创建者.
-     */
-    @ApiModelProperty(value = "租户创建者")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "creatorId", param = "userName")
-    private String creatorName;
-    
-    /**
-     * 租户状态
+     * 状态
      */
     @ApiModelProperty(value = "状态")
     private Integer status;
@@ -67,10 +54,17 @@ public class TenantDTO extends DTO {
     private String statusDesc;
     
     /**
-     * 功能描述.
+     * 创建人
      */
-    @ApiModelProperty(value = "功能描述")
-    private String describe;
+    @ApiModelProperty(value = "创建人ID")
+    private String createdBy;
+    
+    /**
+     * 创建人姓名.
+     */
+    @ApiModelProperty(value = "创建人姓名")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "createdBy", param = "userName")
+    private String createdName;
     
     /**
      * 创建时间

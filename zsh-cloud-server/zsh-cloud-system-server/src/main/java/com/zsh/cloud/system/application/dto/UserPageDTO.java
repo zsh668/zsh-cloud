@@ -3,6 +3,7 @@ package com.zsh.cloud.system.application.dto;
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.converters.localdatetime.LocalDateTimeStringConverter;
+import com.zsh.cloud.common.core.dto.DTO;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.web.translate.Translate;
 import com.zsh.cloud.system.application.translate.ServiceImplTranslator;
@@ -14,7 +15,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 @ApiModel(value = "UserPageDTO", description = "用户分页信息")
 @Data
 @ExcelIgnoreUnannotated
-public class UserPageDTO implements Serializable {
+public class UserPageDTO extends DTO {
     
     /**
      * id.
@@ -60,7 +60,7 @@ public class UserPageDTO implements Serializable {
      */
     @ExcelProperty("组织名称")
     @ApiModelProperty(value = "组织名称")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = OrgRepositoryImpl.class, from = "orgId")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = OrgRepositoryImpl.class, from = "orgId", param = "orgName")
     private String orgName;
     
     /**
@@ -74,7 +74,7 @@ public class UserPageDTO implements Serializable {
      */
     @ExcelProperty("岗位名称")
     @ApiModelProperty(value = "岗位名称")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = StationRepositoryImpl.class, from = "stationId")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = StationRepositoryImpl.class, from = "stationId", param = "stationName")
     private String stationName;
     
     /**
@@ -155,7 +155,7 @@ public class UserPageDTO implements Serializable {
      */
     @ExcelProperty("上级领导")
     @ApiModelProperty(value = "上级领导")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "superior")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "superior", param = "userName")
     private String superiorName;
 }
 

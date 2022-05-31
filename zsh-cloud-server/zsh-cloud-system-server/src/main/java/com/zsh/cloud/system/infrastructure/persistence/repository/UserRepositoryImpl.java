@@ -23,7 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,25 +51,12 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     
     @Override
     public List<User> find(Account account) {
-        List<SysUserDO> sysUserDOList = baseMapper.queryUserNoTenantByAccount(account.getAccount());
-        if (CollectionUtils.isEmpty(sysUserDOList)) {
-            return null;
-        }
-        List<User> users = new ArrayList<>();
-        for (SysUserDO sysUserDO : sysUserDOList) {
-            User user = UserConverter.toUser(sysUserDO, getUserRoles(sysUserDO.getId()),
-                    getUserGroups(sysUserDO.getId()));
-            users.add(user);
-        }
-        return users;
+        return getUserList(baseMapper.queryUserNoTenantByAccount(account.getAccount()));
     }
     
     @Override
     public User find(UserId userId) {
         SysUserDO sysUserDO = baseMapper.selectById(userId.getId());
-        if (sysUserDO == null) {
-            return null;
-        }
         return UserConverter.toUser(sysUserDO, getUserRoles(sysUserDO.getId()), getUserGroups(sysUserDO.getId()));
     }
     
@@ -98,17 +84,7 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     
     @Override
     public List<User> findBySuperior(UserId superior) {
-        List<SysUserDO> sysUserDOList = baseMapper.queryUserBySuperior(superior.getId());
-        if (CollectionUtils.isEmpty(sysUserDOList)) {
-            return null;
-        }
-        List<User> users = new ArrayList<>();
-        for (SysUserDO sysUserDO : sysUserDOList) {
-            User user = UserConverter.toUser(sysUserDO, getUserRoles(sysUserDO.getId()),
-                    getUserGroups(sysUserDO.getId()));
-            users.add(user);
-        }
-        return users;
+        return getUserList(baseMapper.queryUserBySuperior(superior.getId()));
     }
     
     @Override
@@ -149,5 +125,24 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
      */
     private List<SysUserGroupDO> getUserGroups(String userId) {
         return sysUserGroupMapper.queryUserGroup(userId);
+    }
+    
+    /**
+     * 转换.
+     *
+     * @param sysUserDOList
+     * @return
+     */
+    private List<User> getUserList(List<SysUserDO> sysUserDOList) {
+        if (CollectionUtils.isEmpty(sysUserDOList)) {
+            return null;
+        }
+        List<User> users = new ArrayList<>();
+        for (SysUserDO sysUserDO : sysUserDOList) {
+            User user = UserConverter.toUser(sysUserDO, getUserRoles(sysUserDO.getId()),
+                    getUserGroups(sysUserDO.getId()));
+            users.add(user);
+        }
+        return users;
     }
 }

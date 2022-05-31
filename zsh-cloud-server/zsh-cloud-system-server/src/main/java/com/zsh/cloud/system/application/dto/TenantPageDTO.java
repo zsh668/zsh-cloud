@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.application.dto;
 
+import com.zsh.cloud.common.core.dto.DTO;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.web.translate.Translate;
 import com.zsh.cloud.system.application.translate.ServiceImplTranslator;
@@ -20,7 +21,7 @@ import java.time.LocalDateTime;
  */
 @ApiModel(value = "TenantPageDTO", description = "租户分页DTO")
 @Data
-public class TenantPageDTO implements Serializable {
+public class TenantPageDTO extends DTO {
     
     /**
      * id.
@@ -50,7 +51,7 @@ public class TenantPageDTO implements Serializable {
      * 租户创建者.
      */
     @ApiModelProperty(value = "租户创建者")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "creatorId")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "creatorId", param = "userName")
     private String creatorName;
     
     /**

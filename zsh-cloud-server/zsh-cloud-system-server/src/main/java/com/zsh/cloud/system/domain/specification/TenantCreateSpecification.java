@@ -23,8 +23,16 @@ public class TenantCreateSpecification extends AbstractSpecification<Tenant> {
     
     @Override
     public boolean isSatisfiedBy(Tenant tenant) {
-        Assert.isNull(tenantRepository.find(tenant.getTenantName()), ServiceErrorCode.TENANT_NAME_EXISTS);
-        Assert.isNull(tenantRepository.find(tenant.getTenantCode()), ServiceErrorCode.TENANT_CODE_EXISTS);
+        if (tenant.getTenantName() != null) {
+            Tenant existTenant = tenantRepository.find(tenant.getTenantName());
+            Assert.notTrue(existTenant != null && !existTenant.getTenantId().sameValueAs(tenant.getTenantId()),
+                    ServiceErrorCode.TENANT_NAME_EXISTS);
+        }
+        if (tenant.getTenantCode() != null) {
+            Tenant existTenant = tenantRepository.find(tenant.getTenantCode());
+            Assert.notTrue(existTenant != null && !existTenant.getTenantId().sameValueAs(tenant.getTenantId()),
+                    ServiceErrorCode.TENANT_NAME_EXISTS);
+        }
         return true;
     }
 }

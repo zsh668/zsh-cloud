@@ -1,7 +1,5 @@
 package com.zsh.cloud.system.domain.model.tenant;
 
-import com.baomidou.mybatisplus.annotation.SqlCondition;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.zsh.cloud.common.core.domain.Entity;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.system.domain.model.user.UserId;

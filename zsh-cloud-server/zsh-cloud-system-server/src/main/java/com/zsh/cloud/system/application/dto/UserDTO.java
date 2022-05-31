@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.application.dto;
 
+import com.zsh.cloud.common.core.dto.DTO;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.web.translate.Translate;
 import com.zsh.cloud.system.application.translate.ServiceImplTranslator;
@@ -11,7 +12,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +24,7 @@ import java.util.List;
  */
 @ApiModel(value = "UserDTO", description = "用户信息")
 @Data
-public class UserDTO implements Serializable {
+public class UserDTO extends DTO {
     
     /**
      * id.
@@ -54,7 +54,7 @@ public class UserDTO implements Serializable {
      * 组织名称.
      */
     @ApiModelProperty(value = "组织名称")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = OrgRepositoryImpl.class, from = "orgId")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = OrgRepositoryImpl.class, from = "orgId", param = "orgName")
     private String orgName;
     
     /**
@@ -67,7 +67,7 @@ public class UserDTO implements Serializable {
      * 岗位名称.
      */
     @ApiModelProperty(value = "岗位名称")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = StationRepositoryImpl.class, from = "stationId")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = StationRepositoryImpl.class, from = "stationId", param = "stationName")
     private String stationName;
     
     /**
@@ -142,7 +142,7 @@ public class UserDTO implements Serializable {
      * 上级领导.
      */
     @ApiModelProperty(value = "上级领导")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "superior")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "superior", param = "userName")
     private String superiorName;
     
     /**

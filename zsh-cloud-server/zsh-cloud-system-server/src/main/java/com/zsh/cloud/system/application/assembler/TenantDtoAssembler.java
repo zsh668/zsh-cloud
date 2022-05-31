@@ -26,7 +26,7 @@ import java.util.List;
 public interface TenantDtoAssembler {
     
     /**
-     * user转换.
+     * tenant转换.
      *
      * @param tenant
      * @return
@@ -34,7 +34,7 @@ public interface TenantDtoAssembler {
     TenantPageDTO toDto(SysTenantDO tenant);
     
     /**
-     * user转换.(TenantPageDTO toDto())
+     * tenant转换.(TenantPageDTO toDto())
      *
      * @param tenant
      * @return
@@ -42,7 +42,7 @@ public interface TenantDtoAssembler {
     List<TenantPageDTO> toDto(List<SysTenantDO> tenant);
     
     /**
-     * user转换.(List toDto())
+     * tenant转换.(List toDto())
      *
      * @param tenant
      * @return
