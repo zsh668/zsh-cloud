@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.application.command;
 
+import com.zsh.cloud.common.core.dto.Command;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Data
 @ApiModel(value = "重置密码", description = "重置密码")
-public class ResetPasswordCommand {
+public class ResetPasswordCommand extends Command {
     
     /**
      * 用户ID集合

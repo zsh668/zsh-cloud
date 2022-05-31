@@ -10,9 +10,9 @@ import com.zsh.cloud.system.domain.model.tenant.Tenant;
 import com.zsh.cloud.system.domain.model.tenant.TenantId;
 import com.zsh.cloud.system.domain.model.tenant.TenantRepository;
 import com.zsh.cloud.system.domain.specification.TenantCreateSpecification;
-import com.zsh.cloud.system.domain.specification.TenantUpdateSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,7 @@ import java.util.List;
  * @date 2022/5/26 11:22
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class TenantApplicationServiceImpl implements TenantApplicationService {
     
     @Autowired
@@ -44,7 +45,7 @@ public class TenantApplicationServiceImpl implements TenantApplicationService {
     @Override
     public void update(TenantUpdateCommand tenantCommand) {
         Tenant tenant = tenantDtoAssembler.toTenant(tenantCommand);
-        TenantUpdateSpecification specification = new TenantUpdateSpecification(tenantRepository);
+        TenantCreateSpecification specification = new TenantCreateSpecification(tenantRepository);
         specification.isSatisfiedBy(tenant);
         tenantRepository.store(tenant);
     }

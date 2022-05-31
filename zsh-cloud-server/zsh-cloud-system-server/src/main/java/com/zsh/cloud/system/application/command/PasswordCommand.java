@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.application.command;
 
+import com.zsh.cloud.common.core.dto.Command;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @ApiModel(value = "修改密码", description = "修改密码")
-public class PasswordCommand {
+public class PasswordCommand extends Command {
     
     /**
      * 用户ID
@@ -29,6 +30,7 @@ public class PasswordCommand {
      */
     @ApiModelProperty(value = "原密码")
     @NotBlank(message = "原密码不能为空")
+    @Length(min = 6, max = 18, message = "原密码长度为 6-18 位")
     private String password;
     
     /**
@@ -36,7 +38,7 @@ public class PasswordCommand {
      */
     @ApiModelProperty(value = "新密码")
     @NotBlank(message = "新密码不能为空")
-    @Length(min = 6, max = 16, message = "密码长度为 6-16 位")
+    @Length(min = 6, max = 18, message = "密码长度为 6-18 位")
     private String newPassword;
     
     /**
@@ -44,6 +46,6 @@ public class PasswordCommand {
      */
     @ApiModelProperty(value = "确认密码")
     @NotBlank(message = "确认密码不能为空")
-    @Length(min = 6, max = 16, message = "密码长度为 6-16 位")
+    @Length(min = 6, max = 18, message = "密码长度为 6-18 位")
     private String confirmPassword;
 }

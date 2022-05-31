@@ -1,8 +1,10 @@
 package com.zsh.cloud.system.application.command;
 
+import com.zsh.cloud.common.core.dto.Command;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -17,13 +19,14 @@ import java.util.List;
  */
 @Data
 @ApiModel(value = "创建用户", description = "创建用户")
-public class UserCreateCommand {
+public class UserCreateCommand extends Command {
     
     /**
      * 账号.
      */
     @ApiModelProperty(value = "账号")
     @NotBlank(message = "账号不能为空")
+    @Length(max = 30, message = "账号长度不能超过30")
     private String account;
     
     /**
@@ -31,6 +34,7 @@ public class UserCreateCommand {
      */
     @ApiModelProperty(value = "姓名")
     @NotBlank(message = "姓名不能为空")
+    @Length(max = 50, message = "姓名长度不能超过50")
     private String userName;
     
     /**
@@ -74,12 +78,14 @@ public class UserCreateCommand {
      * 头像.
      */
     @ApiModelProperty(value = "头像")
+    @Length(max = 255, message = "头像长度不能超过255")
     private String avatar;
     
     /**
      * 工作描述.
      */
     @ApiModelProperty(value = "工作描述")
+    @Length(max = 255, message = "工作描述长度不能超过255")
     private String workDescribe;
     
     /**
