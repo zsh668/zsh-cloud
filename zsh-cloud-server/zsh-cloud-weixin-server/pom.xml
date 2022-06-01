@@ -35,11 +35,6 @@
             <artifactId>zsh-cloud-common-mybatis</artifactId>
             <version>${revision}</version>
         </dependency>
-        <dependency>
-            <groupId>com.zsh.cloud</groupId>
-            <artifactId>zsh-cloud-common-web</artifactId>
-            <version>${revision}</version>
-        </dependency>
         
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
@@ -65,14 +60,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>6</source>
-                    <target>6</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>
