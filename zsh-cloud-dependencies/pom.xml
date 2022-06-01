@@ -17,7 +17,7 @@
         <revision>1.0.0</revision>
         
         <spring-boot.version>2.6.8</spring-boot.version>
-        <spring-cloud.version>2021.0.2</spring-cloud.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
         <com-alibaba-cloud.version>2021.0.1.0</com-alibaba-cloud.version>
         <dubbo-spring-boot.version>2.7.15</dubbo-spring-boot.version>
         <mybatis-plus.version>3.5.1</mybatis-plus.version>

@@ -20,13 +20,11 @@
             <groupId>com.zsh.cloud</groupId>
             <artifactId>zsh-cloud-common-core</artifactId>
             <version>${revision}</version>
-            <optional>true</optional>
         </dependency>
     
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
-            <optional>true</optional>
         </dependency>
     
         <dependency>
@@ -55,6 +53,7 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
             <scope>compile</scope>
         </dependency>
+        
         <dependency>
             <groupId>com.zsh.cloud</groupId>
             <artifactId>zsh-cloud-system-api</artifactId>

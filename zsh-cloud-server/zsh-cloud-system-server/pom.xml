@@ -70,11 +70,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>com.zsh.cloud</groupId>
             <artifactId>zsh-cloud-system-api</artifactId>
             <version>${revision}</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
     

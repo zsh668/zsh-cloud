@@ -26,20 +26,14 @@ spring:
           - data-id: mybatis.yaml
             group: DEFAULT_GROUP
             refresh: true
+          - data-id: monitor.yaml
+            group: DEFAULT_GROUP
+            refresh: true
 
       discovery:
         namespace: 9af03680-d667-47c6-9b1d-bc5f88bfd5fd
         register-enabled: true
         enabled: true
-
-  boot:
-    admin:
-      client:
-        url: http://127.0.0.1:5001/monitor
-        username: admin
-        password: admin
-        instance:
-          service-host-type: ip
 
 management:
   health:
