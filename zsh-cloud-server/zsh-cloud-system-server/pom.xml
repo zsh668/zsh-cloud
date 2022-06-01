@@ -76,6 +76,12 @@
             <artifactId>zsh-cloud-system-api</artifactId>
             <version>${revision}</version>
         </dependency>
+    
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-swagger</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
     
     <build>

@@ -55,16 +55,18 @@ public class WechatServiceImpl implements WechatService {
     @Override
     public String replyMessage(String requestBody, String appid, WechatMessageQuery messageQuery) {
         Account account = accountRepository.find(new Appid(appid));
-        
+    
+        WxBizMsgCrypt cmsCrypt = new WxBizMsgCrypt(account.getToken().getToken(), account.getAesKey(), appid);
         if ("aes".equalsIgnoreCase(messageQuery.getEncrypt_type())) {
-            WxBizMsgCrypt cmsCrypt = new WxBizMsgCrypt(account.getToken().getToken(), account.getAesKey(), appid);
             requestBody = cmsCrypt.decrypt(messageQuery.getMsg_signature(), messageQuery.getTimestamp(),
                     messageQuery.getNonce(), requestBody);
         }
         Map<String, String> map = XmlUtils.parseXml(requestBody);
         log.info("解析后信息: {}", map);
         String msg = messageRepository.findReplyMessage(appid, map);
-
+        if ("aes".equalsIgnoreCase(messageQuery.getEncrypt_type())) {
+            msg = cmsCrypt.encrypt(msg);
+        }
         return msg;
     }
 }

@@ -50,11 +50,5 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-    
-        <dependency>
-            <groupId>com.zsh.cloud</groupId>
-            <artifactId>zsh-cloud-common-swagger</artifactId>
-            <version>${revision}</version>
-        </dependency>
     </dependencies>
 </project>
