@@ -1,7 +1,7 @@
 server:
   port: 9000
-  servlet:
-    context-path: /wechat
+#  servlet:
+#    context-path: /wechat
 
 
 spring:

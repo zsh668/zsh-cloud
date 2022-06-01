@@ -9,15 +9,6 @@ spring:
 #        file-extension: yaml
 #        enabled: true
 
-  boot:
-    admin:
-      client:
-        url: http://127.0.0.1:5001/monitor
-        username: admin
-        password: admin
-        instance:
-          service-host-type: ip
-
 management:
   health:
     redis:

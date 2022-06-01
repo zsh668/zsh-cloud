@@ -12,7 +12,7 @@ spring:
       resourceserver:
         jwt:
           # 获取JWT验签公钥请求路径
-          jwk-set-uri: 'http://127.0.0.1:8100/auth/getPublicKey'
+          jwk-set-uri: 'http://127.0.0.1:8100/getPublicKey'
 
   cloud:
     gateway:
@@ -22,24 +22,32 @@ spring:
           uri: lb://zsh-cloud-auth-server
           predicates:
             - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<segment>.*), /$\{segment}
 
         # 用户
         - id: zsh-cloud-system-server
           uri: lb://zsh-cloud-system-server
           predicates:
             - Path=/system/**
+          filters:
+            - RewritePath=/system/(?<segment>.*), /$\{segment}
 
         # 微信
         - id: zsh-cloud-weixin-server
           uri: lb://zsh-cloud-weixin-server
           predicates:
             - Path=/wechat/**
+          filters:
+            - RewritePath=/wechat/(?<segment>.*), /$\{segment}
 
         # 监控admin
         - id: zsh-cloud-monitor-server
           uri: lb://zsh-cloud-monitor-server
           predicates:
             - Path=/monitor/**
+          filters:
+            - RewritePath=/monitor/(?<segment>.*), /$\{segment}
 
       discovery:
         locator:
