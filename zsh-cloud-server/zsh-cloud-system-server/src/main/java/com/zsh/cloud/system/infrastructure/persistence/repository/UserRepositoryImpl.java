@@ -94,7 +94,9 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
             ids.add(userId.getId());
         });
         this.removeByIds(ids);
+        // 用户与角色关联
         sysUserRoleMapper.deleteByUserIds(ids);
+        // 用户组与用户关联
         sysUserGroupUserMapper.deleteByUserIds(ids);
     }
     

@@ -1,5 +1,7 @@
 package com.zsh.cloud.system.domain.model.role;
 
+import java.util.List;
+
 /**
  * 角色-Repository接口.
  *
@@ -32,4 +34,18 @@ public interface RoleRepository {
      * @return
      */
     Role find(RoleCode roleCode);
+    
+    /**
+     * 保存.
+     *
+     * @param role
+     */
+    RoleId store(Role role);
+    
+    /**
+     * 删除.
+     *
+     * @param roleIds
+     */
+    void remove(List<RoleId> roleIds);
 }

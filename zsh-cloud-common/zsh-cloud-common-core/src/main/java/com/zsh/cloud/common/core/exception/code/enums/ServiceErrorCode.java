@@ -22,20 +22,27 @@ import com.zsh.cloud.common.core.exception.code.BaseErrorCode;
  */
 public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     
-    // 模块 system 【000】 租户 【000】错误码 【000~999】
+    // 模块 system 【000】 租户 【000】 错误码 【000~999】
     TENANT_NOT_EXISTS(1000000000, "租户不存在"),
     TENANT_NAME_EXISTS(1000000001, "租户名称已存在"),
     TENANT_CODE_EXISTS(1000000002, "租户编码已存在"),
     TENANT_CREATOR_CHANGE(1000000003, "关联租户创建者无法删除或禁用"),
     TENANT_PLATFORM_DELETE(1000000004, "平台租户无法删除"),
     
-    // 模块 system 【000】 用户 【001】错误码 【000~999】
+    // 模块 system 【000】 用户 【001】 错误码 【000~999】
     USER_NOT_EXISTS(1000001000, "用户不存在"),
     USER_PASSWORD_ERROR(1000001001, "密码不正确"),
     USER_PASSWORD_EXPIRATION(1000001002, "密码已过期，请修改密码"),
     USER_ACCOUNT_EXISTS(1000001003, "账号已存在"),
     USER_VERIFICATION_ERROR(1000001004, "验证不通过"),
     USER_NOT_ENABLE(1000001005, "用户被禁用，请联系管理员"),
+    
+    // 模块 system 【000】 角色 【002】 错误码 【000~999】
+    ROLE_NOT_EXISTS(1000002000, "角色不存在"),
+    ROLE_NAME_EXISTS(1000002001, "角色名称已存在"),
+    ROLE_CODE_EXISTS(1000002002, "角色编码已存在"),
+    ROLE_VERIFICATION_ERROR(1000002004, "验证不通过"),
+    ROLE_PLATFORM_DELETE(1000002005, "内置角色无法删除"),
     ;
     
     private Integer code;

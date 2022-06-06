@@ -128,15 +128,15 @@ public class User implements Entity<User> {
      *
      * @return
      */
-    public void isEnable() {
-        Assert.isTrue(StatusEnum.ENABLE == status, ServiceErrorCode.USER_NOT_ENABLE);
+    public boolean isEnable() {
+        return status == StatusEnum.ENABLE;
     }
     
     /**
      * 启用、禁用.
      */
     public void disable() {
-        this.status = this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
+        this.status = isEnable() ? StatusEnum.DISABLE : StatusEnum.ENABLE;
     }
     
     /**
@@ -166,9 +166,8 @@ public class User implements Entity<User> {
      *
      * @return
      */
-    public void checkPasswordExpireTime() {
-        Assert.notTrue(this.passwordExpireTime != null && LocalDateTime.now().isAfter(this.passwordExpireTime),
-                ServiceErrorCode.USER_PASSWORD_EXPIRATION);
+    public boolean checkPasswordExpireTime() {
+        return this.passwordExpireTime != null && LocalDateTime.now().isAfter(this.passwordExpireTime);
     }
     
     /**

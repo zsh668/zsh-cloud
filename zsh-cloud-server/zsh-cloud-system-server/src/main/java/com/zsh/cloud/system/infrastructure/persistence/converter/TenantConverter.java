@@ -47,7 +47,7 @@ public class TenantConverter {
      * @return
      */
     public static SysTenantDO fromTenant(Tenant tenant) {
-        Assert.notNull(tenant == null, ServiceErrorCode.TENANT_NOT_EXISTS);
+        Assert.notNull(tenant, ServiceErrorCode.TENANT_NOT_EXISTS);
         SysTenantDO sysTenantDO = new SysTenantDO();
         sysTenantDO.setId(tenant.getTenantId() == null ? null : tenant.getTenantId().getId());
         sysTenantDO.setTenantCode(tenant.getTenantCode() == null ? null : tenant.getTenantCode().getCode());

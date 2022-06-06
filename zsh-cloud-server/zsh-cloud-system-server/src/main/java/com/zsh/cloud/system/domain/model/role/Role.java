@@ -4,10 +4,12 @@ import com.zsh.cloud.common.core.domain.Entity;
 import com.zsh.cloud.common.core.enums.BooleanEnum;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
+import com.zsh.cloud.system.domain.model.org.OrgId;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 角色.
@@ -43,6 +45,11 @@ public class Role implements Entity<Role> {
     private DataScopeTypeEnum dsType;
     
     /**
+     * 权限自定义-》关联的组织id.
+     */
+    private List<OrgId> orgIdList;
+    
+    /**
      * 是否内置.
      */
     private BooleanEnum readonly;
@@ -72,10 +79,19 @@ public class Role implements Entity<Role> {
     }
     
     /**
+     * 是否内置角色.
+     *
+     * @return
+     */
+    public boolean isReadonly() {
+        return readonly == BooleanEnum.TRUE;
+    }
+    
+    /**
      * 启用、禁用.
      */
     public void disable() {
-        this.status = this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
+        this.status = isEnable() ? StatusEnum.DISABLE : StatusEnum.ENABLE;
     }
     
     @Override

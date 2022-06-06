@@ -31,7 +31,7 @@ public class TenantCreateSpecification extends AbstractSpecification<Tenant> {
         if (tenant.getTenantCode() != null) {
             Tenant existTenant = tenantRepository.find(tenant.getTenantCode());
             Assert.notTrue(existTenant != null && !existTenant.getTenantId().sameValueAs(tenant.getTenantId()),
-                    ServiceErrorCode.TENANT_NAME_EXISTS);
+                    ServiceErrorCode.TENANT_CODE_EXISTS);
         }
         return true;
     }

@@ -1,12 +1,24 @@
 package com.zsh.cloud.system.application.assembler;
 
+import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.Page;
+import com.zsh.cloud.common.core.enums.BooleanEnum;
+import com.zsh.cloud.common.core.enums.StatusEnum;
+import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
+import com.zsh.cloud.system.application.command.RoleCreateCommand;
+import com.zsh.cloud.system.application.command.RoleUpdateCommand;
 import com.zsh.cloud.system.application.dto.RoleDTO;
 import com.zsh.cloud.system.application.dto.RolePageDTO;
+import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.role.Role;
+import com.zsh.cloud.system.domain.model.role.RoleCode;
+import com.zsh.cloud.system.domain.model.role.RoleId;
+import com.zsh.cloud.system.domain.model.role.RoleName;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleDO;
+import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,5 +76,45 @@ public interface RoleDtoAssembler {
         roleDto.setDescribe(role.getDescribe());
         roleDto.setCreatedTime(role.getCreatedTime());
         return roleDto;
+    }
+    
+    /**
+     * 转换.
+     *
+     * @param roleCommand
+     * @return
+     */
+    default Role toRole(RoleCreateCommand roleCommand) {
+        List<OrgId> orgIdList = new ArrayList<>();
+        if (roleCommand.getOrgList() != null) {
+            roleCommand.getOrgList().forEach(orgId -> {
+                orgIdList.add(new OrgId(orgId));
+            });
+        }
+        RoleId repel = StringUtils.isBlank(roleCommand.getRepel()) ? null : new RoleId(roleCommand.getRepel());
+        return Role.builder().roleCode(new RoleCode(roleCommand.getRoleCode()))
+                .roleName(new RoleName(roleCommand.getRoleName())).repel(repel)
+                .dsType(IDict.getByCode(DataScopeTypeEnum.class, roleCommand.getDsType())).readonly(BooleanEnum.FALSE)
+                .orgIdList(orgIdList).status(StatusEnum.ENABLE).describe(roleCommand.getDescribe()).build();
+    }
+    
+    /**
+     * 转换.
+     *
+     * @param roleCommand
+     * @return
+     */
+    default Role toRole(RoleUpdateCommand roleCommand) {
+        List<OrgId> orgIdList = new ArrayList<>();
+        if (roleCommand.getOrgList() != null) {
+            roleCommand.getOrgList().forEach(orgId -> {
+                orgIdList.add(new OrgId(orgId));
+            });
+        }
+        RoleId repel = StringUtils.isBlank(roleCommand.getRepel()) ? null : new RoleId(roleCommand.getRepel());
+        return Role.builder().roleId(new RoleId(roleCommand.getId())).roleCode(new RoleCode(roleCommand.getRoleCode()))
+                .roleName(new RoleName(roleCommand.getRoleName())).repel(repel)
+                .dsType(IDict.getByCode(DataScopeTypeEnum.class, roleCommand.getDsType())).readonly(BooleanEnum.FALSE)
+                .orgIdList(orgIdList).status(StatusEnum.ENABLE).describe(roleCommand.getDescribe()).build();
     }
 }
