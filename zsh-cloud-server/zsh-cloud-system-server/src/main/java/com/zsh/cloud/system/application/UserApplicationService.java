@@ -37,7 +37,7 @@ public interface UserApplicationService {
     void deleteBatch(List<String> ids);
     
     /**
-     * 禁用.
+     * 启用、禁用.
      *
      * @param id
      */

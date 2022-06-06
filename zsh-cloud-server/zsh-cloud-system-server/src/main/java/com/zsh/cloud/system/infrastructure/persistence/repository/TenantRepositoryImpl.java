@@ -2,7 +2,6 @@ package com.zsh.cloud.system.infrastructure.persistence.repository;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zsh.cloud.common.tenant.contex.TenantContext;
 import com.zsh.cloud.system.domain.model.tenant.Tenant;
 import com.zsh.cloud.system.domain.model.tenant.TenantCode;
 import com.zsh.cloud.system.domain.model.tenant.TenantId;
@@ -58,9 +57,6 @@ public class TenantRepositoryImpl extends ServiceImpl<SysTenantMapper, SysTenant
     public TenantId store(Tenant tenant) {
         SysTenantDO sysTenantDO = TenantConverter.fromTenant(tenant);
         this.saveOrUpdate(sysTenantDO);
-        if (TenantContext.getTenantId() == null) {
-            TenantContext.setTenantId(sysTenantDO.getId());
-        }
         return new TenantId(sysTenantDO.getId());
     }
     

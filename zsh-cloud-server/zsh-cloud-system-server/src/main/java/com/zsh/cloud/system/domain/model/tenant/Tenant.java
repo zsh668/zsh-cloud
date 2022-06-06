@@ -67,7 +67,7 @@ public class Tenant implements Entity<Tenant> {
      * 启用、禁用.
      */
     public void disable() {
-        this.status = this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
+        this.status = isEnable() ? StatusEnum.DISABLE : StatusEnum.ENABLE;
     }
     
     @Override

@@ -28,7 +28,7 @@ public class Assert {
     }
     
     /**
-     * false抛异常.
+     * true抛异常.
      *
      * @param expression
      * @param errorCode

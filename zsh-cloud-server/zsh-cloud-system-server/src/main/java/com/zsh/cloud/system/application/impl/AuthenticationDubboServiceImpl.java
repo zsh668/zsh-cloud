@@ -1,7 +1,8 @@
 package com.zsh.cloud.system.application.impl;
 
-import com.zsh.cloud.common.core.exception.ServiceException;
 import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
+import com.zsh.cloud.common.core.util.Assert;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import com.zsh.cloud.system.api.dto.AuthenticationDTO;
 import com.zsh.cloud.system.api.dubbo.AuthenticationDubboService;
 import com.zsh.cloud.system.application.ResourceQueryService;
@@ -11,8 +12,8 @@ import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -37,14 +38,13 @@ public class AuthenticationDubboServiceImpl implements AuthenticationDubboServic
     @Override
     public AuthenticationDTO loginByUserName(String userName) {
         List<User> users = userRepository.find(new Account(userName));
-        if (CollectionUtils.isEmpty(users)) {
-            throw new ServiceException(ServiceErrorCode.USER_NOT_EXISTS.getCode(), "用户或密码不正确");
-        }
+        // 空 抛异常
+        ServiceAssert.notEmpty(users, ServiceErrorCode.USER_NOT_EXISTS.getCode(), "用户或密码不正确");
         User user = users.get(0);
         // 用户禁用
-        user.isEnable();
+        Assert.isTrue(user.isEnable(), ServiceErrorCode.USER_NOT_ENABLE);
         // 密码过期
-        user.checkPasswordExpireTime();
+        Assert.notTrue(user.checkPasswordExpireTime(), ServiceErrorCode.USER_PASSWORD_EXPIRATION);
         AuthenticationDTO authentication = authenticationDtoAssembler.fromUser(user);
         authentication.setPermissionCodes(resourceQueryService.getPermissionCodes(user.getUserId().getId()));
         return authentication;

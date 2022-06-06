@@ -2,6 +2,8 @@ package com.zsh.cloud.system.infrastructure.persistence.converter;
 
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.enums.StatusEnum;
+import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
+import com.zsh.cloud.common.core.util.Assert;
 import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.role.RoleId;
 import com.zsh.cloud.system.domain.model.role.RoleName;
@@ -81,6 +83,7 @@ public class UserConverter {
      * @return
      */
     public static SysUserDO fromUser(User user) {
+        Assert.notNull(user, ServiceErrorCode.USER_NOT_EXISTS);
         SysUserDO sysUserDO = new SysUserDO();
         sysUserDO.setId(user.getUserId() == null ? null : user.getUserId().getId());
         sysUserDO.setAccount(user.getAccount() == null ? null : user.getAccount().getAccount());

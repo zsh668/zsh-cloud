@@ -3,6 +3,8 @@ package com.zsh.cloud.system.infrastructure.persistence.converter;
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.enums.BooleanEnum;
 import com.zsh.cloud.common.core.enums.StatusEnum;
+import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
+import com.zsh.cloud.common.core.util.Assert;
 import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
 import com.zsh.cloud.system.domain.model.role.Role;
 import com.zsh.cloud.system.domain.model.role.RoleCode;
@@ -37,5 +39,25 @@ public class RoleConverter {
                 .readonly(IDict.getByCode(BooleanEnum.class, sysRoleDO.getReadonly()))
                 .status(IDict.getByCode(StatusEnum.class, sysRoleDO.getStatus())).describe(sysRoleDO.getDescribe())
                 .createdTime(sysRoleDO.getCreatedTime()).build();
+    }
+    
+    /**
+     * 转换.
+     *
+     * @param role
+     * @return
+     */
+    public static SysRoleDO fromRole(Role role) {
+        Assert.notNull(role, ServiceErrorCode.ROLE_NOT_EXISTS);
+        SysRoleDO sysRoleDO = new SysRoleDO();
+        sysRoleDO.setId(role.getRoleId() == null ? null : role.getRoleId().getId());
+        sysRoleDO.setRoleCode(role.getRoleCode() == null ? null : role.getRoleCode().getCode());
+        sysRoleDO.setRoleName(role.getRoleName() == null ? null : role.getRoleName().getName());
+        sysRoleDO.setRepel(role.getRepel() == null ? null : role.getRepel().getId());
+        sysRoleDO.setDsType(role.getDsType() == null ? null : role.getDsType().getCode());
+        sysRoleDO.setReadonly(role.getReadonly() == null ? null : role.getReadonly().getCode());
+        sysRoleDO.setDescribe(role.getDescribe());
+        sysRoleDO.setStatus(role.getStatus() == null ? null : role.getStatus().getCode());
+        return sysRoleDO;
     }
 }

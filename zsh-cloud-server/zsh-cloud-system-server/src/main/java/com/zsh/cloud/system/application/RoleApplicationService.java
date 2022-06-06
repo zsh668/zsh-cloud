@@ -14,11 +14,31 @@ import java.util.List;
  */
 public interface RoleApplicationService {
     
+    /**
+     * 保存角色.
+     *
+     * @param roleCommand
+     */
     void save(RoleCreateCommand roleCommand);
     
+    /**
+     * 更新角色.
+     *
+     * @param roleCommand
+     */
     void update(RoleUpdateCommand roleCommand);
     
-    void deleteBatch(List<String> roleIds);
+    /**
+     * 批量删除.
+     *
+     * @param ids
+     */
+    void deleteBatch(List<String> ids);
     
+    /**
+     * 启用、禁用.
+     *
+     * @param id
+     */
     void disable(String id);
 }
