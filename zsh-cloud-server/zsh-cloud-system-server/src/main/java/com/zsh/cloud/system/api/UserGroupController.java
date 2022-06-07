@@ -1,8 +1,29 @@
 package com.zsh.cloud.system.api;
 
+import com.zsh.cloud.common.core.domain.Page;
+import com.zsh.cloud.common.log.annotations.SysLog;
+import com.zsh.cloud.common.web.translate.Translator;
+import com.zsh.cloud.system.application.UserGroupApplicationService;
+import com.zsh.cloud.system.application.UserGroupQueryService;
+import com.zsh.cloud.system.application.command.IdsCommand;
+import com.zsh.cloud.system.application.command.UserGroupCreateCommand;
+import com.zsh.cloud.system.application.command.UserGroupUpdateCommand;
+import com.zsh.cloud.system.application.dto.UserGroupDTO;
+import com.zsh.cloud.system.application.dto.UserGroupPageDTO;
+import com.zsh.cloud.system.application.query.UserGroupPageQuery;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * 用户组管理.
@@ -15,5 +36,91 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class UserGroupController {
-
+    
+    @Autowired
+    private UserGroupQueryService userGroupQueryService;
+    
+    @Autowired
+    private UserGroupApplicationService userGroupApplicationService;
+    
+    /**
+     * 用户组分页查询.
+     *
+     * @param pageQuery
+     * @return
+     */
+    @ApiOperation("分页查询用户组")
+    @Translator
+    @GetMapping("userGroups")
+    public Page<UserGroupPageDTO> page(UserGroupPageQuery pageQuery) {
+        return userGroupQueryService.queryPage(pageQuery);
+    }
+    
+    /**
+     * 根据ID查询用户组.
+     *
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "查询用户组", notes = "查询用户组")
+    @GetMapping("userGroups/{id}")
+    public UserGroupDTO get(@PathVariable String id) {
+        return userGroupQueryService.find(id);
+    }
+    
+    /**
+     * 保存用户组.
+     *
+     * @param userGroupCommand
+     * @return
+     */
+    @ApiOperation("保存用户组")
+    @SysLog("保存用户组")
+    @PostMapping("userGroups")
+    public Boolean save(@Valid @RequestBody UserGroupCreateCommand userGroupCommand) {
+        userGroupApplicationService.save(userGroupCommand);
+        return Boolean.TRUE;
+    }
+    
+    /**
+     * 修改用户组.
+     *
+     * @param userGroupCommand
+     * @return
+     */
+    @ApiOperation("修改用户组")
+    @SysLog("修改用户组")
+    @PutMapping("userGroups/{id}")
+    public Boolean update(@Valid @RequestBody UserGroupUpdateCommand userGroupCommand) {
+        userGroupApplicationService.update(userGroupCommand);
+        return Boolean.TRUE;
+    }
+    
+    /**
+     * 删除用户组.
+     *
+     * @param command
+     * @return
+     */
+    @ApiOperation("删除用户组")
+    @SysLog("删除用户组")
+    @DeleteMapping("userGroups")
+    public Boolean delete(@Valid @RequestBody IdsCommand command) {
+        userGroupApplicationService.deleteBatch(command.getIds());
+        return Boolean.TRUE;
+    }
+    
+    /**
+     * 开启、禁用用户组.
+     *
+     * @param id
+     * @return
+     */
+    @ApiOperation("开启、禁用用户组")
+    @SysLog("开启、禁用用户组")
+    @PutMapping("userGroups/disable")
+    public Boolean disable(String id) {
+        userGroupApplicationService.disable(id);
+        return Boolean.TRUE;
+    }
 }

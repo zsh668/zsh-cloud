@@ -7,6 +7,7 @@ import com.zsh.cloud.common.web.excel.ExportExcel;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.UserQueryService;
+import com.zsh.cloud.system.application.command.IdsCommand;
 import com.zsh.cloud.system.application.command.PasswordCommand;
 import com.zsh.cloud.system.application.command.UserCreateCommand;
 import com.zsh.cloud.system.application.command.UserUpdateCommand;
@@ -23,12 +24,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * 用户管理.
@@ -106,14 +104,14 @@ public class UserController {
     /**
      * 删除用户.
      *
-     * @param userIds
+     * @param command
      * @return
      */
     @ApiOperation("删除用户")
     @SysLog("删除用户")
     @DeleteMapping("users")
-    public Boolean delete(@RequestParam List<String> userIds) {
-        userApplicationService.deleteBatch(userIds);
+    public Boolean delete(@Valid @RequestBody IdsCommand command) {
+        userApplicationService.deleteBatch(command.getIds());
         return Boolean.TRUE;
     }
     
@@ -149,14 +147,14 @@ public class UserController {
     /**
      * 重置密码.
      *
-     * @param userIds
+     * @param command
      * @return
      */
     @ApiOperation(value = "重置密码", notes = "重置密码")
     @SysLog("重置密码")
     @PutMapping("users/reset")
-    public Boolean resetPassword(@RequestParam List<String> userIds) {
-        userApplicationService.resetPassword(userIds);
+    public Boolean resetPassword(@Valid @RequestBody IdsCommand command) {
+        userApplicationService.resetPassword(command.getIds());
         return Boolean.TRUE;
     }
 }
