@@ -5,6 +5,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.RoleApplicationService;
 import com.zsh.cloud.system.application.RoleQueryService;
+import com.zsh.cloud.system.application.command.IdsCommand;
 import com.zsh.cloud.system.application.command.RoleCreateCommand;
 import com.zsh.cloud.system.application.command.RoleUpdateCommand;
 import com.zsh.cloud.system.application.dto.RoleDTO;
@@ -20,11 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * 角色管理.
@@ -100,14 +99,14 @@ public class RoleController {
     /**
      * 删除角色.
      *
-     * @param roleIds
+     * @param command
      * @return
      */
     @ApiOperation("删除角色")
     @SysLog("删除角色")
     @DeleteMapping("roles")
-    public Boolean delete(@RequestParam List<String> roleIds) {
-        roleApplicationService.deleteBatch(roleIds);
+    public Boolean delete(@Valid @RequestBody IdsCommand command) {
+        roleApplicationService.deleteBatch(command.getIds());
         return Boolean.TRUE;
     }
     

@@ -5,6 +5,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.TenantApplicationService;
 import com.zsh.cloud.system.application.TenantQueryService;
+import com.zsh.cloud.system.application.command.IdsCommand;
 import com.zsh.cloud.system.application.command.TenantCreateCommand;
 import com.zsh.cloud.system.application.command.TenantUpdateCommand;
 import com.zsh.cloud.system.application.dto.TenantDTO;
@@ -20,11 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * 租户管理.
@@ -100,14 +99,14 @@ public class TenantController {
     /**
      * 删除租户.
      *
-     * @param tenantIds
+     * @param command
      * @return
      */
     @ApiOperation("删除租户")
     @SysLog("删除租户")
     @DeleteMapping("tenants")
-    public Boolean delete(@RequestParam List<String> tenantIds) {
-        tenantApplicationService.deleteBatch(tenantIds);
+    public Boolean delete(@Valid @RequestBody IdsCommand command) {
+        tenantApplicationService.deleteBatch(command.getIds());
         return Boolean.TRUE;
     }
     
