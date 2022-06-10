@@ -2,8 +2,6 @@ package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.core.enums.BooleanEnum;
-import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
 import com.zsh.cloud.system.application.command.RoleCreateCommand;
 import com.zsh.cloud.system.application.command.RoleUpdateCommand;
@@ -66,15 +64,14 @@ public interface RoleDtoAssembler {
             return null;
         }
         RoleDTO roleDto = new RoleDTO();
-        roleDto.setId(role.getRoleId() == null ? "" : role.getRoleId().getId());
-        roleDto.setRoleCode(role.getRoleCode() == null ? "" : role.getRoleCode().getCode());
-        roleDto.setRoleName(role.getRoleName() == null ? "" : role.getRoleName().getName());
-        roleDto.setRepel(role.getRepel() == null ? "" : role.getRepel().getId());
-        roleDto.setDsType(role.getDsType() == null ? null : role.getDsType().getCode());
-        roleDto.setReadonly(role.getReadonly() == null ? null : role.getReadonly().getCode());
-        roleDto.setStatus(role.getStatus() == null ? null : role.getStatus().getCode());
-        roleDto.setDescribe(role.getDescribe());
-        roleDto.setCreatedTime(role.getCreatedTime());
+        roleDto.setId(role.getRoleId() == null ? "" : role.getRoleId().getId())
+                .setRoleCode(role.getRoleCode() == null ? "" : role.getRoleCode().getCode())
+                .setRoleName(role.getRoleName() == null ? "" : role.getRoleName().getName())
+                .setRepel(role.getRepel() == null ? "" : role.getRepel().getId())
+                .setDsType(role.getDsType() == null ? null : role.getDsType().getCode())
+                .setReadonly(role.getReadonly() == null ? null : role.getReadonly().getCode())
+                .setStatus(role.getStatus() == null ? null : role.getStatus().getCode())
+                .setDescribe(role.getDescribe());
         return roleDto;
     }
     
@@ -92,10 +89,9 @@ public interface RoleDtoAssembler {
             });
         }
         RoleId repel = StringUtils.isBlank(roleCommand.getRepel()) ? null : new RoleId(roleCommand.getRepel());
-        return Role.builder().roleCode(new RoleCode(roleCommand.getRoleCode()))
-                .roleName(new RoleName(roleCommand.getRoleName())).repel(repel)
-                .dsType(IDict.getByCode(DataScopeTypeEnum.class, roleCommand.getDsType())).readonly(BooleanEnum.FALSE)
-                .orgIdList(orgIdList).status(StatusEnum.ENABLE).describe(roleCommand.getDescribe()).build();
+        return new Role(new RoleCode(roleCommand.getRoleCode()), new RoleName(roleCommand.getRoleName()), repel,
+                IDict.getByCode(DataScopeTypeEnum.class, roleCommand.getDsType()), orgIdList,
+                roleCommand.getDescribe());
     }
     
     /**
@@ -112,9 +108,9 @@ public interface RoleDtoAssembler {
             });
         }
         RoleId repel = StringUtils.isBlank(roleCommand.getRepel()) ? null : new RoleId(roleCommand.getRepel());
-        return Role.builder().roleId(new RoleId(roleCommand.getId())).roleCode(new RoleCode(roleCommand.getRoleCode()))
-                .roleName(new RoleName(roleCommand.getRoleName())).repel(repel)
-                .dsType(IDict.getByCode(DataScopeTypeEnum.class, roleCommand.getDsType())).readonly(BooleanEnum.FALSE)
-                .orgIdList(orgIdList).status(StatusEnum.ENABLE).describe(roleCommand.getDescribe()).build();
+        return new Role(new RoleId(roleCommand.getId()), new RoleCode(roleCommand.getRoleCode()),
+                new RoleName(roleCommand.getRoleName()), repel,
+                IDict.getByCode(DataScopeTypeEnum.class, roleCommand.getDsType()), orgIdList, null, null,
+                roleCommand.getDescribe());
     }
 }

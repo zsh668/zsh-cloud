@@ -3,8 +3,7 @@ package com.zsh.cloud.system.domain.model.tenant;
 import com.zsh.cloud.common.core.domain.Entity;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.system.domain.model.user.UserId;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
@@ -15,8 +14,7 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @date 2022/5/25 17:30
  */
-@Data
-@Builder
+@Getter
 public class Tenant implements Entity<Tenant> {
     
     /**
@@ -53,6 +51,31 @@ public class Tenant implements Entity<Tenant> {
      * 功能描述。
      */
     private String describe;
+    
+    /**
+     * 创建.
+     *
+     * @param tenantCode
+     * @param tenantName
+     * @param describe
+     */
+    public Tenant(TenantCode tenantCode, TenantName tenantName, String describe) {
+        this.tenantCode = tenantCode;
+        this.tenantName = tenantName;
+        this.status = StatusEnum.ENABLE;
+        this.describe = describe;
+    }
+    
+    public Tenant(TenantId tenantId, TenantCode tenantCode, TenantName tenantName, StatusEnum status, UserId creatorId,
+            LocalDateTime createdTime, String describe) {
+        this.tenantId = tenantId;
+        this.tenantCode = tenantCode;
+        this.tenantName = tenantName;
+        this.status = status;
+        this.creatorId = creatorId;
+        this.createdTime = createdTime;
+        this.describe = describe;
+    }
     
     /**
      * 是否有效.

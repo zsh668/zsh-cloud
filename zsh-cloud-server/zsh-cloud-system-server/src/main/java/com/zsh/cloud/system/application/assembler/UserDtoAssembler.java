@@ -2,7 +2,6 @@ package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.tenant.contex.TenantContext;
 import com.zsh.cloud.system.application.command.UserCreateCommand;
 import com.zsh.cloud.system.application.command.UserUpdateCommand;
@@ -73,20 +72,18 @@ public interface UserDtoAssembler {
             return null;
         }
         UserDTO userDto = new UserDTO();
-        userDto.setId(user.getUserId() == null ? "" : user.getUserId().getId());
-        userDto.setAccount(user.getAccount() == null ? "" : user.getAccount().getAccount());
-        userDto.setUserName(user.getUserName() == null ? "" : user.getUserName().getName());
-        userDto.setEmail(user.getEmail() == null ? "" : user.getEmail().getEmail());
-        userDto.setMobile(user.getMobile() == null ? "" : user.getMobile().getMobile());
-        userDto.setGender(user.getGender() == null ? null : user.getGender().getCode());
-        userDto.setStatus(user.getStatus() == null ? null : user.getStatus().getCode());
-        userDto.setOrgId(user.getOrgId() == null ? "" : user.getOrgId().getId());
-        userDto.setStationId(user.getStationId() == null ? "" : user.getStationId().getId());
-        userDto.setAvatar(user.getAvatar());
-        userDto.setWorkDescribe(user.getWorkDescribe());
-        userDto.setPasswordExpireTime(user.getPasswordExpireTime());
-        userDto.setLastLoginTime(user.getLastLoginTime());
-        userDto.setSuperior(user.getSuperior() == null ? "" : user.getSuperior().getId());
+        userDto.setId(user.getUserId() == null ? "" : user.getUserId().getId())
+                .setAccount(user.getAccount() == null ? "" : user.getAccount().getAccount())
+                .setUserName(user.getUserName() == null ? "" : user.getUserName().getName())
+                .setEmail(user.getEmail() == null ? "" : user.getEmail().getEmail())
+                .setMobile(user.getMobile() == null ? "" : user.getMobile().getMobile())
+                .setGender(user.getGender() == null ? null : user.getGender().getCode())
+                .setStatus(user.getStatus() == null ? null : user.getStatus().getCode())
+                .setOrgId(user.getOrgId() == null ? "" : user.getOrgId().getId())
+                .setStationId(user.getStationId() == null ? "" : user.getStationId().getId())
+                .setAvatar(user.getAvatar()).setWorkDescribe(user.getWorkDescribe())
+                .setPasswordExpireTime(user.getPasswordExpireTime()).setLastLoginTime(user.getLastLoginTime())
+                .setSuperior(user.getSuperior() == null ? "" : user.getSuperior().getId());
         List<String> roleIdList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(user.getRoleIds())) {
             user.getRoleIds().forEach(roleId -> {
@@ -128,14 +125,12 @@ public interface UserDtoAssembler {
         if (StringUtils.isBlank(superior)) {
             superior = "-1";
         }
-        return User.builder().account(new Account(userCommand.getAccount()))
-                .userName(new UserName(userCommand.getUserName())).mobile(new Mobile(userCommand.getMobile()))
-                .email(new Email(userCommand.getEmail())).password(Password.create(Password.DEFAULT))
-                .gender(IDict.getByCode(GenderEnum.class, userCommand.getGender())).status(StatusEnum.ENABLE)
-                .superior(new UserId(superior)).passwordExpireTime(User.createExpireTime())
-                .avatar(userCommand.getAvatar()).workDescribe(userCommand.getWorkDescribe())
-                .orgId(new OrgId(userCommand.getOrgId())).stationId(new StationId(userCommand.getStationId()))
-                .tenantId(new TenantId(TenantContext.getTenantId())).roleIds(roleIdList).build();
+        return new User(new Account(userCommand.getAccount()), new UserName(userCommand.getUserName()),
+                new Mobile(userCommand.getMobile()), new Email(userCommand.getEmail()),
+                Password.create(Password.DEFAULT), IDict.getByCode(GenderEnum.class, userCommand.getGender()),
+                new UserId(superior), User.createExpireTime(), userCommand.getAvatar(), userCommand.getWorkDescribe(),
+                new OrgId(userCommand.getOrgId()), new StationId(userCommand.getStationId()),
+                new TenantId(TenantContext.getTenantId()), roleIdList);
     }
     
     /**
@@ -155,11 +150,10 @@ public interface UserDtoAssembler {
         if (StringUtils.isBlank(superior)) {
             superior = "-1";
         }
-        return User.builder().userId(new UserId(userCommand.getId())).userName(new UserName(userCommand.getUserName()))
-                .mobile(new Mobile(userCommand.getMobile())).email(new Email(userCommand.getEmail()))
-                .gender(IDict.getByCode(GenderEnum.class, userCommand.getGender())).superior(new UserId(superior))
-                .avatar(userCommand.getAvatar()).workDescribe(userCommand.getWorkDescribe())
-                .orgId(new OrgId(userCommand.getOrgId())).stationId(new StationId(userCommand.getStationId()))
-                .roleIds(roleIdList).build();
+        return new User(new UserId(userCommand.getId()), new UserName(userCommand.getUserName()),
+                new Mobile(userCommand.getMobile()), new Email(userCommand.getEmail()),
+                IDict.getByCode(GenderEnum.class, userCommand.getGender()), new UserId(superior),
+                userCommand.getAvatar(), userCommand.getWorkDescribe(), new OrgId(userCommand.getOrgId()),
+                new StationId(userCommand.getStationId()), roleIdList);
     }
 }

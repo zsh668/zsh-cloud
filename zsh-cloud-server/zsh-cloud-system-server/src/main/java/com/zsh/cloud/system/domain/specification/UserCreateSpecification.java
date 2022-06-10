@@ -29,7 +29,7 @@ public class UserCreateSpecification extends AbstractSpecification<User> {
         List<User> users = userRepository.find(user.getAccount());
         if (!CollectionUtils.isEmpty(users)) {
             users.forEach(u -> {
-                if (user.getTenantId().sameValueAs(user.getTenantId())) {
+                if (user.getAccount().sameValueAs(u.getAccount())) {
                     throw new ServiceException(ServiceErrorCode.USER_ACCOUNT_EXISTS);
                 }
             });

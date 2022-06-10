@@ -33,12 +33,11 @@ public class RoleConverter {
             return null;
         }
         RoleId repel = StringUtils.isBlank(sysRoleDO.getRepel()) ? null : new RoleId(sysRoleDO.getRepel());
-        return Role.builder().roleId(new RoleId(sysRoleDO.getId())).roleName(new RoleName(sysRoleDO.getRoleName()))
-                .roleCode(new RoleCode(sysRoleDO.getRoleCode())).repel(repel)
-                .dsType(IDict.getByCode(DataScopeTypeEnum.class, sysRoleDO.getDsType()))
-                .readonly(IDict.getByCode(BooleanEnum.class, sysRoleDO.getReadonly()))
-                .status(IDict.getByCode(StatusEnum.class, sysRoleDO.getStatus())).describe(sysRoleDO.getDescribe())
-                .createdTime(sysRoleDO.getCreatedTime()).build();
+        return new Role(new RoleId(sysRoleDO.getId()), new RoleCode(sysRoleDO.getRoleCode()),
+                new RoleName(sysRoleDO.getRoleName()), repel,
+                IDict.getByCode(DataScopeTypeEnum.class, sysRoleDO.getDsType()), null,
+                IDict.getByCode(BooleanEnum.class, sysRoleDO.getReadonly()),
+                IDict.getByCode(StatusEnum.class, sysRoleDO.getStatus()), sysRoleDO.getDescribe());
     }
     
     /**

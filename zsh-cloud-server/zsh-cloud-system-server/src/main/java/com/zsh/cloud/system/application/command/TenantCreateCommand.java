@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * 创建租户Command.
@@ -23,7 +23,7 @@ public class TenantCreateCommand extends Command {
      * 租户编码.
      */
     @ApiModelProperty(value = "租户编码")
-    @NotBlank(message = "租户编码不能为空")
+    @NotEmpty(message = "租户编码不能为空")
     @Length(max = 30, message = "租户编码长度不能超过30")
     private String tenantCode;
     
@@ -31,7 +31,7 @@ public class TenantCreateCommand extends Command {
      * 租户名称.
      */
     @ApiModelProperty(value = "租户名称")
-    @NotBlank(message = "租户名称不能为空")
+    @NotEmpty(message = "租户名称不能为空")
     @Length(max = 50, message = "租户名称长度不能超过50")
     private String tenantName;
     

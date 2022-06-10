@@ -5,10 +5,8 @@ import com.zsh.cloud.common.core.enums.BooleanEnum;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
 import com.zsh.cloud.system.domain.model.org.OrgId;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -18,8 +16,7 @@ import java.util.List;
  * @version 1.0
  * @date 2022/5/31 12:52
  */
-@Data
-@Builder
+@Getter
 public class Role implements Entity<Role> {
     
     private RoleId roleId;
@@ -64,10 +61,30 @@ public class Role implements Entity<Role> {
      */
     private String describe;
     
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createdTime;
+    public Role(RoleCode roleCode, RoleName roleName, RoleId repel, DataScopeTypeEnum dsType, List<OrgId> orgIdList,
+            String describe) {
+        this.roleCode = roleCode;
+        this.roleName = roleName;
+        this.repel = repel;
+        this.dsType = dsType;
+        this.orgIdList = orgIdList;
+        this.readonly = BooleanEnum.FALSE;
+        this.status = StatusEnum.ENABLE;
+        this.describe = describe;
+    }
+    
+    public Role(RoleId roleId, RoleCode roleCode, RoleName roleName, RoleId repel, DataScopeTypeEnum dsType,
+            List<OrgId> orgIdList, BooleanEnum readonly, StatusEnum status, String describe) {
+        this.roleId = roleId;
+        this.roleCode = roleCode;
+        this.roleName = roleName;
+        this.repel = repel;
+        this.dsType = dsType;
+        this.orgIdList = orgIdList;
+        this.readonly = readonly;
+        this.status = status;
+        this.describe = describe;
+    }
     
     /**
      * 是否有效.

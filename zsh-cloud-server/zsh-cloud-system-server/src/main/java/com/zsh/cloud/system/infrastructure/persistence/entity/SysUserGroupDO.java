@@ -44,4 +44,10 @@ public class SysUserGroupDO extends TenantBaseDO {
      */
     @TableField(value = "describe_", condition = SqlCondition.LIKE)
     private String describe;
+    
+    /**
+     * 角色名称.
+     */
+    @TableField(exist = false)
+    private String roleName;
 }

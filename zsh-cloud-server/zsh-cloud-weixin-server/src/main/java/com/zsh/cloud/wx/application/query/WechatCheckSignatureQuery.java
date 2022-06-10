@@ -3,7 +3,7 @@ package com.zsh.cloud.wx.application.query;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * 签名验证
@@ -19,6 +19,6 @@ public class WechatCheckSignatureQuery extends WechatSignatureQuery {
     /**
      * 随机字符串
      */
-    @NotBlank(message = "随机字符串不能为空")
+    @NotEmpty(message = "随机字符串不能为空")
     private String echostr;
 }

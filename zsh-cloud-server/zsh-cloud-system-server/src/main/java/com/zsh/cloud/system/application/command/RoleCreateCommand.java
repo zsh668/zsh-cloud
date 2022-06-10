@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 
 /**
  * 创建角色Command.
@@ -60,5 +60,5 @@ public class RoleCreateCommand {
      * 关联的组织id.
      */
     @ApiModelProperty(value = "关联的组织id")
-    private List<String> orgList;
+    private Set<String> orgList;
 }

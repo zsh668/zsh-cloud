@@ -6,9 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.util.List;
+import java.util.Set;
 
 /**
  * 创建用户Command.
@@ -25,7 +25,7 @@ public class UserCreateCommand extends Command {
      * 账号.
      */
     @ApiModelProperty(value = "账号")
-    @NotBlank(message = "账号不能为空")
+    @NotEmpty(message = "账号不能为空")
     @Length(max = 30, message = "账号长度不能超过30")
     private String account;
     
@@ -33,7 +33,7 @@ public class UserCreateCommand extends Command {
      * 姓名.
      */
     @ApiModelProperty(value = "姓名")
-    @NotBlank(message = "姓名不能为空")
+    @NotEmpty(message = "姓名不能为空")
     @Length(max = 50, message = "姓名长度不能超过50")
     private String userName;
     
@@ -41,21 +41,21 @@ public class UserCreateCommand extends Command {
      * 组织ID.
      */
     @ApiModelProperty(value = "组织ID")
-    @NotBlank(message = "组织不能为空")
+    @NotEmpty(message = "组织不能为空")
     private String orgId;
     
     /**
      * 岗位ID.
      */
     @ApiModelProperty(value = "岗位ID")
-    @NotBlank(message = "岗位不能为空")
+    @NotEmpty(message = "岗位不能为空")
     private String stationId;
     
     /**
      * 邮箱.
      */
     @ApiModelProperty(value = "邮箱")
-    @NotBlank(message = "邮箱不能为空")
+    @NotEmpty(message = "邮箱不能为空")
     @Pattern(regexp = "^([a-z0-9A-Z]+[-|.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$", message = "邮箱格式不正确")
     private String email;
     
@@ -63,7 +63,7 @@ public class UserCreateCommand extends Command {
      * 手机.
      */
     @ApiModelProperty(value = "手机")
-    @NotBlank(message = "手机不能为空")
+    @NotEmpty(message = "手机不能为空")
     @Pattern(regexp = "^((13[0-9])|(14[0-1,4-9])|(15[0-3,5-9])|(16[2,5-7])|(17[0-8])|(18[0-9])|(19[0-3,5-9]))\\d{8}$", message = "手机号格式不正确")
     private String mobile;
     
@@ -71,7 +71,7 @@ public class UserCreateCommand extends Command {
      * 性别 1：男 2 女 3 未知.
      */
     @ApiModelProperty(value = "性别")
-    @NotBlank(message = "性别不能为空")
+    @NotEmpty(message = "性别不能为空")
     private Integer gender;
     
     /**
@@ -98,5 +98,5 @@ public class UserCreateCommand extends Command {
      * 角色id集合
      */
     @ApiModelProperty(value = "角色id集合")
-    private List<String> roleIdList;
+    private Set<String> roleIdList;
 }

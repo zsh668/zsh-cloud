@@ -34,10 +34,9 @@ public class TenantConverter {
         TenantId tenantId = StringUtils.isBlank(sysTenantDO.getId()) ? null : new TenantId(sysTenantDO.getId());
         UserId creatorId =
                 StringUtils.isBlank(sysTenantDO.getCreatedBy()) ? null : new UserId(sysTenantDO.getCreatedBy());
-        return Tenant.builder().tenantId(tenantId).tenantCode(new TenantCode(sysTenantDO.getTenantCode()))
-                .tenantName(new TenantName(sysTenantDO.getTenantName()))
-                .status(IDict.getByCode(StatusEnum.class, sysTenantDO.getStatus())).creatorId(creatorId)
-                .createdTime(sysTenantDO.getCreatedTime()).describe(sysTenantDO.getDescribe()).build();
+        return new Tenant(tenantId, new TenantCode(sysTenantDO.getTenantCode()),
+                new TenantName(sysTenantDO.getTenantName()), IDict.getByCode(StatusEnum.class, sysTenantDO.getStatus()),
+                creatorId, sysTenantDO.getCreatedTime(), sysTenantDO.getDescribe());
     }
     
     /**
