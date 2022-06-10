@@ -14,10 +14,11 @@
     </description>
     
     <modules>
+        <module>zsh-cloud-business</module>
         <module>zsh-cloud-dependencies</module>
         <module>zsh-cloud-common</module>
         <module>zsh-cloud-ops</module>
-        <module>zsh-cloud-server</module>
+        <module>zsh-cloud-support</module>
     </modules>
     
     <properties>
