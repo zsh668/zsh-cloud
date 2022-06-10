@@ -7,12 +7,12 @@
         <artifactId>zsh-cloud</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>zsh-cloud-server</artifactId>
+    <artifactId>zsh-cloud-support</artifactId>
     <packaging>pom</packaging>
     
-    <name>zsh-cloud-server</name>
+    <name>zsh-cloud-support</name>
     <description>
-        后端服务
+        系统服务
     </description>
     
     <modules>
@@ -38,13 +38,13 @@
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
-    
+        
         <!--注册中心客户端-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-    
+        
         <!--配置中心客户端-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

@@ -41,18 +41,23 @@ public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     ROLE_NOT_EXISTS(1000002000, "角色不存在"),
     ROLE_NAME_EXISTS(1000002001, "角色名称已存在"),
     ROLE_CODE_EXISTS(1000002002, "角色编码已存在"),
-    ROLE_VERIFICATION_ERROR(1000002004, "验证不通过"),
-    ROLE_PLATFORM_DELETE(1000002005, "内置角色无法删除"),
+    ROLE_VERIFICATION_ERROR(1000002003, "验证不通过"),
+    ROLE_PLATFORM_DELETE(1000002004, "内置角色无法删除"),
     
     // 模块 system 【000】 用户组 【003】 错误码 【000~999】
     USER_GROUP_NOT_EXISTS(1000003000, "用户组不存在"),
     USER_GROUP_NAME_EXISTS(1000003001, "用户组名称已存在"),
-    USER_GROUP_VERIFICATION_ERROR(1000003003, "验证不通过"),
+    USER_GROUP_VERIFICATION_ERROR(1000003002, "验证不通过"),
     
     // 模块 system 【000】 岗位 【004】 错误码 【000~999】
     STATION_NOT_EXISTS(1000004000, "岗位不存在"),
     STATION_NAME_EXISTS(1000004001, "岗位名称已存在"),
-    STATION_VERIFICATION_ERROR(1000004003, "验证不通过"),
+    STATION_VERIFICATION_ERROR(1000004002, "验证不通过"),
+    
+    // 模块 system 【000】 组织 【005】 错误码 【000~999】
+    ORG_NOT_EXISTS(1000005000, "组织不存在"),
+    ORG_NAME_EXISTS(1000005001, "组织名称已存在"),
+    ORG_VERIFICATION_ERROR(1000005002, "验证不通过"),
     ;
     
     private Integer code;

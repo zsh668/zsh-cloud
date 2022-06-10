@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.zsh.cloud</groupId>
-		<artifactId>zsh-cloud-server</artifactId>
+		<artifactId>zsh-cloud-support</artifactId>
 		<version>${revision}</version>
 	</parent>
 	<artifactId>zsh-cloud-generator-server</artifactId>
