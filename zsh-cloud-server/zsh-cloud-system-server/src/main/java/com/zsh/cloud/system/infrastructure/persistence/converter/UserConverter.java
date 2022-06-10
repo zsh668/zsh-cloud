@@ -67,13 +67,11 @@ public class UserConverter {
                 StringUtils.isBlank(sysUserDO.getStationId()) ? null : new StationId(sysUserDO.getStationId());
         UserId superior = StringUtils.isBlank(sysUserDO.getSuperior()) ? null : new UserId(sysUserDO.getSuperior());
         
-        return User.builder().userId(new UserId(sysUserDO.getId())).account(new Account(sysUserDO.getAccount()))
-                .userName(new UserName(sysUserDO.getUserName())).mobile(mobile).email(email)
-                .gender(IDict.getByCode(GenderEnum.class, sysUserDO.getGender()))
-                .status(IDict.getByCode(StatusEnum.class, sysUserDO.getStatus())).superior(superior)
-                .passwordExpireTime(sysUserDO.getPasswordExpireTime()).lastLoginTime(sysUserDO.getLastLoginTime())
-                .tenantId(tenantId).orgId(orgId).stationId(stationId).roleIds(roleIds).roleNames(roleNames)
-                .userGroupsNames(groupNames).build();
+        return new User(new UserId(sysUserDO.getId()), new Account(sysUserDO.getAccount()),
+                new UserName(sysUserDO.getUserName()), mobile, email,
+                IDict.getByCode(GenderEnum.class, sysUserDO.getGender()),
+                IDict.getByCode(StatusEnum.class, sysUserDO.getStatus()), superior, sysUserDO.getPasswordExpireTime(),
+                sysUserDO.getLastLoginTime(), orgId, stationId, tenantId, roleIds, roleNames, groupNames);
     }
     
     /**

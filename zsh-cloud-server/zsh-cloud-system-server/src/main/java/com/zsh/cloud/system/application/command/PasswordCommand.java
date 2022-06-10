@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * 密码Command.
@@ -29,7 +29,7 @@ public class PasswordCommand extends Command {
      * 原密码
      */
     @ApiModelProperty(value = "原密码")
-    @NotBlank(message = "原密码不能为空")
+    @NotEmpty(message = "原密码不能为空")
     @Length(min = 6, max = 18, message = "原密码长度为 6-18 位")
     private String password;
     
@@ -37,7 +37,7 @@ public class PasswordCommand extends Command {
      * 新密码
      */
     @ApiModelProperty(value = "新密码")
-    @NotBlank(message = "新密码不能为空")
+    @NotEmpty(message = "新密码不能为空")
     @Length(min = 6, max = 18, message = "密码长度为 6-18 位")
     private String newPassword;
     
@@ -45,7 +45,7 @@ public class PasswordCommand extends Command {
      * 确认密码
      */
     @ApiModelProperty(value = "确认密码")
-    @NotBlank(message = "确认密码不能为空")
+    @NotEmpty(message = "确认密码不能为空")
     @Length(min = 6, max = 18, message = "密码长度为 6-18 位")
     private String confirmPassword;
 }

@@ -11,6 +11,8 @@ import com.zsh.cloud.system.infrastructure.persistence.repository.UserRepository
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,8 +24,10 @@ import java.util.List;
  * @version 1.0
  * @date 2022/4/29 15:26
  */
-@ApiModel(value = "UserDTO", description = "用户信息")
 @Data
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
+@ApiModel(value = "UserDTO", description = "用户信息")
 public class UserDTO extends DTO {
     
     /**

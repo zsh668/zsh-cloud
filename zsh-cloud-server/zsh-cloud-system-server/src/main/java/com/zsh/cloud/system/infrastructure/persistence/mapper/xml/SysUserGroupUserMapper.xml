@@ -8,4 +8,10 @@
             #{userId}
         </foreach>
     </delete>
+    <delete id="deleteByUserGroupIds">
+        delete from sys_user_group_user where group_id in
+        <foreach item="userGroupId" collection="list" open="(" separator="," close=")">
+            #{userGroupId}
+        </foreach>
+    </delete>
 </mapper>

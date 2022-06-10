@@ -6,10 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 
 /**
  * 更新角色Command.
@@ -26,7 +25,7 @@ public class RoleUpdateCommand extends Command {
      * 角色ID.
      */
     @ApiModelProperty(value = "角色ID")
-    @NotBlank(message = "角色ID不能为空")
+    @NotEmpty(message = "角色ID不能为空")
     private String id;
     
     /**
@@ -69,5 +68,5 @@ public class RoleUpdateCommand extends Command {
      * 关联的组织id.
      */
     @ApiModelProperty(value = "关联的组织id")
-    private List<String> orgList;
+    private Set<String> orgList;
 }

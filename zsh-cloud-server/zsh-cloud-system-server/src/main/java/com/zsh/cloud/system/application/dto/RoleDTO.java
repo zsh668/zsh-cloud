@@ -10,8 +10,8 @@ import com.zsh.cloud.system.infrastructure.persistence.repository.RoleRepository
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * 角色信息DTO.
@@ -21,6 +21,8 @@ import java.time.LocalDateTime;
  * @date 2022/5/31 10:51
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
 @ApiModel(value = "RoleDTO", description = "角色信息")
 public class RoleDTO extends DTO {
     
@@ -99,10 +101,4 @@ public class RoleDTO extends DTO {
      */
     @ApiModelProperty(value = "功能描述")
     private String describe;
-    
-    /**
-     * 创建时间
-     */
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createdTime;
 }

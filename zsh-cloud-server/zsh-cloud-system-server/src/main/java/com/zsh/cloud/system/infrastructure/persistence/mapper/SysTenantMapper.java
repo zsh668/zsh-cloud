@@ -5,7 +5,6 @@ import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
 import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.application.query.TenantPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysTenantDO;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

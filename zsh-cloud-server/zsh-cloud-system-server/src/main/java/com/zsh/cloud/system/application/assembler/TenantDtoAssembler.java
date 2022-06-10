@@ -1,7 +1,6 @@
 package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.system.application.command.TenantCreateCommand;
 import com.zsh.cloud.system.application.command.TenantUpdateCommand;
 import com.zsh.cloud.system.application.dto.TenantDTO;
@@ -60,10 +59,10 @@ public interface TenantDtoAssembler {
             return null;
         }
         TenantDTO tenantDto = new TenantDTO();
-        tenantDto.setId(tenant.getTenantId() == null ? "" : tenant.getTenantId().getId());
-        tenantDto.setTenantCode(tenant.getTenantCode() == null ? "" : tenant.getTenantCode().getCode());
-        tenantDto.setTenantName(tenant.getTenantName() == null ? "" : tenant.getTenantName().getName());
-        tenantDto.setStatus(tenant.getStatus() == null ? null : tenant.getStatus().getCode());
+        tenantDto.setId(tenant.getTenantId() == null ? "" : tenant.getTenantId().getId())
+                .setTenantCode(tenant.getTenantCode() == null ? "" : tenant.getTenantCode().getCode())
+                .setTenantName(tenant.getTenantName() == null ? "" : tenant.getTenantName().getName())
+                .setStatus(tenant.getStatus() == null ? null : tenant.getStatus().getCode());
         return tenantDto;
     }
     
@@ -74,9 +73,8 @@ public interface TenantDtoAssembler {
      * @return
      */
     default Tenant toTenant(TenantCreateCommand tenantCommand) {
-        return Tenant.builder().tenantCode(new TenantCode(tenantCommand.getTenantCode()))
-                .tenantName(new TenantName(tenantCommand.getTenantName())).status(StatusEnum.ENABLE)
-                .describe(tenantCommand.getDescribe()).build();
+        return new Tenant(new TenantCode(tenantCommand.getTenantCode()), new TenantName(tenantCommand.getTenantName()),
+                tenantCommand.getDescribe());
     }
     
     /**
@@ -86,9 +84,7 @@ public interface TenantDtoAssembler {
      * @return
      */
     default Tenant toTenant(TenantUpdateCommand tenantCommand) {
-        return Tenant.builder().tenantId(new TenantId(tenantCommand.getId()))
-                .tenantCode(new TenantCode(tenantCommand.getTenantCode()))
-                .tenantName(new TenantName(tenantCommand.getTenantName())).status(StatusEnum.ENABLE)
-                .describe(tenantCommand.getDescribe()).build();
+        return new Tenant(new TenantId(tenantCommand.getId()), new TenantCode(tenantCommand.getTenantCode()),
+                new TenantName(tenantCommand.getTenantName()), null, null, null, tenantCommand.getDescribe());
     }
 }

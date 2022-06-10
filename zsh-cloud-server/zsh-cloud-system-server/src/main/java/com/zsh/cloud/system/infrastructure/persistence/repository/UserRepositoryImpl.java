@@ -71,7 +71,7 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
         sysUserRoleMapper.deleteByUserIds(userIds);
         List<RoleId> roleIds = user.getRoleIds();
         if (!CollectionUtils.isEmpty(roleIds)) {
-            //保存角色与菜单关系
+            //保存用户与角色关系
             for (RoleId roleId : roleIds) {
                 SysUserRoleDO sysUserRoleDO = new SysUserRoleDO();
                 sysUserRoleDO.setUserId(userId);

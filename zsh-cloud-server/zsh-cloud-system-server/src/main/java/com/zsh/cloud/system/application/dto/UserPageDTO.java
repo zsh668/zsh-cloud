@@ -14,6 +14,8 @@ import com.zsh.cloud.system.infrastructure.persistence.repository.UserRepository
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
@@ -24,9 +26,11 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @date 2022/4/29 15:44
  */
-@ApiModel(value = "UserPageDTO", description = "用户分页信息")
 @Data
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
 @ExcelIgnoreUnannotated
+@ApiModel(value = "UserPageDTO", description = "用户分页信息")
 public class UserPageDTO extends DTO {
     
     /**

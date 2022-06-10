@@ -2,6 +2,7 @@ package com.zsh.cloud.system.application.query;
 
 import com.zsh.cloud.common.core.dto.PageQuery;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,4 +18,21 @@ import lombok.EqualsAndHashCode;
 @ApiModel("用户组分页对象")
 public class UserGroupPageQuery extends PageQuery {
     
+    /**
+     * 用户组名称.
+     */
+    @ApiModelProperty(value = "用户组名称")
+    private String userGroupName;
+    
+    /**
+     * 角色名称.
+     */
+    @ApiModelProperty(value = "角色名称")
+    private String roleName;
+    
+    /**
+     * 状态.
+     */
+    @ApiModelProperty(value = "状态")
+    private Integer status;
 }

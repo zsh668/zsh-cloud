@@ -3,11 +3,8 @@ package com.zsh.cloud.system.infrastructure.persistence.mapper;
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
 import com.zsh.cloud.common.mybatis.util.Wraps;
-import com.zsh.cloud.system.application.dto.RolePageDTO;
 import com.zsh.cloud.system.application.query.RolePageQuery;
-import com.zsh.cloud.system.application.query.TenantPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleDO;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysTenantDO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -40,6 +37,5 @@ public interface SysRoleMapper extends BaseMapperExt<SysRoleDO> {
         return selectPage(query, Wraps.<SysRoleDO>lbQ().likeIfPresent(SysRoleDO::getRoleCode, query.getRoleCode())
                 .likeIfPresent(SysRoleDO::getRoleName, query.getRoleName())
                 .eqIfPresent(SysRoleDO::getStatus, query.getStatus()));
-        
     }
 }

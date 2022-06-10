@@ -20,4 +20,9 @@ public interface SysUserGroupUserMapper extends BaseMapperExt<SysUserGroupUserDO
      * 根据用户ID，批量删除
      */
     int deleteByUserIds(List<String> userIds);
+    
+    /**
+     * 根据用户组ID，批量删除
+     */
+    int deleteByUserGroupIds(List<String> userGroupIds);
 }
