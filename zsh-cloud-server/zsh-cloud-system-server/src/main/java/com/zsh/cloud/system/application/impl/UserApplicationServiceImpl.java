@@ -58,12 +58,13 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public void deleteBatch(List<String> ids) {
         List<UserId> userIds = new ArrayList<>();
-        ids.forEach(id -> userIds.add(new UserId(id)));
         UserDeleteSpecification specification = new UserDeleteSpecification(tenantRepository);
-        for (UserId userId : userIds) {
+        ids.forEach(id -> {
+            UserId userId = new UserId(id);
             User user = userRepository.find(userId);
             specification.isSatisfiedBy(user);
-        }
+            userIds.add(userId);
+        });
         userRepository.remove(userIds);
     }
     

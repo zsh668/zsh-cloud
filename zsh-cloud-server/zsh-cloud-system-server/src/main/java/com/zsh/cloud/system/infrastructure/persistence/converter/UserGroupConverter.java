@@ -34,8 +34,22 @@ public class UserGroupConverter {
                 IDict.getByCode(StatusEnum.class, userGroupDO.getStatus()), null, userGroupDO.getDescribe());
     }
     
+    /**
+     * 转换.
+     *
+     * @param userGroup
+     * @return
+     */
     public static SysUserGroupDO fromUserGroup(UserGroup userGroup) {
         Assert.notNull(userGroup, ServiceErrorCode.USER_GROUP_NOT_EXISTS);
-        return null;
+        SysUserGroupDO sysUserGroupDO = new SysUserGroupDO();
+        sysUserGroupDO.setId(userGroup.getUserGroupId() == null ? null : userGroup.getUserGroupId().getId());
+        sysUserGroupDO.setGroupName(
+                userGroup.getUserGroupName() == null ? null : userGroup.getUserGroupName().getName());
+        sysUserGroupDO.setUserCount(userGroup.getUserCount());
+        sysUserGroupDO.setRoleId(userGroup.getRoleId() == null ? null : userGroup.getRoleId().getId());
+        sysUserGroupDO.setStatus(userGroup.getStatus() == null ? null : userGroup.getStatus().getCode());
+        sysUserGroupDO.setDescribe(userGroup.getDescribe());
+        return sysUserGroupDO;
     }
 }

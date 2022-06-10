@@ -4,6 +4,7 @@ import com.zsh.cloud.common.core.dto.Command;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -18,6 +19,7 @@ import java.util.Set;
  * @date 2022/5/9 19:01
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "更新用户", description = "更新用户")
 public class UserUpdateCommand extends Command {
     

@@ -48,6 +48,11 @@ public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     USER_GROUP_NOT_EXISTS(1000003000, "用户组不存在"),
     USER_GROUP_NAME_EXISTS(1000003001, "用户组名称已存在"),
     USER_GROUP_VERIFICATION_ERROR(1000003003, "验证不通过"),
+    
+    // 模块 system 【000】 岗位 【004】 错误码 【000~999】
+    STATION_NOT_EXISTS(1000004000, "岗位不存在"),
+    STATION_NAME_EXISTS(1000004001, "岗位名称已存在"),
+    STATION_VERIFICATION_ERROR(1000004003, "验证不通过"),
     ;
     
     private Integer code;

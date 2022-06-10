@@ -13,6 +13,7 @@ import com.zsh.cloud.system.domain.specification.UserDeleteSpecification;
 import com.zsh.cloud.system.domain.specification.UserGroupCreateSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.List;
  * @date 2022/6/8 09:51
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserGroupApplicationServiceImpl implements UserGroupApplicationService {
     
     @Autowired

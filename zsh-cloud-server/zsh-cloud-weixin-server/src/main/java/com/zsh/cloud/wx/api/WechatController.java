@@ -3,6 +3,8 @@ package com.zsh.cloud.wx.api;
 import com.zsh.cloud.wx.application.WechatService;
 import com.zsh.cloud.wx.application.query.WechatCheckSignatureQuery;
 import com.zsh.cloud.wx.application.query.WechatMessageQuery;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -14,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 微信
+ * 微信.
  *
  * @author hang
  * @version 1.0
  * @date 2022/03/14 10:19
  */
+@Api(tags = "微信公众号")
 @RestController
 @RequestMapping("portal")
 @Slf4j
@@ -36,6 +39,7 @@ public class WechatController {
      * @author hang
      * @date 2022/03/15 10:20
      */
+    @ApiOperation(value = "认证接口", notes = "认证接口")
     @GetMapping(value = "msg/{appid}", produces = "text/plain;charset=utf-8")
     public String checkToken(@PathVariable("appid") String appid, @Validated WechatCheckSignatureQuery signatureQuery) {
         log.info("接收到来自微信服务器的认证消息：[{}]", signatureQuery.toString());
@@ -56,6 +60,7 @@ public class WechatController {
      * @author hang
      * @date 2022/03/16 14:59
      */
+    @ApiOperation(value = "接收微信各类消息接口", notes = "接收微信各类消息接口")
     @PostMapping(value = "msg/{appid}", produces = "text/plain;charset=utf-8")
     public String receiveMessage(@PathVariable("appid") String appid, @Validated WechatMessageQuery messageQuery,
             @RequestBody String requestBody) {
@@ -63,7 +68,7 @@ public class WechatController {
         log.info("收到消息:\n{}", requestBody);
         // 校验签名
         if (!wechatService.validateSignature(appid, messageQuery)) {
-            throw new IllegalArgumentException("非法请求");
+            return "非法请求";
         }
         return wechatService.replyMessage(requestBody, appid, messageQuery);
     }

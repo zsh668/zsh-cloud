@@ -13,8 +13,8 @@ import lombok.EqualsAndHashCode;
  * @version 1.0
  * @date 2022/4/29 14:47
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @ApiModel("用户分页对象")
 public class UserPageQuery extends PageQuery {
     

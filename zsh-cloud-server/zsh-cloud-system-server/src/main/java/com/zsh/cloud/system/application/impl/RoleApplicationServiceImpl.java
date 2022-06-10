@@ -26,8 +26,8 @@ import java.util.List;
  * @version 1.0
  * @date 2022/5/31 12:18
  */
-@Transactional(rollbackFor = Exception.class)
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class RoleApplicationServiceImpl implements RoleApplicationService {
     
     @Autowired
@@ -58,13 +58,14 @@ public class RoleApplicationServiceImpl implements RoleApplicationService {
     @Override
     public void deleteBatch(List<String> ids) {
         List<RoleId> roleIds = new ArrayList<>();
-        ids.forEach(id -> roleIds.add(new RoleId(id)));
         RoleDeleteSpecification specification = new RoleDeleteSpecification(sysUserRoleMapper);
-        for (RoleId roleId : roleIds) {
+        ids.forEach(id -> {
+            RoleId roleId = new RoleId(id);
             Role role = roleRepository.find(roleId);
             Assert.notTrue(role.isReadonly(), ServiceErrorCode.ROLE_PLATFORM_DELETE);
             specification.isSatisfiedBy(role);
-        }
+            roleIds.add(roleId);
+        });
         roleRepository.remove(roleIds);
     }
     
