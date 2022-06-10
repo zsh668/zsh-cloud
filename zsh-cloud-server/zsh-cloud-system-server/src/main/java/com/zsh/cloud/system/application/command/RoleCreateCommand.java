@@ -1,8 +1,10 @@
 package com.zsh.cloud.system.application.command;
 
+import com.zsh.cloud.common.core.dto.Command;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -17,8 +19,9 @@ import java.util.Set;
  * @date 2022/5/31 10:48
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "创建角色", description = "创建角色")
-public class RoleCreateCommand {
+public class RoleCreateCommand extends Command {
     
     /**
      * 角色编码.

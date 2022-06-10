@@ -23,9 +23,11 @@ public class UserGroupCreateSpecification extends AbstractSpecification<UserGrou
     
     @Override
     public boolean isSatisfiedBy(UserGroup userGroup) {
-        UserGroup existGroup = userGroupRepository.find(userGroup.getUserGroupName());
-        Assert.isTrue(existGroup != null && !existGroup.getUserGroupId().sameValueAs(userGroup.getUserGroupId()),
-                ServiceErrorCode.USER_GROUP_NAME_EXISTS);
+        if (userGroup.getUserGroupName() != null) {
+            UserGroup existGroup = userGroupRepository.find(userGroup.getUserGroupName());
+            Assert.isTrue(existGroup != null && !existGroup.getUserGroupId().sameValueAs(userGroup.getUserGroupId()),
+                    ServiceErrorCode.USER_GROUP_NAME_EXISTS);
+        }
         return true;
     }
 }

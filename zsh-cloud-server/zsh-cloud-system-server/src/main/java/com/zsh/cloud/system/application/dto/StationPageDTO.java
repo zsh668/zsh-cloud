@@ -9,41 +9,45 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDateTime;
-
 /**
- * 角色分页信息DTO.
+ * 岗位分页信息DTO.
  *
  * @author zhangshuhang
  * @version 1.0
- * @date 2022/5/31 10:51
+ * @date 2022/6/10 15:50
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "RolePageDTO", description = "角色分页信息")
-public class RolePageDTO extends DTO {
+@ApiModel(value = "StationPageDTO", description = "岗位分页信息")
+public class StationPageDTO extends DTO {
     
     /**
-     * id
+     * 岗位ID.
      */
-    @ApiModelProperty(value = "角色ID")
+    @ApiModelProperty(value = "岗位ID")
     private String id;
     
     /**
-     * 角色编码
+     * 岗位名称.
      */
-    @ApiModelProperty(value = "角色编码")
-    private String roleCode;
+    @ApiModelProperty(value = "岗位名称")
+    private String stationName;
     
     /**
-     * 角色名称
+     * 组织ID.
      */
-    @ApiModelProperty(value = "角色名称")
-    private String roleName;
+    @ApiModelProperty(value = "组织ID")
+    private String orgId;
     
     /**
-     * 状态
+     * 排序.
+     */
+    @ApiModelProperty(value = "排序")
+    private Integer orderNum;
+    
+    /**
+     * 状态 1启用，0禁用.
      */
     @ApiModelProperty(value = "状态")
     private Integer status;
@@ -60,10 +64,4 @@ public class RolePageDTO extends DTO {
      */
     @ApiModelProperty(value = "功能描述")
     private String describe;
-    
-    /**
-     * 创建时间
-     */
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createdTime;
 }

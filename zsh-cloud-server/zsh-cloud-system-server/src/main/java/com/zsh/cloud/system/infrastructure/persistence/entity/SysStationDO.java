@@ -30,6 +30,11 @@ public class SysStationDO extends TenantBaseDO {
     private String orgId;
     
     /**
+     * 排序.
+     */
+    private Integer orderNum;
+    
+    /**
      * 状态 1启用，0禁用.
      */
     private Integer status;

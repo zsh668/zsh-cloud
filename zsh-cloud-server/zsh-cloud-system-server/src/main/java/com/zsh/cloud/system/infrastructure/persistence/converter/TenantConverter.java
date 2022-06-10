@@ -52,7 +52,7 @@ public class TenantConverter {
         sysTenantDO.setTenantCode(tenant.getTenantCode() == null ? null : tenant.getTenantCode().getCode());
         sysTenantDO.setTenantName(tenant.getTenantName() == null ? null : tenant.getTenantName().getName());
         sysTenantDO.setStatus(tenant.getStatus() == null ? null : tenant.getStatus().getCode());
-        sysTenantDO.setDescribe(tenant.getDescribe() == null ? null : tenant.getDescribe());
+        sysTenantDO.setDescribe(tenant.getDescribe());
         return sysTenantDO;
     }
 }

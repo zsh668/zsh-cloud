@@ -4,6 +4,7 @@ import com.zsh.cloud.common.core.dto.Command;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotEmpty;
  * @date 2022/5/9 19:07
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "修改密码", description = "修改密码")
 public class PasswordCommand extends Command {
     
