@@ -12,7 +12,7 @@
     
     <name>zsh-cloud-support</name>
     <description>
-        系统服务
+        系统基础服务
     </description>
     
     <modules>

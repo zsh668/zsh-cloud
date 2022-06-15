@@ -44,7 +44,7 @@ public class UserGroupController {
     private UserGroupApplicationService userGroupApplicationService;
     
     /**
-     * 用户组分页查询.
+     * 分页查询用户组.
      *
      * @param pageQuery
      * @return
@@ -63,6 +63,7 @@ public class UserGroupController {
      * @return
      */
     @ApiOperation(value = "查询用户组", notes = "查询用户组")
+    @Translator
     @GetMapping("userGroups/{id}")
     public UserGroupDTO get(@PathVariable String id) {
         return userGroupQueryService.find(id);

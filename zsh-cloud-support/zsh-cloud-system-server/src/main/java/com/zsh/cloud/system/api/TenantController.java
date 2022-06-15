@@ -44,7 +44,7 @@ public class TenantController {
     private TenantApplicationService tenantApplicationService;
     
     /**
-     * 租户分页查询.
+     * 分页查询租户.
      *
      * @param tenantPageQuery
      * @return
@@ -63,6 +63,7 @@ public class TenantController {
      * @return
      */
     @ApiOperation(value = "查询租户", notes = "查询租户")
+    @Translator
     @GetMapping("tenants/{id}")
     public TenantDTO get(@PathVariable String id) {
         return tenantQueryService.find(id);

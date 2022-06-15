@@ -44,7 +44,7 @@ public class StationController {
     private StationApplicationService stationApplicationService;
     
     /**
-     * 岗位分页查询.
+     * 分页查询岗位.
      *
      * @param stationPageQuery
      * @return
@@ -63,6 +63,7 @@ public class StationController {
      * @return
      */
     @ApiOperation(value = "查询岗位", notes = "查询岗位")
+    @Translator
     @GetMapping("stations/{id}")
     public StationDTO get(@PathVariable String id) {
         return stationQueryService.find(id);

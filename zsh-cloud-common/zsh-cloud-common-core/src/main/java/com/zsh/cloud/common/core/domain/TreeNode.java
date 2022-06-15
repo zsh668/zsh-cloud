@@ -1,7 +1,10 @@
 package com.zsh.cloud.common.core.domain;
 
+import com.zsh.cloud.common.core.dto.DTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,11 +15,20 @@ import java.util.List;
  * @date 2022/05/13 10:13
  */
 @Data
-public class TreeNode<T extends TreeNode<T>> {
+public class TreeNode<T extends TreeNode<T, I>, I extends Serializable> extends DTO {
     
-    private Long id;
+    /**
+     * id.
+     */
+    private I id;
     
-    private Long parentId;
+    /**
+     * 父id.
+     */
+    private I parentId;
     
+    /**
+     * 子集合.
+     */
     private List<T> childList;
 }

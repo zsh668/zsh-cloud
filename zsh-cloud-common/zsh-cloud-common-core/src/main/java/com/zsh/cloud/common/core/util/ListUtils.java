@@ -4,6 +4,7 @@ import com.zsh.cloud.common.core.domain.TreeNode;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
  */
 @UtilityClass
 public class ListUtils {
+    
+    // 父ID
+    private static final String PARENT_ID = "0";
     
     /**
      * 匹配两个list，指定它们之间关联的属性以及匹配后的动作
@@ -72,22 +76,34 @@ public class ListUtils {
      * List转为树.
      *
      * @param source list
+     * @return 树化后的List
+     */
+    public static <T extends TreeNode<T, String>> List<T> treeify(List<T> source) {
+        return treeify(source, PARENT_ID);
+    }
+    
+    /**
+     * List转为树.
+     *
+     * @param source list
      * @param rootId 指定树的根节点id，一般为0
      * @return 树化后的List
      */
-    public static <T extends TreeNode<T>> List<T> treeify(List<T> source, Long rootId) {
+    public static <T extends TreeNode<T, I>, I extends Serializable> List<T> treeify(List<T> source, I rootId) {
         
         if (CollectionUtils.isEmpty(source)) {
             return new ArrayList<>();
         }
         final List<T> result = new ArrayList<>();
         final Map<Object, T> map = new HashMap<>(source.size());
+        // 获取根节点，map赋值。
         source.forEach(node -> {
             if (Objects.equals(rootId, node.getParentId())) {
                 result.add(node);
             }
             map.put(node.getId(), node);
         });
+        // childList赋值
         source.forEach(node -> map.computeIfPresent(node.getParentId(), (parentId, parentNode) -> {
             Optional.ofNullable(parentNode.getChildList()).orElseGet(() -> {
                 final List<T> list = new ArrayList<>();
@@ -96,6 +112,12 @@ public class ListUtils {
             }).add(node);
             return parentNode;
         }));
+        // 处理 无父ID的集合,根节点除外
+        source.forEach(node -> {
+            if (!Objects.equals(rootId, node.getParentId()) && !map.containsKey(node.getParentId())) {
+                result.add(map.get(node.getId()));
+            }
+        });
         return result;
     }
 }

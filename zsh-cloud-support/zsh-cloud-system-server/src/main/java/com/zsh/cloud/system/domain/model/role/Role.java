@@ -19,6 +19,9 @@ import java.util.List;
 @Getter
 public class Role implements Entity<Role> {
     
+    /**
+     * 角色id.
+     */
     private RoleId roleId;
     
     /**
