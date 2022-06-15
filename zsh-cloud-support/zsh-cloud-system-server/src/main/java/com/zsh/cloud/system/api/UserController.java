@@ -47,7 +47,7 @@ public class UserController {
     private UserApplicationService userApplicationService;
     
     /**
-     * 用户分页查询.
+     * 分页查询用户.
      *
      * @param userPageQuery
      * @return
@@ -68,6 +68,7 @@ public class UserController {
      * @return
      */
     @ApiOperation(value = "查询用户", notes = "查询用户")
+    @Translator
     @GetMapping("users/{id}")
     public UserDTO get(@PathVariable String id) {
         return userQueryService.find(id);

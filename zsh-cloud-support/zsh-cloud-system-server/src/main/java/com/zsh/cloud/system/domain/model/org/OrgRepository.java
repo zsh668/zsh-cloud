@@ -8,5 +8,12 @@ package com.zsh.cloud.system.domain.model.org;
  * @date 2022/5/20 13:45
  */
 public interface OrgRepository {
-
+    
+    /**
+     * 获取组织
+     *
+     * @param orgId
+     * @return
+     */
+    Org find(OrgId orgId);
 }

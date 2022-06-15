@@ -44,7 +44,7 @@ public class RoleController {
     private RoleApplicationService roleApplicationService;
     
     /**
-     * 角色分页查询.
+     * 分页查询角色.
      *
      * @param rolePageQuery
      * @return
@@ -63,6 +63,7 @@ public class RoleController {
      * @return
      */
     @ApiOperation(value = "查询角色", notes = "查询角色")
+    @Translator
     @GetMapping("roles/{id}")
     public RoleDTO get(@PathVariable String id) {
         return roleQueryService.find(id);
