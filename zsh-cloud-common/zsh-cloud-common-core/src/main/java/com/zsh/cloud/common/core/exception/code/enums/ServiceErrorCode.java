@@ -58,6 +58,7 @@ public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     ORG_NOT_EXISTS(1000005000, "组织不存在"),
     ORG_NAME_EXISTS(1000005001, "组织名称已存在"),
     ORG_VERIFICATION_ERROR(1000005002, "验证不通过"),
+    ORG_SORT_EXISTS(1000005003, "同级组织内，排序已存在"),
     ;
     
     private Integer code;

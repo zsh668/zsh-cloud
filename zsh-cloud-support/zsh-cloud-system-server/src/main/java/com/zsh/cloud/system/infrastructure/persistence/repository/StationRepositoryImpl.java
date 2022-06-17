@@ -53,9 +53,7 @@ public class StationRepositoryImpl extends ServiceImpl<SysStationMapper, SysStat
     @Override
     public void remove(List<StationId> stationIds) {
         List<String> ids = new ArrayList<>();
-        stationIds.forEach(stationId -> {
-            ids.add(stationId.getId());
-        });
+        stationIds.forEach(stationId -> ids.add(stationId.getId()));
         this.removeByIds(ids);
     }
 }

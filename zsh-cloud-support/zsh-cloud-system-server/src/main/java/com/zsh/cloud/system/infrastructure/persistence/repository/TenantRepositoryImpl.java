@@ -63,9 +63,7 @@ public class TenantRepositoryImpl extends ServiceImpl<SysTenantMapper, SysTenant
     @Override
     public void remove(List<TenantId> tenantIds) {
         List<String> ids = new ArrayList<>();
-        tenantIds.forEach(tenantId -> {
-            ids.add(tenantId.getId());
-        });
+        tenantIds.forEach(tenantId -> ids.add(tenantId.getId()));
         this.removeByIds(ids);
     }
 }
