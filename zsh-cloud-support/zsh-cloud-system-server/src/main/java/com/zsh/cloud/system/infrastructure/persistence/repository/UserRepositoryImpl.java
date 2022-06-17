@@ -90,9 +90,7 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     @Override
     public void remove(List<UserId> userIds) {
         List<String> ids = new ArrayList<>();
-        userIds.forEach(userId -> {
-            ids.add(userId.getId());
-        });
+        userIds.forEach(userId -> ids.add(userId.getId()));
         this.removeByIds(ids);
         // 用户与角色关联
         sysUserRoleMapper.deleteByUserIds(ids);

@@ -77,9 +77,7 @@ public class RoleRepositoryImpl extends ServiceImpl<SysRoleMapper, SysRoleDO>
     @Override
     public void remove(List<RoleId> roleIds) {
         List<String> ids = new ArrayList<>();
-        roleIds.forEach(roleId -> {
-            ids.add(roleId.getId());
-        });
+        roleIds.forEach(roleId -> ids.add(roleId.getId()));
         this.removeByIds(ids);
         // 角色与组织关联
         sysRoleOrgMapper.deleteByRoleIds(ids);

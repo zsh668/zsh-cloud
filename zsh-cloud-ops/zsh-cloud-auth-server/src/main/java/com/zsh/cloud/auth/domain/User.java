@@ -1,5 +1,6 @@
 package com.zsh.cloud.auth.domain;
 
+import cn.hutool.core.text.StrPool;
 import com.zsh.cloud.common.core.constant.AuthConstants;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.system.api.dto.AuthenticationDTO;
@@ -41,7 +42,7 @@ public class User implements UserDetails {
         this.setEnabled(Objects.equals(StatusEnum.ENABLE.getCode(), authenticationDTO.getStatus()));
         this.setTenantId(authenticationDTO.getTenantId());
         this.authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(
-                StringUtils.join(authenticationDTO.getPermissionCodes(), ","));
+                StringUtils.join(authenticationDTO.getPermissionCodes(), StrPool.COMMA));
     }
     
     @Override

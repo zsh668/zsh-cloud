@@ -70,9 +70,7 @@ public class UserGroupRepositoryImpl extends ServiceImpl<SysUserGroupMapper, Sys
     @Override
     public void remove(List<UserGroupId> userGroupIds) {
         List<String> ids = new ArrayList<>();
-        userGroupIds.forEach(userGroupId -> {
-            ids.add(userGroupId.getId());
-        });
+        userGroupIds.forEach(userGroupId -> ids.add(userGroupId.getId()));
         this.removeByIds(ids);
         // 用户组与用户关联
         sysUserGroupUserMapper.deleteByUserGroupIds(ids);
