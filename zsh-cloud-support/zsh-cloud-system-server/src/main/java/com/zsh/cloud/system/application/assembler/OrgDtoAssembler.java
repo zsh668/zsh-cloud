@@ -22,8 +22,20 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface OrgDtoAssembler {
     
+    /**
+     * 转换.
+     *
+     * @param org
+     * @return
+     */
     OrgTreeDTO toDto(SysOrgDO org);
     
+    /**
+     * 转换.
+     *
+     * @param orgList
+     * @return
+     */
     List<OrgTreeDTO> toDto(List<SysOrgDO> orgList);
     
     /**
