@@ -1,8 +1,12 @@
 package com.zsh.cloud.system.application.impl;
 
+import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.application.ResourceQueryService;
+import com.zsh.cloud.system.application.dto.ResourceDTO;
+import com.zsh.cloud.system.application.dto.ResourcePageDTO;
+import com.zsh.cloud.system.application.query.ResourcePageQuery;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysResourceDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysResourceMapper;
@@ -33,6 +37,16 @@ public class ResourceQueryServiceImpl implements ResourceQueryService {
         List<SysResourceDO> sysPermissionDOList = getSysResourceDOList(userId);
         return sysPermissionDOList.stream().filter(Objects::nonNull).map(SysResourceDO::getResourceCode)
                 .collect(Collectors.toSet());
+    }
+    
+    @Override
+    public Page<ResourcePageDTO> queryPage(ResourcePageQuery resourcePageQuery) {
+        return null;
+    }
+    
+    @Override
+    public ResourceDTO find(String id) {
+        return null;
     }
     
     /**

@@ -1,5 +1,10 @@
 package com.zsh.cloud.system.application;
 
+import com.zsh.cloud.common.core.domain.Page;
+import com.zsh.cloud.system.application.dto.ResourceDTO;
+import com.zsh.cloud.system.application.dto.ResourcePageDTO;
+import com.zsh.cloud.system.application.query.ResourcePageQuery;
+
 import java.util.Set;
 
 /**
@@ -18,4 +23,20 @@ public interface ResourceQueryService {
      * @return
      */
     Set<String> getPermissionCodes(String userId);
+    
+    /**
+     * 分页查询.
+     *
+     * @param resourcePageQuery
+     * @return
+     */
+    Page<ResourcePageDTO> queryPage(ResourcePageQuery resourcePageQuery);
+    
+    /**
+     * 根据ID查询.
+     *
+     * @param id
+     * @return
+     */
+    ResourceDTO find(String id);
 }
