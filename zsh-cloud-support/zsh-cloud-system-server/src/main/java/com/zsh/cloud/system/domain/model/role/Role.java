@@ -60,7 +60,7 @@ public class Role implements Entity<Role> {
     private StatusEnum status;
     
     /**
-     * 功能描述。
+     * 功能描述.
      */
     private String describe;
     

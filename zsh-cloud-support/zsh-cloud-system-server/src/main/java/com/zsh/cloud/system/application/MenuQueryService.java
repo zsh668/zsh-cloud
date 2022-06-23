@@ -1,9 +1,10 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.system.application.dto.MenuDTO;
 import com.zsh.cloud.system.application.dto.MenuTreeDTO;
 import com.zsh.cloud.system.application.query.MenuPageQuery;
+
+import java.util.List;
 
 /**
  * 菜单查询服务接口.
@@ -20,7 +21,7 @@ public interface MenuQueryService {
      * @param menuPageQuery
      * @return
      */
-    Page<MenuTreeDTO> queryList(MenuPageQuery menuPageQuery);
+    List<MenuTreeDTO> queryList(MenuPageQuery menuPageQuery);
     
     /**
      * 查询.

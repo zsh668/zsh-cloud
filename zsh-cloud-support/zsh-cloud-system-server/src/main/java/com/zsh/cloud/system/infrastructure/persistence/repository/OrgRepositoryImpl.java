@@ -47,7 +47,7 @@ public class OrgRepositoryImpl extends ServiceImpl<SysOrgMapper, SysOrgDO>
     
     @Override
     public List<Org> queryList(OrgId parentId) {
-        List<SysOrgDO> sysOrgDOList = baseMapper.selectList(SysOrgDO::getId, parentId.getId());
+        List<SysOrgDO> sysOrgDOList = baseMapper.selectList(SysOrgDO::getParentId, parentId.getId());
         if (CollectionUtils.isEmpty(sysOrgDOList)) {
             return null;
         }

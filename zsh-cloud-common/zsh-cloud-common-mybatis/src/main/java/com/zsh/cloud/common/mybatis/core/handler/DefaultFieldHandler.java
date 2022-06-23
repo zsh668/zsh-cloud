@@ -28,11 +28,13 @@ public class DefaultFieldHandler implements MetaObjectHandler {
     
     private static final String IS_DELETED = "delFlag";
     
+    private static final String DEFAULT_USER_ID = "0";
+    
     private String getCurrentUserId() {
         try {
             return RequestUtils.getUserId();
         } catch (Exception e) {
-            return "0";
+            return DEFAULT_USER_ID;
         }
     }
     

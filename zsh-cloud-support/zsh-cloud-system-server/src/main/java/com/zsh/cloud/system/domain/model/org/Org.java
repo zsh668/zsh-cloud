@@ -15,6 +15,11 @@ import lombok.Getter;
 public class Org implements Entity<Org> {
     
     /**
+     * 父ID.
+     */
+    public static final String PARENT_ID = "0";
+    
+    /**
      * 组织ID.
      */
     private OrgId orgId;
@@ -40,7 +45,7 @@ public class Org implements Entity<Org> {
     private StatusEnum status;
     
     /**
-     * 功能描述。
+     * 功能描述.
      */
     private String describe;
     

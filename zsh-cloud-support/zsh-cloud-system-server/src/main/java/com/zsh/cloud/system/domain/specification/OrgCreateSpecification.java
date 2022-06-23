@@ -6,6 +6,7 @@ import com.zsh.cloud.common.core.util.Assert;
 import com.zsh.cloud.common.core.util.ServiceAssert;
 import com.zsh.cloud.system.domain.model.org.Org;
 import com.zsh.cloud.system.domain.model.org.OrgRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -39,8 +40,10 @@ public class OrgCreateSpecification extends AbstractSpecification<Org> {
             });
         }
         // 父组织不能为空
-        Org parent = orgRepository.find(org.getParentId());
-        ServiceAssert.notNull(parent, ServiceErrorCode.ORG_NOT_EXISTS.getCode(), "父组织不存在");
+        if (!StringUtils.equals(Org.PARENT_ID, org.getParentId().getId())) {
+            Org parent = orgRepository.find(org.getParentId());
+            ServiceAssert.notNull(parent, ServiceErrorCode.ORG_NOT_EXISTS.getCode(), "父组织不存在");
+        }
         // 同级组织
         orgs = orgRepository.queryList(org.getParentId());
         if (CollectionUtils.isEmpty(orgs)) {

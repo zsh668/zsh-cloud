@@ -16,5 +16,19 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @ApiModel("资源分页查询对象")
 public class ResourcePageQuery extends PageQuery {
-
+    
+    /**
+     * 菜单ID.
+     */
+    private String menuId;
+    
+    /**
+     * 资源编码 规则： 链接： 数据列： 按钮：
+     */
+    private String resourceCode;
+    
+    /**
+     * 资源名称.
+     */
+    private String resourceName;
 }

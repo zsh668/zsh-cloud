@@ -1,6 +1,5 @@
 package com.zsh.cloud.system.api;
 
-import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.MenuApplicationService;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 菜单管理.
@@ -52,7 +52,7 @@ public class MenuController {
     @ApiOperation("分页查询菜单")
     @Translator
     @GetMapping("menus/tree")
-    public Page<MenuTreeDTO> tree(MenuPageQuery menuPageQuery) {
+    public List<MenuTreeDTO> tree(MenuPageQuery menuPageQuery) {
         return menuQueryService.queryList(menuPageQuery);
     }
     

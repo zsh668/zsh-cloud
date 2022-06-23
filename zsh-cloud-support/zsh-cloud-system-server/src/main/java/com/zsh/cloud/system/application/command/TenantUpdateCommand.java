@@ -45,7 +45,7 @@ public class TenantUpdateCommand extends Command {
     private String tenantName;
     
     /**
-     * 功能描述。
+     * 功能描述.
      */
     @ApiModelProperty(value = "功能描述")
     @Length(max = 100, message = "功能描述长度不能超过100")

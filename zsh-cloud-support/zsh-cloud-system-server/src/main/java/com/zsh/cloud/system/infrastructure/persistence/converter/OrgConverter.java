@@ -46,6 +46,7 @@ public class OrgConverter {
         sysOrgDO.setOrgName(org.getOrgName() == null ? null : org.getOrgName().getName());
         sysOrgDO.setParentId(org.getParentId() == null ? null : org.getParentId().getId());
         sysOrgDO.setSortValue(org.getSortValue());
+        sysOrgDO.setStatus(org.getStatus() == null ? null : org.getStatus().getCode());
         sysOrgDO.setDescribe(org.getDescribe());
         return sysOrgDO;
     }

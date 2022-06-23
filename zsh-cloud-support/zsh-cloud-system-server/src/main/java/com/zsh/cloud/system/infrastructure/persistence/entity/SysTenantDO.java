@@ -35,7 +35,7 @@ public class SysTenantDO extends BaseDO {
     private Integer status;
     
     /**
-     * 功能描述。
+     * 功能描述.
      */
     @TableField(value = "describe_", condition = SqlCondition.LIKE)
     private String describe;
