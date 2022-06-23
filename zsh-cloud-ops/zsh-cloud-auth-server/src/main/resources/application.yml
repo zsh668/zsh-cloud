@@ -11,7 +11,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.56.120:8848
 
 dubbo:
   application:
@@ -24,7 +24,7 @@ dubbo:
     port: -1
 
   registry:
-    address: nacos://127.0.0.1:8848
+    address: nacos://192.168.56.120:8848
     check: false
     parameters:
       # 命名空间ID
@@ -38,3 +38,18 @@ dubbo:
   provider:
     filter: dubboExceptionFitler,-exception
 
+
+management:
+  health:
+    redis:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus"
+  metrics:
+    tags:
+      application: ${spring.application.name}

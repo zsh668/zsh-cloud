@@ -66,3 +66,18 @@ secure:
       - "/swagger-resources"
       - "/assets/**"
       - "/favicon.ico"
+
+management:
+  health:
+    redis:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus"
+  metrics:
+    tags:
+      application: ${spring.application.name}

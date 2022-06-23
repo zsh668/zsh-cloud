@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +26,8 @@ public class JsonUtils {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     
     static {
+        // 解决不支持java8的时间类型
+        MAPPER.registerModule(new JavaTimeModule());
         // 解决 空对象报错
         MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         // 解决字段对应不上报错
