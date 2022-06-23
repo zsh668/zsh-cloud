@@ -5,6 +5,7 @@ import com.zsh.cloud.system.application.command.StationCreateCommand;
 import com.zsh.cloud.system.application.command.StationUpdateCommand;
 import com.zsh.cloud.system.application.dto.StationDTO;
 import com.zsh.cloud.system.application.dto.StationPageDTO;
+import com.zsh.cloud.system.domain.model.org.Org;
 import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.station.Station;
 import com.zsh.cloud.system.domain.model.station.StationId;
@@ -77,7 +78,7 @@ public interface StationDtoAssembler {
     default Station toStation(StationCreateCommand stationCommand) {
         String orgId = stationCommand.getOrgId();
         if (StringUtils.isBlank(orgId)) {
-            orgId = "0";
+            orgId = Org.PARENT_ID;
         }
         return new Station(new StationName(stationCommand.getStationName()), new OrgId(orgId),
                 stationCommand.getOrderNum(), stationCommand.getDescribe());
@@ -92,7 +93,7 @@ public interface StationDtoAssembler {
     default Station toStation(StationUpdateCommand stationCommand) {
         String orgId = stationCommand.getOrgId();
         if (StringUtils.isBlank(orgId)) {
-            orgId = "0";
+            orgId = Org.PARENT_ID;
         }
         return new Station(new StationId(stationCommand.getId()), new StationName(stationCommand.getStationName()),
                 new OrgId(orgId), stationCommand.getOrderNum(), null, stationCommand.getDescribe());

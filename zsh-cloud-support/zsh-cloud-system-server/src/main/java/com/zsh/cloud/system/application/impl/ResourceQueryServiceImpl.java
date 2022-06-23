@@ -4,9 +4,13 @@ import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.application.ResourceQueryService;
+import com.zsh.cloud.system.application.assembler.ResourceDtoAssembler;
 import com.zsh.cloud.system.application.dto.ResourceDTO;
 import com.zsh.cloud.system.application.dto.ResourcePageDTO;
 import com.zsh.cloud.system.application.query.ResourcePageQuery;
+import com.zsh.cloud.system.domain.model.resource.Resource;
+import com.zsh.cloud.system.domain.model.resource.ResourceId;
+import com.zsh.cloud.system.domain.model.resource.ResourceRepository;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysResourceDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysResourceMapper;
@@ -31,6 +35,12 @@ public class ResourceQueryServiceImpl implements ResourceQueryService {
     @Autowired
     private SysResourceMapper sysResourceMapper;
     
+    @Autowired
+    private ResourceRepository resourceRepository;
+    
+    @Autowired
+    private ResourceDtoAssembler resourceDtoAssembler;
+    
     @Override
     public Set<String> getPermissionCodes(String userId) {
         // 获取权限资源
@@ -41,12 +51,14 @@ public class ResourceQueryServiceImpl implements ResourceQueryService {
     
     @Override
     public Page<ResourcePageDTO> queryPage(ResourcePageQuery resourcePageQuery) {
-        return null;
+        Page<SysResourceDO> page = sysResourceMapper.selectPage(resourcePageQuery);
+        return resourceDtoAssembler.toDto(page);
     }
     
     @Override
     public ResourceDTO find(String id) {
-        return null;
+        Resource resource = resourceRepository.find(new ResourceId(id));
+        return resourceDtoAssembler.fromResource(resource);
     }
     
     /**

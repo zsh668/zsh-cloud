@@ -1,7 +1,9 @@
 package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.Page;
+import com.zsh.cloud.system.application.dto.ResourceDTO;
 import com.zsh.cloud.system.application.dto.ResourcePageDTO;
+import com.zsh.cloud.system.domain.model.resource.Resource;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysResourceDO;
 import org.mapstruct.Mapper;
 
@@ -16,6 +18,7 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring")
 public interface ResourceDtoAssembler {
+    
     /**
      * resource转换.
      *
@@ -39,4 +42,14 @@ public interface ResourceDtoAssembler {
      * @return
      */
     Page<ResourcePageDTO> toDto(Page<SysResourceDO> resource);
+    
+    /**
+     * 转换.
+     *
+     * @param resource
+     * @return
+     */
+    default ResourceDTO fromResource(Resource resource) {
+        return null;
+    }
 }

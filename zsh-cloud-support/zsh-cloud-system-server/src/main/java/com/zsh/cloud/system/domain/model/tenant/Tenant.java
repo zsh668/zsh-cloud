@@ -48,7 +48,7 @@ public class Tenant implements Entity<Tenant> {
     private LocalDateTime createdTime;
     
     /**
-     * 功能描述。
+     * 功能描述.
      */
     private String describe;
     
