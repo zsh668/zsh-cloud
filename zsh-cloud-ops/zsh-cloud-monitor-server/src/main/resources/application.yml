@@ -12,3 +12,18 @@ spring:
 #      context-path: /monitor
       ui:
         title: ZshCloud监控服务
+
+management:
+  health:
+    redis:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus"
+  metrics:
+    tags:
+      application: ${spring.application.name}

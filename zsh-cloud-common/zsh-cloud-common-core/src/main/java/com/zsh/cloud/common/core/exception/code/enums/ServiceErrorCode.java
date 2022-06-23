@@ -59,6 +59,21 @@ public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     ORG_NAME_EXISTS(1000005001, "组织名称已存在"),
     ORG_VERIFICATION_ERROR(1000005002, "验证不通过"),
     ORG_SORT_EXISTS(1000005003, "同级组织内，排序已存在"),
+    
+    // 模块 system 【000】 菜单 【006】 错误码 【000~999】
+    MENU_NOT_EXISTS(1000006000, "菜单不存在"),
+    MENU_NAME_EXISTS(1000006001, "菜单名称已存在"),
+    MENU_VERIFICATION_ERROR(1000006002, "验证不通过"),
+    MENU_SORT_EXISTS(1000006003, "同级菜单内，排序已存在"),
+    
+    // 模块 system 【000】 资源 【007】 错误码 【000~999】
+    RESOURCE_NOT_EXISTS(1000007000, "资源不存在"),
+    RESOURCE_NAME_EXISTS(1000007001, "资源名称已存在"),
+    RESOURCE_VERIFICATION_ERROR(1000007002, "验证不通过"),
+    RESOURCE_SORT_EXISTS(1000007003, "同级资源内，排序已存在"),
+    
+    // 模块 system 【000】 日志 【008】 错误码 【000~999】
+    LOG_NOT_EXISTS(1000008000, "日志不存在"),
     ;
     
     private Integer code;

@@ -1,7 +1,7 @@
 package com.zsh.cloud.system.infrastructure.persistence.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.zsh.cloud.common.mybatis.core.entity.BaseDO;
+import com.zsh.cloud.common.tenant.entity.TenantBaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("sys_opt_log")
-public class SysOptLogDO extends BaseDO {
+public class SysOptLogDO extends TenantBaseDO {
     
     /**
      * 操作IP.

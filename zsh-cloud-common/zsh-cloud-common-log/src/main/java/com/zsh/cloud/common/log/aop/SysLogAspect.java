@@ -7,6 +7,7 @@ import cn.hutool.extra.servlet.ServletUtil;
 import com.zsh.cloud.common.core.domain.Result;
 import com.zsh.cloud.common.core.util.JsonUtils;
 import com.zsh.cloud.common.core.util.RequestUtils;
+import com.zsh.cloud.common.tenant.contex.TenantContext;
 import com.zsh.cloud.system.api.dto.OptLogDTO;
 import com.zsh.cloud.common.log.enums.LogTypeEnum;
 import com.zsh.cloud.common.log.event.SysLogEvent;
@@ -136,7 +137,7 @@ public class SysLogAspect {
         sysLog.setHttpMethod(request.getMethod());
         sysLog.setUa(StrUtil.sub(request.getHeader("user-agent"), 0, 500));
         sysLog.setStartTime(LocalDateTime.now());
-        
+        sysLog.setTenantId(TenantContext.getTenantId());
         THREAD_LOCAL.set(sysLog);
     }
     
