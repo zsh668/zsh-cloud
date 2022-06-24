@@ -24,12 +24,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+    
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
         
         <dependency>
             <groupId>com.zsh.cloud</groupId>
             <artifactId>zsh-cloud-common-weixin</artifactId>
             <version>${revision}</version>
         </dependency>
+        
         <dependency>
             <groupId>com.zsh.cloud</groupId>
             <artifactId>zsh-cloud-common-mybatis</artifactId>
@@ -46,6 +53,20 @@
     
     <build>
         <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.json</include>
+                    <include>**/*.ftl</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

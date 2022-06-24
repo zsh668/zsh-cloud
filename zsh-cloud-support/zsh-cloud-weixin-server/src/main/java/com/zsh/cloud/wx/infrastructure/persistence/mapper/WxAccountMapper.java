@@ -5,7 +5,7 @@ import com.zsh.cloud.wx.infrastructure.persistence.entity.WxAccountDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 公众号账号Mapper
+ * 公众号账号Mapper.
  *
  * @author hang
  * @version 1.0

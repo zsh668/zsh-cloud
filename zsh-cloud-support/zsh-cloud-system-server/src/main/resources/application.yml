@@ -52,16 +52,13 @@ zsh:
       machine-code: 1  # id生成器机器掩码
 
 management:
-  health:
-    redis:
-      enabled: false
   endpoint:
     health:
       show-details: always
   endpoints:
     web:
       exposure:
-        include: "prometheus"
+        include: "*"
   metrics:
     tags:
       application: ${spring.application.name}

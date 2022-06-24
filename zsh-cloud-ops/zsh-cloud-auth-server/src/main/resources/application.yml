@@ -49,7 +49,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "prometheus"
+        include: "*"
   metrics:
     tags:
       application: ${spring.application.name}

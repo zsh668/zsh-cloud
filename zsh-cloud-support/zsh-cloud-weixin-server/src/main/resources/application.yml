@@ -9,21 +9,6 @@ spring:
     throw-exception-if-no-handler-found: true
     static-path-pattern: /statics/**
 
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/zsh_cloud?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: root
-
-mybatis-plus:
-  mapper-locations: classpath*:com/zsh/cloud/wx/infrastructure/persistence/mapper/xml/*Mapper.xml
-  type-aliases-package: entity
-  global-config:
-    db-config:
-      id-type: assign_id
-    banner: false
-
 management:
   health:
     redis:
