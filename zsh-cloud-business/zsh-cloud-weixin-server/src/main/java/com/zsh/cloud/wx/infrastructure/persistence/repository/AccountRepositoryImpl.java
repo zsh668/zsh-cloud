@@ -2,7 +2,7 @@ package com.zsh.cloud.wx.infrastructure.persistence.repository;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zsh.cloud.wx.domain.model.account.Appid;
+import com.zsh.cloud.wx.domain.model.account.AppId;
 import com.zsh.cloud.wx.domain.model.account.Account;
 import com.zsh.cloud.wx.domain.model.account.AccountRepository;
 import com.zsh.cloud.wx.infrastructure.persistence.converter.AccountConverter;
@@ -22,7 +22,7 @@ public class AccountRepositoryImpl extends ServiceImpl<WxAccountMapper, WxAccoun
         implements AccountRepository, IService<WxAccountDO> {
     
     @Override
-    public Account find(Appid appid) {
+    public Account find(AppId appid) {
         WxAccountDO wxAccountDO = this.getById(appid.getId());
         return AccountConverter.toAccount(wxAccountDO);
     }

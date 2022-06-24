@@ -18,7 +18,6 @@
     <modules>
         <module>zsh-cloud-system-api</module>
         <module>zsh-cloud-system-server</module>
-        <module>zsh-cloud-weixin-server</module>
         <module>zsh-cloud-generator-server</module>
     </modules>
     

@@ -10,11 +10,11 @@ import org.springframework.util.ObjectUtils;
  * @version 1.0
  * @date 2022/03/16 10:04
  */
-public class Appid implements ValueObject<Appid> {
+public class AppId implements ValueObject<AppId> {
     
     private String id;
     
-    public Appid(final String id) {
+    public AppId(final String id) {
         if (ObjectUtils.isEmpty(id)) {
             throw new IllegalArgumentException("appid不能为空");
         }
@@ -26,7 +26,7 @@ public class Appid implements ValueObject<Appid> {
     }
     
     @Override
-    public boolean sameValueAs(Appid other) {
+    public boolean sameValueAs(AppId other) {
         return other != null && this.id.equals(other.id);
     }
     

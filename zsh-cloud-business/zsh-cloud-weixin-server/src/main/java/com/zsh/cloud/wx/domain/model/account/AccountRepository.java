@@ -7,5 +7,5 @@ package com.zsh.cloud.wx.domain.model.account;
  */
 public interface AccountRepository {
     
-    Account find(Appid appid);
+    Account find(AppId appid);
 }

@@ -7,7 +7,7 @@ import com.zsh.cloud.wx.application.query.WechatMessageQuery;
 import com.zsh.cloud.wx.application.query.WechatSignatureQuery;
 import com.zsh.cloud.wx.domain.model.account.Account;
 import com.zsh.cloud.wx.domain.model.account.AccountRepository;
-import com.zsh.cloud.wx.domain.model.account.Appid;
+import com.zsh.cloud.wx.domain.model.account.AppId;
 import com.zsh.cloud.wx.domain.model.message.MessageRepository;
 import com.zsh.cloud.wx.domain.model.token.Signature;
 import com.zsh.cloud.wx.domain.model.token.TokenSignature;
@@ -44,7 +44,7 @@ public class WechatServiceImpl implements WechatService {
      */
     @Override
     public boolean validateSignature(String appid, WechatSignatureQuery signatureQuery) {
-        Account account = accountRepository.find(new Appid(appid));
+        Account account = accountRepository.find(new AppId(appid));
         
         WechatSignatureValidateService wechatSignatureValidateService = new WechatSignatureValidateService();
         return wechatSignatureValidateService.validate(
@@ -54,7 +54,7 @@ public class WechatServiceImpl implements WechatService {
     
     @Override
     public String replyMessage(String requestBody, String appid, WechatMessageQuery messageQuery) {
-        Account account = accountRepository.find(new Appid(appid));
+        Account account = accountRepository.find(new AppId(appid));
     
         WxBizMsgCrypt cmsCrypt = new WxBizMsgCrypt(account.getToken().getToken(), account.getAesKey(), appid);
         if ("aes".equalsIgnoreCase(messageQuery.getEncrypt_type())) {

@@ -1,7 +1,7 @@
 package com.zsh.cloud.wx.infrastructure.persistence.converter;
 
 import com.zsh.cloud.wx.domain.model.account.Account;
-import com.zsh.cloud.wx.domain.model.account.Appid;
+import com.zsh.cloud.wx.domain.model.account.AppId;
 import com.zsh.cloud.wx.domain.model.account.Token;
 import com.zsh.cloud.wx.infrastructure.persistence.entity.WxAccountDO;
 
@@ -26,7 +26,7 @@ public class AccountConverter {
         if (wxAccountDO == null) {
             return null;
         }
-        return new Account(new Appid(wxAccountDO.getAppid()), new Token(wxAccountDO.getToken()),
+        return new Account(new AppId(wxAccountDO.getAppid()), new Token(wxAccountDO.getToken()),
                 wxAccountDO.getAesKey());
     }
 }
