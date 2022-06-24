@@ -13,6 +13,7 @@ import com.zsh.cloud.system.infrastructure.persistence.mapper.SysMenuMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.List;
  * @date 2022/6/17 16:35
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class MenuApplicationServiceImpl implements MenuApplicationService {
     
     @Autowired

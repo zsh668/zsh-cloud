@@ -69,8 +69,8 @@ public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     // 模块 system 【000】 资源 【007】 错误码 【000~999】
     RESOURCE_NOT_EXISTS(1000007000, "资源不存在"),
     RESOURCE_NAME_EXISTS(1000007001, "资源名称已存在"),
-    RESOURCE_VERIFICATION_ERROR(1000007002, "验证不通过"),
-    RESOURCE_SORT_EXISTS(1000007003, "同级资源内，排序已存在"),
+    RESOURCE_CODE_EXISTS(1000007002, "资源编码已存在"),
+    RESOURCE_VERIFICATION_ERROR(1000007003, "验证不通过"),
     
     // 模块 system 【000】 日志 【008】 错误码 【000~999】
     LOG_NOT_EXISTS(1000008000, "日志不存在"),
