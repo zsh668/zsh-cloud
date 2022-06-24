@@ -3,6 +3,7 @@ package com.zsh.cloud.system.application.dto;
 import com.zsh.cloud.common.core.domain.TreeNode;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.web.translate.Translate;
+import com.zsh.cloud.common.web.translate.TranslateField;
 import com.zsh.cloud.system.application.translate.ServiceImplTranslator;
 import com.zsh.cloud.system.infrastructure.persistence.repository.MenuRepositoryImpl;
 import io.swagger.annotations.ApiModel;
@@ -71,5 +72,6 @@ public class MenuTreeDTO extends TreeNode<MenuTreeDTO, String> {
     /**
      * 子集合.
      */
+    @TranslateField
     private List<MenuTreeDTO> childList;
 }

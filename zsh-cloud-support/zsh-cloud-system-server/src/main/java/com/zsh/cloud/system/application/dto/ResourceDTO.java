@@ -39,6 +39,12 @@ public class ResourceDTO extends DTO {
     private String resourceName;
     
     /**
+     * 菜单ID
+     */
+    @ApiModelProperty(value = "菜单ID")
+    private String menuId;
+    
+    /**
      * 请求方式
      */
     @ApiModelProperty(value = "请求方式")

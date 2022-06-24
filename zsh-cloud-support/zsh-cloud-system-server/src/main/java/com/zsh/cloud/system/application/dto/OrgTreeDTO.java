@@ -3,6 +3,7 @@ package com.zsh.cloud.system.application.dto;
 import com.zsh.cloud.common.core.domain.TreeNode;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.web.translate.Translate;
+import com.zsh.cloud.common.web.translate.TranslateField;
 import com.zsh.cloud.system.application.translate.ServiceImplTranslator;
 import com.zsh.cloud.system.infrastructure.persistence.repository.OrgRepositoryImpl;
 import io.swagger.annotations.ApiModel;
@@ -77,5 +78,6 @@ public class OrgTreeDTO extends TreeNode<OrgTreeDTO, String> {
     /**
      * 子集合.
      */
+    @TranslateField
     private List<OrgTreeDTO> childList;
 }
