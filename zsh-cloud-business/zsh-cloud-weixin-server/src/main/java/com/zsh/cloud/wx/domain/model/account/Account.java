@@ -11,13 +11,13 @@ import com.zsh.cloud.common.core.domain.Entity;
  */
 public class Account implements Entity<Account> {
     
-    private Appid appid;
+    private AppId appid;
     
     private Token token;
     
     private String aesKey;
     
-    public Account(Appid appid, Token token, String aesKey) {
+    public Account(AppId appid, Token token, String aesKey) {
         this.appid = appid;
         this.token = token;
         this.aesKey = aesKey;
@@ -28,7 +28,7 @@ public class Account implements Entity<Account> {
         return other != null && appid.sameValueAs(other.appid);
     }
     
-    public Appid getAppid() {
+    public AppId getAppid() {
         return appid;
     }
     
