@@ -24,7 +24,7 @@ public class ResourceUrl implements ValueObject<ResourceUrl> {
         this.url = url;
     }
     
-    public String getId() {
+    public String getUrl() {
         return url;
     }
     
