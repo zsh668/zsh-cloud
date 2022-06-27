@@ -39,6 +39,16 @@ public interface AuthConstants {
      */
     String JWT_JTI = "jti";
     
+    /**
+     * JWT ID 唯一标识
+     */
+    String JWT_EXP = "exp";
+    
+    /**
+     * 黑名单token前缀
+     */
+    String TOKEN_BLACKLIST_PREFIX = "auth:token:blacklist:";
+    
     String CLIENT_DETAILS_FIELDS = "client_id, CONCAT('{noop}', client_secret) as client_secret, resource_ids, scope, "
             + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
             + "refresh_token_validity, additional_information, autoapprove";

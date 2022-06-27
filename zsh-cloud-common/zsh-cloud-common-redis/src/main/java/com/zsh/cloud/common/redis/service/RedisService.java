@@ -177,8 +177,23 @@ public class RedisService {
     }
     
     /**
-     * 获取缓存（string数据结构）
-     * <p>
+     * 缓存普通键值对，并设置失效时间
+     *
+     * @param key     键
+     * @param value   值
+     * @param seconds 时间（秒），如果 time <= 0 则不设置失效时间
+     */
+    public void set(String key, Object value, long seconds) {
+        if (seconds > 0) {
+            redisTemplate.opsForValue().set(key, value, seconds, TimeUnit.SECONDS);
+        } else {
+            redisTemplate.opsForValue().set(key, seconds);
+        }
+    }
+    
+    /**
+     * 获取缓存（string数据结构）.
+     * </p>
      * 通过泛型T指定缓存数据类型
      *
      * @param key 键
@@ -188,21 +203,6 @@ public class RedisService {
     @SuppressWarnings("unchecked")
     public <T> T get(String key) {
         return key == null ? null : (T) redisTemplate.opsForValue().get(key);
-    }
-    
-    /**
-     * 缓存普通键值对，并设置失效时间
-     *
-     * @param key     键
-     * @param value   值
-     * @param seconds 时间（秒），如果 time <= 0 则不设置失效时间
-     */
-    public void set(String key, Object value, int seconds) {
-        if (seconds > 0) {
-            redisTemplate.opsForValue().set(key, value, seconds, TimeUnit.SECONDS);
-        } else {
-            redisTemplate.opsForValue().set(key, seconds);
-        }
     }
     
     /**
