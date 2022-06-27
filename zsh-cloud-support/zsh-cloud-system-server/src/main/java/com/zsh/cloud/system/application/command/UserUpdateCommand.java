@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Set;
 
@@ -72,7 +73,7 @@ public class UserUpdateCommand extends Command {
      * 性别 1：男 2 女 3 未知.
      */
     @ApiModelProperty(value = "性别")
-    @NotEmpty(message = "性别不能为空")
+    @NotNull(message = "性别不能为空")
     private Integer gender;
     
     /**
