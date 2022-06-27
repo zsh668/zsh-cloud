@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * 创建组织Command.
@@ -40,7 +41,7 @@ public class OrgCreateCommand extends Command {
      * 排序.
      */
     @ApiModelProperty(value = "排序")
-    @NotEmpty(message = "排序不能为空")
+    @NotNull(message = "排序不能为空")
     private Integer sortValue;
     
     /**
