@@ -53,9 +53,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     
-//    @Autowired
-//    private RedisConnectionFactory redisConnectionFactory;
-    
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.allowFormAuthenticationForClients();
@@ -99,18 +96,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //  2 非重复使用：access token过期刷新时， refresh token过期时间延续，在refresh token有效期内刷新便永不失效达到无需再次登录的目的
                 .reuseRefreshTokens(true);
     }
-    
-    /**
-     * 获取Token存储类型(此处存储在Redis中)
-     *
-     * @return
-     */
-//    @Bean
-//    public TokenStore tokenStore() {
-//        RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
-//        tokenStore.setPrefix(CacheKey.OAUTH_ACCESS);
-//        return tokenStore;
-//    }
     
     /**
      * 使用非对称加密算法对token签名

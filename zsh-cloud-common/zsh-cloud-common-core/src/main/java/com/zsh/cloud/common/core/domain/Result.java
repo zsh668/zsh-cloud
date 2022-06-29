@@ -1,5 +1,6 @@
 package com.zsh.cloud.common.core.domain;
 
+import com.zsh.cloud.common.core.exception.code.BaseErrorCode;
 import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -89,11 +90,20 @@ public class Result<T> implements Serializable {
      * 失败
      *
      * @param message
-     * @param <T>
      * @return
      */
     public static <T> Result<T> error(String message) {
         return error(GlobalErrorCode.INTERNAL_SERVER_ERROR.getCode(), message);
+    }
+    
+    /**
+     * 失败
+     *
+     * @param errorCode
+     * @return
+     */
+    public static <T> Result<T> error(BaseErrorCode errorCode) {
+        return error(errorCode.getCode(), errorCode.getMsg());
     }
     
     /**

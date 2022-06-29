@@ -16,7 +16,9 @@ public enum GlobalErrorCode implements BaseErrorCode, IDict<Integer> {
     
     BAD_REQUEST(400, "请求参数不正确"),
     
-    UNAUTHORIZED(403, "认证失败"),
+    UNAUTHORIZED(401, "无权限"),
+    
+    AUTHENTICATION_FAILED(402, "认证失败"),
     
     NOT_FOUND(404, "请求未找到"),
     

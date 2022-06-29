@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -101,6 +102,13 @@ public class InitializingAdviceDecorator implements InitializingBean {
                         .contains("application/vnd.openxmlformats-officedocument")) {
                     return;
                 }
+            }
+            // 过滤jwk-set-uri地址
+            Optional<HttpServletRequest> request = Optional.of(webRequest)
+                    .map(nativeWebRequest -> ((ServletWebRequest) webRequest).getRequest());
+            if (request.get().getRequestURI().contains("getPublicKey")) {
+                handler.handleReturnValue(returnValue, returnType, mavContainer, webRequest);
+                return;
             }
             //如果已经封装了结构体就直接放行
             if (returnValue instanceof Result) {

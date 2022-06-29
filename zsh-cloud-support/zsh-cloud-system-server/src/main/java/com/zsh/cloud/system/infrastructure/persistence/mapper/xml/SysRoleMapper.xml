@@ -3,11 +3,8 @@
 <mapper namespace="com.zsh.cloud.system.infrastructure.persistence.mapper.SysRoleMapper">
     
     <select id="queryUserRole" resultType="com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleDO">
-        SELECT r.*
-        FROM sys_role r
-        INNER JOIN sys_user_role ur ON ur.role_id = r.id
-        WHERE ur.user_id = #{userId}
-          AND r.del_flag = 0
-          AND r.status = 0
+        select r.* from sys_role r
+        INNER JOIN sys_user_role sur on sur.role_id = r.id
+        where sur.user_id = #{userId} and r.del_flag = 0 and r.status = 1
     </select>
 </mapper>

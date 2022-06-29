@@ -8,6 +8,7 @@ import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.application.query.UserPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,9 +30,8 @@ public interface SysUserMapper extends BaseMapperExt<SysUserDO> {
      * @return
      */
     @InterceptorIgnore(tenantLine = "true")
-    default List<SysUserDO> queryUserNoTenantByAccount(String account) {
-        return selectList(Wraps.<SysUserDO>lbQ().eq(SysUserDO::getAccount, account));
-    }
+    @Select("select * from sys_user where account = #{account}")
+    List<SysUserDO> queryUserNoTenantByAccount(String account);
     
     /**
      * 根据查询条件分页查询数据.

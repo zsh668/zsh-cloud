@@ -26,12 +26,4 @@ public class TenantHandlerInterceptor implements HandlerInterceptor {
         }
         return true;
     }
-    
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-            throws Exception {
-        // 清理
-        TenantContext.clear();
-        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
-    }
 }

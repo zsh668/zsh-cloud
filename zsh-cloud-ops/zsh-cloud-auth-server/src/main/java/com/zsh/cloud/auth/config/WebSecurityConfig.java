@@ -45,8 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll().and().authorizeRequests()
                 .antMatchers("/getPublicKey", "/oauth/logout", "/captcha").permitAll()
-                .antMatchers("/oauth/**", "/webjars/**", "/**.html", "/swagger-resources/**", "/v3/**")
-                .permitAll().antMatchers("/error").permitAll().anyRequest().authenticated().and().csrf().disable();
+                .antMatchers("/oauth/**", "/webjars/**", "/**.html", "/swagger-resources/**", "/v3/**").permitAll()
+                .antMatchers("/error").permitAll().anyRequest().authenticated().and().csrf().disable();
     }
     
     @Bean
@@ -70,8 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().print(JsonUtils.toJsonString(
-                    Result.error(GlobalErrorCode.UNAUTHORIZED.getCode(), GlobalErrorCode.UNAUTHORIZED.getMsg())));
+            response.getWriter().print(JsonUtils.toJsonString(Result.error(GlobalErrorCode.UNAUTHORIZED)));
             response.getWriter().flush();
         };
     }

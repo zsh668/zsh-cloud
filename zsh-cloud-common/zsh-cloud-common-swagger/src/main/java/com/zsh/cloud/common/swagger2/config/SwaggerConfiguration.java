@@ -2,7 +2,7 @@ package com.zsh.cloud.common.swagger2.config;
 
 import com.google.common.net.HttpHeaders;
 import com.zsh.cloud.common.core.constant.CommonConstant;
-import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Swagger配置
+ * Swagger配置.
  *
  * @author zhangshuhang
  * @version 1.0
@@ -45,9 +45,11 @@ public class SwaggerConfiguration {
     
     @Bean
     public Docket createRestApi() {
+        // RequestHandlerSelectors.withClassAnnotation(Api.class) 不显示登录接口
+        // RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class) 显示登录接口
         return new Docket(DocumentationType.OAS_30).apiInfo(apiInfo()).select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class)).paths(PathSelectors.any()).build()
-                .securitySchemes(security()).globalRequestParameters(getGlobalRequestParameters())
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class)).paths(PathSelectors.any())
+                .build().securitySchemes(security()).globalRequestParameters(getGlobalRequestParameters())
                 .securityContexts(securityContexts());
     }
     
