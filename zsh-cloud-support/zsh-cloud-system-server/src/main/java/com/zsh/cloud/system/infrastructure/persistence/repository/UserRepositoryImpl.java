@@ -57,7 +57,7 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     @Override
     public User find(UserId userId) {
         SysUserDO sysUserDO = baseMapper.selectById(userId.getId());
-        return UserConverter.toUser(sysUserDO, getUserRoles(sysUserDO.getId()), getUserGroups(sysUserDO.getId()));
+        return UserConverter.toUser(sysUserDO, getUserRoles(userId.getId()), getUserGroups(userId.getId()));
     }
     
     @Override

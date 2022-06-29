@@ -62,6 +62,7 @@ public class SysMenuDO extends BaseDO {
     /**
      * 菜单分组.
      */
+    @TableField(value = "group_", condition = SqlCondition.LIKE)
     private String group;
     
     /**
