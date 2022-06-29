@@ -3,6 +3,7 @@ package com.zsh.cloud.auth.filter;
 import com.zsh.cloud.auth.sevice.CaptchaService;
 import com.zsh.cloud.common.core.constant.AuthConstants;
 import com.zsh.cloud.common.core.domain.Result;
+import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
 import com.zsh.cloud.common.core.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -45,7 +46,8 @@ public class CaptchaFilter extends OncePerRequestFilter {
             if (!captchaService.validateCaptcha(key, code)) {
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 response.setStatus(HttpServletResponse.SC_OK);
-                response.getOutputStream().write(JsonUtils.toJsonString(Result.error("验证码不正确")).getBytes());
+                response.getOutputStream().write(JsonUtils.toJsonString(
+                        Result.error(GlobalErrorCode.AUTHENTICATION_FAILED.getCode(), "验证码不正确")).getBytes());
                 return;
             }
         }

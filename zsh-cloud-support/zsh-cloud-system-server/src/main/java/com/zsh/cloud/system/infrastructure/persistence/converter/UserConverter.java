@@ -13,6 +13,7 @@ import com.zsh.cloud.system.domain.model.user.Account;
 import com.zsh.cloud.system.domain.model.user.Email;
 import com.zsh.cloud.system.domain.model.user.GenderEnum;
 import com.zsh.cloud.system.domain.model.user.Mobile;
+import com.zsh.cloud.system.domain.model.user.Password;
 import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.domain.model.user.UserName;
@@ -68,7 +69,7 @@ public class UserConverter {
         UserId superior = StringUtils.isBlank(sysUserDO.getSuperior()) ? null : new UserId(sysUserDO.getSuperior());
         
         return new User(new UserId(sysUserDO.getId()), new Account(sysUserDO.getAccount()),
-                new UserName(sysUserDO.getUserName()), mobile, email,
+                new UserName(sysUserDO.getUserName()), mobile, email, new Password(sysUserDO.getPassword()),
                 IDict.getByCode(GenderEnum.class, sysUserDO.getGender()),
                 IDict.getByCode(StatusEnum.class, sysUserDO.getStatus()), superior, sysUserDO.getPasswordExpireTime(),
                 sysUserDO.getLastLoginTime(), orgId, stationId, tenantId, roleIds, roleNames, groupNames);

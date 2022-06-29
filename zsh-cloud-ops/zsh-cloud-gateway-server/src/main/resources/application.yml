@@ -21,33 +21,33 @@ spring:
         - id: zsh-cloud-auth-server
           uri: lb://zsh-cloud-auth-server
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
           filters:
-            - RewritePath=/auth/(?<segment>.*), /$\{segment}
+            - RewritePath=/api/auth/(?<segment>.*), /$\{segment}
 
         # 用户
         - id: zsh-cloud-system-server
           uri: lb://zsh-cloud-system-server
           predicates:
-            - Path=/system/**
+            - Path=/api/system/**
           filters:
-            - RewritePath=/system/(?<segment>.*), /$\{segment}
+            - RewritePath=/api/system/(?<segment>.*), /$\{segment}
 
         # 微信
         - id: zsh-cloud-weixin-server
           uri: lb://zsh-cloud-weixin-server
           predicates:
-            - Path=/wechat/**
+            - Path=/api/wechat/**
           filters:
-            - RewritePath=/wechat/(?<segment>.*), /$\{segment}
+            - RewritePath=/api/wechat/(?<segment>.*), /$\{segment}
 
         # 监控admin
         - id: zsh-cloud-monitor-server
           uri: lb://zsh-cloud-monitor-server
           predicates:
-            - Path=/monitor/**
+            - Path=/api/monitor/**
           filters:
-            - RewritePath=/monitor/(?<segment>.*), /$\{segment}
+            - RewritePath=/api/monitor/(?<segment>.*), /$\{segment}
 
       discovery:
         locator:
@@ -58,7 +58,7 @@ spring:
 secure:
   white:
     urls:
-      - "/auth/**"
+      - "/api/auth/**"
       - "/actuator/**"
       - "/*/v3/api-docs/**"
       - "/doc.html"

@@ -6,6 +6,7 @@ import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.application.query.RolePageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public interface SysRoleMapper extends BaseMapperExt<SysRoleDO> {
      * @param userId
      * @return
      */
-    List<SysRoleDO> queryUserRole(String userId);
+    List<SysRoleDO> queryUserRole(@Param("userId") String userId);
     
     /**
      * 根据查询条件分页查询数据.

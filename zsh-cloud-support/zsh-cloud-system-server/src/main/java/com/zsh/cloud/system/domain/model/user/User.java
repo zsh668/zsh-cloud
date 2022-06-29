@@ -208,15 +208,16 @@ public class User implements Entity<User> {
      * @param roleNames
      * @param userGroupsNames
      */
-    public User(UserId userId, Account account, UserName userName, Mobile mobile, Email email, GenderEnum gender,
-            StatusEnum status, UserId superior, LocalDateTime passwordExpireTime, LocalDateTime lastLoginTime,
-            OrgId orgId, StationId stationId, TenantId tenantId, List<RoleId> roleIds, List<RoleName> roleNames,
-            List<UserGroupName> userGroupsNames) {
+    public User(UserId userId, Account account, UserName userName, Mobile mobile, Email email, Password password,
+            GenderEnum gender, StatusEnum status, UserId superior, LocalDateTime passwordExpireTime,
+            LocalDateTime lastLoginTime, OrgId orgId, StationId stationId, TenantId tenantId, List<RoleId> roleIds,
+            List<RoleName> roleNames, List<UserGroupName> userGroupsNames) {
         this.userId = userId;
         this.account = account;
         this.userName = userName;
         this.mobile = mobile;
         this.email = email;
+        this.password = password;
         this.gender = gender;
         this.status = status;
         this.superior = superior;

@@ -1,4 +1,4 @@
-package com.zsh.cloud.common.log.util;
+package com.zsh.cloud.common.core.util;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.StrUtil;
@@ -15,7 +15,11 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
- * 根据ip查询地址
+ * 根据ip查询地址.
+ *
+ * @author zhangshuhang
+ * @version 1.0
+ * @date 2022/5/29 10:19
  */
 @Slf4j
 public class AddressUtil {
@@ -26,9 +30,6 @@ public class AddressUtil {
     
     static DbSearcher searcher = null;
     
-    /**
-     * 初始化IP库.
-     */
     static {
         try {
             String dbPath = Objects.requireNonNull(AddressUtil.class.getResource("/ip2region/ip2region.db")).getPath();

@@ -1,4 +1,4 @@
-package com.zsh.cloud.auth.query;
+package com.zsh.cloud.auth.dto.query;
 
 import com.zsh.cloud.common.core.dto.Query;
 import io.swagger.annotations.ApiModel;
@@ -19,6 +19,20 @@ import javax.validation.constraints.NotEmpty;
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "LoginParamQuery", description = "登录参数")
 public class LoginParamQuery extends Query {
+    
+    /**
+     * 验证码KEY.
+     */
+    @ApiModelProperty(value = "验证码KEY")
+    @NotEmpty(message = "验证码KEY不能为空")
+    private String key;
+    
+    /**
+     * 验证码.
+     */
+    @ApiModelProperty(value = "验证码")
+    @NotEmpty(message = "验证码不能为空")
+    private String code;
     
     /**
      * 账号.
