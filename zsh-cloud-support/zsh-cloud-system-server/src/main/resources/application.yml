@@ -45,6 +45,7 @@ zsh:
         - "sys_tenant"
         - "sys_menu"
         - "sys_resource"
+        - "sys_login_log"
         - "sys_opt_log"
 
     id-generator:
