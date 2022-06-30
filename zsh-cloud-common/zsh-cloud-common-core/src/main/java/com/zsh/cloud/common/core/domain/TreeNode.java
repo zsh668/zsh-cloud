@@ -2,7 +2,6 @@ package com.zsh.cloud.common.core.domain;
 
 import com.zsh.cloud.common.core.dto.DTO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.List;
@@ -30,5 +29,5 @@ public class TreeNode<T extends TreeNode<T, I>, I extends Serializable> extends 
     /**
      * 子集合.
      */
-    private List<T> childList;
+    private List<T> children;
 }

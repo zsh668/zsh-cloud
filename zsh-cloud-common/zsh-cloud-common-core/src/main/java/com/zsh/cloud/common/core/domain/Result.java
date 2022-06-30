@@ -120,12 +120,21 @@ public class Result<T> implements Serializable {
     }
     
     /**
-     * 是否是成功code
+     * 是否是成功code.
      *
      * @return 是否成功
      */
-    public Boolean validateCode() {
+    public Boolean getIsSuccess() {
         return this.code == GlobalErrorCode.SUCCESS.getCode() || this.code == HttpStatus.OK.value();
+    }
+    
+    /**
+     * 是否是错误code.
+     *
+     * @return 是否失败
+     */
+    public Boolean getIsError() {
+        return !this.getIsSuccess();
     }
     
     /**

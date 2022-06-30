@@ -7,11 +7,11 @@ import cn.hutool.extra.servlet.ServletUtil;
 import com.zsh.cloud.common.core.domain.Result;
 import com.zsh.cloud.common.core.util.JsonUtils;
 import com.zsh.cloud.common.core.util.RequestUtils;
-import com.zsh.cloud.common.tenant.contex.TenantContext;
-import com.zsh.cloud.system.api.dto.OptLogDTO;
 import com.zsh.cloud.common.log.enums.LogTypeEnum;
 import com.zsh.cloud.common.log.event.SysLogEvent;
 import com.zsh.cloud.common.log.util.LogUtil;
+import com.zsh.cloud.common.tenant.contex.TenantContext;
+import com.zsh.cloud.system.api.dto.OptLogDTO;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -174,12 +174,17 @@ public class SysLogAspect {
      * @param ret
      */
     private void publishEventPrepare(Object ret) {
-        Result r = Convert.convert(Result.class, ret);
+        Result r;
+        if (ret instanceof Result) {
+            r = Convert.convert(Result.class, ret);
+        } else {
+            r = Result.success(ret);
+        }
         OptLogDTO sysLog = get();
         if (r == null) {
             sysLog.setType(LogTypeEnum.OPT.getCode());
         } else {
-            if (r.validateCode()) {
+            if (r.getIsSuccess()) {
                 sysLog.setType(LogTypeEnum.OPT.getCode());
             } else {
                 sysLog.setType(LogTypeEnum.EX.getCode());

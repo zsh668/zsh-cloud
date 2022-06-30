@@ -6,6 +6,7 @@ import com.zsh.cloud.common.tenant.contex.TenantContext;
 import com.zsh.cloud.system.application.command.UserCreateCommand;
 import com.zsh.cloud.system.application.command.UserUpdateCommand;
 import com.zsh.cloud.system.application.dto.UserDTO;
+import com.zsh.cloud.system.application.dto.UserInfoDTO;
 import com.zsh.cloud.system.application.dto.UserPageDTO;
 import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.role.RoleId;
@@ -44,6 +45,14 @@ public interface UserDtoAssembler {
      * @return
      */
     UserPageDTO toDto(SysUserDO user);
+    
+    /**
+     * 转换.
+     *
+     * @param user
+     * @return
+     */
+    UserInfoDTO toDto(UserDTO user);
     
     /**
      * user转换.(UserPageDTO toDto())

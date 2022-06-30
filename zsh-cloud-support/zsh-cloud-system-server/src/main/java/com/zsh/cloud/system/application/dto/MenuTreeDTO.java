@@ -73,5 +73,5 @@ public class MenuTreeDTO extends TreeNode<MenuTreeDTO, String> {
      * 子集合.
      */
     @TranslateField
-    private List<MenuTreeDTO> childList;
+    private List<MenuTreeDTO> children;
 }

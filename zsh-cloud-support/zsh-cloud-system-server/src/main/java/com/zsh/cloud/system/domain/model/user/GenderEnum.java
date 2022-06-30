@@ -2,7 +2,6 @@ package com.zsh.cloud.system.domain.model.user;
 
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.ValueObject;
-import com.zsh.cloud.common.core.enums.StatusEnum;
 
 /**
  * 性别 枚举.

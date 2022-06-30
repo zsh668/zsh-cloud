@@ -11,6 +11,7 @@ import com.zsh.cloud.system.application.command.IdsCommand;
 import com.zsh.cloud.system.application.command.PasswordCommand;
 import com.zsh.cloud.system.application.command.UserCreateCommand;
 import com.zsh.cloud.system.application.command.UserUpdateCommand;
+import com.zsh.cloud.system.application.dto.LoginDTO;
 import com.zsh.cloud.system.application.dto.UserDTO;
 import com.zsh.cloud.system.application.dto.UserPageDTO;
 import com.zsh.cloud.system.application.query.UserPageQuery;
@@ -55,7 +56,7 @@ public class UserController {
     @ApiOperation("分页查询用户")
     @Translator
     @ExportExcel(fileName = "用户")
-    @SysLog("用户列表")
+    @SysLog("分页查询用户")
     @GetMapping("users")
     public Page<UserPageDTO> page(UserPageQuery userPageQuery) {
         return userQueryService.queryPage(userPageQuery);
@@ -157,5 +158,16 @@ public class UserController {
     public Boolean resetPassword(@Valid @RequestBody IdsCommand command) {
         userApplicationService.resetPassword(command.getIds());
         return Boolean.TRUE;
+    }
+    
+    /**
+     * 获取当前登录信息
+     *
+     * @return
+     */
+    @ApiOperation(value = "获取当前登录信息", notes = "获取当前登录信息")
+    @GetMapping("users/current")
+    public LoginDTO currentLogin() {
+        return userQueryService.current();
     }
 }

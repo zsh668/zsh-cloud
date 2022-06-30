@@ -35,9 +35,8 @@ public class ResourceCreateSpecification extends AbstractSpecification<Resource>
         if (!CollectionUtils.isEmpty(resources)) {
             resources.forEach(o -> {
                 // 资源编号不能重复
-                boolean expression =
-                        !resource.getResourceId().sameValueAs(o.getResourceId()) && resource.getResourceCode()
-                                .sameValueAs(o.getResourceCode());
+                boolean expression = !o.getResourceId().sameValueAs(resource.getResourceId()) && o.getResourceCode()
+                        .sameValueAs(resource.getResourceCode());
                 Assert.notTrue(expression, ServiceErrorCode.RESOURCE_CODE_EXISTS);
             });
         }
@@ -46,11 +45,11 @@ public class ResourceCreateSpecification extends AbstractSpecification<Resource>
         Assert.notNull(menu, ServiceErrorCode.MENU_NOT_EXISTS);
         // 同级资源
         resources = resourceRepository.queryList(resource.getMenuId());
-        if (CollectionUtils.isEmpty(resources)) {
+        if (!CollectionUtils.isEmpty(resources)) {
             resources.forEach(o -> {
                 // 同级资源下，名称不能重复
                 boolean expression =
-                        !resource.getResourceId().sameValueAs(o.getResourceId()) && resource.getResourceName()
+                        !o.getResourceId().sameValueAs(resource.getResourceId()) && resource.getResourceName()
                                 .sameValueAs(o.getResourceName());
                 Assert.notTrue(expression, ServiceErrorCode.RESOURCE_NAME_EXISTS);
             });

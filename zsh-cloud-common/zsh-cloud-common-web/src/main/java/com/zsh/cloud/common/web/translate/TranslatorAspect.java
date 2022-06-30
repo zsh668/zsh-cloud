@@ -51,8 +51,10 @@ public class TranslatorAspect {
     @AfterReturning(pointcut = "pointCut()", returning = "object")
     @SuppressWarnings("unchecked")
     public void doAfter(JoinPoint joinPoint, Object object) {
-        TranslateTypeConvert<Object> translateTypeConvert = translateConvertFactory.getTranslateTypeConvert(
-                (Class<Object>) object.getClass());
+        TranslateTypeConvert<Object> translateTypeConvert = null;
+        if (object != null) {
+            translateTypeConvert = translateConvertFactory.getTranslateTypeConvert((Class<Object>) object.getClass());
+        }
         Object result;
         if (translateTypeConvert != null) {
             result = translateTypeConvert.convert(object);

@@ -105,9 +105,9 @@ public class ListUtils {
         });
         // childList赋值
         source.forEach(node -> map.computeIfPresent(node.getParentId(), (parentId, parentNode) -> {
-            Optional.ofNullable(parentNode.getChildList()).orElseGet(() -> {
+            Optional.ofNullable(parentNode.getChildren()).orElseGet(() -> {
                 final List<T> list = new ArrayList<>();
-                parentNode.setChildList(list);
+                parentNode.setChildren(list);
                 return list;
             }).add(node);
             return parentNode;

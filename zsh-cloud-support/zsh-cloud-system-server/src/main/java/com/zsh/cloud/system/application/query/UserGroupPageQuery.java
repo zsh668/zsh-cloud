@@ -22,7 +22,7 @@ public class UserGroupPageQuery extends PageQuery {
      * 用户组名称.
      */
     @ApiModelProperty(value = "用户组名称")
-    private String userGroupName;
+    private String groupName;
     
     /**
      * 角色名称.
