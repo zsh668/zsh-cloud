@@ -34,8 +34,8 @@ public class MenuCreateSpecification extends AbstractSpecification<Menu> {
             menus.forEach(o -> {
                 // 同一菜单下，名称不能重复
                 boolean expression =
-                        !menu.getMenuId().sameValueAs(o.getMenuId()) && menu.getParentId().sameValueAs(o.getParentId())
-                                && menu.getMenuName().sameValueAs(o.getMenuName());
+                        !o.getMenuId().sameValueAs(menu.getMenuId()) && o.getParentId().sameValueAs(menu.getParentId())
+                                && o.getMenuName().sameValueAs(menu.getMenuName());
                 Assert.notTrue(expression, ServiceErrorCode.MENU_NAME_EXISTS);
             });
         }
@@ -46,10 +46,10 @@ public class MenuCreateSpecification extends AbstractSpecification<Menu> {
         }
         // 同级菜单
         menus = menuRepository.queryList(menu.getParentId());
-        if (CollectionUtils.isEmpty(menus)) {
+        if (!CollectionUtils.isEmpty(menus)) {
             menus.forEach(o -> {
                 // 同级菜单下，排序不能重复
-                boolean expression = !menu.getMenuId().sameValueAs(o.getMenuId()) && Objects.equals(menu.getSortValue(),
+                boolean expression = !o.getMenuId().sameValueAs(menu.getMenuId()) && Objects.equals(menu.getSortValue(),
                         o.getSortValue());
                 Assert.notTrue(expression, ServiceErrorCode.MENU_SORT_EXISTS);
             });

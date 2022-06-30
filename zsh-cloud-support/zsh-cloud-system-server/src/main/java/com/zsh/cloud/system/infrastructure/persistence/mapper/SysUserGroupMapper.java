@@ -5,6 +5,7 @@ import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
 import com.zsh.cloud.system.application.query.UserGroupPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserGroupDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -33,5 +34,5 @@ public interface SysUserGroupMapper extends BaseMapperExt<SysUserGroupDO> {
      * @param query
      * @return
      */
-    IPage<SysUserGroupDO> selectPage(IPage<SysUserGroupDO> page, UserGroupPageQuery query);
+    IPage<SysUserGroupDO> selectPage(IPage<SysUserGroupDO> page, @Param("query") UserGroupPageQuery query);
 }

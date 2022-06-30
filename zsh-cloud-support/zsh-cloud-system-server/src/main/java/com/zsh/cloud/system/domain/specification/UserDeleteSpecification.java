@@ -3,6 +3,8 @@ package com.zsh.cloud.system.domain.specification;
 import com.zsh.cloud.common.core.domain.specification.AbstractSpecification;
 import com.zsh.cloud.common.core.exception.ServiceException;
 import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
+import com.zsh.cloud.common.core.util.Assert;
+import com.zsh.cloud.common.core.util.ServiceAssert;
 import com.zsh.cloud.system.domain.model.tenant.Tenant;
 import com.zsh.cloud.system.domain.model.tenant.TenantRepository;
 import com.zsh.cloud.system.domain.model.user.User;
@@ -25,9 +27,7 @@ public class UserDeleteSpecification extends AbstractSpecification<User> {
     @Override
     public boolean isSatisfiedBy(User user) {
         Tenant tenant = tenantRepository.find(user.getTenantId());
-        if (tenant.getCreatorId().sameValueAs(user.getUserId())) {
-            throw new ServiceException(ServiceErrorCode.TENANT_CREATOR_CHANGE);
-        }
+        Assert.notTrue(tenant.getCreatorId().sameValueAs(user.getUserId()), ServiceErrorCode.TENANT_CREATOR_CHANGE);
         return true;
     }
 }

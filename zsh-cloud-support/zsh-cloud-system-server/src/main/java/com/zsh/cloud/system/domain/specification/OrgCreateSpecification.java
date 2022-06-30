@@ -34,8 +34,8 @@ public class OrgCreateSpecification extends AbstractSpecification<Org> {
             orgs.forEach(o -> {
                 // 同一组织下，名称不能重复
                 boolean expression =
-                        !org.getOrgId().sameValueAs(o.getOrgId()) && org.getParentId().sameValueAs(o.getParentId())
-                                && org.getOrgName().sameValueAs(o.getOrgName());
+                        !o.getOrgId().sameValueAs(org.getOrgId()) && o.getParentId().sameValueAs(org.getParentId())
+                                && o.getOrgName().sameValueAs(org.getOrgName());
                 Assert.notTrue(expression, ServiceErrorCode.ORG_NAME_EXISTS);
             });
         }
@@ -46,10 +46,10 @@ public class OrgCreateSpecification extends AbstractSpecification<Org> {
         }
         // 同级组织
         orgs = orgRepository.queryList(org.getParentId());
-        if (CollectionUtils.isEmpty(orgs)) {
+        if (!CollectionUtils.isEmpty(orgs)) {
             orgs.forEach(o -> {
                 // 同级组织下，排序不能重复
-                boolean expression = !org.getOrgId().sameValueAs(o.getOrgId()) && Objects.equals(org.getSortValue(),
+                boolean expression = !o.getOrgId().sameValueAs(org.getOrgId()) && Objects.equals(org.getSortValue(),
                         o.getSortValue());
                 Assert.notTrue(expression, ServiceErrorCode.ORG_SORT_EXISTS);
             });

@@ -6,11 +6,14 @@ import com.zsh.cloud.system.application.command.MenuCreateCommand;
 import com.zsh.cloud.system.application.command.MenuUpdateCommand;
 import com.zsh.cloud.system.application.dto.MenuDTO;
 import com.zsh.cloud.system.application.dto.MenuTreeDTO;
+import com.zsh.cloud.system.application.dto.VueRouterDTO;
 import com.zsh.cloud.system.domain.model.menu.Menu;
 import com.zsh.cloud.system.domain.model.menu.MenuId;
 import com.zsh.cloud.system.domain.model.menu.MenuName;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysMenuDO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
@@ -76,4 +79,10 @@ public interface MenuDtoAssembler {
                 menuCommand.getIcon(), menuCommand.getSortValue(),
                 IDict.getByCode(BooleanEnum.class, menuCommand.getIsPublic()), null, menuCommand.getDescribe());
     }
+    
+    @Mappings({@Mapping(source = "menuName", target = "meta.title"),
+            @Mapping(source = "icon", target = "meta.icon")})
+    VueRouterDTO toRouterDto(SysMenuDO menu);
+    
+    List<VueRouterDTO> toRouterDto(List<SysMenuDO> menuList);
 }

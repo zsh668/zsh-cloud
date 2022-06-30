@@ -79,5 +79,5 @@ public class OrgTreeDTO extends TreeNode<OrgTreeDTO, String> {
      * 子集合.
      */
     @TranslateField
-    private List<OrgTreeDTO> childList;
+    private List<OrgTreeDTO> children;
 }

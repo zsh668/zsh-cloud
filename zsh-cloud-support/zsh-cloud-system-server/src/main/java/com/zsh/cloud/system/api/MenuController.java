@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.api;
 
+import com.zsh.cloud.common.core.util.RequestUtils;
 import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.MenuApplicationService;
@@ -9,10 +10,13 @@ import com.zsh.cloud.system.application.command.MenuCreateCommand;
 import com.zsh.cloud.system.application.command.MenuUpdateCommand;
 import com.zsh.cloud.system.application.dto.MenuDTO;
 import com.zsh.cloud.system.application.dto.MenuTreeDTO;
+import com.zsh.cloud.system.application.dto.VueRouterDTO;
 import com.zsh.cloud.system.application.query.MenuPageQuery;
+import com.zsh.cloud.system.application.query.RouterQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +53,7 @@ public class MenuController {
      * @param menuPageQuery
      * @return
      */
-    @ApiOperation("分页查询菜单")
+    @ApiOperation("查询菜单树")
     @Translator
     @GetMapping("menus/tree")
     public List<MenuTreeDTO> tree(MenuPageQuery menuPageQuery) {
@@ -123,5 +127,20 @@ public class MenuController {
     public Boolean disable(String id) {
         menuApplicationService.disable(id);
         return Boolean.TRUE;
+    }
+    
+    /**
+     * 查询菜单路由树.
+     *
+     * @param routerQuery
+     * @return
+     */
+    @ApiOperation("查询菜单路由树")
+    @GetMapping("menus/router")
+    public List<VueRouterDTO> router(RouterQuery routerQuery) {
+        if (StringUtils.isBlank(routerQuery.getUserId())) {
+            routerQuery.setUserId(RequestUtils.getUserId());
+        }
+        return menuQueryService.queryRouterList(routerQuery);
     }
 }

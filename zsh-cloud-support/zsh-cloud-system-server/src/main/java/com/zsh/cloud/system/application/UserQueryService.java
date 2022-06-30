@@ -2,6 +2,7 @@ package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.mybatis.datascope.domain.DataPermission;
+import com.zsh.cloud.system.application.dto.LoginDTO;
 import com.zsh.cloud.system.application.dto.UserDTO;
 import com.zsh.cloud.system.application.dto.UserPageDTO;
 import com.zsh.cloud.system.application.query.UserPageQuery;
@@ -38,4 +39,11 @@ public interface UserQueryService {
      * @return
      */
     DataPermission getDataScopeById(String userId);
+    
+    /**
+     * 获取用户信息.
+     *
+     * @return
+     */
+    LoginDTO current();
 }

@@ -199,6 +199,7 @@ public class User implements Entity<User> {
      * @param gender
      * @param status
      * @param superior
+     * @param avatar
      * @param passwordExpireTime
      * @param lastLoginTime
      * @param orgId
@@ -209,7 +210,7 @@ public class User implements Entity<User> {
      * @param userGroupsNames
      */
     public User(UserId userId, Account account, UserName userName, Mobile mobile, Email email, Password password,
-            GenderEnum gender, StatusEnum status, UserId superior, LocalDateTime passwordExpireTime,
+            GenderEnum gender, StatusEnum status, UserId superior, String avatar, LocalDateTime passwordExpireTime,
             LocalDateTime lastLoginTime, OrgId orgId, StationId stationId, TenantId tenantId, List<RoleId> roleIds,
             List<RoleName> roleNames, List<UserGroupName> userGroupsNames) {
         this.userId = userId;
@@ -221,6 +222,7 @@ public class User implements Entity<User> {
         this.gender = gender;
         this.status = status;
         this.superior = superior;
+        this.avatar = avatar;
         this.passwordExpireTime = passwordExpireTime;
         this.lastLoginTime = lastLoginTime;
         this.orgId = orgId;

@@ -2,7 +2,9 @@ package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.system.application.dto.MenuDTO;
 import com.zsh.cloud.system.application.dto.MenuTreeDTO;
+import com.zsh.cloud.system.application.dto.VueRouterDTO;
 import com.zsh.cloud.system.application.query.MenuPageQuery;
+import com.zsh.cloud.system.application.query.RouterQuery;
 
 import java.util.List;
 
@@ -30,4 +32,12 @@ public interface MenuQueryService {
      * @return
      */
     MenuDTO find(String id);
+    
+    /**
+     * 查询路由树.
+     *
+     * @param routerQuery
+     * @return
+     */
+    List<VueRouterDTO> queryRouterList(RouterQuery routerQuery);
 }
