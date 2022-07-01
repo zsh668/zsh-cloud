@@ -103,7 +103,7 @@ public class UserDTO extends DTO {
      * 状态 1启用 0禁用.
      */
     @ApiModelProperty(value = "状态")
-    private Integer status;
+    private Boolean status;
     
     /**
      * 状态 1启用 0禁用.
@@ -153,13 +153,13 @@ public class UserDTO extends DTO {
      * 角色id集合.
      */
     @ApiModelProperty(value = "角色id集合")
-    private List<String> roleIdList;
+    private List<String> roleIds;
     
     /**
      * 角色名称集合.
      */
     @ApiModelProperty(value = "角色名称集合")
-    private List<String> roleNameList;
+    private List<String> roleNames;
     
     /**
      * 用户组名称.

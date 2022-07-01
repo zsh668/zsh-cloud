@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +18,21 @@ import java.util.List;
  */
 @ApiModel("分页")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Page<T> implements Serializable {
+    
+    /**
+     * 当前页
+     */
+    @ApiModelProperty(value = "当前页", required = true)
+    protected Long current = 1L;
+    
+    /**
+     * 每页显示条数，默认 10
+     */
+    @ApiModelProperty(value = "每页数", required = true)
+    protected Long size = 10L;
     
     /**
      * 总数.
@@ -40,14 +51,4 @@ public class Page<T> implements Serializable {
      */
     @ApiModelProperty(value = "数据", required = true)
     private List<T> list;
-    
-    /**
-     * 空.
-     *
-     * @param <T> 实体
-     * @return
-     */
-    public static <T> Page<T> empty() {
-        return new Page<>(0L, 0L, new ArrayList<T>());
-    }
 }

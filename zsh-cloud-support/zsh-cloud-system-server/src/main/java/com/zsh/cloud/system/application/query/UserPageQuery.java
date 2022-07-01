@@ -35,4 +35,10 @@ public class UserPageQuery extends PageQuery {
      */
     @ApiModelProperty(value = "组织ID", example = "1000", notes = "同时筛选子组织")
     private String orgId;
+    
+    /**
+     * 状态.
+     */
+    @ApiModelProperty(value = "状态")
+    private Boolean status;
 }

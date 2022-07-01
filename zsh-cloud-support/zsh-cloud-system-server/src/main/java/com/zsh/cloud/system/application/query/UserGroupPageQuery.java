@@ -25,14 +25,14 @@ public class UserGroupPageQuery extends PageQuery {
     private String groupName;
     
     /**
-     * 角色名称.
+     * 角色id.
      */
-    @ApiModelProperty(value = "角色名称")
-    private String roleName;
+    @ApiModelProperty(value = "角色id")
+    private String roleId;
     
     /**
      * 状态.
      */
     @ApiModelProperty(value = "状态")
-    private Integer status;
+    private Boolean status;
 }

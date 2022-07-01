@@ -20,6 +20,6 @@ public class PageAssembler {
      * @return Page
      */
     public static <T> Page<T> toPage(IPage<T> iPage) {
-        return new Page<>(iPage.getTotal(), iPage.getPages(), iPage.getRecords());
+        return new Page<>(iPage.getCurrent(), iPage.getSize(), iPage.getTotal(), iPage.getPages(), iPage.getRecords());
     }
 }

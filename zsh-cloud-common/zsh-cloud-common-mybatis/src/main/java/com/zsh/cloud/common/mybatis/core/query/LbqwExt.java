@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Collection;
@@ -69,7 +70,7 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @return
      */
     public LbqwExt<T> eqIfPresent(SFunction<T, ?> column, Object val) {
-        if (val != null) {
+        if (!ObjectUtils.isEmpty(val)) {
             return (LbqwExt<T>) super.eq(column, val);
         }
         return this;
@@ -83,7 +84,7 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @return
      */
     public LbqwExt<T> neIfPresent(SFunction<T, ?> column, Object val) {
-        if (val != null) {
+        if (!ObjectUtils.isEmpty(val)) {
             return (LbqwExt<T>) super.ne(column, val);
         }
         return this;
@@ -97,7 +98,7 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @return
      */
     public LbqwExt<T> gtIfPresent(SFunction<T, ?> column, Object val) {
-        if (val != null) {
+        if (!ObjectUtils.isEmpty(val)) {
             return (LbqwExt<T>) super.gt(column, val);
         }
         return this;
@@ -111,7 +112,7 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @return
      */
     public LbqwExt<T> geIfPresent(SFunction<T, ?> column, Object val) {
-        if (val != null) {
+        if (!ObjectUtils.isEmpty(val)) {
             return (LbqwExt<T>) super.ge(column, val);
         }
         return this;
@@ -125,7 +126,7 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @return
      */
     public LbqwExt<T> ltIfPresent(SFunction<T, ?> column, Object val) {
-        if (val != null) {
+        if (!ObjectUtils.isEmpty(val)) {
             return (LbqwExt<T>) super.lt(column, val);
         }
         return this;
@@ -139,7 +140,7 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @return
      */
     public LbqwExt<T> leIfPresent(SFunction<T, ?> column, Object val) {
-        if (val != null) {
+        if (!ObjectUtils.isEmpty(val)) {
             return (LbqwExt<T>) super.le(column, val);
         }
         return this;
@@ -154,13 +155,13 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
      * @return
      */
     public LbqwExt<T> betweenIfPresent(SFunction<T, ?> column, Object val1, Object val2) {
-        if (val1 != null && val2 != null) {
+        if (!ObjectUtils.isEmpty(val1) && !ObjectUtils.isEmpty(val2)) {
             return (LbqwExt<T>) super.between(column, val1, val2);
         }
-        if (val1 != null) {
+        if (!ObjectUtils.isEmpty(val1)) {
             return (LbqwExt<T>) ge(column, val1);
         }
-        if (val2 != null) {
+        if (!ObjectUtils.isEmpty(val2)) {
             return (LbqwExt<T>) le(column, val2);
         }
         return this;

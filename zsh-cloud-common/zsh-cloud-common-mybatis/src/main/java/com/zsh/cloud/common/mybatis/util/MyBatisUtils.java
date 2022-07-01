@@ -48,7 +48,7 @@ public class MyBatisUtils {
      */
     public static <T> Page<T> buildPage(PageQuery pageQuery, Collection<Sort> sortFields) {
         // 页码 + 数量
-        Page<T> page = new Page<>(pageQuery.getPageNo(), pageQuery.getPageSize());
+        Page<T> page = new Page<>(pageQuery.getCurrent(), pageQuery.getSize());
         // 排序字段
         if (!CollectionUtil.isEmpty(sortFields)) {
             page.addOrder(sortFields.stream()

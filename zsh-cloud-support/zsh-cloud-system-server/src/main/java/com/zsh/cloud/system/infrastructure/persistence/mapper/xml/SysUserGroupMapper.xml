@@ -5,27 +5,10 @@
     <select id="queryUserGroup" resultType="com.zsh.cloud.system.infrastructure.persistence.entity.SysUserGroupDO">
         SELECT ug.*
         FROM sys_user_group ug
-        INNER JOIN sys_user_group_user ugu on ugu.group_id = ug.id
+                 INNER JOIN sys_user_group_user ugu on ugu.group_id = ug.id
         WHERE ugu.user_id = #{userId}
           AND ug.del_flag = 0
           AND ug.status = 0
     </select>
     
-    <select id="selectPage" resultType="com.zsh.cloud.system.infrastructure.persistence.entity.SysUserGroupDO">
-        SELECT ug.*, r.role_name
-        FROM sys_user_group ug
-        LEFT JOIN sys_role r ON r.id = ug.role_id
-        <where>
-            AND ug.del_flag = 0 AND r.del_flag = 0
-            <if test="query.groupName != null and query.groupName !=''">
-                AND ug.group_name = #{query.groupName}
-            </if>
-            <if test="query.roleName != null and query.roleName !=''">
-                AND r.role_name = #{query.roleName}
-            </if>
-            <if test="query.status != null">
-                AND ug.status = #{query.status}
-            </if>
-        </where>
-    </select>
 </mapper>

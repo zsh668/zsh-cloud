@@ -93,27 +93,27 @@ public interface UserDtoAssembler {
                 .setAvatar(user.getAvatar()).setWorkDescribe(user.getWorkDescribe())
                 .setPasswordExpireTime(user.getPasswordExpireTime()).setLastLoginTime(user.getLastLoginTime())
                 .setSuperior(user.getSuperior() == null ? "" : user.getSuperior().getId());
-        List<String> roleIdList = new ArrayList<>();
+        List<String> roleIds = new ArrayList<>();
         if (!CollectionUtils.isEmpty(user.getRoleIds())) {
             user.getRoleIds().forEach(roleId -> {
-                roleIdList.add(roleId.getId());
+                roleIds.add(roleId.getId());
             });
         }
-        userDto.setRoleIdList(roleIdList);
-        List<String> roleNameList = new ArrayList<>();
+        userDto.setRoleIds(roleIds);
+        List<String> roleNames = new ArrayList<>();
         if (!CollectionUtils.isEmpty(user.getRoleNames())) {
             user.getRoleNames().forEach(roleName -> {
-                roleNameList.add(roleName.getName());
+                roleNames.add(roleName.getName());
             });
         }
-        userDto.setRoleNameList(roleNameList);
-        List<String> groupsNameList = new ArrayList<>();
+        userDto.setRoleNames(roleNames);
+        List<String> groupsNames = new ArrayList<>();
         if (!CollectionUtils.isEmpty(user.getUserGroupsNames())) {
             user.getUserGroupsNames().forEach(groupName -> {
-                groupsNameList.add(groupName.getName());
+                groupsNames.add(groupName.getName());
             });
         }
-        userDto.setUserGroupsNames(groupsNameList);
+        userDto.setUserGroupsNames(groupsNames);
         return userDto;
     }
     

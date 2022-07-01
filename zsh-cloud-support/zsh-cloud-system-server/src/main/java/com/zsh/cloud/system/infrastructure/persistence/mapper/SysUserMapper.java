@@ -7,6 +7,7 @@ import com.zsh.cloud.common.mybatis.datascope.annotations.DataScope;
 import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.application.query.UserPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
+import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserGroupDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -43,7 +44,8 @@ public interface SysUserMapper extends BaseMapperExt<SysUserDO> {
     @DataScope
     default Page<SysUserDO> selectPage(UserPageQuery query, Collection<String> orgIds) {
         return selectPage(query, Wraps.<SysUserDO>lbQ().likeIfPresent(SysUserDO::getAccount, query.getAccount())
-                .likeIfPresent(SysUserDO::getUserName, query.getUserName()).inIfPresent(SysUserDO::getOrgId, orgIds));
+                .likeIfPresent(SysUserDO::getUserName, query.getUserName()).inIfPresent(SysUserDO::getOrgId, orgIds)
+                .eqIfPresent(SysUserDO::getStatus, query.getStatus()));
     }
     
     /**

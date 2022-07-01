@@ -30,7 +30,7 @@ public abstract class PageQuery extends Query {
     @ApiModelProperty(value = "页码，从 1 开始", required = true, example = "1")
     @NotNull(message = "页码不能为空")
     @Min(value = 1, message = "页码最小值为 1")
-    private Long pageNo = PAGE_NO;
+    private Long current = PAGE_NO;
     
     /**
      * 每页条数.
@@ -38,5 +38,5 @@ public abstract class PageQuery extends Query {
     @ApiModelProperty(value = "每页条数", required = true, example = "10")
     @NotNull(message = "每页条数不能为空")
     @Min(value = 1, message = "页码最小值为 1")
-    private Long pageSize = PAGE_SIZE;
+    private Long size = PAGE_SIZE;
 }
