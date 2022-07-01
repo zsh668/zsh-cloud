@@ -3,6 +3,8 @@ package com.zsh.cloud.system.application.dto;
 import com.zsh.cloud.common.core.dto.DTO;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.web.translate.Translate;
+import com.zsh.cloud.system.application.translate.ServiceImplTranslator;
+import com.zsh.cloud.system.infrastructure.persistence.repository.RoleRepositoryImpl;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -44,7 +46,7 @@ public class UserGroupPageDTO extends DTO {
      * 状态 1启用，0禁用.
      */
     @ApiModelProperty(value = "状态")
-    private Integer status;
+    private Boolean status;
     
     /**
      * 状态 1启用 0禁用.
@@ -60,8 +62,15 @@ public class UserGroupPageDTO extends DTO {
     private String describe;
     
     /**
+     * 角色ID
+     */
+    @ApiModelProperty(value = "角色ID")
+    private String roleId;
+    
+    /**
      * 角色名称.
      */
     @ApiModelProperty(value = "角色名称")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = RoleRepositoryImpl.class, from = "roleId", param = "roleName")
     private String roleName;
 }

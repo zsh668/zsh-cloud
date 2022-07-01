@@ -125,8 +125,8 @@ public class UserController {
      */
     @ApiOperation("开启、禁用用户")
     @SysLog("开启、禁用用户")
-    @PutMapping("users/disable")
-    public Boolean disable(String id) {
+    @PutMapping("users/disable/{id}")
+    public Boolean disable(@PathVariable String id) {
         userApplicationService.disable(id);
         return Boolean.TRUE;
     }

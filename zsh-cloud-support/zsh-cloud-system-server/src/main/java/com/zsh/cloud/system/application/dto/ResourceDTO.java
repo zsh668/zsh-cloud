@@ -60,7 +60,7 @@ public class ResourceDTO extends DTO {
      * 状态 1启用，0禁用.
      */
     @ApiModelProperty(value = "状态")
-    private Integer status;
+    private Boolean status;
     
     /**
      * 接口描述

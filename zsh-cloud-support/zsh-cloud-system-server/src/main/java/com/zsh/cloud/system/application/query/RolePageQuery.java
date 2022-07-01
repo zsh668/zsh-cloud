@@ -34,5 +34,5 @@ public class RolePageQuery extends PageQuery {
      * 状态
      */
     @ApiModelProperty(value = "状态")
-    private Integer status;
+    private Boolean status;
 }

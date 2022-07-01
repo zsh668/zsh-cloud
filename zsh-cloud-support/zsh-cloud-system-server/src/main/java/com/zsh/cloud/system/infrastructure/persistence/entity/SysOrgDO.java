@@ -82,7 +82,7 @@ public class SysOrgDO extends TenantBaseDO {
     /**
      * 状态 1启用，0禁用.
      */
-    private Integer status;
+    private Boolean status;
     
     /**
      * 功能描述.

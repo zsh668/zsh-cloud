@@ -119,8 +119,8 @@ public class UserGroupController {
      */
     @ApiOperation("开启、禁用用户组")
     @SysLog("开启、禁用用户组")
-    @PutMapping("userGroups/disable")
-    public Boolean disable(String id) {
+    @PutMapping("userGroups/disable/{id}")
+    public Boolean disable(@PathVariable String id) {
         userGroupApplicationService.disable(id);
         return Boolean.TRUE;
     }

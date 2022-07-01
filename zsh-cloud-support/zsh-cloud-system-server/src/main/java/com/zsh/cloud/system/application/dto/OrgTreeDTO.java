@@ -66,7 +66,7 @@ public class OrgTreeDTO extends TreeNode<OrgTreeDTO, String> {
      * 状态 1启用，0禁用.
      */
     @ApiModelProperty(value = "状态")
-    private Integer status;
+    private Boolean status;
     
     /**
      * 状态 1启用 0禁用.
@@ -80,4 +80,15 @@ public class OrgTreeDTO extends TreeNode<OrgTreeDTO, String> {
      */
     @TranslateField
     private List<OrgTreeDTO> children;
+    
+    /**
+     * 标签.
+     */
+    private String label;
+    
+    private Boolean parentStatus;
+    
+    public String getLabel() {
+        return this.orgName;
+    }
 }

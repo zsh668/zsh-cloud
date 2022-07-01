@@ -40,8 +40,7 @@ public class UserGroupQueryServiceImpl implements UserGroupQueryService {
     
     @Override
     public Page<UserGroupPageDTO> queryPage(UserGroupPageQuery query) {
-        IPage<SysUserGroupDO> iPage = sysUserGroupMapper.selectPage(MyBatisUtils.buildPage(query), query);
-        Page<SysUserGroupDO> page = PageAssembler.toPage(iPage);
+        Page<SysUserGroupDO> page = sysUserGroupMapper.selectPage(query);
         return userGroupDtoAssembler.toDto(page);
     }
     

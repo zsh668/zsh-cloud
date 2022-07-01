@@ -102,8 +102,8 @@ public class ExportExcelAspect {
             for (Object arg : args) {
                 if (arg instanceof PageQuery) {
                     pageQuery = ((PageQuery) arg);
-                    pageQuery.setPageSize(PART_EXPORT_NUM);
-                    pageQuery.setPageNo(1L);
+                    pageQuery.setSize(PART_EXPORT_NUM);
+                    pageQuery.setCurrent(1L);
                     break;
                 }
             }
@@ -119,8 +119,8 @@ public class ExportExcelAspect {
                 pages = page.getPages();
                 excelWriter.write(records, writeSheet);
                 records.clear();
-                Objects.requireNonNull(pageQuery).setPageNo(pageQuery.getPageNo() + 1);
-            } while (pageQuery.getPageNo() <= pages);
+                Objects.requireNonNull(pageQuery).setCurrent(pageQuery.getCurrent() + 1);
+            } while (pageQuery.getCurrent() <= pages);
             excelWriter.finish();
         } else if (rawType == List.class) {
             Object result = point.proceed();

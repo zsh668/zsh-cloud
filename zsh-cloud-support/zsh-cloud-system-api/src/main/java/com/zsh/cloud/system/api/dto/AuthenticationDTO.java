@@ -33,7 +33,7 @@ public class AuthenticationDTO implements Serializable {
     /**
      * 状态.
      */
-    private Integer status;
+    private Boolean status;
     
     /**
      * 租户ID.

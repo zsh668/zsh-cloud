@@ -47,7 +47,7 @@ public class SysResourceDO extends BaseDO {
     /**
      * 状态 1启用，0禁用.
      */
-    private Integer status;
+    private Boolean status;
     
     /**
      * 接口描述

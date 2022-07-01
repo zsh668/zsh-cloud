@@ -1,8 +1,11 @@
 package com.zsh.cloud.system.infrastructure.persistence.mapper;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
+import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.application.query.UserGroupPageQuery;
+import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserGroupDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -30,9 +33,14 @@ public interface SysUserGroupMapper extends BaseMapperExt<SysUserGroupDO> {
     /**
      * 分页查询用户组.
      *
-     * @param page
      * @param query
      * @return
      */
-    IPage<SysUserGroupDO> selectPage(IPage<SysUserGroupDO> page, @Param("query") UserGroupPageQuery query);
+    default Page<SysUserGroupDO> selectPage(UserGroupPageQuery query) {
+        return selectPage(query,
+                Wraps.<SysUserGroupDO>lbQ().likeIfPresent(SysUserGroupDO::getGroupName, query.getGroupName())
+                        .eqIfPresent(SysUserGroupDO::getRoleId, query.getRoleId())
+                        .eqIfPresent(SysUserGroupDO::getStatus, query.getStatus()));
+        
+    }
 }
