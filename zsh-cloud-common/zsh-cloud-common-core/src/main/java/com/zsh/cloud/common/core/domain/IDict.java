@@ -128,7 +128,6 @@ public interface IDict<T> {
         return DictPool.getDict(this).getText();
     }
     
-    
     class DictPool {
         
         private static final Map<IDict, DictBean> DICT_MAP = new ConcurrentHashMap<>();
@@ -149,7 +148,6 @@ public interface IDict<T> {
         static <K extends IDict<T>, T> DictBean<T> getDict(K dict) {
             return DICT_MAP.get(dict);
         }
-        
         
     }
     

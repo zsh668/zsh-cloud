@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import com.zsh.cloud.common.core.util.DateUtil;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,25 +30,21 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class DateTimeConfig {
     
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
-    
-    private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    
-    private static final String TIME_FORMAT = "HH:mm:ss";
-    
     @Bean
     @Primary
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
         return builder -> builder.serializerByType(LocalDateTime.class,
-                        new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATETIME_FORMAT)))
-                .serializerByType(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DATE_FORMAT)))
-                .serializerByType(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(TIME_FORMAT)))
+                        new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.FULL_TIME_SPLIT_PATTERN)))
+                .serializerByType(LocalDate.class,
+                        new LocalDateSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_FORMAT)))
+                .serializerByType(LocalTime.class,
+                        new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)))
                 .deserializerByType(LocalDateTime.class,
-                        new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DATETIME_FORMAT)))
+                        new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.FULL_TIME_SPLIT_PATTERN)))
                 .deserializerByType(LocalDate.class,
-                        new LocalDateDeserializer(DateTimeFormatter.ofPattern(DATE_FORMAT)))
+                        new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_FORMAT)))
                 .deserializerByType(LocalTime.class,
-                        new LocalTimeDeserializer(DateTimeFormatter.ofPattern(TIME_FORMAT)));
+                        new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.DEFAULT_TIME_FORMAT)));
     }
     
     @Component
@@ -55,7 +52,7 @@ public class DateTimeConfig {
         
         @Override
         public LocalDate convert(@NonNull String source) {
-            return LocalDate.parse(source, DateTimeFormatter.ofPattern(DATE_FORMAT));
+            return LocalDate.parse(source, DateTimeFormatter.ofPattern(DateUtil.DEFAULT_DATE_FORMAT));
         }
     }
     
@@ -64,7 +61,7 @@ public class DateTimeConfig {
         
         @Override
         public LocalDateTime convert(@NonNull String source) {
-            return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+            return LocalDateTime.parse(source, DateTimeFormatter.ofPattern(DateUtil.FULL_TIME_SPLIT_PATTERN));
         }
     }
     

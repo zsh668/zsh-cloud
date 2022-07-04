@@ -8,20 +8,19 @@ import com.zsh.cloud.common.core.domain.Result;
 import com.zsh.cloud.common.core.util.JsonUtils;
 import com.zsh.cloud.common.core.util.RequestUtils;
 import com.zsh.cloud.common.log.enums.LogTypeEnum;
-import com.zsh.cloud.common.log.event.SysLogEvent;
 import com.zsh.cloud.common.log.util.LogUtil;
 import com.zsh.cloud.common.tenant.contex.TenantContext;
 import com.zsh.cloud.system.api.dto.OptLogDTO;
+import com.zsh.cloud.system.api.dubbo.OptLogDubboService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -33,7 +32,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * 系统日志，切面处理类(单机使用).
+ * 系统日志，切面处理类（集群）.
  *
  * @author zhangshuhang
  * @version 1.0
@@ -41,15 +40,10 @@ import java.util.function.Consumer;
  */
 @Slf4j
 @Aspect
-public class SysLogAspect {
+public class SysLogCloudAspect {
     
-    /**
-     * 事件发布是由ApplicationContext对象管控的，
-     * <p>
-     * 我们发布事件前需要注入ApplicationContext对象调用publishEvent方法完成事件发布
-     **/
-    @Autowired
-    private ApplicationContext applicationContext;
+    @DubboReference
+    private OptLogDubboService optLogDubboService;
     
     private static final ThreadLocal<OptLogDTO> THREAD_LOCAL = new ThreadLocal<>();
     
@@ -204,7 +198,7 @@ public class SysLogAspect {
     private void publishEvent(OptLogDTO sysLog) {
         sysLog.setFinishTime(LocalDateTime.now());
         sysLog.setConsumingTime(sysLog.getStartTime().until(sysLog.getFinishTime(), ChronoUnit.MILLIS));
-        applicationContext.publishEvent(new SysLogEvent(sysLog));
+        optLogDubboService.save(sysLog);
         THREAD_LOCAL.remove();
     }
     

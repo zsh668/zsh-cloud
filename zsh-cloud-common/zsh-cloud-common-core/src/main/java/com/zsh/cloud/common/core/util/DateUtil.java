@@ -24,6 +24,8 @@ public class DateUtil {
     
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     
+    public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
+    
     /**
      * 格式化日期, 返回格式为 yyyy-MM-dd
      *

@@ -54,9 +54,9 @@ public class UserController {
      * @return
      */
     @ApiOperation("分页查询用户")
+    @SysLog("分页查询用户")
     @Translator
     @ExportExcel(fileName = "用户")
-    @SysLog("分页查询用户")
     @GetMapping("users")
     public Page<UserPageDTO> page(UserPageQuery userPageQuery) {
         return userQueryService.queryPage(userPageQuery);
@@ -69,6 +69,7 @@ public class UserController {
      * @return
      */
     @ApiOperation(value = "查询用户", notes = "查询用户")
+    @SysLog("根据ID查询用户")
     @Translator
     @GetMapping("users/{id}")
     public UserDTO get(@PathVariable String id) {
@@ -97,7 +98,7 @@ public class UserController {
      */
     @ApiOperation("修改用户")
     @SysLog("修改用户")
-    @PutMapping("users/{id}")
+    @PutMapping("users")
     public Boolean update(@Valid @RequestBody UserUpdateCommand userCommand) {
         userApplicationService.update(userCommand);
         return Boolean.TRUE;
@@ -166,6 +167,7 @@ public class UserController {
      * @return
      */
     @ApiOperation(value = "获取当前登录信息", notes = "获取当前登录信息")
+    @SysLog("获取当前登录信息")
     @GetMapping("users/current")
     public LoginDTO currentLogin() {
         return userQueryService.current();

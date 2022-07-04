@@ -50,6 +50,7 @@ public class TenantController {
      * @return
      */
     @ApiOperation("分页查询租户")
+    @SysLog("分页查询租户")
     @Translator
     @GetMapping("tenants")
     public Page<TenantPageDTO> page(TenantPageQuery tenantPageQuery) {
@@ -63,6 +64,7 @@ public class TenantController {
      * @return
      */
     @ApiOperation(value = "查询租户", notes = "查询租户")
+    @SysLog("根据ID查询租户")
     @Translator
     @GetMapping("tenants/{id}")
     public TenantDTO get(@PathVariable String id) {
@@ -91,7 +93,7 @@ public class TenantController {
      */
     @ApiOperation("修改租户")
     @SysLog("修改租户")
-    @PutMapping("tenants/{id}")
+    @PutMapping("tenants")
     public Boolean update(@Valid @RequestBody TenantUpdateCommand tenantCommand) {
         tenantApplicationService.update(tenantCommand);
         return Boolean.TRUE;

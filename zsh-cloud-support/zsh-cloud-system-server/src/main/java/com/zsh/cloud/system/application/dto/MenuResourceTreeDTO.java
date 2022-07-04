@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 import java.util.List;
 
 /**
- * 菜单树信息DTO.
+ * 菜单资源树信息DTO.
  *
  * @author zhangshuhang
  * @version 1.0
@@ -22,8 +22,8 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "MenuTreeDTO", description = "菜单树信息")
-public class MenuTreeDTO extends TreeNode<MenuTreeDTO, String> {
+@ApiModel(value = "MenuResourceTreeDTO", description = "菜单资源树信息")
+public class MenuResourceTreeDTO extends TreeNode<MenuResourceTreeDTO, String> {
     
     /**
      * id.
@@ -44,13 +44,6 @@ public class MenuTreeDTO extends TreeNode<MenuTreeDTO, String> {
     private String parentId;
     
     /**
-     * 父组织名称.
-     */
-    @ApiModelProperty(value = "父菜单名称")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = MenuRepositoryImpl.class, from = "parentId", param = "menuName")
-    private String parentName;
-    
-    /**
      * 排序.
      */
     @ApiModelProperty(value = "排序")
@@ -63,28 +56,15 @@ public class MenuTreeDTO extends TreeNode<MenuTreeDTO, String> {
     private Boolean status;
     
     /**
-     * 状态 1启用 0禁用.
-     */
-    @ApiModelProperty(value = "状态")
-    @Translate(dataSource = StatusEnum.class, from = "status")
-    private String statusDesc;
-    
-    /**
      * 子集合.
      */
     @TranslateField
     @ApiModelProperty(value = "子菜单集合")
-    private List<MenuTreeDTO> children;
+    private List<MenuResourceTreeDTO> children;
     
     /**
-     * 层级
+     * 资源集合.
      */
-    @ApiModelProperty(value = "层级")
-    private int level;
-    
-    /**
-     * 父状态
-     */
-    @ApiModelProperty(value = "父状态")
-    private Boolean parentStatus;
+    @ApiModelProperty(value = "资源集合")
+    private List<ResourceDTO> resources;
 }

@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.application;
 
+import com.zsh.cloud.system.application.command.RoleAuthorityCommand;
 import com.zsh.cloud.system.application.command.RoleCreateCommand;
 import com.zsh.cloud.system.application.command.RoleUpdateCommand;
 
@@ -41,4 +42,6 @@ public interface RoleApplicationService {
      * @param id
      */
     void disable(String id);
+    
+    void saveRoleAuthority(RoleAuthorityCommand roleCommand);
 }

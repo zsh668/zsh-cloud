@@ -28,6 +28,6 @@ public enum AuthorizeTypeEnum implements ValueObject<AuthorizeTypeEnum>, IDict<I
     
     @Override
     public boolean sameValueAs(AuthorizeTypeEnum other) {
-        return false;
+        return this.equals(other);
     }
 }

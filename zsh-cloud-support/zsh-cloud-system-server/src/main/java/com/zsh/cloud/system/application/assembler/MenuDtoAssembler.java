@@ -5,6 +5,7 @@ import com.zsh.cloud.common.core.enums.BooleanEnum;
 import com.zsh.cloud.system.application.command.MenuCreateCommand;
 import com.zsh.cloud.system.application.command.MenuUpdateCommand;
 import com.zsh.cloud.system.application.dto.MenuDTO;
+import com.zsh.cloud.system.application.dto.MenuResourceTreeDTO;
 import com.zsh.cloud.system.application.dto.MenuTreeDTO;
 import com.zsh.cloud.system.application.dto.VueRouterDTO;
 import com.zsh.cloud.system.domain.model.menu.Menu;
@@ -85,4 +86,8 @@ public interface MenuDtoAssembler {
     VueRouterDTO toRouterDto(SysMenuDO menu);
     
     List<VueRouterDTO> toRouterDto(List<SysMenuDO> menuList);
+    
+    MenuResourceTreeDTO toResourceDto(SysMenuDO menu);
+    
+    List<MenuResourceTreeDTO> toResourceDto(List<SysMenuDO> menuList);
 }

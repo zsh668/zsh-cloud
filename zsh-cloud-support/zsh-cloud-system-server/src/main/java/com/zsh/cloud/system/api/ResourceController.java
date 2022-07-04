@@ -50,6 +50,7 @@ public class ResourceController {
      * @return
      */
     @ApiOperation("分页查询资源")
+    @SysLog("分页查询资源")
     @Translator
     @GetMapping("resources")
     public Page<ResourcePageDTO> page(ResourcePageQuery resourcePageQuery) {
@@ -63,6 +64,7 @@ public class ResourceController {
      * @return
      */
     @ApiOperation(value = "查询资源", notes = "查询资源")
+    @SysLog("根据ID查询资源")
     @Translator
     @GetMapping("resources/{id}")
     public ResourceDTO get(@PathVariable String id) {
@@ -91,7 +93,7 @@ public class ResourceController {
      */
     @ApiOperation("修改资源")
     @SysLog("修改资源")
-    @PutMapping("resources/{id}")
+    @PutMapping("resources")
     public Boolean update(@Valid @RequestBody ResourceUpdateCommand resourceCommand) {
         resourceApplicationService.update(resourceCommand);
         return Boolean.TRUE;
