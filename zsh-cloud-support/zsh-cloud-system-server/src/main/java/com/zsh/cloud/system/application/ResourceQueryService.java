@@ -5,6 +5,7 @@ import com.zsh.cloud.system.application.dto.ResourceDTO;
 import com.zsh.cloud.system.application.dto.ResourcePageDTO;
 import com.zsh.cloud.system.application.query.ResourcePageQuery;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,6 +32,14 @@ public interface ResourceQueryService {
      * @return
      */
     Page<ResourcePageDTO> queryPage(ResourcePageQuery resourcePageQuery);
+    
+    /**
+     * 根据菜单ID查询.
+     *
+     * @param menuId
+     * @return
+     */
+    List<ResourceDTO> queryList(String menuId);
     
     /**
      * 根据ID查询.

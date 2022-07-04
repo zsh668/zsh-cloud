@@ -39,4 +39,16 @@ public interface SysRoleMapper extends BaseMapperExt<SysRoleDO> {
                 .likeIfPresent(SysRoleDO::getRoleName, query.getRoleName())
                 .eqIfPresent(SysRoleDO::getStatus, query.getStatus()));
     }
+    
+    /**
+     * 根据查询条件查询数据.
+     *
+     * @param query 参数
+     * @return
+     */
+    default List<SysRoleDO> selectList(RolePageQuery query) {
+        return selectList(Wraps.<SysRoleDO>lbQ().likeIfPresent(SysRoleDO::getRoleCode, query.getRoleCode())
+                .likeIfPresent(SysRoleDO::getRoleName, query.getRoleName())
+                .eqIfPresent(SysRoleDO::getStatus, query.getStatus()));
+    }
 }

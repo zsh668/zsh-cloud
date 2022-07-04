@@ -1,6 +1,6 @@
 package com.zsh.cloud.common.log.config;
 
-import com.zsh.cloud.common.log.aop.SysLogAspect;
+import com.zsh.cloud.common.log.aop.SysLogCloudAspect;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -25,9 +25,15 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @ConditionalOnProperty(name = "zsh.cloud.log.enabled", havingValue = "true", matchIfMissing = true)
 public class LogAutoConfiguration {
     
+    //    @Bean
+    //    @ConditionalOnMissingBean
+    //    public SysLogAspect sysLogAspect() {
+    //        return new SysLogAspect();
+    //    }
+    
     @Bean
     @ConditionalOnMissingBean
-    public SysLogAspect sysLogAspect() {
-        return new SysLogAspect();
+    public SysLogCloudAspect sysLogCloudAspect() {
+        return new SysLogCloudAspect();
     }
 }

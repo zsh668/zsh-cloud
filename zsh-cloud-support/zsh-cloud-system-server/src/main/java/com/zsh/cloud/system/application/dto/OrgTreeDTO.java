@@ -86,6 +86,9 @@ public class OrgTreeDTO extends TreeNode<OrgTreeDTO, String> {
      */
     private String label;
     
+    /**
+     * 父状态
+     */
     private Boolean parentStatus;
     
     public String getLabel() {

@@ -1,5 +1,6 @@
 package com.zsh.cloud.common.mybatis.datascope.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.ValueObject;
 
@@ -10,6 +11,7 @@ import com.zsh.cloud.common.core.domain.ValueObject;
  * @version 1.0
  * @date 2022/5/12 11:21
  */
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum DataScopeTypeEnum implements ValueObject<DataScopeTypeEnum>, IDict<Integer> {
     
     ALL(1, "全部"),
@@ -20,6 +22,17 @@ public enum DataScopeTypeEnum implements ValueObject<DataScopeTypeEnum>, IDict<I
     
     DataScopeTypeEnum(Integer code, String text) {
         init(code, text);
+    }
+    
+    /**
+     * 存在 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+     * <p>
+     * 必须有 getName()方法
+     *
+     * @return
+     */
+    public String getName() {
+        return this.name();
     }
     
     @Override

@@ -13,6 +13,7 @@ import com.zsh.cloud.system.infrastructure.persistence.entity.SysOrgDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysOrgMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class OrgQueryServiceImpl implements OrgQueryService {
     public List<OrgTreeDTO> queryList(OrgPageQuery orgPageQuery) {
         List<SysOrgDO> orgList = sysOrgMapper.selectList(orgPageQuery);
         List<OrgTreeDTO> orgs = orgDtoAssembler.toDto(orgList);
+        buildParentStatus(orgs, null);
         return ListUtils.treeify(orgs);
     }
     
@@ -46,5 +48,21 @@ public class OrgQueryServiceImpl implements OrgQueryService {
     public OrgDTO find(String id) {
         Org org = orgRepository.find(new OrgId(id));
         return orgDtoAssembler.fromOrg(org);
+    }
+    
+    /**
+     * 批量设置组织树的状态
+     *
+     * @param list
+     * @param status
+     */
+    private void buildParentStatus(List<OrgTreeDTO> list, Boolean status) {
+        for (OrgTreeDTO orgTreeDTO : list) {
+            orgTreeDTO.setParentStatus(status);
+            if (!CollectionUtils.isEmpty(orgTreeDTO.getChildren())) {
+                Boolean parentStatus = orgTreeDTO.getStatus();
+                buildParentStatus(orgTreeDTO.getChildren(), parentStatus);
+            }
+        }
     }
 }

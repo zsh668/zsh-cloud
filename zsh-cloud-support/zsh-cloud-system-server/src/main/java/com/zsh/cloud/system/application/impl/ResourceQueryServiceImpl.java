@@ -8,6 +8,7 @@ import com.zsh.cloud.system.application.assembler.ResourceDtoAssembler;
 import com.zsh.cloud.system.application.dto.ResourceDTO;
 import com.zsh.cloud.system.application.dto.ResourcePageDTO;
 import com.zsh.cloud.system.application.query.ResourcePageQuery;
+import com.zsh.cloud.system.domain.model.menu.MenuId;
 import com.zsh.cloud.system.domain.model.resource.Resource;
 import com.zsh.cloud.system.domain.model.resource.ResourceId;
 import com.zsh.cloud.system.domain.model.resource.ResourceRepository;
@@ -16,7 +17,9 @@ import com.zsh.cloud.system.infrastructure.persistence.entity.SysResourceDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -53,6 +56,16 @@ public class ResourceQueryServiceImpl implements ResourceQueryService {
     public Page<ResourcePageDTO> queryPage(ResourcePageQuery resourcePageQuery) {
         Page<SysResourceDO> page = sysResourceMapper.selectPage(resourcePageQuery);
         return resourceDtoAssembler.toDto(page);
+    }
+    
+    @Override
+    public List<ResourceDTO> queryList(String menuId) {
+        List<Resource> list = resourceRepository.queryList(new MenuId(menuId));
+        List<ResourceDTO> resources = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(list)) {
+            list.forEach(resource -> resources.add(resourceDtoAssembler.fromResource(resource)));
+        }
+        return resources;
     }
     
     @Override

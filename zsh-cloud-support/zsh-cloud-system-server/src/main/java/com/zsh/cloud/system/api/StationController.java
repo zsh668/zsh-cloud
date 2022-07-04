@@ -50,6 +50,7 @@ public class StationController {
      * @return
      */
     @ApiOperation("分页查询岗位")
+    @SysLog("分页查询岗位")
     @Translator
     @GetMapping("stations")
     public Page<StationPageDTO> page(StationPageQuery stationPageQuery) {
@@ -63,6 +64,7 @@ public class StationController {
      * @return
      */
     @ApiOperation(value = "查询岗位", notes = "查询岗位")
+    @SysLog("根据ID查询岗位")
     @Translator
     @GetMapping("stations/{id}")
     public StationDTO get(@PathVariable String id) {
@@ -91,7 +93,7 @@ public class StationController {
      */
     @ApiOperation("修改岗位")
     @SysLog("修改岗位")
-    @PutMapping("stations/{id}")
+    @PutMapping("stations")
     public Boolean update(@Valid @RequestBody StationUpdateCommand stationCommand) {
         stationApplicationService.update(stationCommand);
         return Boolean.TRUE;

@@ -68,7 +68,7 @@ public interface RoleDtoAssembler {
                 .setRoleCode(role.getRoleCode() == null ? "" : role.getRoleCode().getCode())
                 .setRoleName(role.getRoleName() == null ? "" : role.getRoleName().getName())
                 .setRepel(role.getRepel() == null ? "" : role.getRepel().getId())
-                .setDsType(role.getDsType() == null ? null : role.getDsType().getCode())
+                .setDsType(role.getDsType() == null ? null : role.getDsType())
                 .setReadonly(role.getReadonly() == null ? null : role.getReadonly().getCode())
                 .setStatus(role.getStatus() == null ? null : role.getStatus().getCode())
                 .setDescribe(role.getDescribe());
@@ -90,8 +90,7 @@ public interface RoleDtoAssembler {
         }
         RoleId repel = StringUtils.isBlank(roleCommand.getRepel()) ? null : new RoleId(roleCommand.getRepel());
         return new Role(new RoleCode(roleCommand.getRoleCode()), new RoleName(roleCommand.getRoleName()), repel,
-                IDict.getByCode(DataScopeTypeEnum.class, roleCommand.getDsType()), orgIdList,
-                roleCommand.getDescribe());
+                roleCommand.getDsType(), orgIdList, roleCommand.getDescribe());
     }
     
     /**
@@ -109,8 +108,7 @@ public interface RoleDtoAssembler {
         }
         RoleId repel = StringUtils.isBlank(roleCommand.getRepel()) ? null : new RoleId(roleCommand.getRepel());
         return new Role(new RoleId(roleCommand.getId()), new RoleCode(roleCommand.getRoleCode()),
-                new RoleName(roleCommand.getRoleName()), repel,
-                IDict.getByCode(DataScopeTypeEnum.class, roleCommand.getDsType()), orgIdList, null, null,
+                new RoleName(roleCommand.getRoleName()), repel, roleCommand.getDsType(), orgIdList, null, null,
                 roleCommand.getDescribe());
     }
 }

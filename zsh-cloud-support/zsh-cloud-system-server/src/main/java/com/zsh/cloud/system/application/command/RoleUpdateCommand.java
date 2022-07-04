@@ -1,10 +1,13 @@
 package com.zsh.cloud.system.application.command;
 
 import com.zsh.cloud.common.core.dto.Command;
+import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -20,6 +23,8 @@ import java.util.Set;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(value = "更新角色", description = "更新角色")
 public class RoleUpdateCommand extends Command {
     
@@ -51,7 +56,7 @@ public class RoleUpdateCommand extends Command {
      */
     @ApiModelProperty(value = "数据权限类型")
     @NotNull(message = "数据权限类型不能为空")
-    private Integer dsType;
+    private DataScopeTypeEnum dsType;
     
     /**
      * 互斥角色.

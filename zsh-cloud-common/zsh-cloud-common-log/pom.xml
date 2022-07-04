@@ -57,5 +57,11 @@
             <version>${revision}</version>
             <scope>compile</scope>
         </dependency>
+    
+    
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -50,6 +50,7 @@ public class UserGroupController {
      * @return
      */
     @ApiOperation("分页查询用户组")
+    @SysLog("分页查询用户组")
     @Translator
     @GetMapping("userGroups")
     public Page<UserGroupPageDTO> page(UserGroupPageQuery pageQuery) {
@@ -63,6 +64,7 @@ public class UserGroupController {
      * @return
      */
     @ApiOperation(value = "查询用户组", notes = "查询用户组")
+    @SysLog("根据ID查询用户组")
     @Translator
     @GetMapping("userGroups/{id}")
     public UserGroupDTO get(@PathVariable String id) {
@@ -91,7 +93,7 @@ public class UserGroupController {
      */
     @ApiOperation("修改用户组")
     @SysLog("修改用户组")
-    @PutMapping("userGroups/{id}")
+    @PutMapping("userGroups")
     public Boolean update(@Valid @RequestBody UserGroupUpdateCommand userGroupCommand) {
         userGroupApplicationService.update(userGroupCommand);
         return Boolean.TRUE;

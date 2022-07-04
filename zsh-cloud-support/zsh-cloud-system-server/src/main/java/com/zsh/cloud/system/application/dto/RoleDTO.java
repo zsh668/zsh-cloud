@@ -61,14 +61,7 @@ public class RoleDTO extends DTO {
      * 数据权限范围
      */
     @ApiModelProperty(value = "数据权限范围")
-    private Integer dsType;
-    
-    /**
-     * 数据权限范围.
-     */
-    @ApiModelProperty(value = "数据权限范围")
-    @Translate(dataSource = DataScopeTypeEnum.class, from = "dsType")
-    private String dsTypeDesc;
+    private DataScopeTypeEnum dsType;
     
     /**
      * 是否内置.

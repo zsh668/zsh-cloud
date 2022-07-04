@@ -39,4 +39,16 @@ public interface SysResourceMapper extends BaseMapperExt<SysResourceDO> {
                 .likeIfPresent(SysResourceDO::getResourceName, query.getResourceName())
                 .likeIfPresent(SysResourceDO::getResourceCode, query.getResourceCode()));
     }
+    
+    /**
+     * 根据查询条件查询数据.
+     *
+     * @param query
+     * @return
+     */
+    default List<SysResourceDO> selectList(ResourcePageQuery query) {
+        return selectList(Wraps.<SysResourceDO>lbQ().eqIfPresent(SysResourceDO::getMenuId, query.getMenuId())
+                .likeIfPresent(SysResourceDO::getResourceName, query.getResourceName())
+                .likeIfPresent(SysResourceDO::getResourceCode, query.getResourceCode()));
+    }
 }

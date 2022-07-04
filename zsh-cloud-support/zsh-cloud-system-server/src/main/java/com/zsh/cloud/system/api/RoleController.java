@@ -6,8 +6,10 @@ import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.RoleApplicationService;
 import com.zsh.cloud.system.application.RoleQueryService;
 import com.zsh.cloud.system.application.command.IdsCommand;
+import com.zsh.cloud.system.application.command.RoleAuthorityCommand;
 import com.zsh.cloud.system.application.command.RoleCreateCommand;
 import com.zsh.cloud.system.application.command.RoleUpdateCommand;
+import com.zsh.cloud.system.application.dto.RoleAuthorityDTO;
 import com.zsh.cloud.system.application.dto.RoleDTO;
 import com.zsh.cloud.system.application.dto.RolePageDTO;
 import com.zsh.cloud.system.application.query.RolePageQuery;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 角色管理.
@@ -50,10 +53,25 @@ public class RoleController {
      * @return
      */
     @ApiOperation("分页查询角色")
+    @SysLog("分页查询角色")
     @Translator
     @GetMapping("roles")
     public Page<RolePageDTO> page(RolePageQuery rolePageQuery) {
         return roleQueryService.queryPage(rolePageQuery);
+    }
+    
+    /**
+     * 查询角色.
+     *
+     * @param rolePageQuery
+     * @return
+     */
+    @ApiOperation("查询角色列表")
+    @SysLog("查询角色列表")
+    @Translator
+    @GetMapping("roles/list")
+    public List<RolePageDTO> list(RolePageQuery rolePageQuery) {
+        return roleQueryService.queryList(rolePageQuery);
     }
     
     /**
@@ -63,6 +81,7 @@ public class RoleController {
      * @return
      */
     @ApiOperation(value = "查询角色", notes = "查询角色")
+    @SysLog("根据ID查询角色")
     @Translator
     @GetMapping("roles/{id}")
     public RoleDTO get(@PathVariable String id) {
@@ -91,7 +110,7 @@ public class RoleController {
      */
     @ApiOperation("修改角色")
     @SysLog("修改角色")
-    @PutMapping("roles/{id}")
+    @PutMapping("roles")
     public Boolean update(@Valid @RequestBody RoleUpdateCommand roleCommand) {
         roleApplicationService.update(roleCommand);
         return Boolean.TRUE;
@@ -119,9 +138,36 @@ public class RoleController {
      */
     @ApiOperation("开启、禁用角色")
     @SysLog("开启、禁用角色")
-    @PutMapping("roles/disable")
-    public Boolean disable(String id) {
+    @PutMapping("roles/disable/{id}")
+    public Boolean disable(@PathVariable String id) {
         roleApplicationService.disable(id);
+        return Boolean.TRUE;
+    }
+    
+    /**
+     * 查询角色拥有的资源.
+     *
+     * @param roleId
+     * @return
+     */
+    @ApiOperation(value = "查询角色拥有的资源id集合", notes = "查询角色拥有的资源id集合")
+    @SysLog("查询角色拥有的资源")
+    @GetMapping("roles/authority/{roleId}")
+    public RoleAuthorityDTO findAuthorityIdByRoleId(@PathVariable Long roleId) {
+        return roleQueryService.findRoleAuthority(roleId);
+    }
+    
+    /**
+     * 修改角色资源.
+     *
+     * @param roleCommand
+     * @return
+     */
+    @ApiOperation("修改角色资源")
+    @SysLog("修改角色资源")
+    @PutMapping("roles/authority")
+    public Boolean saveRoleAuthority(@Valid @RequestBody RoleAuthorityCommand roleCommand) {
+        roleApplicationService.saveRoleAuthority(roleCommand);
         return Boolean.TRUE;
     }
 }

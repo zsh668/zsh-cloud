@@ -32,7 +32,8 @@ public class DefaultFieldHandler implements MetaObjectHandler {
     
     private String getCurrentUserId() {
         try {
-            return RequestUtils.getUserId();
+            String userId = RequestUtils.getUserId();
+            return userId;
         } catch (Exception e) {
             return DEFAULT_USER_ID;
         }

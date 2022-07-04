@@ -50,6 +50,7 @@ public class OrgController {
      * @return
      */
     @ApiOperation("查询组织树")
+    @SysLog("查询组织树")
     @Translator
     @GetMapping("orgs/tree")
     public List<OrgTreeDTO> tree(OrgPageQuery orgPageQuery) {
@@ -63,6 +64,7 @@ public class OrgController {
      * @return
      */
     @ApiOperation(value = "查询组织", notes = "查询组织")
+    @SysLog("根据ID查询组织")
     @Translator
     @GetMapping("orgs/{id}")
     public OrgDTO get(@PathVariable String id) {
@@ -91,7 +93,7 @@ public class OrgController {
      */
     @ApiOperation("修改组织")
     @SysLog("修改组织")
-    @PutMapping("orgs/{id}")
+    @PutMapping("orgs")
     public Boolean update(@Valid @RequestBody OrgUpdateCommand orgCommand) {
         orgApplicationService.update(orgCommand);
         return Boolean.TRUE;

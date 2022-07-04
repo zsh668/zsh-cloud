@@ -1,6 +1,7 @@
 package com.zsh.cloud.system.application.command;
 
 import com.zsh.cloud.common.core.dto.Command;
+import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -44,7 +45,7 @@ public class RoleCreateCommand extends Command {
      */
     @ApiModelProperty(value = "数据权限类型")
     @NotNull(message = "数据权限类型不能为空")
-    private Integer dsType;
+    private DataScopeTypeEnum dsType;
     
     /**
      * 互斥角色.
