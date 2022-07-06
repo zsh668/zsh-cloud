@@ -100,17 +100,20 @@ public class Menu implements Entity<Menu> {
     /**
      * 是否有效.
      *
+     * @param status
      * @return
      */
-    public boolean isEnable() {
+    public boolean isEnable(StatusEnum status) {
         return status == StatusEnum.ENABLE;
     }
     
     /**
      * 启用、禁用.
+     *
+     * @param status
      */
-    public void disable() {
-        this.status = isEnable() ? StatusEnum.DISABLE : StatusEnum.ENABLE;
+    public void disable(StatusEnum status) {
+        this.status = isEnable(status) ? StatusEnum.DISABLE : StatusEnum.ENABLE;
     }
     
     @Override

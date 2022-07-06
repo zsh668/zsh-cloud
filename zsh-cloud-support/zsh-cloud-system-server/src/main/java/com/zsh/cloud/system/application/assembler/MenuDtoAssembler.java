@@ -81,8 +81,7 @@ public interface MenuDtoAssembler {
                 IDict.getByCode(BooleanEnum.class, menuCommand.getIsPublic()), null, menuCommand.getDescribe());
     }
     
-    @Mappings({@Mapping(source = "menuName", target = "meta.title"),
-            @Mapping(source = "icon", target = "meta.icon")})
+    @Mappings({@Mapping(source = "menuName", target = "meta.title"), @Mapping(source = "icon", target = "meta.icon")})
     VueRouterDTO toRouterDto(SysMenuDO menu);
     
     List<VueRouterDTO> toRouterDto(List<SysMenuDO> menuList);

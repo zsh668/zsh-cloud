@@ -32,7 +32,7 @@ public class SysStationDO extends TenantBaseDO {
     /**
      * 排序.
      */
-    private Integer orderNum;
+    private Integer sortValue;
     
     /**
      * 状态 1启用，0禁用.

@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.application.impl;
 
+import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.system.application.OrgApplicationService;
 import com.zsh.cloud.system.application.assembler.OrgDtoAssembler;
 import com.zsh.cloud.system.application.command.OrgCreateCommand;
@@ -14,6 +15,7 @@ import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +74,29 @@ public class OrgApplicationServiceImpl implements OrgApplicationService {
     
     @Override
     public void disable(String id) {
+        // 禁用当前ID
         Org org = orgRepository.find(new OrgId(id));
-        org.disable();
+        // 禁用 父ID为 id的子集
+        disableParent(id, org.getStatus());
+        org.disable(org.getStatus());
         orgRepository.store(org);
+    }
+    
+    /**
+     * 禁用父ID的子集.
+     *
+     * @param parentId
+     * @param status
+     */
+    private void disableParent(String parentId, StatusEnum status) {
+        // 禁用 父ID为 id的子集
+        List<Org> orgs = orgRepository.queryList(new OrgId(parentId));
+        if (!CollectionUtils.isEmpty(orgs)) {
+            orgs.forEach(org -> {
+                org.disable(status);
+                orgRepository.store(org);
+                disableParent(org.getOrgId().getId(), status);
+            });
+        }
     }
 }

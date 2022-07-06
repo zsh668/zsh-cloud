@@ -10,19 +10,19 @@ import com.zsh.cloud.common.core.domain.ValueObject;
  * @version 1.0
  * @date 2022/4/29 10:18
  */
-public enum BooleanEnum implements ValueObject<BooleanEnum>, IDict<Integer> {
+public enum BooleanEnum implements ValueObject<BooleanEnum>, IDict<Boolean> {
     
     /**
      * 是.
      */
-    TRUE(1, "是"),
+    TRUE(Boolean.TRUE, "是"),
     
     /**
      * 否.
      */
-    FALSE(0, "否");
+    FALSE(Boolean.FALSE, "否");
     
-    BooleanEnum(Integer code, String text) {
+    BooleanEnum(Boolean code, String text) {
         init(code, text);
     }
     

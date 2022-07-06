@@ -33,7 +33,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * 系统日志，切面处理类(单机使用).
+ * 系统日志，切面处理类(spring 事件处理).
  *
  * @author zhangshuhang
  * @version 1.0
@@ -44,8 +44,8 @@ import java.util.function.Consumer;
 public class SysLogAspect {
     
     /**
-     * 事件发布是由ApplicationContext对象管控的，
-     * <p>
+     * 事件发布是由ApplicationContext对象管控的.
+     * </p>
      * 我们发布事件前需要注入ApplicationContext对象调用publishEvent方法完成事件发布
      **/
     @Autowired

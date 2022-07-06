@@ -30,7 +30,7 @@ public class StationConverter {
             return null;
         }
         return new Station(new StationId(sysStationDO.getId()), new StationName(sysStationDO.getStationName()),
-                new OrgId(sysStationDO.getOrgId()), sysStationDO.getOrderNum(),
+                new OrgId(sysStationDO.getOrgId()), sysStationDO.getSortValue(),
                 IDict.getByCode(StatusEnum.class, sysStationDO.getStatus()), sysStationDO.getDescribe());
     }
     
@@ -46,7 +46,7 @@ public class StationConverter {
         sysStationDO.setId(station.getStationId() == null ? null : station.getStationId().getId());
         sysStationDO.setStationName(station.getStationName() == null ? null : station.getStationName().getName());
         sysStationDO.setOrgId(station.getOrgId() == null ? null : station.getOrgId().getId());
-        sysStationDO.setOrderNum(station.getOrderNum());
+        sysStationDO.setSortValue(station.getSortValue());
         sysStationDO.setStatus(station.getStatus() == null ? null : station.getStatus().getCode());
         sysStationDO.setDescribe(station.getDescribe());
         return sysStationDO;

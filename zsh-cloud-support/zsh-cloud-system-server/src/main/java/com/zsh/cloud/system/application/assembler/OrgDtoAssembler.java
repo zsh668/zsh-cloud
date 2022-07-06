@@ -76,7 +76,7 @@ public interface OrgDtoAssembler {
      * @return
      */
     default Org toOrg(OrgUpdateCommand orgCommand) {
-        return new Org(new OrgId(orgCommand.getId()), new OrgName(orgCommand.getOrgName()), null,
-                orgCommand.getSortValue(), null, orgCommand.getDescribe());
+        return new Org(new OrgId(orgCommand.getId()), new OrgName(orgCommand.getOrgName()),
+                new OrgId(orgCommand.getParentId()), orgCommand.getSortValue(), null, orgCommand.getDescribe());
     }
 }

@@ -33,7 +33,7 @@ public class Station implements Entity<Station> {
     /**
      * 排序.
      */
-    private Integer orderNum;
+    private Integer sortValue;
     
     /**
      * 状态.
@@ -45,20 +45,20 @@ public class Station implements Entity<Station> {
      */
     private String describe;
     
-    public Station(StationName stationName, OrgId orgId, Integer orderNum, String describe) {
+    public Station(StationName stationName, OrgId orgId, Integer sortValue, String describe) {
         this.stationName = stationName;
         this.orgId = orgId;
-        this.orderNum = orderNum;
+        this.sortValue = sortValue;
         this.status = StatusEnum.ENABLE;
         this.describe = describe;
     }
     
-    public Station(StationId stationId, StationName stationName, OrgId orgId, Integer orderNum, StatusEnum status,
+    public Station(StationId stationId, StationName stationName, OrgId orgId, Integer sortValue, StatusEnum status,
             String describe) {
         this.stationId = stationId;
         this.stationName = stationName;
         this.orgId = orgId;
-        this.orderNum = orderNum;
+        this.sortValue = sortValue;
         this.status = status;
         this.describe = describe;
     }
