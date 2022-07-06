@@ -18,6 +18,7 @@ import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysMenuDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysMenuMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysRoleAuthorityMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -54,7 +55,6 @@ public class MenuQueryServiceImpl implements MenuQueryService {
     public List<MenuTreeDTO> queryList(MenuPageQuery menuPageQuery) {
         List<SysMenuDO> menuList = sysMenuMapper.selectList(menuPageQuery);
         List<MenuTreeDTO> menus = menuDtoAssembler.toDto(menuList);
-        
         List<MenuTreeDTO> result = ListUtils.treeify(menus);
         buildParentStatus(result, null);
         buildLevel(result, 1);

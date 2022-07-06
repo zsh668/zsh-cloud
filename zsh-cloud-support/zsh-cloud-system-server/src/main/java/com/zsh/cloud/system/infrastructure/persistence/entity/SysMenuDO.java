@@ -32,7 +32,7 @@ public class SysMenuDO extends BaseDO {
     /**
      * 是否公开菜单 1是，0否 就是无需分配就可以访问的。所有人可见.
      */
-    private Integer isPublic;
+    private Boolean isPublic;
     
     /**
      * 对应路由path.

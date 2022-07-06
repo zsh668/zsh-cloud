@@ -39,6 +39,15 @@ debug: 当此属性设置为true时，将打印出logback内部日志信息，�
             </layout>
         </encoder>
     </appender>
+    
+    <!-- skywalking日志 -->
+    <appender name="skywalking" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+                <Pattern>${console_log_pattern}</Pattern>
+            </layout>
+        </encoder>
+    </appender>
 
     <!-- 文件输出日志 -->
     <appender name="FILE_CONSOLE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -96,6 +105,7 @@ debug: 当此属性设置为true时，将打印出logback内部日志信息，�
 
     <root level="${log_level}">
         <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="skywalking"/>
         <appender-ref ref="ASYNC_LOG_CONSOLE"/>
         <appender-ref ref="ASYNC_LOG_ERROR"/>
     </root>

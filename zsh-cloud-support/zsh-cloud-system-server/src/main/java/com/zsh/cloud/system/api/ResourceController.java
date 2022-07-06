@@ -121,8 +121,8 @@ public class ResourceController {
      */
     @ApiOperation("开启、禁用资源")
     @SysLog("开启、禁用资源")
-    @PutMapping("resources/disable")
-    public Boolean disable(String id) {
+    @PutMapping("resources/disable/{id}")
+    public Boolean disable(@PathVariable String id) {
         resourceApplicationService.disable(id);
         return Boolean.TRUE;
     }

@@ -121,8 +121,8 @@ public class StationController {
      */
     @ApiOperation("开启、禁用岗位")
     @SysLog("开启、禁用岗位")
-    @PutMapping("stations/disable")
-    public Boolean disable(String id) {
+    @PutMapping("stations/disable/{id}")
+    public Boolean disable(@PathVariable String id) {
         stationApplicationService.disable(id);
         return Boolean.TRUE;
     }

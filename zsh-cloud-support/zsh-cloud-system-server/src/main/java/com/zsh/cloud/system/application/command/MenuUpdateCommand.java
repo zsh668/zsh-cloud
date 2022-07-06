@@ -49,7 +49,7 @@ public class MenuUpdateCommand extends Command {
      */
     @ApiModelProperty(value = "是否公开菜单")
     @NotNull(message = "是否公开菜单不能为空")
-    private Integer isPublic;
+    private Boolean isPublic;
     
     /**
      * 对应路由path.

@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.application.impl;
 
+import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.system.application.MenuApplicationService;
 import com.zsh.cloud.system.application.assembler.MenuDtoAssembler;
 import com.zsh.cloud.system.application.command.MenuCreateCommand;
@@ -14,6 +15,7 @@ import com.zsh.cloud.system.infrastructure.persistence.mapper.SysResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +74,29 @@ public class MenuApplicationServiceImpl implements MenuApplicationService {
     
     @Override
     public void disable(String id) {
+        // 禁用当前ID
         Menu menu = menuRepository.find(new MenuId(id));
-        menu.disable();
+        // 禁用 父ID为 id的子集
+        disableParent(id, menu.getStatus());
+        menu.disable(menu.getStatus());
         menuRepository.store(menu);
+    }
+    
+    /**
+     * 禁用父ID的子集.
+     *
+     * @param parentId
+     * @param status
+     */
+    private void disableParent(String parentId, StatusEnum status) {
+        // 禁用 父ID为 id的子集
+        List<Menu> menus = menuRepository.queryList(new MenuId(parentId));
+        if (!CollectionUtils.isEmpty(menus)) {
+            menus.forEach(menu -> {
+                menu.disable(status);
+                menuRepository.store(menu);
+                disableParent(menu.getMenuId().getId(), status);
+            });
+        }
     }
 }

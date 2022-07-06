@@ -121,8 +121,8 @@ public class TenantController {
      */
     @ApiOperation("开启、禁用租户")
     @SysLog("开启、禁用租户")
-    @PutMapping("tenants/disable")
-    public Boolean disable(String id) {
+    @PutMapping("tenants/disable/{id}")
+    public Boolean disable(@PathVariable String id) {
         tenantApplicationService.disable(id);
         return Boolean.TRUE;
     }

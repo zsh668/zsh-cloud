@@ -67,7 +67,7 @@ public class RoleDTO extends DTO {
      * 是否内置.
      */
     @ApiModelProperty(value = "是否内置")
-    private Integer readonly;
+    private Boolean readonly;
     
     /**
      * 是否内置 1是 0否.

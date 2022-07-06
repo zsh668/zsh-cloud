@@ -42,7 +42,7 @@ public class MenuDTO extends DTO {
      * 是否公开菜单 1是，0否.
      */
     @ApiModelProperty(value = "是否公开菜单")
-    private Integer isPublic;
+    private Boolean isPublic;
     
     /**
      * 对应路由path.

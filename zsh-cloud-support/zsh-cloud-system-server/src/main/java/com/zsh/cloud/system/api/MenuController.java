@@ -126,8 +126,8 @@ public class MenuController {
      */
     @ApiOperation("开启、禁用菜单")
     @SysLog("开启、禁用菜单")
-    @PutMapping("menus/disable")
-    public Boolean disable(String id) {
+    @PutMapping("menus/disable/{id}")
+    public Boolean disable(@PathVariable String id) {
         menuApplicationService.disable(id);
         return Boolean.TRUE;
     }

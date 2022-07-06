@@ -49,7 +49,7 @@ public class StationUpdateCommand extends Command {
      */
     @ApiModelProperty(value = "排序")
     @NotNull(message = "排序不能为空")
-    private Integer orderNum;
+    private Integer sortValue;
     
     /**
      * 功能描述.

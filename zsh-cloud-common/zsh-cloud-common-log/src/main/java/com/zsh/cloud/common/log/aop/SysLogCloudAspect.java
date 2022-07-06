@@ -32,7 +32,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * 系统日志，切面处理类（集群）.
+ * 系统日志，切面处理类（Dubbo服务处理）.
  *
  * @author zhangshuhang
  * @version 1.0

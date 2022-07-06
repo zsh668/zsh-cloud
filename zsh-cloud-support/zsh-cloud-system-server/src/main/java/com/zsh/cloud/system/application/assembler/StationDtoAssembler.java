@@ -65,7 +65,7 @@ public interface StationDtoAssembler {
                 .setStationName(station.getStationName() == null ? "" : station.getStationName().getName())
                 .setOrgId(station.getOrgId() == null ? "" : station.getOrgId().getId())
                 .setStatus(station.getStatus() == null ? null : station.getStatus().getCode())
-                .setOrderNum(station.getOrderNum()).setDescribe(station.getDescribe());
+                .setSortValue(station.getSortValue()).setDescribe(station.getDescribe());
         return stationDto;
     }
     
@@ -81,7 +81,7 @@ public interface StationDtoAssembler {
             orgId = Org.PARENT_ID;
         }
         return new Station(new StationName(stationCommand.getStationName()), new OrgId(orgId),
-                stationCommand.getOrderNum(), stationCommand.getDescribe());
+                stationCommand.getSortValue(), stationCommand.getDescribe());
     }
     
     /**
@@ -96,6 +96,6 @@ public interface StationDtoAssembler {
             orgId = Org.PARENT_ID;
         }
         return new Station(new StationId(stationCommand.getId()), new StationName(stationCommand.getStationName()),
-                new OrgId(orgId), stationCommand.getOrderNum(), null, stationCommand.getDescribe());
+                new OrgId(orgId), stationCommand.getSortValue(), null, stationCommand.getDescribe());
     }
 }

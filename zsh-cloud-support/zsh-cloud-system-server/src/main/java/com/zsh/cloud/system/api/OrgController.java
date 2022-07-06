@@ -121,8 +121,8 @@ public class OrgController {
      */
     @ApiOperation("开启、禁用组织")
     @SysLog("开启、禁用组织")
-    @PutMapping("orgs/disable")
-    public Boolean disable(String id) {
+    @PutMapping("orgs/disable/{id}")
+    public Boolean disable(@PathVariable String id) {
         orgApplicationService.disable(id);
         return Boolean.TRUE;
     }
