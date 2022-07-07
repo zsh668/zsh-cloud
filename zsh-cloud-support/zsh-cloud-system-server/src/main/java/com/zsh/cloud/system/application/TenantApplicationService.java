@@ -1,7 +1,7 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.command.TenantCreateCommand;
-import com.zsh.cloud.system.application.command.TenantUpdateCommand;
+import com.zsh.cloud.system.application.model.command.TenantCreateCommand;
+import com.zsh.cloud.system.application.model.command.TenantUpdateCommand;
 
 import java.util.List;
 

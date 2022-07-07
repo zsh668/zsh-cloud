@@ -2,8 +2,8 @@ package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.system.application.StationApplicationService;
 import com.zsh.cloud.system.application.assembler.StationDtoAssembler;
-import com.zsh.cloud.system.application.command.StationCreateCommand;
-import com.zsh.cloud.system.application.command.StationUpdateCommand;
+import com.zsh.cloud.system.application.model.command.StationCreateCommand;
+import com.zsh.cloud.system.application.model.command.StationUpdateCommand;
 import com.zsh.cloud.system.domain.model.station.Station;
 import com.zsh.cloud.system.domain.model.station.StationId;
 import com.zsh.cloud.system.domain.model.station.StationRepository;

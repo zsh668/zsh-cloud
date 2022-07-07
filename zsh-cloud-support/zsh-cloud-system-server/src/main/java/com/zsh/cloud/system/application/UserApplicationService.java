@@ -1,8 +1,8 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.command.PasswordCommand;
-import com.zsh.cloud.system.application.command.UserCreateCommand;
-import com.zsh.cloud.system.application.command.UserUpdateCommand;
+import com.zsh.cloud.system.application.model.command.PasswordCommand;
+import com.zsh.cloud.system.application.model.command.UserCreateCommand;
+import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 
 import java.util.List;
 

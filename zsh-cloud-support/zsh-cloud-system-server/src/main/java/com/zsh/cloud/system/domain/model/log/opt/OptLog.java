@@ -6,6 +6,7 @@ import com.zsh.cloud.system.domain.model.log.LogId;
 import com.zsh.cloud.system.domain.model.tenant.TenantId;
 import com.zsh.cloud.system.domain.model.user.UserName;
 import lombok.Getter;
+import org.springframework.http.HttpMethod;
 
 import java.time.LocalDateTime;
 
@@ -62,7 +63,7 @@ public class OptLog implements Entity<OptLog> {
     /**
      * 请求类型. #HttpMethod{GET:GET请求;POST:POST请求;PUT:PUT请求;DELETE:DELETE请求;PATCH:PATCH请求;TRACE:TRACE请求;HEAD:HEAD请求;OPTIONS:OPTIONS请求;}
      */
-    private String httpMethod;
+    private HttpMethod httpMethod;
     
     /**
      * 请求参数.
@@ -110,7 +111,7 @@ public class OptLog implements Entity<OptLog> {
     private TenantId tenantId;
     
     public OptLog(String requestIp, LogTypeEnum type, UserName userName, String description, String classPath,
-            String actionMethod, String requestUri, String httpMethod, String params, String result, String exDesc,
+            String actionMethod, String requestUri, HttpMethod httpMethod, String params, String result, String exDesc,
             String exDetail, LocalDateTime startTime, LocalDateTime finishTime, Long consumingTime, String ua,
             TenantId tenantId) {
         this.requestIp = requestIp;
@@ -130,6 +131,29 @@ public class OptLog implements Entity<OptLog> {
         this.consumingTime = consumingTime;
         this.ua = ua;
         this.tenantId = tenantId;
+    }
+    
+    public OptLog(LogId logId, String requestIp, LogTypeEnum type, UserName userName, String description,
+            String classPath, String actionMethod, String requestUri, HttpMethod httpMethod, String params,
+            String result, String exDesc, String exDetail, LocalDateTime startTime, LocalDateTime finishTime,
+            Long consumingTime, String ua) {
+        this.logId = logId;
+        this.requestIp = requestIp;
+        this.type = type;
+        this.userName = userName;
+        this.description = description;
+        this.classPath = classPath;
+        this.actionMethod = actionMethod;
+        this.requestUri = requestUri;
+        this.httpMethod = httpMethod;
+        this.params = params;
+        this.result = result;
+        this.exDesc = exDesc;
+        this.exDetail = exDetail;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+        this.consumingTime = consumingTime;
+        this.ua = ua;
     }
     
     @Override

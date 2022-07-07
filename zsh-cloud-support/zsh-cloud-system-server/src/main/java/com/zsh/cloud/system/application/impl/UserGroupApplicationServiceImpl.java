@@ -2,14 +2,11 @@ package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.system.application.UserGroupApplicationService;
 import com.zsh.cloud.system.application.assembler.UserGroupDtoAssembler;
-import com.zsh.cloud.system.application.command.UserGroupCreateCommand;
-import com.zsh.cloud.system.application.command.UserGroupUpdateCommand;
-import com.zsh.cloud.system.domain.model.user.User;
-import com.zsh.cloud.system.domain.model.user.UserId;
+import com.zsh.cloud.system.application.model.command.UserGroupCreateCommand;
+import com.zsh.cloud.system.application.model.command.UserGroupUpdateCommand;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroup;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupId;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupRepository;
-import com.zsh.cloud.system.domain.specification.UserDeleteSpecification;
 import com.zsh.cloud.system.domain.specification.UserGroupCreateSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

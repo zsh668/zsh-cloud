@@ -1,7 +1,7 @@
 package com.zsh.cloud.system;
 
 import com.zsh.cloud.common.core.util.ListUtils;
-import com.zsh.cloud.system.application.dto.OrgTreeDTO;
+import com.zsh.cloud.system.application.model.dto.OrgTreeDTO;
 
 import java.util.ArrayList;
 import java.util.List;

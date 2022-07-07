@@ -36,6 +36,8 @@ public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     USER_ACCOUNT_EXISTS(1000001003, "账号已存在"),
     USER_VERIFICATION_ERROR(1000001004, "验证不通过"),
     USER_NOT_ENABLE(1000001005, "用户被禁用，请联系管理员"),
+    USER_ACCOUNT_PASSWORD_ERROR(1000001006, "账号密码不正确"),
+    USER_ACCOUNT_PASSWORD_LOCK_ERROR(1000001007, "密码连续输错次数已达到5次,用户已被锁定1小时"),
     
     // 模块 system 【000】 角色 【002】 错误码 【000~999】
     ROLE_NOT_EXISTS(1000002000, "角色不存在"),

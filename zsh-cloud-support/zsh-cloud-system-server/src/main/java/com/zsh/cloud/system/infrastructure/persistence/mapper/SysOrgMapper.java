@@ -2,7 +2,7 @@ package com.zsh.cloud.system.infrastructure.persistence.mapper;
 
 import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
 import com.zsh.cloud.common.mybatis.util.Wraps;
-import com.zsh.cloud.system.application.query.OrgPageQuery;
+import com.zsh.cloud.system.application.model.query.OrgPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysOrgDO;
 import org.apache.ibatis.annotations.Mapper;
 

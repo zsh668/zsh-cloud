@@ -1,9 +1,9 @@
 package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.application.dto.TenantDTO;
-import com.zsh.cloud.system.application.dto.TenantPageDTO;
-import com.zsh.cloud.system.application.query.TenantPageQuery;
+import com.zsh.cloud.system.application.model.dto.TenantDTO;
+import com.zsh.cloud.system.application.model.dto.TenantPageDTO;
+import com.zsh.cloud.system.application.model.query.TenantPageQuery;
 
 /**
  * 租户查询服务接口.

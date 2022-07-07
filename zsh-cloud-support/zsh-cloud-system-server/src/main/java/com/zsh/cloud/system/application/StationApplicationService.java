@@ -1,7 +1,7 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.command.StationCreateCommand;
-import com.zsh.cloud.system.application.command.StationUpdateCommand;
+import com.zsh.cloud.system.application.model.command.StationCreateCommand;
+import com.zsh.cloud.system.application.model.command.StationUpdateCommand;
 
 import java.util.List;
 

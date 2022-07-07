@@ -44,7 +44,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         Captcha captcha = new ArithmeticCaptcha(115, 42);
         captcha.setCharType(2);
         // 保存
-        cache.set(CacheKey.CAPTCHA, uuid, StringUtils.lowerCase(captcha.text()), 5 * 60L);
+        cache.set(CacheKey.CAPTCHA, uuid, StringUtils.lowerCase(captcha.text()));
         return captcha;
     }
     

@@ -1,8 +1,8 @@
 package com.zsh.cloud.wx.api;
 
 import com.zsh.cloud.wx.application.WechatService;
-import com.zsh.cloud.wx.application.query.WechatCheckSignatureQuery;
-import com.zsh.cloud.wx.application.query.WechatMessageQuery;
+import com.zsh.cloud.wx.application.model.query.WechatCheckSignatureQuery;
+import com.zsh.cloud.wx.application.model.query.WechatMessageQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

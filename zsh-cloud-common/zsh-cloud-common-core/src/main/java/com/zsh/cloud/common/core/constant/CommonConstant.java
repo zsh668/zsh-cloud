@@ -17,7 +17,7 @@ public interface CommonConstant {
     /**
      * 用户名
      */
-    String USER_NAME = "username";
+    String USER_NAME = "userName";
     
     /**
      * 租户ID

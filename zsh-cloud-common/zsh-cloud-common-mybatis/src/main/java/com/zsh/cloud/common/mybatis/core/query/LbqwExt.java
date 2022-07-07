@@ -4,9 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import lombok.val;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
 
 /**
@@ -165,6 +169,68 @@ public class LbqwExt<T> extends LambdaQueryWrapper<T> {
             return (LbqwExt<T>) le(column, val2);
         }
         return this;
+    }
+    
+    /**
+     * 大于等于 >=（时间）
+     *
+     * @param column
+     * @param val    时间
+     * @return
+     */
+    public LbqwExt<T> geHeaderIfPresent(SFunction<T, ?> column, LocalDateTime val) {
+        if (ObjectUtils.isEmpty(val)) {
+            return this;
+        }
+        if (val != null) {
+            val = LocalDateTime.of(val.toLocalDate(), LocalTime.MIN);
+        }
+        return (LbqwExt<T>) ge(column, val);
+    }
+    
+    /**
+     * 大于等于 >=（时间）
+     *
+     * @param column
+     * @param val    日期
+     * @return
+     */
+    public LbqwExt<T> geHeaderIfPresent(SFunction<T, ?> column, LocalDate val) {
+        if (ObjectUtils.isEmpty(val)) {
+            return this;
+        }
+        LocalDateTime dateTime = LocalDateTime.of(val, LocalTime.MIN);
+        return (LbqwExt<T>) ge(column, val);
+    }
+    
+    /**
+     * 小于等于 <=（时间）
+     *
+     * @param column
+     * @param val    时间
+     * @return
+     */
+    public LbqwExt<T> leFooterIfPresent(SFunction<T, ?> column, LocalDateTime val) {
+        if (ObjectUtils.isEmpty(val)) {
+            return this;
+        }
+        val = LocalDateTime.of(val.toLocalDate(), LocalTime.MAX);
+        return (LbqwExt<T>) le(column, val);
+    }
+    
+    /**
+     * 小于等于 <=（时间）
+     *
+     * @param column
+     * @param val    日期
+     * @return
+     */
+    public LbqwExt<T> leFooterIfPresent(SFunction<T, ?> column, LocalDate val) {
+        if (ObjectUtils.isEmpty(val)) {
+            return this;
+        }
+        LocalDateTime dateTime = LocalDateTime.of(val, LocalTime.MAX);
+        return (LbqwExt<T>) le(column, dateTime);
     }
     
     // ========== 重写父类方法，方便链式调用 ==========

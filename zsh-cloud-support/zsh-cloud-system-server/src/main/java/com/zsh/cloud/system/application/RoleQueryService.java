@@ -1,10 +1,10 @@
 package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.application.dto.RoleAuthorityDTO;
-import com.zsh.cloud.system.application.dto.RoleDTO;
-import com.zsh.cloud.system.application.dto.RolePageDTO;
-import com.zsh.cloud.system.application.query.RolePageQuery;
+import com.zsh.cloud.system.application.model.dto.RoleAuthorityDTO;
+import com.zsh.cloud.system.application.model.dto.RoleDTO;
+import com.zsh.cloud.system.application.model.dto.RolePageDTO;
+import com.zsh.cloud.system.application.model.query.RolePageQuery;
 
 import java.util.List;
 

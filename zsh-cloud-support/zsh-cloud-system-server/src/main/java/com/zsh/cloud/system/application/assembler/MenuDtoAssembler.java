@@ -2,12 +2,12 @@ package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.enums.BooleanEnum;
-import com.zsh.cloud.system.application.command.MenuCreateCommand;
-import com.zsh.cloud.system.application.command.MenuUpdateCommand;
-import com.zsh.cloud.system.application.dto.MenuDTO;
-import com.zsh.cloud.system.application.dto.MenuResourceTreeDTO;
-import com.zsh.cloud.system.application.dto.MenuTreeDTO;
-import com.zsh.cloud.system.application.dto.VueRouterDTO;
+import com.zsh.cloud.system.application.model.command.MenuCreateCommand;
+import com.zsh.cloud.system.application.model.command.MenuUpdateCommand;
+import com.zsh.cloud.system.application.model.dto.MenuDTO;
+import com.zsh.cloud.system.application.model.dto.MenuResourceTreeDTO;
+import com.zsh.cloud.system.application.model.dto.MenuTreeDTO;
+import com.zsh.cloud.system.application.model.dto.VueRouterDTO;
 import com.zsh.cloud.system.domain.model.menu.Menu;
 import com.zsh.cloud.system.domain.model.menu.MenuId;
 import com.zsh.cloud.system.domain.model.menu.MenuName;

@@ -1,7 +1,7 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.command.MenuCreateCommand;
-import com.zsh.cloud.system.application.command.MenuUpdateCommand;
+import com.zsh.cloud.system.application.model.command.MenuCreateCommand;
+import com.zsh.cloud.system.application.model.command.MenuUpdateCommand;
 
 import java.util.List;
 

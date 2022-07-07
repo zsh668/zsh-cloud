@@ -9,6 +9,7 @@ import com.zsh.cloud.common.core.constant.CacheKey;
 import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
 import com.zsh.cloud.gateway.util.WebUtils;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import net.oschina.j2cache.CacheChannel;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 /**
  * 全局过滤器.
  *
@@ -28,6 +33,7 @@ import reactor.core.publisher.Mono;
  * @version 1.0
  * @date 2022/4/22 11:35
  */
+@Slf4j
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
     
@@ -57,7 +63,11 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         if (isBlack) {
             return WebUtils.getAuthFailResult(response, GlobalErrorCode.UNAUTHORIZED.getCode());
         }
-        
+        try {
+            payload = URLEncoder.encode(payload, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            log.error("转义异常", e);
+        }
         // 存在token且不是黑名单，request写入JWT的载体信息
         request = exchange.getRequest().mutate().header(AuthConstants.JWT_PAYLOAD_KEY, payload).build();
         exchange = exchange.mutate().request(request).build();

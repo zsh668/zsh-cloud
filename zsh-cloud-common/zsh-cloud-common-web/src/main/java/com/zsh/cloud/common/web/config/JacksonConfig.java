@@ -51,7 +51,7 @@ public class JacksonConfig {
     @Primary
     @ConditionalOnMissingBean
     public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
-        builder.simpleDateFormat(DateUtil.FULL_TIME_SPLIT_PATTERN);
+        builder.simpleDateFormat(DateUtil.DEFAULT_DATE_TIME_FORMAT);
         ObjectMapper objectMapper = builder.createXmlMapper(false)
                 .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .timeZone(TimeZone.getTimeZone("Asia/Shanghai")).build();
@@ -67,7 +67,7 @@ public class JacksonConfig {
                 // 单引号处理
                 .configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true)
                 // 日期格式
-                .setDateFormat(new SimpleDateFormat(DateUtil.FULL_TIME_SPLIT_PATTERN));
+                .setDateFormat(new SimpleDateFormat(DateUtil.DEFAULT_DATE_TIME_FORMAT));
         
         // 反序列化时，属性不存在的兼容处理
         objectMapper.getDeserializationConfig().withoutFeatures(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);

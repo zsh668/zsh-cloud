@@ -1,11 +1,11 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.dto.MenuDTO;
-import com.zsh.cloud.system.application.dto.MenuResourceTreeDTO;
-import com.zsh.cloud.system.application.dto.MenuTreeDTO;
-import com.zsh.cloud.system.application.dto.VueRouterDTO;
-import com.zsh.cloud.system.application.query.MenuPageQuery;
-import com.zsh.cloud.system.application.query.RouterQuery;
+import com.zsh.cloud.system.application.model.dto.MenuDTO;
+import com.zsh.cloud.system.application.model.dto.MenuResourceTreeDTO;
+import com.zsh.cloud.system.application.model.dto.MenuTreeDTO;
+import com.zsh.cloud.system.application.model.dto.VueRouterDTO;
+import com.zsh.cloud.system.application.model.query.MenuPageQuery;
+import com.zsh.cloud.system.application.model.query.RouterQuery;
 
 import java.util.List;
 

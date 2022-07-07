@@ -1,7 +1,7 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.command.ResourceCreateCommand;
-import com.zsh.cloud.system.application.command.ResourceUpdateCommand;
+import com.zsh.cloud.system.application.model.command.ResourceCreateCommand;
+import com.zsh.cloud.system.application.model.command.ResourceUpdateCommand;
 
 import java.util.List;
 
