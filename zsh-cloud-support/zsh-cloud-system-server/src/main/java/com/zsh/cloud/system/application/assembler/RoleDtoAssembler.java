@@ -1,12 +1,10 @@
 package com.zsh.cloud.system.application.assembler;
 
-import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
-import com.zsh.cloud.system.application.command.RoleCreateCommand;
-import com.zsh.cloud.system.application.command.RoleUpdateCommand;
-import com.zsh.cloud.system.application.dto.RoleDTO;
-import com.zsh.cloud.system.application.dto.RolePageDTO;
+import com.zsh.cloud.system.application.model.command.RoleCreateCommand;
+import com.zsh.cloud.system.application.model.command.RoleUpdateCommand;
+import com.zsh.cloud.system.application.model.dto.RoleDTO;
+import com.zsh.cloud.system.application.model.dto.RolePageDTO;
 import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.role.Role;
 import com.zsh.cloud.system.domain.model.role.RoleCode;

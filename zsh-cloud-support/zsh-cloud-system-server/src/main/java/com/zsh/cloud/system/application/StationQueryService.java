@@ -1,9 +1,9 @@
 package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.application.dto.StationDTO;
-import com.zsh.cloud.system.application.dto.StationPageDTO;
-import com.zsh.cloud.system.application.query.StationPageQuery;
+import com.zsh.cloud.system.application.model.dto.StationDTO;
+import com.zsh.cloud.system.application.model.dto.StationPageDTO;
+import com.zsh.cloud.system.application.model.query.StationPageQuery;
 
 /**
  * 岗位查询服务接口.

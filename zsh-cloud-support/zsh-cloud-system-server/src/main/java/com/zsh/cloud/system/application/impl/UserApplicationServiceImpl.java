@@ -2,9 +2,9 @@ package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.assembler.UserDtoAssembler;
-import com.zsh.cloud.system.application.command.PasswordCommand;
-import com.zsh.cloud.system.application.command.UserCreateCommand;
-import com.zsh.cloud.system.application.command.UserUpdateCommand;
+import com.zsh.cloud.system.application.model.command.PasswordCommand;
+import com.zsh.cloud.system.application.model.command.UserCreateCommand;
+import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 import com.zsh.cloud.system.domain.model.tenant.TenantRepository;
 import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserId;

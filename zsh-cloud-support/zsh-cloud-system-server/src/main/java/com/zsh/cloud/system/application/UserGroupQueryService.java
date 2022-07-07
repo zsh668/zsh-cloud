@@ -1,9 +1,9 @@
 package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.application.dto.UserGroupDTO;
-import com.zsh.cloud.system.application.dto.UserGroupPageDTO;
-import com.zsh.cloud.system.application.query.UserGroupPageQuery;
+import com.zsh.cloud.system.application.model.dto.UserGroupDTO;
+import com.zsh.cloud.system.application.model.dto.UserGroupPageDTO;
+import com.zsh.cloud.system.application.model.query.UserGroupPageQuery;
 
 /**
  * 用户组查询服务接口.

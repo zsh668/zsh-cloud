@@ -6,27 +6,22 @@ import com.zsh.cloud.common.mybatis.datascope.domain.DataPermission;
 import com.zsh.cloud.system.application.ResourceQueryService;
 import com.zsh.cloud.system.application.UserQueryService;
 import com.zsh.cloud.system.application.assembler.UserDtoAssembler;
-import com.zsh.cloud.system.application.dto.LoginDTO;
-import com.zsh.cloud.system.application.dto.UserDTO;
-import com.zsh.cloud.system.application.dto.UserInfoDTO;
-import com.zsh.cloud.system.application.dto.UserPageDTO;
-import com.zsh.cloud.system.application.query.UserPageQuery;
+import com.zsh.cloud.system.application.model.dto.LoginDTO;
+import com.zsh.cloud.system.application.model.dto.UserDTO;
+import com.zsh.cloud.system.application.model.dto.UserPageDTO;
+import com.zsh.cloud.system.application.model.query.UserPageQuery;
 import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysResourceDO;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
-import com.zsh.cloud.system.infrastructure.persistence.mapper.SysResourceMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**

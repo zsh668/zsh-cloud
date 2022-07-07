@@ -1,7 +1,7 @@
 package com.zsh.cloud.wx.application;
 
-import com.zsh.cloud.wx.application.query.WechatMessageQuery;
-import com.zsh.cloud.wx.application.query.WechatSignatureQuery;
+import com.zsh.cloud.wx.application.model.query.WechatMessageQuery;
+import com.zsh.cloud.wx.application.model.query.WechatSignatureQuery;
 
 /**
  * @author hang

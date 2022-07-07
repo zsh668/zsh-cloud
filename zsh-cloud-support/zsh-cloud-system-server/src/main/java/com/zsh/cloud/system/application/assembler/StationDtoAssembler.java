@@ -1,10 +1,10 @@
 package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.application.command.StationCreateCommand;
-import com.zsh.cloud.system.application.command.StationUpdateCommand;
-import com.zsh.cloud.system.application.dto.StationDTO;
-import com.zsh.cloud.system.application.dto.StationPageDTO;
+import com.zsh.cloud.system.application.model.command.StationCreateCommand;
+import com.zsh.cloud.system.application.model.command.StationUpdateCommand;
+import com.zsh.cloud.system.application.model.dto.StationDTO;
+import com.zsh.cloud.system.application.model.dto.StationPageDTO;
 import com.zsh.cloud.system.domain.model.org.Org;
 import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.station.Station;

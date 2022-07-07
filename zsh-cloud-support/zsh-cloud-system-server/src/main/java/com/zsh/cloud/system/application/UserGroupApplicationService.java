@@ -1,7 +1,7 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.command.UserGroupCreateCommand;
-import com.zsh.cloud.system.application.command.UserGroupUpdateCommand;
+import com.zsh.cloud.system.application.model.command.UserGroupCreateCommand;
+import com.zsh.cloud.system.application.model.command.UserGroupUpdateCommand;
 
 import java.util.List;
 

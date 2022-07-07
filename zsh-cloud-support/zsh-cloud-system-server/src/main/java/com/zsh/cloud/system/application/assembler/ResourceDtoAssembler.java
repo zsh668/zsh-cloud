@@ -1,10 +1,10 @@
 package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.application.command.ResourceCreateCommand;
-import com.zsh.cloud.system.application.command.ResourceUpdateCommand;
-import com.zsh.cloud.system.application.dto.ResourceDTO;
-import com.zsh.cloud.system.application.dto.ResourcePageDTO;
+import com.zsh.cloud.system.application.model.command.ResourceCreateCommand;
+import com.zsh.cloud.system.application.model.command.ResourceUpdateCommand;
+import com.zsh.cloud.system.application.model.dto.ResourceDTO;
+import com.zsh.cloud.system.application.model.dto.ResourcePageDTO;
 import com.zsh.cloud.system.domain.model.menu.MenuId;
 import com.zsh.cloud.system.domain.model.resource.Resource;
 import com.zsh.cloud.system.domain.model.resource.ResourceCode;

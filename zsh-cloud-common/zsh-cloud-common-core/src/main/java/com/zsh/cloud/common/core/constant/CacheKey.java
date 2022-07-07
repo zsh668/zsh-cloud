@@ -38,6 +38,16 @@ public interface CacheKey {
     String REPEAT_REQUEST_REDIS_KEY = "repeat_request_redis_key:";
     
     /**
+     * 登录用户 前缀
+     */
+    String LOGIN_USER_NAME_KEY = "login_user_name_key";
+    
+    /**
+     * 登录用户锁 前缀
+     */
+    String LOGIN_USER_NAME_LOCK_KEY = "login_user_name_lock_key";
+    
+    /**
      * 构建key
      */
     static String buildKey(Object... args) {

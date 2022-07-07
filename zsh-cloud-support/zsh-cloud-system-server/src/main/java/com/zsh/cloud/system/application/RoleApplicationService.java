@@ -1,8 +1,8 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.command.RoleAuthorityCommand;
-import com.zsh.cloud.system.application.command.RoleCreateCommand;
-import com.zsh.cloud.system.application.command.RoleUpdateCommand;
+import com.zsh.cloud.system.application.model.command.RoleAuthorityCommand;
+import com.zsh.cloud.system.application.model.command.RoleCreateCommand;
+import com.zsh.cloud.system.application.model.command.RoleUpdateCommand;
 
 import java.util.List;
 

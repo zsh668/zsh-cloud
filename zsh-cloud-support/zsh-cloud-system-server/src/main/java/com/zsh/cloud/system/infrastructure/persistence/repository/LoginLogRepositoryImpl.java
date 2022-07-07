@@ -2,6 +2,7 @@ package com.zsh.cloud.system.infrastructure.persistence.repository;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zsh.cloud.system.domain.model.log.LogId;
 import com.zsh.cloud.system.domain.model.log.login.LoginLog;
 import com.zsh.cloud.system.domain.model.log.login.LoginLogRepository;
 import com.zsh.cloud.system.infrastructure.persistence.converter.LoginLogConverter;
@@ -11,6 +12,10 @@ import com.zsh.cloud.system.infrastructure.persistence.mapper.SysLoginLogMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 登录日志-Repository实现类.
@@ -29,8 +34,9 @@ public class LoginLogRepositoryImpl extends ServiceImpl<SysLoginLogMapper, SysLo
     @Override
     public void store(LoginLog loginLog) {
         SysLoginLogDO sysLoginLogDO = LoginLogConverter.fromLoginLog(loginLog);
-        SysUserDO sysUserDO = sysUserMapper.selectOne(SysUserDO::getAccount, sysLoginLogDO.getAccount());
-        if (sysUserDO != null) {
+        List<SysUserDO> users = sysUserMapper.queryUserNoTenantByAccount(sysLoginLogDO.getAccount());
+        if (!CollectionUtils.isEmpty(users)) {
+            SysUserDO sysUserDO = users.get(0);
             sysLoginLogDO.setUserId(sysUserDO.getId());
             sysLoginLogDO.setUserName(sysUserDO.getUserName());
         }
@@ -39,5 +45,18 @@ public class LoginLogRepositoryImpl extends ServiceImpl<SysLoginLogMapper, SysLo
         } else {
             this.updateById(sysLoginLogDO);
         }
+    }
+    
+    @Override
+    public LoginLog find(LogId logId) {
+        SysLoginLogDO sysLoginLogDO = baseMapper.selectById(logId.getId());
+        return LoginLogConverter.toLoginLog(sysLoginLogDO);
+    }
+    
+    @Override
+    public void remove(List<LogId> logIds) {
+        List<String> ids = new ArrayList<>();
+        logIds.forEach(logId -> ids.add(logId.getId()));
+        this.removeByIds(ids);
     }
 }

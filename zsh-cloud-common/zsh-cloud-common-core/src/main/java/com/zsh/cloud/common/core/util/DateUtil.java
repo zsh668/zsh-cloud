@@ -20,11 +20,38 @@ public class DateUtil {
     
     public static final String FULL_TIME_PATTERN = "yyyyMMddHHmmss";
     
-    public static final String FULL_TIME_SPLIT_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    
+    public static final String DEFAULT_DATE_HOUR_MINUTE_FORMAT = "yyyy-MM-dd HH:mm";
+    
+    public static final String DEFAULT_DATE_HOUR_FORMAT = "yyyy-MM-dd HH";
     
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     
+    public static final String DEFAULT_MONTH_FORMAT = "yyyy-MM";
+    
+    public static final String DEFAULT_YEAR_FORMAT = "yyyy";
+    
     public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
+    
+    public static final String DEFAULT_DATE_TIME_FORMAT_SLASH = "yyyy/MM/dd HH:mm:ss";
+    
+    public static final String DEFAULT_DATE_HOUR_MINUTE_FORMAT_SLASH = "yyyy/MM/dd HH:mm";
+    
+    public static final String DEFAULT_DATE_HOUR_FORMAT_SLASH = "yyyy/MM/dd HH";
+    
+    public static final String DEFAULT_DATE_FORMAT_SLASH = "yyyy/MM/dd";
+    
+    public static final String DEFAULT_MONTH_FORMAT_SLASH = "yyyy/MM";
+    
+    public static final String DEFAULT_MONTH_FORMAT_EN = "yyyy年MM月";
+    
+    public static final String DEFAULT_WEEK_FORMAT = "yyyy-ww";
+    
+    public static final String DEFAULT_WEEK_FORMAT_EN = "yyyy年ww周";
+    
+    public static final String DEFAULT_DATE_FORMAT_EN = "yyyy年MM月dd日";
+    
     
     /**
      * 格式化日期, 返回格式为 yyyy-MM-dd
@@ -47,7 +74,7 @@ public class DateUtil {
             date = LocalDateTime.now();
         }
         if (pattern == null) {
-            pattern = FULL_TIME_SPLIT_PATTERN;
+            pattern = DEFAULT_DATE_TIME_FORMAT;
         }
         return date.format(DateTimeFormatter.ofPattern(pattern));
     }

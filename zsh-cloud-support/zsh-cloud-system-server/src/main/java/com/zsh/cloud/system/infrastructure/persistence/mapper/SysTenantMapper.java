@@ -3,7 +3,7 @@ package com.zsh.cloud.system.infrastructure.persistence.mapper;
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
 import com.zsh.cloud.common.mybatis.util.Wraps;
-import com.zsh.cloud.system.application.query.TenantPageQuery;
+import com.zsh.cloud.system.application.model.query.TenantPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysTenantDO;
 import org.apache.ibatis.annotations.Mapper;
 

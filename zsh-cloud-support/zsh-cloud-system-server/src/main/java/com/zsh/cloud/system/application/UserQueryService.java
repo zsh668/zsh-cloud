@@ -2,10 +2,10 @@ package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.mybatis.datascope.domain.DataPermission;
-import com.zsh.cloud.system.application.dto.LoginDTO;
-import com.zsh.cloud.system.application.dto.UserDTO;
-import com.zsh.cloud.system.application.dto.UserPageDTO;
-import com.zsh.cloud.system.application.query.UserPageQuery;
+import com.zsh.cloud.system.application.model.dto.LoginDTO;
+import com.zsh.cloud.system.application.model.dto.UserDTO;
+import com.zsh.cloud.system.application.model.dto.UserPageDTO;
+import com.zsh.cloud.system.application.model.query.UserPageQuery;
 
 /**
  * 用户查询服务接口.

@@ -2,8 +2,8 @@ package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.system.application.ResourceApplicationService;
 import com.zsh.cloud.system.application.assembler.ResourceDtoAssembler;
-import com.zsh.cloud.system.application.command.ResourceCreateCommand;
-import com.zsh.cloud.system.application.command.ResourceUpdateCommand;
+import com.zsh.cloud.system.application.model.command.ResourceCreateCommand;
+import com.zsh.cloud.system.application.model.command.ResourceUpdateCommand;
 import com.zsh.cloud.system.domain.model.menu.MenuRepository;
 import com.zsh.cloud.system.domain.model.resource.Resource;
 import com.zsh.cloud.system.domain.model.resource.ResourceId;

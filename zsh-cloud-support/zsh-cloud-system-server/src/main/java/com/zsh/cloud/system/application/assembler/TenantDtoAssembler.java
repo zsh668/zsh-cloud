@@ -1,10 +1,10 @@
 package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.application.command.TenantCreateCommand;
-import com.zsh.cloud.system.application.command.TenantUpdateCommand;
-import com.zsh.cloud.system.application.dto.TenantDTO;
-import com.zsh.cloud.system.application.dto.TenantPageDTO;
+import com.zsh.cloud.system.application.model.command.TenantCreateCommand;
+import com.zsh.cloud.system.application.model.command.TenantUpdateCommand;
+import com.zsh.cloud.system.application.model.dto.TenantDTO;
+import com.zsh.cloud.system.application.model.dto.TenantPageDTO;
 import com.zsh.cloud.system.domain.model.tenant.Tenant;
 import com.zsh.cloud.system.domain.model.tenant.TenantCode;
 import com.zsh.cloud.system.domain.model.tenant.TenantId;

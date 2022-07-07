@@ -1,9 +1,9 @@
 package com.zsh.cloud.system.application.assembler;
 
-import com.zsh.cloud.system.application.command.OrgCreateCommand;
-import com.zsh.cloud.system.application.command.OrgUpdateCommand;
-import com.zsh.cloud.system.application.dto.OrgDTO;
-import com.zsh.cloud.system.application.dto.OrgTreeDTO;
+import com.zsh.cloud.system.application.model.command.OrgCreateCommand;
+import com.zsh.cloud.system.application.model.command.OrgUpdateCommand;
+import com.zsh.cloud.system.application.model.dto.OrgDTO;
+import com.zsh.cloud.system.application.model.dto.OrgTreeDTO;
 import com.zsh.cloud.system.domain.model.org.Org;
 import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.org.OrgName;

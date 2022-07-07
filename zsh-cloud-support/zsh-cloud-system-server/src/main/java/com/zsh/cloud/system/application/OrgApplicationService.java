@@ -1,7 +1,7 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.command.OrgCreateCommand;
-import com.zsh.cloud.system.application.command.OrgUpdateCommand;
+import com.zsh.cloud.system.application.model.command.OrgCreateCommand;
+import com.zsh.cloud.system.application.model.command.OrgUpdateCommand;
 
 import java.util.List;
 

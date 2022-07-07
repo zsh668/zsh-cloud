@@ -5,9 +5,8 @@ import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
 import com.zsh.cloud.common.mybatis.datascope.annotations.DataScope;
 import com.zsh.cloud.common.mybatis.util.Wraps;
-import com.zsh.cloud.system.application.query.UserPageQuery;
+import com.zsh.cloud.system.application.model.query.UserPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserGroupDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

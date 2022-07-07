@@ -1,9 +1,9 @@
 package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.application.dto.ResourceDTO;
-import com.zsh.cloud.system.application.dto.ResourcePageDTO;
-import com.zsh.cloud.system.application.query.ResourcePageQuery;
+import com.zsh.cloud.system.application.model.dto.ResourceDTO;
+import com.zsh.cloud.system.application.model.dto.ResourcePageDTO;
+import com.zsh.cloud.system.application.model.query.ResourcePageQuery;
 
 import java.util.List;
 import java.util.Set;

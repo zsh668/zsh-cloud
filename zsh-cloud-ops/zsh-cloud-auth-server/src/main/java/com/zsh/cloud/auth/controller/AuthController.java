@@ -1,5 +1,8 @@
 package com.zsh.cloud.auth.controller;
 
+import com.zsh.cloud.auth.sevice.LoginService;
+import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
+import com.zsh.cloud.common.core.util.Assert;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -33,6 +36,9 @@ public class AuthController {
     @Autowired
     private TokenEndpoint tokenEndpoint;
     
+    @Autowired
+    private LoginService loginService;
+    
     /**
      * 登录.
      *
@@ -50,10 +56,20 @@ public class AuthController {
             @ApiImplicitParam(name = "refresh_token", value = "刷新token"),
             @ApiImplicitParam(name = "username", defaultValue = "admin", value = "登录用户名"),
             @ApiImplicitParam(name = "password", defaultValue = "123456", value = "登录密码")})
-    public OAuth2AccessToken postAccessToken(Principal principal, @RequestParam Map<String, String> parameters)
-            throws HttpRequestMethodNotSupportedException {
-        OAuth2AccessToken accessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
-        return accessToken;
+    public OAuth2AccessToken postAccessToken(Principal principal, @RequestParam Map<String, String> parameters) {
+        try {
+            OAuth2AccessToken accessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
+            // 重置 错误次数
+            loginService.restErrorNum(parameters.get("username"));
+            return accessToken;
+        } catch (Exception e) {
+            // 更新 错误次数
+            loginService.updateErrorNum(parameters.get("username"));
+            Object obj = loginService.getLock(parameters.get("username"));
+            Assert.isTrue(obj == null, ServiceErrorCode.USER_ACCOUNT_PASSWORD_LOCK_ERROR);
+            Assert.notTrue(obj == null, ServiceErrorCode.USER_ACCOUNT_PASSWORD_ERROR);
+        }
+        return null;
     }
     
 }

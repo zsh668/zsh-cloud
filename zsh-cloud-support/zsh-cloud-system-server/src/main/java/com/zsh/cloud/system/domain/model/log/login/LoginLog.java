@@ -92,6 +92,23 @@ public class LoginLog implements Entity<LoginLog> {
         this.location = location;
     }
     
+    public LoginLog(LogId logId, String requestIp, UserId userId, UserName userName, Account account,
+            String description, LocalDateTime loginTime, String ua, String browser, String browserVersion,
+            String operatingSystem, String location) {
+        this.logId = logId;
+        this.requestIp = requestIp;
+        this.userId = userId;
+        this.userName = userName;
+        this.account = account;
+        this.description = description;
+        this.loginTime = loginTime;
+        this.ua = ua;
+        this.browser = browser;
+        this.browserVersion = browserVersion;
+        this.operatingSystem = operatingSystem;
+        this.location = location;
+    }
+    
     @Override
     public boolean sameIdentityAs(LoginLog other) {
         return other != null && logId.sameValueAs(other.logId);

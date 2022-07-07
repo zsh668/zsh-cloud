@@ -1,6 +1,7 @@
 package com.zsh.cloud.auth.sevice.impl;
 
 import com.zsh.cloud.auth.domain.User;
+import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
 import com.zsh.cloud.system.api.dto.AuthenticationDTO;
 import com.zsh.cloud.system.api.dubbo.AuthenticationDubboService;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -28,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (authenticationDTO != null) {
             return new User(authenticationDTO);
         } else {
-            throw new UsernameNotFoundException("用户名或密码不正确");
+            throw new UsernameNotFoundException(ServiceErrorCode.USER_ACCOUNT_PASSWORD_ERROR.getMsg());
         }
     }
 }

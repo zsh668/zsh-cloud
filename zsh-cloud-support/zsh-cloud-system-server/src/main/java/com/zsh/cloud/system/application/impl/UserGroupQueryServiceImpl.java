@@ -1,16 +1,11 @@
 package com.zsh.cloud.system.application.impl;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.mybatis.util.MyBatisUtils;
-import com.zsh.cloud.common.mybatis.util.PageAssembler;
 import com.zsh.cloud.system.application.UserGroupQueryService;
 import com.zsh.cloud.system.application.assembler.UserGroupDtoAssembler;
-import com.zsh.cloud.system.application.dto.UserGroupDTO;
-import com.zsh.cloud.system.application.dto.UserGroupPageDTO;
-import com.zsh.cloud.system.application.query.UserGroupPageQuery;
-import com.zsh.cloud.system.domain.model.user.User;
-import com.zsh.cloud.system.domain.model.user.UserId;
+import com.zsh.cloud.system.application.model.dto.UserGroupDTO;
+import com.zsh.cloud.system.application.model.dto.UserGroupPageDTO;
+import com.zsh.cloud.system.application.model.query.UserGroupPageQuery;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroup;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupId;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupRepository;

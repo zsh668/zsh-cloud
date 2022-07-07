@@ -1,8 +1,8 @@
 package com.zsh.cloud.system.application;
 
-import com.zsh.cloud.system.application.dto.OrgDTO;
-import com.zsh.cloud.system.application.dto.OrgTreeDTO;
-import com.zsh.cloud.system.application.query.OrgPageQuery;
+import com.zsh.cloud.system.application.model.dto.OrgDTO;
+import com.zsh.cloud.system.application.model.dto.OrgTreeDTO;
+import com.zsh.cloud.system.application.model.query.OrgPageQuery;
 
 import java.util.List;
 

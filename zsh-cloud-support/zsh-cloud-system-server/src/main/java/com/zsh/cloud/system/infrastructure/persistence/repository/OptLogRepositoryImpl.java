@@ -2,9 +2,12 @@ package com.zsh.cloud.system.infrastructure.persistence.repository;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zsh.cloud.system.domain.model.log.LogId;
 import com.zsh.cloud.system.domain.model.log.opt.OptLog;
 import com.zsh.cloud.system.domain.model.log.opt.OptLogRepository;
+import com.zsh.cloud.system.infrastructure.persistence.converter.LoginLogConverter;
 import com.zsh.cloud.system.infrastructure.persistence.converter.OptLogConverter;
+import com.zsh.cloud.system.infrastructure.persistence.entity.SysLoginLogDO;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysOptLogDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysOptLogMapper;
 import org.springframework.stereotype.Repository;
@@ -28,5 +31,11 @@ public class OptLogRepositoryImpl extends ServiceImpl<SysOptLogMapper, SysOptLog
         } else {
             this.updateById(sysOptLogDO);
         }
+    }
+    
+    @Override
+    public OptLog find(LogId logId) {
+        SysOptLogDO sysOptLogDO = baseMapper.selectById(logId.getId());
+        return OptLogConverter.toOptLog(sysOptLogDO);
     }
 }

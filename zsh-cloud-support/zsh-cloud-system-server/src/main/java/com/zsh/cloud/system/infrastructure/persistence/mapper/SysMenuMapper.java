@@ -3,11 +3,9 @@ package com.zsh.cloud.system.infrastructure.persistence.mapper;
 import com.zsh.cloud.common.core.enums.BooleanEnum;
 import com.zsh.cloud.common.mybatis.core.mapper.BaseMapperExt;
 import com.zsh.cloud.common.mybatis.util.Wraps;
-import com.zsh.cloud.system.application.query.MenuPageQuery;
-import com.zsh.cloud.system.application.query.RouterQuery;
+import com.zsh.cloud.system.application.model.query.MenuPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysMenuDO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.poi.ss.formula.functions.T;
 
 import java.util.List;
 import java.util.Set;
