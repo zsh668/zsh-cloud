@@ -150,6 +150,18 @@ public class UserDTO extends DTO {
     private String superiorName;
     
     /**
+     * 创建时间.
+     */
+    @ApiModelProperty(value = "创建时间")
+    private LocalDateTime createdTime;
+    
+    /**
+     * 更新时间.
+     */
+    @ApiModelProperty(value = "更新时间")
+    private LocalDateTime updatedTime;
+    
+    /**
      * 角色id集合.
      */
     @ApiModelProperty(value = "角色id集合")

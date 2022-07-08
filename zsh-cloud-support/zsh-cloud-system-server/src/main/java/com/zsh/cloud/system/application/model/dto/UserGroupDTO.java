@@ -11,6 +11,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 /**
  * 用户组信息DTO.
  *
@@ -73,4 +75,10 @@ public class UserGroupDTO extends DTO {
     @ApiModelProperty(value = "角色名称")
     @Translate(translator = ServiceImplTranslator.class, dataSource = RoleRepositoryImpl.class, from = "roleId", param = "roleName")
     private String roleName;
+    
+    @ApiModelProperty(value = "成员")
+    private List<String> userIds;
+    
+    @ApiModelProperty(value = "成员名称")
+    private List<String> userNames;
 }

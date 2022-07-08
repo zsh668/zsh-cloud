@@ -72,8 +72,8 @@ public class UserConverter {
                 new UserName(sysUserDO.getUserName()), mobile, email, new Password(sysUserDO.getPassword()),
                 IDict.getByCode(GenderEnum.class, sysUserDO.getGender()),
                 IDict.getByCode(StatusEnum.class, sysUserDO.getStatus()), superior, sysUserDO.getAvatar(),
-                sysUserDO.getPasswordExpireTime(), sysUserDO.getLastLoginTime(), orgId, stationId, tenantId, roleIds,
-                roleNames, groupNames);
+                sysUserDO.getPasswordExpireTime(), sysUserDO.getLastLoginTime(), orgId, stationId, tenantId,
+                sysUserDO.getCreatedTime(), sysUserDO.getUpdatedTime(), roleIds, roleNames, groupNames);
     }
     
     /**

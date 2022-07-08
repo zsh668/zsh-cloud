@@ -4,6 +4,7 @@ import com.zsh.cloud.common.core.domain.Entity;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.system.domain.model.role.RoleId;
 import com.zsh.cloud.system.domain.model.user.UserId;
+import com.zsh.cloud.system.domain.model.user.UserName;
 import lombok.Getter;
 
 import java.util.List;
@@ -53,6 +54,11 @@ public class UserGroup implements Entity<UserGroup> {
      */
     private List<UserId> userIds;
     
+    /**
+     * 姓名集合
+     */
+    private List<UserName> userNames;
+    
     public UserGroup(UserGroupName userGroupName, RoleId roleId, Integer userCount, List<UserId> userIds,
             String describe) {
         this.userGroupName = userGroupName;
@@ -64,13 +70,14 @@ public class UserGroup implements Entity<UserGroup> {
     }
     
     public UserGroup(UserGroupId userGroupId, UserGroupName userGroupName, RoleId roleId, Integer userCount,
-            StatusEnum status, List<UserId> userIds, String describe) {
+            StatusEnum status, List<UserId> userIds, List<UserName> userNames, String describe) {
         this.userGroupId = userGroupId;
         this.userGroupName = userGroupName;
         this.roleId = roleId;
         this.userCount = userCount;
         this.status = status;
         this.userIds = userIds;
+        this.userNames = userNames;
         this.describe = describe;
     }
     

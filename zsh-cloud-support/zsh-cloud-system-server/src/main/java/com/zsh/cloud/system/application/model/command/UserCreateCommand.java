@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 /**
@@ -60,6 +61,7 @@ public class UserCreateCommand extends Command {
     @ApiModelProperty(value = "邮箱")
     @NotEmpty(message = "邮箱不能为空")
     @Pattern(regexp = "^([a-z0-9A-Z]+[-|.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$", message = "邮箱格式不正确")
+    @Size(max = 50, message = "邮箱长度不能超过 50 个字符")
     private String email;
     
     /**

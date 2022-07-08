@@ -25,6 +25,8 @@ import java.util.List;
 @Getter
 public class User implements Entity<User> {
     
+    public static final String SUPERIOR = "-1";
+    
     /**
      * 用户ID.
      */
@@ -104,6 +106,16 @@ public class User implements Entity<User> {
      * 当前租户.
      */
     private TenantId tenantId;
+    
+    /**
+     * 创建时间.
+     */
+    private LocalDateTime createdTime;
+    
+    /**
+     * 更新时间.
+     */
+    private LocalDateTime updatedTime;
     
     /**
      * 角色Id列表.
@@ -196,6 +208,7 @@ public class User implements Entity<User> {
      * @param userName
      * @param mobile
      * @param email
+     * @param password
      * @param gender
      * @param status
      * @param superior
@@ -205,14 +218,17 @@ public class User implements Entity<User> {
      * @param orgId
      * @param stationId
      * @param tenantId
+     * @param createdTime
+     * @param updatedTime
      * @param roleIds
      * @param roleNames
      * @param userGroupsNames
      */
     public User(UserId userId, Account account, UserName userName, Mobile mobile, Email email, Password password,
             GenderEnum gender, StatusEnum status, UserId superior, String avatar, LocalDateTime passwordExpireTime,
-            LocalDateTime lastLoginTime, OrgId orgId, StationId stationId, TenantId tenantId, List<RoleId> roleIds,
-            List<RoleName> roleNames, List<UserGroupName> userGroupsNames) {
+            LocalDateTime lastLoginTime, OrgId orgId, StationId stationId, TenantId tenantId, LocalDateTime createdTime,
+            LocalDateTime updatedTime, List<RoleId> roleIds, List<RoleName> roleNames,
+            List<UserGroupName> userGroupsNames) {
         this.userId = userId;
         this.account = account;
         this.userName = userName;
@@ -228,6 +244,8 @@ public class User implements Entity<User> {
         this.orgId = orgId;
         this.stationId = stationId;
         this.tenantId = tenantId;
+        this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
         this.roleIds = roleIds;
         this.roleNames = roleNames;
         this.userGroupsNames = userGroupsNames;

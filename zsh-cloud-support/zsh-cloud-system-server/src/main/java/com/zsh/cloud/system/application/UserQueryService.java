@@ -2,6 +2,7 @@ package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.mybatis.datascope.domain.DataPermission;
+import com.zsh.cloud.system.application.model.dto.HierarchyDTO;
 import com.zsh.cloud.system.application.model.dto.LoginDTO;
 import com.zsh.cloud.system.application.model.dto.UserDTO;
 import com.zsh.cloud.system.application.model.dto.UserPageDTO;
@@ -46,4 +47,12 @@ public interface UserQueryService {
      * @return
      */
     LoginDTO current();
+    
+    /**
+     * 用户层级关系.
+     *
+     * @param userId
+     * @return
+     */
+    HierarchyDTO findHierarchy(String userId);
 }

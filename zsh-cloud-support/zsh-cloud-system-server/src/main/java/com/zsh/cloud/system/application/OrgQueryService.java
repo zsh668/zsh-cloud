@@ -30,4 +30,12 @@ public interface OrgQueryService {
      * @return
      */
     OrgDTO find(String id);
+    
+    /**
+     * 根据ID获取所有孩子.
+     *
+     * @param orgId
+     * @return
+     */
+    List<OrgDTO> findChildren(String orgId);
 }

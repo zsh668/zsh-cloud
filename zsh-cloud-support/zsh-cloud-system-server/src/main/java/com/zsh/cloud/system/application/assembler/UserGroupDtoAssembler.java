@@ -61,13 +61,25 @@ public interface UserGroupDtoAssembler {
         if (userGroup == null) {
             return null;
         }
+        List<String> userIds = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(userGroup.getUserIds())) {
+            userGroup.getUserIds().forEach(userId -> {
+                userIds.add(userId.getId());
+            });
+        }
+        List<String> userNames = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(userGroup.getUserNames())) {
+            userGroup.getUserNames().forEach(userName -> {
+                userNames.add(userName.getName());
+            });
+        }
         UserGroupDTO groupDto = new UserGroupDTO();
         groupDto.setId(userGroup.getUserGroupId() == null ? "" : userGroup.getUserGroupId().getId())
                 .setGroupName(userGroup.getUserGroupName() == null ? "" : userGroup.getUserGroupName().getName())
                 .setUserCount(userGroup.getUserCount())
                 .setRoleId(userGroup.getRoleId() == null ? "" : userGroup.getRoleId().getId())
                 .setStatus(userGroup.getStatus() == null ? null : userGroup.getStatus().getCode())
-                .setDescribe(userGroup.getDescribe());
+                .setDescribe(userGroup.getDescribe()).setUserIds(userIds).setUserNames(userNames);
         return groupDto;
     }
     
@@ -104,7 +116,7 @@ public interface UserGroupDtoAssembler {
         }
         return new UserGroup(new UserGroupId(userGroupCommand.getId()),
                 new UserGroupName(userGroupCommand.getGroupName()), new RoleId(userGroupCommand.getRoleId()),
-                userIdList.size(), null, userIdList, userGroupCommand.getDescribe());
+                userIdList.size(), null, userIdList, null, userGroupCommand.getDescribe());
     }
     
 }
