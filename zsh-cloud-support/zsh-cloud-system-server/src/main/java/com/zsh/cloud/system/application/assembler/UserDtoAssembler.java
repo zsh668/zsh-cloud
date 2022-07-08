@@ -92,7 +92,8 @@ public interface UserDtoAssembler {
                 .setStationId(user.getStationId() == null ? "" : user.getStationId().getId())
                 .setAvatar(user.getAvatar()).setWorkDescribe(user.getWorkDescribe())
                 .setPasswordExpireTime(user.getPasswordExpireTime()).setLastLoginTime(user.getLastLoginTime())
-                .setSuperior(user.getSuperior() == null ? "" : user.getSuperior().getId());
+                .setSuperior(user.getSuperior() == null ? "" : user.getSuperior().getId())
+                .setCreatedTime(user.getCreatedTime()).setUpdatedTime(user.getUpdatedTime());
         List<String> roleIds = new ArrayList<>();
         if (!CollectionUtils.isEmpty(user.getRoleIds())) {
             user.getRoleIds().forEach(roleId -> {
@@ -132,7 +133,7 @@ public interface UserDtoAssembler {
         }
         String superior = userCommand.getSuperior();
         if (StringUtils.isBlank(superior)) {
-            superior = "-1";
+            superior = User.SUPERIOR;
         }
         return new User(new Account(userCommand.getAccount()), new UserName(userCommand.getUserName()),
                 new Mobile(userCommand.getMobile()), new Email(userCommand.getEmail()),
@@ -157,7 +158,7 @@ public interface UserDtoAssembler {
         }
         String superior = userCommand.getSuperior();
         if (StringUtils.isBlank(superior)) {
-            superior = "-1";
+            superior = User.SUPERIOR;
         }
         return new User(new UserId(userCommand.getId()), new UserName(userCommand.getUserName()),
                 new Mobile(userCommand.getMobile()), new Email(userCommand.getEmail()),

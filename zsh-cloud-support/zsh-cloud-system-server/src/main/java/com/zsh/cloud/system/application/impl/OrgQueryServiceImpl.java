@@ -11,10 +11,12 @@ import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.org.OrgRepository;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysOrgDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysOrgMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +50,36 @@ public class OrgQueryServiceImpl implements OrgQueryService {
     public OrgDTO find(String id) {
         Org org = orgRepository.find(new OrgId(id));
         return orgDtoAssembler.fromOrg(org);
+    }
+    
+    @Override
+    public List<OrgDTO> findChildren(String orgId) {
+        List<OrgDTO> orgs = new ArrayList<>();
+        if (StringUtils.isBlank(orgId)) {
+            return orgs;
+        }
+        Org org = orgRepository.find(new OrgId(orgId));
+        OrgDTO orgDTO = orgDtoAssembler.fromOrg(org);
+        if (orgDTO == null) {
+            return orgs;
+        }
+        orgs.add(orgDTO);
+        findChildren(orgId, orgs);
+        return orgs;
+    }
+    
+    /**
+     * 查询组织的全部子节点.
+     *
+     * @param orgId
+     * @param orgs
+     */
+    private void findChildren(String orgId, List<OrgDTO> orgs) {
+        List<Org> children = orgRepository.queryList(new OrgId(orgId));
+        if (!CollectionUtils.isEmpty(children)) {
+            children.forEach(org -> orgs.add(orgDtoAssembler.fromOrg(org)));
+            children.forEach(org -> findChildren(org.getOrgId().getId(), orgs));
+        }
     }
     
     /**

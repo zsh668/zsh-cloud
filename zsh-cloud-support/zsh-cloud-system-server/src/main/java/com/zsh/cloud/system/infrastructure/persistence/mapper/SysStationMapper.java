@@ -25,6 +25,8 @@ public interface SysStationMapper extends BaseMapperExt<SysStationDO> {
      */
     default Page<SysStationDO> selectPage(StationPageQuery query) {
         return selectPage(query,
-                Wraps.<SysStationDO>lbQ().likeIfPresent(SysStationDO::getStationName, query.getStationName()));
+                Wraps.<SysStationDO>lbQ().likeIfPresent(SysStationDO::getStationName, query.getStationName())
+                        .eqIfPresent(SysStationDO::getOrgId, query.getOrgId())
+                        .eqIfPresent(SysStationDO::getStatus, query.getStatus()));
     }
 }

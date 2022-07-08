@@ -135,7 +135,7 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
      */
     private List<User> getUserList(List<SysUserDO> sysUserDOList) {
         if (CollectionUtils.isEmpty(sysUserDOList)) {
-            return null;
+            return new ArrayList<>();
         }
         List<User> users = new ArrayList<>();
         for (SysUserDO sysUserDO : sysUserDOList) {

@@ -11,6 +11,7 @@ import com.zsh.cloud.system.application.model.command.IdsCommand;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
+import com.zsh.cloud.system.application.model.dto.HierarchyDTO;
 import com.zsh.cloud.system.application.model.dto.LoginDTO;
 import com.zsh.cloud.system.application.model.dto.UserDTO;
 import com.zsh.cloud.system.application.model.dto.UserPageDTO;
@@ -159,6 +160,14 @@ public class UserController {
     public Boolean resetPassword(@Valid @RequestBody IdsCommand command) {
         userApplicationService.resetPassword(command.getIds());
         return Boolean.TRUE;
+    }
+    
+    @ApiOperation(value = "查询用户上下级结构", notes = "查询用户上下级结构")
+    @GetMapping("users/hierarchy/{id}")
+    @Translator
+    @SysLog("查询用户上下级结构")
+    public HierarchyDTO hierarchy(@PathVariable String id) {
+        return userQueryService.findHierarchy(id);
     }
     
     /**

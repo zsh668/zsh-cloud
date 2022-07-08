@@ -23,4 +23,16 @@ public class StationPageQuery extends PageQuery {
      */
     @ApiModelProperty(value = "岗位名称")
     private String stationName;
+    
+    /**
+     * 组织ID.
+     */
+    @ApiModelProperty(value = "组织ID")
+    private String orgId;
+    
+    /**
+     * 状态.
+     */
+    @ApiModelProperty(value = "状态")
+    private Boolean status;
 }
