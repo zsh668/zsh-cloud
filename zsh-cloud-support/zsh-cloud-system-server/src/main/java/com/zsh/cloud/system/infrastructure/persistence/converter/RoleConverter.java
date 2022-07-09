@@ -37,7 +37,7 @@ public class RoleConverter {
                 new RoleName(sysRoleDO.getRoleName()), repel,
                 IDict.getByCode(DataScopeTypeEnum.class, sysRoleDO.getDsType()), null,
                 IDict.getByCode(BooleanEnum.class, sysRoleDO.getReadonly()),
-                IDict.getByCode(StatusEnum.class, sysRoleDO.getStatus()), sysRoleDO.getDescribe());
+                IDict.getByCode(StatusEnum.class, sysRoleDO.getStatus()), sysRoleDO.getDescribe(), null);
     }
     
     /**

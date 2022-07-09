@@ -63,24 +63,21 @@ public class UserGroupRepositoryImpl extends ServiceImpl<SysUserGroupMapper, Sys
     }
     
     @Override
+    public List<UserGroup> find(UserId userId) {
+        List<SysUserGroupDO> sysUserGroupDOList = baseMapper.queryUserGroup(userId.getId());
+        List<UserGroup> userGroups = new ArrayList<>();
+        if (CollectionUtils.isEmpty(sysUserGroupDOList)) {
+            return userGroups;
+        }
+        sysUserGroupDOList.forEach(sysRoleDO -> userGroups.add(UserGroupConverter.toUserGroup(sysRoleDO, null, null)));
+        return userGroups;
+    }
+    
+    @Override
     public UserGroupId store(UserGroup userGroup) {
         SysUserGroupDO sysUserGroupDO = UserGroupConverter.fromUserGroup(userGroup);
         this.saveOrUpdate(sysUserGroupDO);
         String userGroupId = sysUserGroupDO.getId();
-        //先删除用户组与用户关系
-        List<String> userGroupIds = new ArrayList<>();
-        userGroupIds.add(userGroupId);
-        sysUserGroupUserMapper.deleteByUserGroupIds(userGroupIds);
-        List<UserId> userIds = userGroup.getUserIds();
-        if (!CollectionUtils.isEmpty(userIds)) {
-            //保存用户组与用户关系
-            for (UserId userId : userIds) {
-                SysUserGroupUserDO sysUserGroupUserDO = new SysUserGroupUserDO();
-                sysUserGroupUserDO.setGroupId(userGroupId);
-                sysUserGroupUserDO.setUserId(userId.getId());
-                sysUserGroupUserMapper.insert(sysUserGroupUserDO);
-            }
-        }
         return new UserGroupId(userGroupId);
     }
     

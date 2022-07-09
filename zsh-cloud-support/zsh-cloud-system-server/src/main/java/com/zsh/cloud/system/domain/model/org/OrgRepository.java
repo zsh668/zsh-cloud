@@ -1,5 +1,7 @@
 package com.zsh.cloud.system.domain.model.org;
 
+import com.zsh.cloud.system.application.model.dto.OrgDTO;
+
 import java.util.List;
 
 /**
@@ -48,4 +50,6 @@ public interface OrgRepository {
      * @param orgIds
      */
     void remove(List<OrgId> orgIds);
+    
+    List<Org> findChildren(OrgId orgId);
 }

@@ -91,12 +91,10 @@ public class OrgApplicationServiceImpl implements OrgApplicationService {
     private void disableParent(String parentId, StatusEnum status) {
         // 禁用 父ID为 id的子集
         List<Org> orgs = orgRepository.queryList(new OrgId(parentId));
-        if (!CollectionUtils.isEmpty(orgs)) {
-            orgs.forEach(org -> {
-                org.disable(status);
-                orgRepository.store(org);
-                disableParent(org.getOrgId().getId(), status);
-            });
-        }
+        orgs.forEach(org -> {
+            org.disable(status);
+            orgRepository.store(org);
+            disableParent(org.getOrgId().getId(), status);
+        });
     }
 }

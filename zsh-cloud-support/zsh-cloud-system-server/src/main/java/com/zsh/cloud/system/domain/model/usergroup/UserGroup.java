@@ -59,13 +59,17 @@ public class UserGroup implements Entity<UserGroup> {
      */
     private List<UserName> userNames;
     
-    public UserGroup(UserGroupName userGroupName, RoleId roleId, Integer userCount, List<UserId> userIds,
-            String describe) {
+    public UserGroup(UserGroupName userGroupName, RoleId roleId, String describe) {
         this.userGroupName = userGroupName;
         this.roleId = roleId;
         this.status = StatusEnum.ENABLE;
-        this.userCount = userCount;
-        this.userIds = userIds;
+        this.describe = describe;
+    }
+    
+    public UserGroup(UserGroupId userGroupId, UserGroupName userGroupName, RoleId roleId, String describe) {
+        this.userGroupId = userGroupId;
+        this.userGroupName = userGroupName;
+        this.roleId = roleId;
         this.describe = describe;
     }
     

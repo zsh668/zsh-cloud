@@ -10,12 +10,15 @@ import com.zsh.cloud.system.domain.model.role.Role;
 import com.zsh.cloud.system.domain.model.role.RoleCode;
 import com.zsh.cloud.system.domain.model.role.RoleId;
 import com.zsh.cloud.system.domain.model.role.RoleName;
+import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleDO;
+import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleOrgDO;
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 角色Assembler.
@@ -55,9 +58,10 @@ public interface RoleDtoAssembler {
      * 转换.
      *
      * @param role
+     * @param roleOrgS
      * @return
      */
-    default RoleDTO fromRole(Role role) {
+    default RoleDTO fromRole(Role role, List<SysRoleOrgDO> roleOrgS) {
         if (role == null) {
             return null;
         }
@@ -67,9 +71,12 @@ public interface RoleDtoAssembler {
                 .setRoleName(role.getRoleName() == null ? "" : role.getRoleName().getName())
                 .setRepel(role.getRepel() == null ? "" : role.getRepel().getId())
                 .setDsType(role.getDsType() == null ? null : role.getDsType())
-                .setReadonly(role.getReadonly() == null ? null : role.getReadonly().getCode())
                 .setStatus(role.getStatus() == null ? null : role.getStatus().getCode())
                 .setDescribe(role.getDescribe());
+        if (roleOrgS != null) {
+            List<String> orgIds = roleOrgS.stream().map(SysRoleOrgDO::getOrgId).collect(Collectors.toList());
+            roleDto.setOrgList(orgIds);
+        }
         return roleDto;
     }
     
@@ -88,7 +95,7 @@ public interface RoleDtoAssembler {
         }
         RoleId repel = StringUtils.isBlank(roleCommand.getRepel()) ? null : new RoleId(roleCommand.getRepel());
         return new Role(new RoleCode(roleCommand.getRoleCode()), new RoleName(roleCommand.getRoleName()), repel,
-                roleCommand.getDsType(), orgIdList, roleCommand.getDescribe());
+                roleCommand.getDsType(), orgIdList, roleCommand.getDescribe(), new UserId(roleCommand.getUserId()));
     }
     
     /**
@@ -107,6 +114,6 @@ public interface RoleDtoAssembler {
         RoleId repel = StringUtils.isBlank(roleCommand.getRepel()) ? null : new RoleId(roleCommand.getRepel());
         return new Role(new RoleId(roleCommand.getId()), new RoleCode(roleCommand.getRoleCode()),
                 new RoleName(roleCommand.getRoleName()), repel, roleCommand.getDsType(), orgIdList, null, null,
-                roleCommand.getDescribe());
+                roleCommand.getDescribe(), new UserId(roleCommand.getUserId()));
     }
 }

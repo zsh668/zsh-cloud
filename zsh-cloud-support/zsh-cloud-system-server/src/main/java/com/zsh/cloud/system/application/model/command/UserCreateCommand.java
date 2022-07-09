@@ -103,5 +103,5 @@ public class UserCreateCommand extends Command {
      * 角色id集合
      */
     @ApiModelProperty(value = "角色id集合")
-    private Set<String> roleIdList;
+    private Set<String> roleIds;
 }

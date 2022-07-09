@@ -1,6 +1,7 @@
 package com.zsh.cloud.system.application.model.dto;
 
 import com.zsh.cloud.common.core.dto.DTO;
+import com.zsh.cloud.common.core.enums.BooleanEnum;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.web.translate.Translate;
 import io.swagger.annotations.ApiModel;
@@ -41,6 +42,19 @@ public class RolePageDTO extends DTO {
      */
     @ApiModelProperty(value = "角色名称")
     private String roleName;
+    
+    /**
+     * 是否内置.
+     */
+    @ApiModelProperty(value = "是否内置")
+    private Boolean readonly;
+    
+    /**
+     * 是否内置 1是 0否.
+     */
+    @ApiModelProperty(value = "是否内置")
+    @Translate(dataSource = BooleanEnum.class, from = "readonly")
+    private String readonlyDesc;
     
     /**
      * 状态

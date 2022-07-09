@@ -6,7 +6,6 @@ import com.zsh.cloud.system.application.model.command.UserGroupUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.UserGroupDTO;
 import com.zsh.cloud.system.application.model.dto.UserGroupPageDTO;
 import com.zsh.cloud.system.domain.model.role.RoleId;
-import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroup;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupId;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupName;
@@ -90,15 +89,8 @@ public interface UserGroupDtoAssembler {
      * @return
      */
     default UserGroup toUserGroup(UserGroupCreateCommand userGroupCommand) {
-        List<UserId> userIdList = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(userGroupCommand.getUserIdList())) {
-            userGroupCommand.getUserIdList().forEach(userId -> {
-                userIdList.add(new UserId(userId));
-            });
-        }
         return new UserGroup(new UserGroupName(userGroupCommand.getGroupName()),
-                new RoleId(userGroupCommand.getRoleId()), userIdList.size(), userIdList,
-                userGroupCommand.getDescribe());
+                new RoleId(userGroupCommand.getRoleId()), userGroupCommand.getDescribe());
     }
     
     /**
@@ -108,15 +100,9 @@ public interface UserGroupDtoAssembler {
      * @return
      */
     default UserGroup toUserGroup(UserGroupUpdateCommand userGroupCommand) {
-        List<UserId> userIdList = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(userGroupCommand.getUserIdList())) {
-            userGroupCommand.getUserIdList().forEach(userId -> {
-                userIdList.add(new UserId(userId));
-            });
-        }
         return new UserGroup(new UserGroupId(userGroupCommand.getId()),
                 new UserGroupName(userGroupCommand.getGroupName()), new RoleId(userGroupCommand.getRoleId()),
-                userIdList.size(), null, userIdList, null, userGroupCommand.getDescribe());
+                userGroupCommand.getDescribe());
     }
     
 }

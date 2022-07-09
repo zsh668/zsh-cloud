@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.Set;
 
 /**
  * 创建用户组Command.
@@ -36,13 +35,6 @@ public class UserGroupCreateCommand extends Command {
     @ApiModelProperty(value = "角色ID")
     @NotEmpty(message = "角色ID不能为空")
     private String roleId;
-    
-    /**
-     * 成员.
-     */
-    @ApiModelProperty(value = "成员")
-    @NotEmpty(message = "成员不能为空")
-    private Set<String> userIdList;
     
     /**
      * 功能描述

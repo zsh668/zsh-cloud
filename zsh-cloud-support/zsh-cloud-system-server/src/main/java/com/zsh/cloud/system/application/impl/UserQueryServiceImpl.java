@@ -4,6 +4,7 @@ import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.core.util.CollectionUtils;
 import com.zsh.cloud.common.core.util.RequestUtils;
 import com.zsh.cloud.common.mybatis.datascope.domain.DataPermission;
+import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
 import com.zsh.cloud.system.application.OrgQueryService;
 import com.zsh.cloud.system.application.ResourceQueryService;
 import com.zsh.cloud.system.application.UserQueryService;
@@ -14,10 +15,12 @@ import com.zsh.cloud.system.application.model.dto.OrgDTO;
 import com.zsh.cloud.system.application.model.dto.UserDTO;
 import com.zsh.cloud.system.application.model.dto.UserPageDTO;
 import com.zsh.cloud.system.application.model.query.UserPageQuery;
+import com.zsh.cloud.system.domain.model.role.Role;
+import com.zsh.cloud.system.domain.model.role.RoleRepository;
 import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
+import com.zsh.cloud.system.domain.service.strategy.DataScopeContext;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -27,7 +30,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.stream.Collectors;
@@ -57,10 +63,23 @@ public class UserQueryServiceImpl implements UserQueryService {
     @Autowired
     private OrgQueryService orgQueryService;
     
+    @Autowired
+    private RoleRepository roleRepository;
+    
+    @Autowired
+    private DataScopeContext dataScopeContext;
+    
     @Override
     public Page<UserPageDTO> queryPage(UserPageQuery query) {
-        Page<SysUserDO> page = sysUserMapper.selectPage(query, getOrgCondition(query.getOrgId()));
-        return userDtoAssembler.toDto(page);
+        Page<UserPageDTO> page = userDtoAssembler.toDto(
+                sysUserMapper.selectPage(query, getOrgCondition(query.getOrgId())));
+        page.getList().forEach(user -> {
+            List<Role> roles = roleRepository.find(new UserId(user.getId()));
+            List<String> roleNames = roles.stream().map(role -> role.getRoleName().getName())
+                    .collect(Collectors.toList());
+            user.setRoleNames(roleNames);
+        });
+        return page;
     }
     
     @Override
@@ -72,8 +91,18 @@ public class UserQueryServiceImpl implements UserQueryService {
     @Override
     public DataPermission getDataScopeById(String userId) {
         DataPermission dataPermission = new DataPermission();
-        dataPermission.setOrgIds(Arrays.asList("1", "2", "3", "4"));
-        dataPermission.setDsType(2);
+        DataScopeTypeEnum dsType = DataScopeTypeEnum.SELF;
+        Set<String> orgIds = new HashSet<>();
+        
+        List<Role> list = roleRepository.find(new UserId(userId));
+        Optional<Role> min = list.stream().min(Comparator.comparingInt((item) -> item.getDsType().getCode()));
+        if (min.isPresent()) {
+            Role role = min.get();
+            dsType = role.getDsType();
+            orgIds = dataScopeContext.getOrgIdsForDataScope(role.getRoleId().getId(), dsType, userId);
+        }
+        dataPermission.setOrgIds(orgIds);
+        dataPermission.setDsType(dsType.getCode());
         return dataPermission;
     }
     

@@ -53,33 +53,22 @@ public class OrgQueryServiceImpl implements OrgQueryService {
     }
     
     @Override
-    public List<OrgDTO> findChildren(String orgId) {
-        List<OrgDTO> orgs = new ArrayList<>();
-        if (StringUtils.isBlank(orgId)) {
-            return orgs;
-        }
-        Org org = orgRepository.find(new OrgId(orgId));
-        OrgDTO orgDTO = orgDtoAssembler.fromOrg(org);
-        if (orgDTO == null) {
-            return orgs;
-        }
-        orgs.add(orgDTO);
-        findChildren(orgId, orgs);
-        return orgs;
+    public List<OrgDTO> findAll() {
+        List<Org> orgs = orgRepository.queryList(null);
+        List<OrgDTO> orgDTOList = new ArrayList<>();
+        orgs.forEach(org -> orgDTOList.add(orgDtoAssembler.fromOrg(org)));
+        return orgDTOList;
     }
     
-    /**
-     * 查询组织的全部子节点.
-     *
-     * @param orgId
-     * @param orgs
-     */
-    private void findChildren(String orgId, List<OrgDTO> orgs) {
-        List<Org> children = orgRepository.queryList(new OrgId(orgId));
-        if (!CollectionUtils.isEmpty(children)) {
-            children.forEach(org -> orgs.add(orgDtoAssembler.fromOrg(org)));
-            children.forEach(org -> findChildren(org.getOrgId().getId(), orgs));
+    @Override
+    public List<OrgDTO> findChildren(String orgId) {
+        List<OrgDTO> orgDTOList = new ArrayList<>();
+        if (StringUtils.isBlank(orgId)) {
+            return orgDTOList;
         }
+        List<Org> orgs = orgRepository.findChildren(new OrgId(orgId));
+        orgs.forEach(org -> orgDTOList.add(orgDtoAssembler.fromOrg(org)));
+        return orgDTOList;
     }
     
     /**

@@ -14,8 +14,10 @@ import com.zsh.cloud.system.domain.model.role.RoleId;
 import com.zsh.cloud.system.domain.model.role.RoleRepository;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleAuthorityDO;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleDO;
+import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleOrgDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysRoleAuthorityMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysRoleMapper;
+import com.zsh.cloud.system.infrastructure.persistence.mapper.SysRoleOrgMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +46,9 @@ public class RoleQueryServiceImpl implements RoleQueryService {
     @Autowired
     private SysRoleAuthorityMapper sysRoleAuthorityMapper;
     
+    @Autowired
+    private SysRoleOrgMapper sysRoleOrgMapper;
+    
     @Override
     public Page<RolePageDTO> queryPage(RolePageQuery query) {
         Page<SysRoleDO> page = sysRoleMapper.selectPage(query);
@@ -59,7 +64,8 @@ public class RoleQueryServiceImpl implements RoleQueryService {
     @Override
     public RoleDTO find(String id) {
         Role role = roleRepository.find(new RoleId(id));
-        return roleDtoAssembler.fromRole(role);
+        List<SysRoleOrgDO> roleOrgS = sysRoleOrgMapper.selectList(SysRoleOrgDO::getRoleId, id);
+        return roleDtoAssembler.fromRole(role, roleOrgS);
     }
     
     @Override

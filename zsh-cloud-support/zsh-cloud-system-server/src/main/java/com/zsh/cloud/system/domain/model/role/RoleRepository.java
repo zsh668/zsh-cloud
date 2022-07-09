@@ -1,5 +1,7 @@
 package com.zsh.cloud.system.domain.model.role;
 
+import com.zsh.cloud.system.domain.model.user.UserId;
+
 import java.util.List;
 
 /**
@@ -34,6 +36,14 @@ public interface RoleRepository {
      * @return
      */
     Role find(RoleCode roleCode);
+    
+    /**
+     * 根据用户ID查询角色.
+     *
+     * @param userId
+     * @return
+     */
+    List<Role> find(UserId userId);
     
     /**
      * 保存.

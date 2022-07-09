@@ -4,7 +4,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 数据权限.
@@ -29,7 +31,7 @@ public class DataPermission implements Serializable {
     /**
      * 组织ID集合.
      */
-    private List<String> orgIds = new ArrayList<>();
+    private Set<String> orgIds = new HashSet<>();
     
     /**
      * 所属权限类型. 默认个人

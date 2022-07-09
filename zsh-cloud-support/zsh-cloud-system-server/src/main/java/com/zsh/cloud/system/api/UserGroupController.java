@@ -126,4 +126,34 @@ public class UserGroupController {
         userGroupApplicationService.disable(id);
         return Boolean.TRUE;
     }
+    
+    /**
+     * 分配用户.
+     *
+     * @param id
+     * @param command
+     * @return
+     */
+    @ApiOperation("分配用户")
+    @SysLog("分配用户")
+    @PutMapping("userGroups/addUser/{id}")
+    public Boolean addGroupUser(@PathVariable String id, @Valid @RequestBody IdsCommand command) {
+        // userGroupApplicationService.addGroupUser(command);
+        return Boolean.TRUE;
+    }
+    
+    /**
+     * 增加用户.
+     *
+     * @param id
+     * @param command
+     * @return
+     */
+    @ApiOperation("修改角色资源")
+    @SysLog("修改角色资源")
+    @PutMapping("userGroups/deleteUser/{id}")
+    public Boolean deleteGroupUser(@PathVariable String id, @Valid @RequestBody IdsCommand command) {
+        // userGroupApplicationService.addGroupUser(command);
+        return Boolean.TRUE;
+    }
 }

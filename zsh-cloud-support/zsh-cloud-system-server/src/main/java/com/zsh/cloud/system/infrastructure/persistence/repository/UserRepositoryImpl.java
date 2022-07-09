@@ -3,19 +3,19 @@ package com.zsh.cloud.system.infrastructure.persistence.repository;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zsh.cloud.common.mybatis.util.Wraps;
+import com.zsh.cloud.system.domain.model.role.Role;
 import com.zsh.cloud.system.domain.model.role.RoleId;
+import com.zsh.cloud.system.domain.model.role.RoleRepository;
 import com.zsh.cloud.system.domain.model.user.Account;
 import com.zsh.cloud.system.domain.model.user.Password;
 import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
+import com.zsh.cloud.system.domain.model.usergroup.UserGroup;
+import com.zsh.cloud.system.domain.model.usergroup.UserGroupRepository;
 import com.zsh.cloud.system.infrastructure.persistence.converter.UserConverter;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysRoleDO;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserGroupDO;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserRoleDO;
-import com.zsh.cloud.system.infrastructure.persistence.mapper.SysRoleMapper;
-import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserGroupMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserGroupUserMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserRoleMapper;
@@ -38,10 +38,10 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
         implements UserRepository, IService<SysUserDO> {
     
     @Autowired
-    private SysRoleMapper sysRoleMapper;
+    private RoleRepository roleRepository;
     
     @Autowired
-    private SysUserGroupMapper sysUserGroupMapper;
+    private UserGroupRepository userGroupRepository;
     
     @Autowired
     private SysUserRoleMapper sysUserRoleMapper;
@@ -113,8 +113,8 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
      * @param userId
      * @return
      */
-    private List<SysRoleDO> getUserRoles(String userId) {
-        return sysRoleMapper.queryUserRole(userId);
+    private List<Role> getUserRoles(String userId) {
+        return roleRepository.find(new UserId(userId));
     }
     
     /**
@@ -123,8 +123,8 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
      * @param userId
      * @return
      */
-    private List<SysUserGroupDO> getUserGroups(String userId) {
-        return sysUserGroupMapper.queryUserGroup(userId);
+    private List<UserGroup> getUserGroups(String userId) {
+        return userGroupRepository.find(new UserId(userId));
     }
     
     /**
@@ -134,10 +134,10 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
      * @return
      */
     private List<User> getUserList(List<SysUserDO> sysUserDOList) {
-        if (CollectionUtils.isEmpty(sysUserDOList)) {
-            return new ArrayList<>();
-        }
         List<User> users = new ArrayList<>();
+        if (CollectionUtils.isEmpty(sysUserDOList)) {
+            return users;
+        }
         for (SysUserDO sysUserDO : sysUserDOList) {
             User user = UserConverter.toUser(sysUserDO, getUserRoles(sysUserDO.getId()),
                     getUserGroups(sysUserDO.getId()));
