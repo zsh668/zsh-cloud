@@ -30,7 +30,7 @@ public class MenuDeleteSpecification extends AbstractSpecification<Menu> {
     @Override
     public boolean isSatisfiedBy(Menu menu) {
         // 是否存在 下级菜单
-        Long count = sysMenuMapper.selectCount(SysMenuDO::getId, menu.getParentId().getId());
+        Long count = sysMenuMapper.selectCount(SysMenuDO::getParentId, menu.getMenuId().getId());
         ServiceAssert.notTrue(count > 0, ServiceErrorCode.MENU_VERIFICATION_ERROR.getCode(), "当前菜单存在下级菜单无法删除或禁用");
         // 当前菜单是否存在 资源
         count = sysResourceMapper.selectCount(SysResourceDO::getMenuId, menu.getMenuId().getId());

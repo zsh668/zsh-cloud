@@ -126,8 +126,8 @@ public interface UserDtoAssembler {
      */
     default User toUser(UserCreateCommand userCommand) {
         List<RoleId> roleIdList = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(userCommand.getRoleIdList())) {
-            userCommand.getRoleIdList().forEach(roleId -> {
+        if (!CollectionUtils.isEmpty(userCommand.getRoleIds())) {
+            userCommand.getRoleIds().forEach(roleId -> {
                 roleIdList.add(new RoleId(roleId));
             });
         }
@@ -151,8 +151,8 @@ public interface UserDtoAssembler {
      */
     default User toUser(UserUpdateCommand userCommand) {
         List<RoleId> roleIdList = new ArrayList<>();
-        if (userCommand.getRoleIdList() != null) {
-            userCommand.getRoleIdList().forEach(roleId -> {
+        if (userCommand.getRoleIds() != null) {
+            userCommand.getRoleIds().forEach(roleId -> {
                 roleIdList.add(new RoleId(roleId));
             });
         }

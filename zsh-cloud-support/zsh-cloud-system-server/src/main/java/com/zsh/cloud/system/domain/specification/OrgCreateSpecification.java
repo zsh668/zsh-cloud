@@ -46,14 +46,12 @@ public class OrgCreateSpecification extends AbstractSpecification<Org> {
         }
         // 同级组织
         orgs = orgRepository.queryList(org.getParentId());
-        if (!CollectionUtils.isEmpty(orgs)) {
-            orgs.forEach(o -> {
-                // 同级组织下，排序不能重复
-                boolean expression = !o.getOrgId().sameValueAs(org.getOrgId()) && Objects.equals(org.getSortValue(),
-                        o.getSortValue());
-                Assert.notTrue(expression, ServiceErrorCode.ORG_SORT_EXISTS);
-            });
-        }
+        orgs.forEach(o -> {
+            // 同级组织下，排序不能重复
+            boolean expression =
+                    !o.getOrgId().sameValueAs(org.getOrgId()) && Objects.equals(org.getSortValue(), o.getSortValue());
+            Assert.notTrue(expression, ServiceErrorCode.ORG_SORT_EXISTS);
+        });
         return true;
     }
 }

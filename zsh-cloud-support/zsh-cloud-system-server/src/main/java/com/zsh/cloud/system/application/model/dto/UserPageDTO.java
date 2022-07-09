@@ -18,6 +18,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 用户分页DTO.
@@ -161,6 +162,12 @@ public class UserPageDTO extends DTO {
     @ApiModelProperty(value = "上级领导")
     @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "superior", param = "userName")
     private String superiorName;
+    
+    /**
+     * 角色名称集合.
+     */
+    @ApiModelProperty(value = "角色名称集合")
+    private List<String> roleNames;
 }
 
 

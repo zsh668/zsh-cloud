@@ -65,4 +65,9 @@ public class RoleCreateCommand extends Command {
      */
     @ApiModelProperty(value = "关联的组织id")
     private Set<String> orgList;
+    
+    /**
+     * 创建人.
+     */
+    private String userId;
 }

@@ -47,11 +47,16 @@ public class OrgRepositoryImpl extends ServiceImpl<SysOrgMapper, SysOrgDO>
     
     @Override
     public List<Org> queryList(OrgId parentId) {
-        List<SysOrgDO> sysOrgDOList = baseMapper.selectList(SysOrgDO::getParentId, parentId.getId());
-        if (CollectionUtils.isEmpty(sysOrgDOList)) {
-            return null;
+        List<SysOrgDO> sysOrgDOList;
+        if (parentId == null) {
+            sysOrgDOList = baseMapper.selectList();
+        } else {
+            sysOrgDOList = baseMapper.selectList(SysOrgDO::getParentId, parentId.getId());
         }
         List<Org> orgs = new ArrayList<>();
+        if (CollectionUtils.isEmpty(sysOrgDOList)) {
+            return orgs;
+        }
         sysOrgDOList.forEach(sysOrgDO -> orgs.add(OrgConverter.toOrg(sysOrgDO)));
         return orgs;
     }
@@ -74,5 +79,29 @@ public class OrgRepositoryImpl extends ServiceImpl<SysOrgMapper, SysOrgDO>
         List<String> ids = new ArrayList<>();
         orgIds.forEach(orgId -> ids.add(orgId.getId()));
         this.removeByIds(ids);
+    }
+    
+    @Override
+    public List<Org> findChildren(OrgId orgId) {
+        List<Org> orgs = new ArrayList<>();
+        Org org = this.find(orgId);
+        if (org == null) {
+            return orgs;
+        }
+        orgs.add(org);
+        findChildren(orgId, orgs);
+        return orgs;
+    }
+    
+    /**
+     * 查询组织的全部子节点.
+     *
+     * @param orgId
+     * @param orgs
+     */
+    private void findChildren(OrgId orgId, List<Org> orgs) {
+        List<Org> children = this.queryList(orgId);
+        orgs.addAll(children);
+        children.forEach(org -> findChildren(org.getOrgId(), orgs));
     }
 }

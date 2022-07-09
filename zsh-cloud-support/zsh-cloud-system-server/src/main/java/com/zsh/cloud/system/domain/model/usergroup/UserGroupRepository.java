@@ -1,5 +1,7 @@
 package com.zsh.cloud.system.domain.model.usergroup;
 
+import com.zsh.cloud.system.domain.model.user.UserId;
+
 import java.util.List;
 
 /**
@@ -26,6 +28,14 @@ public interface UserGroupRepository {
      * @return
      */
     UserGroup find(UserGroupName userGroupName);
+    
+    /**
+     * 根据用户ID查询用户组.
+     *
+     * @param userId
+     * @return
+     */
+    List<UserGroup> find(UserId userId);
     
     /**
      * 保存.

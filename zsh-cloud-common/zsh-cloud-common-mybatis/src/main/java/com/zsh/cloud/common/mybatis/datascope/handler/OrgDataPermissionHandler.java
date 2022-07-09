@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -58,7 +59,6 @@ public class OrgDataPermissionHandler implements DataPermissionHandler {
                 }
                 // 获取到用户的id
                 String userId = RequestUtils.getUserId();
-                userId = "2";
                 DataPermission dataPermission = function.apply(userId);
                 if (dataPermission == null) {
                     return where;
@@ -81,7 +81,7 @@ public class OrgDataPermissionHandler implements DataPermissionHandler {
                         // 创建 AND 表达式 拼接Where 和 = 表达式
                         return new AndExpression(where, equalsTo);
                     } else {
-                        List<String> orgIds = dataPermission.getOrgIds();
+                        Set<String> orgIds = dataPermission.getOrgIds();
                         if (CollectionUtil.isEmpty(orgIds)) {
                             return where;
                         }

@@ -1,6 +1,7 @@
 package com.zsh.cloud.system.api;
 
 import com.zsh.cloud.common.core.domain.Page;
+import com.zsh.cloud.common.core.util.RequestUtils;
 import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.RoleApplicationService;
@@ -98,6 +99,7 @@ public class RoleController {
     @SysLog("保存角色")
     @PostMapping("roles")
     public Boolean save(@Valid @RequestBody RoleCreateCommand roleCommand) {
+        roleCommand.setUserId(RequestUtils.getUserId());
         roleApplicationService.save(roleCommand);
         return Boolean.TRUE;
     }
@@ -112,6 +114,7 @@ public class RoleController {
     @SysLog("修改角色")
     @PutMapping("roles")
     public Boolean update(@Valid @RequestBody RoleUpdateCommand roleCommand) {
+        roleCommand.setUserId(RequestUtils.getUserId());
         roleApplicationService.update(roleCommand);
         return Boolean.TRUE;
     }

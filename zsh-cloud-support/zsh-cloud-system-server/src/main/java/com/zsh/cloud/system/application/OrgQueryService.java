@@ -32,6 +32,13 @@ public interface OrgQueryService {
     OrgDTO find(String id);
     
     /**
+     * 获取所有组织.
+     *
+     * @return
+     */
+    List<OrgDTO> findAll();
+    
+    /**
      * 根据ID获取所有孩子.
      *
      * @param orgId

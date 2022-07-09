@@ -76,4 +76,9 @@ public class RoleUpdateCommand extends Command {
      */
     @ApiModelProperty(value = "关联的组织id")
     private Set<String> orgList;
+    
+    /**
+     * 更新人.
+     */
+    private String userId;
 }

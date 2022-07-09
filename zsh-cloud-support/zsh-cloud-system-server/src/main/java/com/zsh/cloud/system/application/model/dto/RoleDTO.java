@@ -13,6 +13,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 /**
  * 角色信息DTO.
  *
@@ -64,19 +66,6 @@ public class RoleDTO extends DTO {
     private DataScopeTypeEnum dsType;
     
     /**
-     * 是否内置.
-     */
-    @ApiModelProperty(value = "是否内置")
-    private Boolean readonly;
-    
-    /**
-     * 是否内置 1是 0否.
-     */
-    @ApiModelProperty(value = "是否内置")
-    @Translate(dataSource = BooleanEnum.class, from = "readonly")
-    private String readonlyDesc;
-    
-    /**
      * 状态
      */
     @ApiModelProperty(value = "状态")
@@ -94,4 +83,10 @@ public class RoleDTO extends DTO {
      */
     @ApiModelProperty(value = "功能描述")
     private String describe;
+    
+    /**
+     * 关联的组织id
+     */
+    @ApiModelProperty(value = "关联的组织id")
+    private List<String> orgList;
 }

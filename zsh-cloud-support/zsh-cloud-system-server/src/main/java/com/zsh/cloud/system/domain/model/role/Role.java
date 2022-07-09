@@ -5,6 +5,7 @@ import com.zsh.cloud.common.core.enums.BooleanEnum;
 import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.mybatis.datascope.enums.DataScopeTypeEnum;
 import com.zsh.cloud.system.domain.model.org.OrgId;
+import com.zsh.cloud.system.domain.model.user.UserId;
 import lombok.Getter;
 
 import java.util.List;
@@ -64,8 +65,13 @@ public class Role implements Entity<Role> {
      */
     private String describe;
     
+    /**
+     * 变更人.
+     */
+    private UserId userId;
+    
     public Role(RoleCode roleCode, RoleName roleName, RoleId repel, DataScopeTypeEnum dsType, List<OrgId> orgIdList,
-            String describe) {
+            String describe, UserId userId) {
         this.roleCode = roleCode;
         this.roleName = roleName;
         this.repel = repel;
@@ -74,10 +80,11 @@ public class Role implements Entity<Role> {
         this.readonly = BooleanEnum.FALSE;
         this.status = StatusEnum.ENABLE;
         this.describe = describe;
+        this.userId = userId;
     }
     
     public Role(RoleId roleId, RoleCode roleCode, RoleName roleName, RoleId repel, DataScopeTypeEnum dsType,
-            List<OrgId> orgIdList, BooleanEnum readonly, StatusEnum status, String describe) {
+            List<OrgId> orgIdList, BooleanEnum readonly, StatusEnum status, String describe, UserId userId) {
         this.roleId = roleId;
         this.roleCode = roleCode;
         this.roleName = roleName;
@@ -87,6 +94,7 @@ public class Role implements Entity<Role> {
         this.readonly = readonly;
         this.status = status;
         this.describe = describe;
+        this.userId = userId;
     }
     
     /**
