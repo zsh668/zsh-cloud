@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +24,7 @@ import java.util.Optional;
  * @version 1.0
  * @date 2022/5/11 16:16
  */
-@Configuration
+//@Configuration
 public class InitializingAdviceDecorator implements InitializingBean {
     
     private final RequestMappingHandlerAdapter adapter;
@@ -103,10 +102,8 @@ public class InitializingAdviceDecorator implements InitializingBean {
                     return;
                 }
             }
-            // 过滤jwk-set-uri地址
-            Optional<HttpServletRequest> request = Optional.of(webRequest)
-                    .map(nativeWebRequest -> ((ServletWebRequest) webRequest).getRequest());
-            if (request.get().getRequestURI().contains("getPublicKey")) {
+            // 标注 无需增强的 放行
+            if (returnType.hasMethodAnnotation(NotControllerResponseAdvice.class)) {
                 handler.handleReturnValue(returnValue, returnType, mavContainer, webRequest);
                 return;
             }
