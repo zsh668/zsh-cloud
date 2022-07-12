@@ -2,6 +2,7 @@ package com.zsh.cloud.system;
 
 import com.zsh.cloud.common.core.util.ListUtils;
 import com.zsh.cloud.system.application.model.dto.OrgTreeDTO;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,5 +38,11 @@ public class Test {
         list.add(org);
     
         System.out.println(ListUtils.treeify(list));
+        
+        
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String pwd = encoder.encode("zhangshuhang@naocs");
+        System.out.println(pwd);
     }
+    
 }

@@ -4,9 +4,6 @@ server:
     context-path: /
 
 spring:
-  main:
-    allow-bean-definition-overriding: true
-
   security:
     oauth2:
       resourceserver:
@@ -60,7 +57,7 @@ secure:
     urls:
       - "/api/auth/**"
       - "/actuator/**"
-      - "/*/v3/api-docs/**"
+      - "/*/*/v3/api-docs/**"
       - "/doc.html"
       - "/webjars/**"
       - "/swagger-resources"

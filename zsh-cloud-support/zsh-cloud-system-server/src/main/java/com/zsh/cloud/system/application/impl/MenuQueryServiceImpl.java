@@ -77,7 +77,9 @@ public class MenuQueryServiceImpl implements MenuQueryService {
             menuList = sysMenuMapper.queryByMenuIds(menuIds, routerQuery.getGroup());
         }
         List<VueRouterDTO> menus = menuDtoAssembler.toRouterDto(menuList);
-        return ListUtils.treeify(menus);
+        List<VueRouterDTO> result = ListUtils.treeify(menus);
+        buildRouterLevel(result, 1);
+        return result;
     }
     
     @Override
@@ -116,6 +118,22 @@ public class MenuQueryServiceImpl implements MenuQueryService {
             if (!CollectionUtils.isEmpty(menuTreeDTO.getChildren())) {
                 int parentLevel = menuTreeDTO.getLevel();
                 buildLevel(menuTreeDTO.getChildren(), parentLevel + 1);
+            }
+        }
+    }
+    
+    /**
+     * 构建菜单级别
+     *
+     * @param list
+     * @param level
+     */
+    private void buildRouterLevel(List<VueRouterDTO> list, int level) {
+        for (VueRouterDTO vueRouterDTO : list) {
+            vueRouterDTO.setLevel(level);
+            if (!CollectionUtils.isEmpty(vueRouterDTO.getChildren())) {
+                int parentLevel = vueRouterDTO.getLevel();
+                buildRouterLevel(vueRouterDTO.getChildren(), parentLevel + 1);
             }
         }
     }

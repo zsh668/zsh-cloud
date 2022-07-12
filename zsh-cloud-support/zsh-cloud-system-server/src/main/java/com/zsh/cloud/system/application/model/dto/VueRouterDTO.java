@@ -75,6 +75,12 @@ public class VueRouterDTO extends TreeNode<VueRouterDTO, String> {
     private Boolean alwaysShow = false;
     
     /**
+     * 层级
+     */
+    @ApiModelProperty(value = "层级")
+    private int level;
+    
+    /**
      * 子路由.
      */
     @ApiModelProperty(value = "子路由")

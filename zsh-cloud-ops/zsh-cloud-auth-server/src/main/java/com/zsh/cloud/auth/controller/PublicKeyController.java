@@ -2,6 +2,7 @@ package com.zsh.cloud.auth.controller;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
+import com.zsh.cloud.common.web.handler.NotControllerResponseAdvice;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,7 @@ public class PublicKeyController {
      * @return
      */
     @ApiOperation(value = "获取公钥", notes = "getPublicKey")
+    @NotControllerResponseAdvice
     @GetMapping("/getPublicKey")
     public Map<String, Object> loadPublicKey() {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
