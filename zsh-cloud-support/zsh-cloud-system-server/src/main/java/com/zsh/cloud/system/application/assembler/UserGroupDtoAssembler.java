@@ -1,6 +1,7 @@
 package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.Page;
+import com.zsh.cloud.system.application.model.command.GroupUserCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.UserGroupDTO;
@@ -104,5 +105,4 @@ public interface UserGroupDtoAssembler {
                 new UserGroupName(userGroupCommand.getGroupName()), new RoleId(userGroupCommand.getRoleId()),
                 userGroupCommand.getDescribe());
     }
-    
 }

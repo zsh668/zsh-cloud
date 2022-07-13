@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 岗位管理.
@@ -55,6 +56,20 @@ public class StationController {
     @GetMapping("stations")
     public Page<StationPageDTO> page(StationPageQuery stationPageQuery) {
         return stationQueryService.queryPage(stationPageQuery);
+    }
+    
+    /**
+     * 查询岗位列表.
+     *
+     * @param stationPageQuery
+     * @return
+     */
+    @ApiOperation("查询岗位列表")
+    @SysLog("查询岗位列表")
+    @Translator
+    @GetMapping("stations/list")
+    public List<StationPageDTO> list(StationPageQuery stationPageQuery) {
+        return stationQueryService.queryList(stationPageQuery);
     }
     
     /**

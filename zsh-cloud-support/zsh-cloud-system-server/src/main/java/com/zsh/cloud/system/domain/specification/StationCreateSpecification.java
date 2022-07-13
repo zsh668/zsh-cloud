@@ -23,6 +23,11 @@ public class StationCreateSpecification extends AbstractSpecification<Station> {
     
     @Override
     public boolean isSatisfiedBy(Station station) {
+        if (station.getStationCode() != null) {
+            Station existStation = stationRepository.find(station.getStationCode());
+            Assert.notTrue(existStation != null && !existStation.getStationId().sameValueAs(station.getStationId()),
+                    ServiceErrorCode.STATION_CODE_EXISTS);
+        }
         if (station.getStationName() != null) {
             Station existStation = stationRepository.find(station.getStationName());
             Assert.notTrue(existStation != null && !existStation.getStationId().sameValueAs(station.getStationId()),

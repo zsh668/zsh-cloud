@@ -62,7 +62,10 @@ public interface TenantDtoAssembler {
         tenantDto.setId(tenant.getTenantId() == null ? "" : tenant.getTenantId().getId())
                 .setTenantCode(tenant.getTenantCode() == null ? "" : tenant.getTenantCode().getCode())
                 .setTenantName(tenant.getTenantName() == null ? "" : tenant.getTenantName().getName())
-                .setStatus(tenant.getStatus() == null ? null : tenant.getStatus().getCode());
+                .setStatus(tenant.getStatus() == null ? null : tenant.getStatus().getCode())
+                .setDescribe(tenant.getDescribe())
+                .setCreatorId(tenant.getCreatorId() == null ? null : tenant.getCreatorId().getId())
+                .setCreatedTime(tenant.getCreatedTime());
         return tenantDto;
     }
     

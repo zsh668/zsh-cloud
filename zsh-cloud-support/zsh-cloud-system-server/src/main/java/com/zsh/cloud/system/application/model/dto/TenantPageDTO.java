@@ -48,13 +48,13 @@ public class TenantPageDTO extends DTO {
      * 租户创建者
      */
     @ApiModelProperty(value = "租户ID")
-    private String creatorId;
+    private String createdBy;
     
     /**
      * 租户创建者.
      */
     @ApiModelProperty(value = "租户创建者")
-    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "creatorId", param = "userName")
+    @Translate(translator = ServiceImplTranslator.class, dataSource = UserRepositoryImpl.class, from = "createdBy", param = "userName")
     private String creatorName;
     
     /**
@@ -64,11 +64,10 @@ public class TenantPageDTO extends DTO {
     private Boolean status;
     
     /**
-     * 状态 1启用 0禁用.
+     * 功能描述.
      */
-    @ApiModelProperty(value = "状态")
-    @Translate(dataSource = StatusEnum.class, from = "status")
-    private String statusDesc;
+    @ApiModelProperty(value = "功能描述")
+    private String describe;
     
     /**
      * 创建时间

@@ -253,6 +253,11 @@ public class User implements Entity<User> {
         this.userGroupsNames = userGroupsNames;
     }
     
+    public User(UserId userId, List<RoleId> roleIds) {
+        this.userId = userId;
+        this.roleIds = roleIds;
+    }
+    
     /**
      * 是否有效.
      *

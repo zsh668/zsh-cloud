@@ -6,6 +6,7 @@ import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
 import com.zsh.cloud.common.core.util.Assert;
 import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.station.Station;
+import com.zsh.cloud.system.domain.model.station.StationCode;
 import com.zsh.cloud.system.domain.model.station.StationId;
 import com.zsh.cloud.system.domain.model.station.StationName;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysStationDO;
@@ -29,9 +30,10 @@ public class StationConverter {
         if (sysStationDO == null) {
             return null;
         }
-        return new Station(new StationId(sysStationDO.getId()), new StationName(sysStationDO.getStationName()),
-                new OrgId(sysStationDO.getOrgId()), sysStationDO.getSortValue(),
-                IDict.getByCode(StatusEnum.class, sysStationDO.getStatus()), sysStationDO.getDescribe());
+        return new Station(new StationId(sysStationDO.getId()), new StationCode(sysStationDO.getStationCode()),
+                new StationName(sysStationDO.getStationName()), new OrgId(sysStationDO.getOrgId()),
+                sysStationDO.getSortValue(), IDict.getByCode(StatusEnum.class, sysStationDO.getStatus()),
+                sysStationDO.getDescribe());
     }
     
     /**

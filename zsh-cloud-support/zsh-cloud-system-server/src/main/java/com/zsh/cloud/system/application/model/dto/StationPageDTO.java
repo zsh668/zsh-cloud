@@ -31,6 +31,12 @@ public class StationPageDTO extends DTO {
     private String id;
     
     /**
+     * 岗位编码.
+     */
+    @ApiModelProperty(value = "岗位编码")
+    private String stationCode;
+    
+    /**
      * 岗位名称.
      */
     @ApiModelProperty(value = "岗位名称")
@@ -60,13 +66,6 @@ public class StationPageDTO extends DTO {
      */
     @ApiModelProperty(value = "状态")
     private Boolean status;
-    
-    /**
-     * 状态 1启用 0禁用.
-     */
-    @ApiModelProperty(value = "状态")
-    @Translate(dataSource = StatusEnum.class, from = "status")
-    private String statusDesc;
     
     /**
      * 功能描述.

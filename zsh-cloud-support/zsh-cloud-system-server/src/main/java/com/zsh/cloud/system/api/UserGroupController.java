@@ -5,6 +5,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.UserGroupApplicationService;
 import com.zsh.cloud.system.application.UserGroupQueryService;
+import com.zsh.cloud.system.application.model.command.GroupUserCommand;
 import com.zsh.cloud.system.application.model.command.IdsCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupUpdateCommand;
@@ -130,30 +131,14 @@ public class UserGroupController {
     /**
      * 分配用户.
      *
-     * @param id
      * @param command
      * @return
      */
     @ApiOperation("分配用户")
     @SysLog("分配用户")
-    @PutMapping("userGroups/addUser/{id}")
-    public Boolean addGroupUser(@PathVariable String id, @Valid @RequestBody IdsCommand command) {
-        // userGroupApplicationService.addGroupUser(command);
-        return Boolean.TRUE;
-    }
-    
-    /**
-     * 增加用户.
-     *
-     * @param id
-     * @param command
-     * @return
-     */
-    @ApiOperation("修改角色资源")
-    @SysLog("修改角色资源")
-    @PutMapping("userGroups/deleteUser/{id}")
-    public Boolean deleteGroupUser(@PathVariable String id, @Valid @RequestBody IdsCommand command) {
-        // userGroupApplicationService.addGroupUser(command);
+    @PutMapping("userGroups/user")
+    public Boolean updateUser(@Valid @RequestBody GroupUserCommand command) {
+        userGroupApplicationService.updateUser(command);
         return Boolean.TRUE;
     }
 }

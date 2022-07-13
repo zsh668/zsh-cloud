@@ -30,6 +30,14 @@ public class StationUpdateCommand extends Command {
     private String id;
     
     /**
+     * 岗位编码.
+     */
+    @ApiModelProperty(value = "岗位编码")
+    @NotEmpty(message = "岗位编码不能为空")
+    @Length(max = 30, message = "岗位编码长度不能超过30")
+    private String stationCode;
+    
+    /**
      * 名称.
      */
     @ApiModelProperty(value = "岗位名称")

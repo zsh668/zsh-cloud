@@ -20,6 +20,11 @@ import lombok.EqualsAndHashCode;
 public class SysStationDO extends TenantBaseDO {
     
     /**
+     * 岗位编码.
+     */
+    private String stationCode;
+    
+    /**
      * 名称.
      */
     private String stationName;

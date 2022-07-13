@@ -54,7 +54,8 @@ public enum ServiceErrorCode implements BaseErrorCode, IDict<Integer> {
     // 模块 system 【000】 岗位 【004】 错误码 【000~999】
     STATION_NOT_EXISTS(1000004000, "岗位不存在"),
     STATION_NAME_EXISTS(1000004001, "岗位名称已存在"),
-    STATION_VERIFICATION_ERROR(1000004002, "验证不通过"),
+    STATION_CODE_EXISTS(1000004002, "岗位编码已存在"),
+    STATION_VERIFICATION_ERROR(1000004003, "验证不通过"),
     
     // 模块 system 【000】 组织 【005】 错误码 【000~999】
     ORG_NOT_EXISTS(1000005000, "组织不存在"),

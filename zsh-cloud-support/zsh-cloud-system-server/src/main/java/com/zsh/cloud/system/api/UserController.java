@@ -10,6 +10,7 @@ import com.zsh.cloud.system.application.UserQueryService;
 import com.zsh.cloud.system.application.model.command.IdsCommand;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
+import com.zsh.cloud.system.application.model.command.UserRoleCommand;
 import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.HierarchyDTO;
 import com.zsh.cloud.system.application.model.dto.LoginDTO;
@@ -159,6 +160,20 @@ public class UserController {
     @PutMapping("users/reset")
     public Boolean resetPassword(@Valid @RequestBody IdsCommand command) {
         userApplicationService.resetPassword(command.getIds());
+        return Boolean.TRUE;
+    }
+    
+    /**
+     * 分配角色.
+     *
+     * @param command
+     * @return
+     */
+    @ApiOperation(value = "分配角色", notes = "分配角色")
+    @SysLog("分配角色")
+    @PutMapping("users/role")
+    public Boolean updateRole(@Valid @RequestBody UserRoleCommand command) {
+        userApplicationService.updateRole(command);
         return Boolean.TRUE;
     }
     

@@ -21,6 +21,11 @@ public class Station implements Entity<Station> {
     private StationId stationId;
     
     /**
+     * 编码.
+     */
+    private StationCode stationCode;
+    
+    /**
      * 名称.
      */
     private StationName stationName;
@@ -45,7 +50,8 @@ public class Station implements Entity<Station> {
      */
     private String describe;
     
-    public Station(StationName stationName, OrgId orgId, Integer sortValue, String describe) {
+    public Station(StationCode stationCode, StationName stationName, OrgId orgId, Integer sortValue, String describe) {
+        this.stationCode = stationCode;
         this.stationName = stationName;
         this.orgId = orgId;
         this.sortValue = sortValue;
@@ -53,9 +59,10 @@ public class Station implements Entity<Station> {
         this.describe = describe;
     }
     
-    public Station(StationId stationId, StationName stationName, OrgId orgId, Integer sortValue, StatusEnum status,
+    public Station(StationId stationId, StationCode stationCode, StationName stationName, OrgId orgId, Integer sortValue, StatusEnum status,
             String describe) {
         this.stationId = stationId;
+        this.stationCode = stationCode;
         this.stationName = stationName;
         this.orgId = orgId;
         this.sortValue = sortValue;

@@ -31,6 +31,12 @@ public class StationDTO extends DTO {
     private String id;
     
     /**
+     * 岗位编码.
+     */
+    @ApiModelProperty(value = "岗位编码")
+    private String stationCode;
+    
+    /**
      * 名称.
      */
     @ApiModelProperty(value = "岗位名称")

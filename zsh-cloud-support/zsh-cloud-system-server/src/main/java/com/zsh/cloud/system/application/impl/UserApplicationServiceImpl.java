@@ -2,13 +2,17 @@ package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.assembler.UserDtoAssembler;
+import com.zsh.cloud.system.application.assembler.UserRoleDtoAssembler;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
+import com.zsh.cloud.system.application.model.command.UserRoleCommand;
 import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 import com.zsh.cloud.system.domain.model.tenant.TenantRepository;
 import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
+import com.zsh.cloud.system.domain.model.userrole.UserRole;
+import com.zsh.cloud.system.domain.model.userrole.UserRoleRepository;
 import com.zsh.cloud.system.domain.specification.UserCreateSpecification;
 import com.zsh.cloud.system.domain.specification.UserDeleteSpecification;
 import com.zsh.cloud.system.domain.specification.UserUpdateSpecification;
@@ -38,6 +42,12 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     
     @Autowired
     private TenantRepository tenantRepository;
+    
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+    
+    @Autowired
+    private UserRoleDtoAssembler userRoleDtoAssembler;
     
     @Override
     public void save(UserCreateCommand userCommand) {
@@ -88,5 +98,11 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public void resetPassword(List<String> ids) {
         userRepository.reset(ids);
+    }
+    
+    @Override
+    public void updateRole(UserRoleCommand command) {
+        UserRole user = userRoleDtoAssembler.toUser(command);
+        userRoleRepository.store(user);
     }
 }
