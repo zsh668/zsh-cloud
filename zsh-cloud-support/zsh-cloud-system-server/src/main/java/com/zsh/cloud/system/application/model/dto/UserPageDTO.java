@@ -117,14 +117,6 @@ public class UserPageDTO extends DTO {
     private Boolean status;
     
     /**
-     * 状态 1启用 0禁用.
-     */
-    @ExcelProperty("状态")
-    @ApiModelProperty(value = "状态")
-    @Translate(dataSource = StatusEnum.class, from = "status")
-    private String statusDesc;
-    
-    /**
      * 头像.
      */
     @ApiModelProperty(value = "头像")

@@ -14,6 +14,8 @@ import com.zsh.cloud.system.infrastructure.persistence.mapper.SysStationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 岗位查询服务实现类.
  *
@@ -37,6 +39,12 @@ public class StationQueryServiceImpl implements StationQueryService {
     public Page<StationPageDTO> queryPage(StationPageQuery query) {
         Page<SysStationDO> page = sysStationMapper.selectPage(query);
         return stationDtoAssembler.toDto(page);
+    }
+    
+    @Override
+    public List<StationPageDTO> queryList(StationPageQuery query) {
+        List<SysStationDO> list = sysStationMapper.selectList(query);
+        return stationDtoAssembler.toDto(list);
     }
     
     @Override

@@ -27,7 +27,8 @@ public interface SysMenuMapper extends BaseMapperExt<SysMenuDO> {
      * @return
      */
     default List<SysMenuDO> selectList(MenuPageQuery menuPageQuery) {
-        return selectList(Wraps.<SysMenuDO>lbQ().likeIfPresent(SysMenuDO::getMenuName, menuPageQuery.getMenuName()));
+        return selectList(Wraps.<SysMenuDO>lbQ().likeIfPresent(SysMenuDO::getMenuName, menuPageQuery.getMenuName())
+                .orderByAsc(SysMenuDO::getSortValue));
     }
     
     /**

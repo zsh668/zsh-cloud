@@ -63,13 +63,6 @@ public class MenuTreeDTO extends TreeNode<MenuTreeDTO, String> {
     private Boolean status;
     
     /**
-     * 状态 1启用 0禁用.
-     */
-    @ApiModelProperty(value = "状态")
-    @Translate(dataSource = StatusEnum.class, from = "status")
-    private String statusDesc;
-    
-    /**
      * 子集合.
      */
     @TranslateField

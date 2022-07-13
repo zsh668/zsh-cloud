@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zsh.cloud.common.mybatis.util.Wraps;
 import com.zsh.cloud.system.domain.model.role.Role;
-import com.zsh.cloud.system.domain.model.role.RoleId;
 import com.zsh.cloud.system.domain.model.role.RoleRepository;
 import com.zsh.cloud.system.domain.model.user.Account;
 import com.zsh.cloud.system.domain.model.user.Password;
@@ -13,12 +12,12 @@ import com.zsh.cloud.system.domain.model.user.UserId;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroup;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupRepository;
+import com.zsh.cloud.system.domain.model.userrole.UserRole;
+import com.zsh.cloud.system.domain.model.userrole.UserRoleRepository;
 import com.zsh.cloud.system.infrastructure.persistence.converter.UserConverter;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserDO;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysUserRoleDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserGroupUserMapper;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserMapper;
-import com.zsh.cloud.system.infrastructure.persistence.mapper.SysUserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -44,7 +43,7 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     private UserGroupRepository userGroupRepository;
     
     @Autowired
-    private SysUserRoleMapper sysUserRoleMapper;
+    private UserRoleRepository userRoleRepository;
     
     @Autowired
     private SysUserGroupUserMapper sysUserGroupUserMapper;
@@ -65,20 +64,8 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
         SysUserDO sysUserDO = UserConverter.fromUser(user);
         this.saveOrUpdate(sysUserDO);
         String userId = sysUserDO.getId();
-        //先删除用户与角色关系
-        List<String> userIds = new ArrayList<>();
-        userIds.add(userId);
-        sysUserRoleMapper.deleteByUserIds(userIds);
-        List<RoleId> roleIds = user.getRoleIds();
-        if (!CollectionUtils.isEmpty(roleIds)) {
-            //保存用户与角色关系
-            for (RoleId roleId : roleIds) {
-                SysUserRoleDO sysUserRoleDO = new SysUserRoleDO();
-                sysUserRoleDO.setUserId(userId);
-                sysUserRoleDO.setRoleId(roleId.getId());
-                sysUserRoleMapper.insert(sysUserRoleDO);
-            }
-        }
+        
+        userRoleRepository.store(new UserRole(user.getUserId(), user.getRoleIds()));
         return new UserId(userId);
     }
     
@@ -93,7 +80,7 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
         userIds.forEach(userId -> ids.add(userId.getId()));
         this.removeByIds(ids);
         // 用户与角色关联
-        sysUserRoleMapper.deleteByUserIds(ids);
+        userRoleRepository.remove(userIds);
         // 用户组与用户关联
         sysUserGroupUserMapper.deleteByUserIds(ids);
     }

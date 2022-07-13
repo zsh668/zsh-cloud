@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.application;
 
+import com.zsh.cloud.system.application.model.command.GroupUserCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupUpdateCommand;
 
@@ -41,4 +42,11 @@ public interface UserGroupApplicationService {
      * @param id
      */
     void disable(String id);
+    
+    /**
+     * 增加用户.
+     *
+     * @param command
+     */
+    void updateUser(GroupUserCommand command);
 }

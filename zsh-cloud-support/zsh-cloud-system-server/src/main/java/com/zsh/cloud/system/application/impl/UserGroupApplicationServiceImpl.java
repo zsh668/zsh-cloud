@@ -1,9 +1,13 @@
 package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.system.application.UserGroupApplicationService;
+import com.zsh.cloud.system.application.assembler.GroupUserDtoAssembler;
 import com.zsh.cloud.system.application.assembler.UserGroupDtoAssembler;
+import com.zsh.cloud.system.application.model.command.GroupUserCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupUpdateCommand;
+import com.zsh.cloud.system.domain.model.groupuser.GroupUser;
+import com.zsh.cloud.system.domain.model.groupuser.GroupUserRepository;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroup;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupId;
 import com.zsh.cloud.system.domain.model.usergroup.UserGroupRepository;
@@ -31,6 +35,12 @@ public class UserGroupApplicationServiceImpl implements UserGroupApplicationServ
     
     @Autowired
     private UserGroupDtoAssembler userGroupDtoAssembler;
+    
+    @Autowired
+    private GroupUserRepository groupUserRepository;
+    
+    @Autowired
+    private GroupUserDtoAssembler groupUserDtoAssembler;
     
     @Override
     public void save(UserGroupCreateCommand userGroupCommand) {
@@ -60,5 +70,14 @@ public class UserGroupApplicationServiceImpl implements UserGroupApplicationServ
         UserGroup userGroup = userGroupRepository.find(new UserGroupId(id));
         userGroup.disable();
         userGroupRepository.store(userGroup);
+    }
+    
+    @Override
+    public void updateUser(GroupUserCommand command) {
+        UserGroup userGroup = userGroupRepository.find(new UserGroupId(command.getGroupId()));
+        int count = command.getUserIds().size();
+        userGroupRepository.store(userGroup);
+        GroupUser groupUser = groupUserDtoAssembler.toUser(command);
+        groupUserRepository.store(groupUser);
     }
 }

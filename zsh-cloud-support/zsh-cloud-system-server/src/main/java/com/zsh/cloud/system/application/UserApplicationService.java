@@ -2,6 +2,7 @@ package com.zsh.cloud.system.application;
 
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
+import com.zsh.cloud.system.application.model.command.UserRoleCommand;
 import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 
 import java.util.List;
@@ -56,4 +57,6 @@ public interface UserApplicationService {
      * @param ids
      */
     void resetPassword(List<String> ids);
+    
+    void updateRole(UserRoleCommand command);
 }

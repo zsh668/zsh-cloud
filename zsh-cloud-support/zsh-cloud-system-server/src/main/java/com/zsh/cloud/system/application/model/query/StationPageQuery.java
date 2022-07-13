@@ -19,6 +19,12 @@ import lombok.EqualsAndHashCode;
 public class StationPageQuery extends PageQuery {
     
     /**
+     * 岗位编码.
+     */
+    @ApiModelProperty(value = "岗位编码")
+    private String stationCode;
+    
+    /**
      * 岗位名称.
      */
     @ApiModelProperty(value = "岗位名称")

@@ -63,13 +63,6 @@ public class RolePageDTO extends DTO {
     private Boolean status;
     
     /**
-     * 状态 1启用 0禁用.
-     */
-    @ApiModelProperty(value = "状态")
-    @Translate(dataSource = StatusEnum.class, from = "status")
-    private String statusDesc;
-    
-    /**
      * 功能描述.
      */
     @ApiModelProperty(value = "功能描述")

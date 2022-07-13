@@ -20,6 +20,14 @@ public interface StationRepository {
     Station find(StationId stationId);
     
     /**
+     * 通过编码获取岗位.
+     *
+     * @param stationCode
+     * @return
+     */
+    Station find(StationCode stationCode);
+    
+    /**
      * 通过名称获取岗位.
      *
      * @param stationName

@@ -5,6 +5,8 @@ import com.zsh.cloud.system.application.model.dto.StationDTO;
 import com.zsh.cloud.system.application.model.dto.StationPageDTO;
 import com.zsh.cloud.system.application.model.query.StationPageQuery;
 
+import java.util.List;
+
 /**
  * 岗位查询服务接口.
  *
@@ -14,7 +16,6 @@ import com.zsh.cloud.system.application.model.query.StationPageQuery;
  */
 public interface StationQueryService {
     
-    
     /**
      * 分页查询.
      *
@@ -22,6 +23,14 @@ public interface StationQueryService {
      * @return
      */
     Page<StationPageDTO> queryPage(StationPageQuery query);
+    
+    /**
+     * 查询列表.
+     *
+     * @param query
+     * @return
+     */
+    List<StationPageDTO> queryList(StationPageQuery query);
     
     /**
      * 通过id获取岗位.

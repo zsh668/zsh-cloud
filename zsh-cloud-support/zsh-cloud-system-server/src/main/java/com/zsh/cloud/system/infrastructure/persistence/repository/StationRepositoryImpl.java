@@ -3,6 +3,7 @@ package com.zsh.cloud.system.infrastructure.persistence.repository;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zsh.cloud.system.domain.model.station.Station;
+import com.zsh.cloud.system.domain.model.station.StationCode;
 import com.zsh.cloud.system.domain.model.station.StationId;
 import com.zsh.cloud.system.domain.model.station.StationName;
 import com.zsh.cloud.system.domain.model.station.StationRepository;
@@ -28,6 +29,15 @@ public class StationRepositoryImpl extends ServiceImpl<SysStationMapper, SysStat
     @Override
     public Station find(StationId stationId) {
         SysStationDO sysStationDO = baseMapper.selectById(stationId.getId());
+        if (sysStationDO == null) {
+            return null;
+        }
+        return StationConverter.toStation(sysStationDO);
+    }
+    
+    @Override
+    public Station find(StationCode stationCode) {
+        SysStationDO sysStationDO = baseMapper.selectOne(SysStationDO::getStationCode, stationCode.getCode());
         if (sysStationDO == null) {
             return null;
         }

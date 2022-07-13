@@ -8,6 +8,7 @@ import com.zsh.cloud.system.application.model.dto.StationPageDTO;
 import com.zsh.cloud.system.domain.model.org.Org;
 import com.zsh.cloud.system.domain.model.org.OrgId;
 import com.zsh.cloud.system.domain.model.station.Station;
+import com.zsh.cloud.system.domain.model.station.StationCode;
 import com.zsh.cloud.system.domain.model.station.StationId;
 import com.zsh.cloud.system.domain.model.station.StationName;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysStationDO;
@@ -62,6 +63,7 @@ public interface StationDtoAssembler {
         }
         StationDTO stationDto = new StationDTO();
         stationDto.setId(station.getStationId() == null ? "" : station.getStationId().getId())
+                .setStationCode(station.getStationCode() == null ? "" : station.getStationCode().getCode())
                 .setStationName(station.getStationName() == null ? "" : station.getStationName().getName())
                 .setOrgId(station.getOrgId() == null ? "" : station.getOrgId().getId())
                 .setStatus(station.getStatus() == null ? null : station.getStatus().getCode())
@@ -80,8 +82,9 @@ public interface StationDtoAssembler {
         if (StringUtils.isBlank(orgId)) {
             orgId = Org.PARENT_ID;
         }
-        return new Station(new StationName(stationCommand.getStationName()), new OrgId(orgId),
-                stationCommand.getSortValue(), stationCommand.getDescribe());
+        return new Station(new StationCode(stationCommand.getStationCode()),
+                new StationName(stationCommand.getStationName()), new OrgId(orgId), stationCommand.getSortValue(),
+                stationCommand.getDescribe());
     }
     
     /**
@@ -95,7 +98,8 @@ public interface StationDtoAssembler {
         if (StringUtils.isBlank(orgId)) {
             orgId = Org.PARENT_ID;
         }
-        return new Station(new StationId(stationCommand.getId()), new StationName(stationCommand.getStationName()),
-                new OrgId(orgId), stationCommand.getSortValue(), null, stationCommand.getDescribe());
+        return new Station(new StationId(stationCommand.getId()), new StationCode(stationCommand.getStationCode()),
+                new StationName(stationCommand.getStationName()), new OrgId(orgId), stationCommand.getSortValue(), null,
+                stationCommand.getDescribe());
     }
 }
