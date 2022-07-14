@@ -6,6 +6,7 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,29 +30,39 @@ public class ListUtils {
     private static final String PARENT_ID = "0";
     
     /**
-     * 匹配两个list，指定它们之间关联的属性以及匹配后的动作
-     * </p>
-     * 简单来说，就是另一个集合 给 主集合 的 字段赋值.
+     * 匹配两个list集合相同元素，并执行匹配后的动作 适用于两个集合泛型不一致
      *
-     * @param mainList                  主集合
-     * @param otherList                 另一个集合
-     * @param mainField                 主集合中的关联属性
-     * @param otherFieldEqualsMainField 另一个集合中的关联属性
-     * @param operator                  匹配后的动作
-     * @param <T>                       主集合中的元素
-     * @param <K>                       另一个集合中的元素
-     * @param <R>                       关联属性的类型
+     * @param list1    第一个集合
+     * @param list2    第二个集合
+     * @param field1   第一个集合中判定元素相同的属性，如：SomeBean::getId
+     * @param field2   第二个集合中判定元素相同的属性，如：OtherBean::getId
+     * @param operator 匹配后执行的动作，入参为A、B集合中的相同元素，如：(a, b)->a.setXx(b.getXx())
+     * @param <T>      第一个集合的泛型
+     * @param <K>      第二个集合的泛型
      */
-    public static <T, K, R> void match(List<T> mainList, List<K> otherList, Function<T, R> mainField,
-            Function<K, R> otherFieldEqualsMainField, BiConsumer<T, K> operator) {
-        Map<R, K> map = otherList.stream().collect(Collectors.toMap(otherFieldEqualsMainField, Function.identity()));
-        for (T t : mainList) {
-            operator.accept(t, map.get(mainField.apply(t)));
-        }
+    public static <T, K> void match(Collection<T> list1, Collection<K> list2, Function<T, ?> field1,
+            Function<K, ?> field2, BiConsumer<T, K> operator) {
+        Map<?, K> map = list2.stream().collect(Collectors.toMap(field2, Function.identity()));
+        list1.forEach(item1 -> Optional.ofNullable(map.get(field1.apply(item1)))
+                .ifPresent(item2 -> operator.accept(item1, item2)));
     }
     
     /**
-     * 转换List.
+     * 匹配两个list集合中的相同元素，并执行匹配后的动作 适用于两个集合的泛型一致
+     *
+     * @param list1      第一个集合
+     * @param list2      第二个集合
+     * @param equalField 判定元素相同的属性，如Student::getId
+     * @param operator   匹配后执行的动作，入参为两个集合中的相同元素，如：(a, b)->a.setXx(b.getXx())
+     * @param <T>        集合泛型
+     */
+    public static <T> void match(Collection<T> list1, Collection<T> list2, Function<T, ?> equalField,
+            BiConsumer<T, T> operator) {
+        match(list1, list2, equalField, equalField, operator);
+    }
+    
+    /**
+     * 转换List
      *
      * @param list      原集合
      * @param converter 转换函数
@@ -62,7 +73,7 @@ public class ListUtils {
     }
     
     /**
-     * 转换List，转换之后去重.
+     * 转换List，转换之后去重
      *
      * @param list      原集合
      * @param converter 转换函数
