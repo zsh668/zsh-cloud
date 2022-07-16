@@ -17,6 +17,11 @@ public class TenantContext {
     private static final ThreadLocal<String> TENANT_ID = new TransmittableThreadLocal<>();
     
     /**
+     * 是否忽略租户
+     */
+    private static final ThreadLocal<Boolean> IGNORE = new TransmittableThreadLocal<>();
+    
+    /**
      * 获得租户编号。
      *
      * @return 租户编号
@@ -29,7 +34,21 @@ public class TenantContext {
         TENANT_ID.set(tenantId);
     }
     
+    public static void setIgnore(Boolean ignore) {
+        IGNORE.set(ignore);
+    }
+    
+    /**
+     * 当前是否忽略租户
+     *
+     * @return 是否忽略
+     */
+    public static boolean isIgnore() {
+        return Boolean.TRUE.equals(IGNORE.get());
+    }
+    
     public static void clear() {
         TENANT_ID.remove();
+        IGNORE.remove();
     }
 }

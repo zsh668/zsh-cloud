@@ -38,4 +38,9 @@ public interface CommonConstant {
      * Bearer
      */
     String AUTHORIZATION_PREFIX = "Bearer";
+    
+    /**
+     * admin id.
+     */
+    String ADMIN_ID = "1";
 }
