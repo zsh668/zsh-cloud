@@ -2,8 +2,8 @@ package com.zsh.cloud.common.tenant.handler;
 
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.zsh.cloud.common.core.constant.CommonConstant;
-import com.zsh.cloud.common.tenant.properties.TenantProperties;
 import com.zsh.cloud.common.core.contex.TenantContext;
+import com.zsh.cloud.common.tenant.properties.TenantProperties;
 import lombok.AllArgsConstructor;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.NullValue;
@@ -30,8 +30,10 @@ public class TenantDatabaseHandler implements TenantLineHandler {
     
     @Override
     public boolean ignoreTable(String tableName) {
-        // 忽略多租户的表
-        return properties.getIgnoreTables().stream().anyMatch((t) -> t.equalsIgnoreCase(tableName));
+        // 情况一，全局忽略多租户
+        // 情况二，忽略多租户的表
+        return TenantContext.isIgnore() || properties.getIgnoreTables().stream()
+                .anyMatch((t) -> t.equalsIgnoreCase(tableName));
     }
     
     @Override

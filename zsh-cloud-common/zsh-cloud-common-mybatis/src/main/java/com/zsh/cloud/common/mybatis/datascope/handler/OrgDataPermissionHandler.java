@@ -2,6 +2,7 @@ package com.zsh.cloud.common.mybatis.datascope.handler;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.extension.plugins.handler.DataPermissionHandler;
+import com.zsh.cloud.common.core.constant.CommonConstant;
 import com.zsh.cloud.common.core.util.RequestUtils;
 import com.zsh.cloud.common.mybatis.datascope.annotations.DataScope;
 import com.zsh.cloud.common.mybatis.datascope.domain.DataPermission;
@@ -39,8 +40,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class OrgDataPermissionHandler implements DataPermissionHandler {
     
-    static final String ADMIN_ID = "1";
-    
     private Function<String, DataPermission> function;
     
     @SneakyThrows
@@ -61,7 +60,7 @@ public class OrgDataPermissionHandler implements DataPermissionHandler {
                 }
                 // 获取到用户的id
                 String userId = RequestUtils.getUserId();
-                if (StringUtils.equals(ADMIN_ID, userId)) {
+                if (StringUtils.equals(CommonConstant.ADMIN_ID, userId)) {
                     return where;
                 }
                 DataPermission dataPermission = function.apply(userId);
