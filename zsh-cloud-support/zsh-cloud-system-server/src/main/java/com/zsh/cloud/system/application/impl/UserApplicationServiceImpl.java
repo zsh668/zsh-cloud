@@ -3,6 +3,7 @@ package com.zsh.cloud.system.application.impl;
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.assembler.UserDtoAssembler;
 import com.zsh.cloud.system.application.assembler.UserRoleDtoAssembler;
+import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserRoleCommand;
@@ -62,6 +63,13 @@ public class UserApplicationServiceImpl implements UserApplicationService {
         User user = userDtoAssembler.toUser(userCommand);
         UserUpdateSpecification specification = new UserUpdateSpecification(userRepository);
         specification.isSatisfiedBy(user);
+        userRepository.store(user);
+    }
+    
+    @Override
+    public void update(CurrentUserCommand userCommand) {
+        User user = userDtoAssembler.toUser(userCommand);
+        user.notUpdated();
         userRepository.store(user);
     }
     

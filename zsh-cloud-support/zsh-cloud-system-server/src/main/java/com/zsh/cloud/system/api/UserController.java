@@ -7,6 +7,7 @@ import com.zsh.cloud.common.web.excel.ExportExcel;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.UserQueryService;
+import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
 import com.zsh.cloud.system.application.model.command.IdsCommand;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
@@ -183,6 +184,20 @@ public class UserController {
     @SysLog("查询用户上下级结构")
     public HierarchyDTO hierarchy(@PathVariable String id) {
         return userQueryService.findHierarchy(id);
+    }
+    
+    /**
+     * 修改当前登录信息
+     *
+     * @return
+     */
+    @ApiOperation(value = "修改当前登录信息", notes = "修改当前登录信息")
+    @SysLog("修改当前登录信息")
+    @PutMapping("users/current")
+    public Boolean updateCurrentUser(@Valid @RequestBody CurrentUserCommand userCommand) {
+        userCommand.setUserId(RequestUtils.getUserId());
+        userApplicationService.update(userCommand);
+        return Boolean.TRUE;
     }
     
     /**

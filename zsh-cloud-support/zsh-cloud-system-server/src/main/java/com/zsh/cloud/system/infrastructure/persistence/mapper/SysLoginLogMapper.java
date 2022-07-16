@@ -25,6 +25,7 @@ public interface SysLoginLogMapper extends BaseMapperExt<SysLoginLogDO> {
      */
     default Page<SysLoginLogDO> selectPage(LoginLogPageQuery query) {
         return selectPage(query, Wraps.<SysLoginLogDO>lbQ().likeIfPresent(SysLoginLogDO::getAccount, query.getAccount())
+                .eqIfPresent(SysLoginLogDO::getUserId, query.getUserId())
                 .likeIfPresent(SysLoginLogDO::getUserName, query.getUserName())
                 .likeIfPresent(SysLoginLogDO::getRequestIp, query.getRequestIp())
                 .leFooterIfPresent(SysLoginLogDO::getLoginTime, query.getStartLoginTime())

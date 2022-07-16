@@ -1,10 +1,13 @@
 package com.zsh.cloud.system.api;
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.servlet.ServletUtil;
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.system.application.LoginLogApplicationService;
 import com.zsh.cloud.system.application.LoginLogQueryService;
 import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.system.application.model.dto.LoginLogDTO;
 import com.zsh.cloud.system.application.model.dto.LoginLogPageDTO;
 import com.zsh.cloud.system.application.model.query.LoginLogPageQuery;
 import io.swagger.annotations.Api;
@@ -15,9 +18,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 /**
  * 登录日志管理.
@@ -61,6 +67,26 @@ public class LoginLogController {
     @GetMapping("loginLogs/{id}")
     public LoginLogPageDTO get(@PathVariable String id) {
         return loginLogQueryService.find(id);
+    }
+    
+    /**
+     * 新增登录日志.
+     *
+     * @param account
+     * @param description
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "新增登录日志", notes = "新增登录日志不为空的字段")
+    @GetMapping("loginLogs/login/{account}")
+    public Boolean save(@NotBlank(message = "用户名不能为为空") @PathVariable String account,
+            @RequestParam(required = false, defaultValue = "登陆成功") String description, HttpServletRequest request) {
+        LoginLogDTO loginLog = new LoginLogDTO();
+        String ua = StrUtil.sub(request.getHeader("user-agent"), 0, 500);
+        String ip = ServletUtil.getClientIP(request);
+        loginLog.setUa(ua).setAccount(account).setDescription(description).setRequestIp(ip);
+        loginLogApplicationService.save(loginLog);
+        return Boolean.TRUE;
     }
     
     /**

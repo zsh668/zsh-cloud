@@ -11,7 +11,6 @@ import com.zsh.cloud.system.domain.model.user.Account;
 import com.zsh.cloud.system.domain.model.user.User;
 import com.zsh.cloud.system.domain.model.user.UserRepository;
 import net.oschina.j2cache.CacheChannel;
-import net.oschina.j2cache.CacheObject;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 

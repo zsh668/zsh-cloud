@@ -1,7 +1,7 @@
 package com.zsh.cloud.common.tenant.interceptor;
 
 import com.zsh.cloud.common.core.constant.CommonConstant;
-import com.zsh.cloud.common.tenant.contex.TenantContext;
+import com.zsh.cloud.common.core.contex.TenantContext;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 

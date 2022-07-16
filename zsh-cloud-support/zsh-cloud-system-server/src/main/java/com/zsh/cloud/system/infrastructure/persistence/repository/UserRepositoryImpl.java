@@ -64,8 +64,9 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
         SysUserDO sysUserDO = UserConverter.fromUser(user);
         this.saveOrUpdate(sysUserDO);
         String userId = sysUserDO.getId();
-        
-        userRoleRepository.store(new UserRole(user.getUserId(), user.getRoleIds()));
+        if (user.getUpdatedUserRole()) {
+            userRoleRepository.store(new UserRole(user.getUserId(), user.getRoleIds()));
+        }
         return new UserId(userId);
     }
     
