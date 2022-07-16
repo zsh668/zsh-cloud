@@ -1,7 +1,6 @@
 package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.api.dto.LoginLogDTO;
 import com.zsh.cloud.system.application.LoginLogQueryService;
 import com.zsh.cloud.system.application.assembler.LoginLogDtoAssembler;
 import com.zsh.cloud.system.application.model.dto.LoginLogPageDTO;

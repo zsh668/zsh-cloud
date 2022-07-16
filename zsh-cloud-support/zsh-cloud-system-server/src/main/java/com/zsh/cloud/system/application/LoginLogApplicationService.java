@@ -1,5 +1,7 @@
 package com.zsh.cloud.system.application;
 
+import com.zsh.cloud.system.application.model.dto.LoginLogDTO;
+
 import java.util.List;
 
 /**
@@ -10,6 +12,13 @@ import java.util.List;
  * @date 2022/7/7 10:12
  */
 public interface LoginLogApplicationService {
+    
+    /**
+     * 保存.
+     *
+     * @param loginLog
+     */
+    void save(LoginLogDTO loginLog);
     
     /**
      * 批量删除

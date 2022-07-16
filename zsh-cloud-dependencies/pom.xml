@@ -42,7 +42,6 @@
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <hutool.version>5.7.22</hutool.version>
         <ip2region.version>1.7.2</ip2region.version>
-        <bitwalker.version>1.21</bitwalker.version>
         <commons-io.version>2.11.0</commons-io.version>
         <easyexcel.version>3.0.5</easyexcel.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
@@ -176,12 +175,6 @@
                 <groupId>org.lionsoul</groupId>
                 <artifactId>ip2region</artifactId>
                 <version>${ip2region.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/eu.bitwalker/UserAgentUtils -->
-            <dependency>
-                <groupId>eu.bitwalker</groupId>
-                <artifactId>UserAgentUtils</artifactId>
-                <version>${bitwalker.version}</version>
             </dependency>
             
             <dependency>

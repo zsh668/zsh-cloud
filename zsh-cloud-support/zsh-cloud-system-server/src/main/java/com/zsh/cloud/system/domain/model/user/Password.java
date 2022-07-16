@@ -38,7 +38,7 @@ public class Password implements ValueObject<Password> {
     
     @Override
     public boolean sameValueAs(Password other) {
-        return other != null && this.password.equals(other.password);
+        return other != null && new BCryptPasswordEncoder().matches(other.password, this.password);
     }
     
     @Override

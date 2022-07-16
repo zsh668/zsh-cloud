@@ -4,7 +4,6 @@ import com.zsh.cloud.auth.sevice.LoginService;
 import com.zsh.cloud.common.core.constant.CacheKey;
 import net.oschina.j2cache.CacheChannel;
 import net.oschina.j2cache.CacheObject;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

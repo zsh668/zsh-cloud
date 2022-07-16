@@ -3,7 +3,7 @@ package com.zsh.cloud.common.tenant.handler;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.zsh.cloud.common.core.constant.CommonConstant;
 import com.zsh.cloud.common.tenant.properties.TenantProperties;
-import com.zsh.cloud.common.tenant.contex.TenantContext;
+import com.zsh.cloud.common.core.contex.TenantContext;
 import lombok.AllArgsConstructor;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.NullValue;

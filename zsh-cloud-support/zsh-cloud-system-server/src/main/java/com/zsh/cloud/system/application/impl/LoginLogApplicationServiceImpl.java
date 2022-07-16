@@ -1,14 +1,17 @@
 package com.zsh.cloud.system.application.impl;
 
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
+import com.zsh.cloud.common.core.util.AddressUtil;
 import com.zsh.cloud.system.application.LoginLogApplicationService;
+import com.zsh.cloud.system.application.assembler.LoginLogDtoAssembler;
+import com.zsh.cloud.system.application.model.dto.LoginLogDTO;
 import com.zsh.cloud.system.domain.model.log.LogId;
 import com.zsh.cloud.system.domain.model.log.login.LoginLogRepository;
-import com.zsh.cloud.system.domain.model.menu.MenuId;
-import com.zsh.cloud.system.domain.model.menu.MenuRepository;
-import com.zsh.cloud.system.domain.specification.MenuDeleteSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,19 @@ public class LoginLogApplicationServiceImpl implements LoginLogApplicationServic
     
     @Autowired
     private LoginLogRepository loginLogRepository;
+    
+    @Autowired
+    private LoginLogDtoAssembler loginLogDtoAssembler;
+    
+    @Override
+    public void save(LoginLogDTO loginLog) {
+        UserAgent userAgent = UserAgentUtil.parse(loginLog.getUa());
+        String location = AddressUtil.getRegion(loginLog.getRequestIp());
+        loginLog.setLoginTime(LocalDateTime.now()).setBrowser(userAgent.getBrowser().getName())
+                .setBrowserVersion(userAgent.getVersion()).setOperatingSystem(userAgent.getPlatform().getName())
+                .setLocation(location);
+        loginLogRepository.store(loginLogDtoAssembler.toLog(loginLog));
+    }
     
     @Override
     public void deleteBatch(List<String> ids) {

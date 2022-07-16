@@ -2,7 +2,8 @@ package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.tenant.contex.TenantContext;
+import com.zsh.cloud.common.core.contex.TenantContext;
+import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.UserDTO;
@@ -165,5 +166,18 @@ public interface UserDtoAssembler {
                 IDict.getByCode(GenderEnum.class, userCommand.getGender()), new UserId(superior),
                 userCommand.getAvatar(), userCommand.getWorkDescribe(), new OrgId(userCommand.getOrgId()),
                 new StationId(userCommand.getStationId()), roleIdList);
+    }
+    
+    /**
+     * 转换.
+     *
+     * @param userCommand
+     * @return
+     */
+    default User toUser(CurrentUserCommand userCommand) {
+        return new User(new UserId(userCommand.getUserId()), new UserName(userCommand.getUserName()),
+                new Mobile(userCommand.getMobile()), new Email(userCommand.getEmail()),
+                IDict.getByCode(GenderEnum.class, userCommand.getGender()), userCommand.getAvatar(),
+                userCommand.getWorkDescribe());
     }
 }

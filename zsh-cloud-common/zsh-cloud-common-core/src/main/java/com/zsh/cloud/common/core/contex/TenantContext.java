@@ -1,4 +1,4 @@
-package com.zsh.cloud.common.tenant.contex;
+package com.zsh.cloud.common.core.contex;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 

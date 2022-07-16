@@ -2,7 +2,7 @@ package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.core.util.BeanUtils;
-import com.zsh.cloud.system.api.dto.LoginLogDTO;
+import com.zsh.cloud.system.application.model.dto.LoginLogDTO;
 import com.zsh.cloud.system.application.model.dto.LoginLogPageDTO;
 import com.zsh.cloud.system.domain.model.log.login.LoginLog;
 import com.zsh.cloud.system.domain.model.user.Account;

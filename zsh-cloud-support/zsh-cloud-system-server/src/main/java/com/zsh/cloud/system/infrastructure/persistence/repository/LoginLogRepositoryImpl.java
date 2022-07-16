@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,9 @@ public class LoginLogRepositoryImpl extends ServiceImpl<SysLoginLogMapper, SysLo
             SysUserDO sysUserDO = users.get(0);
             sysLoginLogDO.setUserId(sysUserDO.getId());
             sysLoginLogDO.setUserName(sysUserDO.getUserName());
+            // 更新 最后登录时间
+            sysUserDO.setLastLoginTime(LocalDateTime.now());
+            sysUserMapper.updateById(sysUserDO);
         }
         if (sysLoginLogDO.getId() == null) {
             this.save(sysLoginLogDO);

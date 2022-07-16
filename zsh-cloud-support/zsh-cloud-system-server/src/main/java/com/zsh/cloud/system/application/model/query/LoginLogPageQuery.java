@@ -21,6 +21,12 @@ import java.time.LocalDateTime;
 public class LoginLogPageQuery extends PageQuery {
     
     /**
+     * 登录人ID.
+     */
+    @ApiModelProperty(value = "登录人ID")
+    private String userId;
+    
+    /**
      * 登录人姓名.
      */
     @ApiModelProperty(value = "登录人姓名")

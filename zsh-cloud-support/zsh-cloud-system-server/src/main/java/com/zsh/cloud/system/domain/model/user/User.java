@@ -133,6 +133,11 @@ public class User implements Entity<User> {
     private List<UserGroupName> userGroupsNames;
     
     /**
+     * 是否更新用户角色
+     */
+    private Boolean updatedUserRole = Boolean.TRUE;
+    
+    /**
      * 创建.
      *
      * @param account
@@ -227,8 +232,8 @@ public class User implements Entity<User> {
      */
     public User(UserId userId, Account account, UserName userName, Mobile mobile, Email email, Password password,
             GenderEnum gender, StatusEnum status, UserId superior, String avatar, LocalDateTime passwordExpireTime,
-            LocalDateTime lastLoginTime, String workDescribe, OrgId orgId, StationId stationId, TenantId tenantId, LocalDateTime createdTime,
-            LocalDateTime updatedTime, List<RoleId> roleIds, List<RoleName> roleNames,
+            LocalDateTime lastLoginTime, String workDescribe, OrgId orgId, StationId stationId, TenantId tenantId,
+            LocalDateTime createdTime, LocalDateTime updatedTime, List<RoleId> roleIds, List<RoleName> roleNames,
             List<UserGroupName> userGroupsNames) {
         this.userId = userId;
         this.account = account;
@@ -258,6 +263,26 @@ public class User implements Entity<User> {
         this.roleIds = roleIds;
     }
     
+    public User(UserId userId, UserName userName, Mobile mobile, Email email, GenderEnum gender, String avatar,
+            String workDescribe) {
+        this.userId = userId;
+        this.userName = userName;
+        this.mobile = mobile;
+        this.email = email;
+        this.gender = gender;
+        this.avatar = avatar;
+        this.workDescribe = workDescribe;
+    }
+    
+    /**
+     * 不更新.
+     *
+     * @return
+     */
+    public void notUpdated() {
+        this.updatedUserRole = Boolean.FALSE;
+    }
+    
     /**
      * 是否有效.
      *
@@ -281,7 +306,7 @@ public class User implements Entity<User> {
      * @return
      */
     public boolean checkPassword(String passwordStr) {
-        return password != null && this.password.sameValueAs(Password.create(passwordStr));
+        return password != null && this.password.sameValueAs(new Password(passwordStr));
     }
     
     /**

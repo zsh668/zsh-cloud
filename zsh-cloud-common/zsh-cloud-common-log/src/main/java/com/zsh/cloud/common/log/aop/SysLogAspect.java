@@ -10,7 +10,7 @@ import com.zsh.cloud.common.core.util.RequestUtils;
 import com.zsh.cloud.common.log.enums.LogTypeEnum;
 import com.zsh.cloud.common.log.event.SysLogEvent;
 import com.zsh.cloud.common.log.util.LogUtil;
-import com.zsh.cloud.common.tenant.contex.TenantContext;
+import com.zsh.cloud.common.core.contex.TenantContext;
 import com.zsh.cloud.system.api.dto.OptLogDTO;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;

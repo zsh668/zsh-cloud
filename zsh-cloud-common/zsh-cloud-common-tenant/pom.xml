@@ -29,11 +29,6 @@
             <optional>true</optional>
         </dependency>
     
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>transmittable-thread-local</artifactId>
-        </dependency>
-    
         <!-- Spring 核心 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

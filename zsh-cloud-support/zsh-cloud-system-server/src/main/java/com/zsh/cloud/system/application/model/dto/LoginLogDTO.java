@@ -1,4 +1,4 @@
-package com.zsh.cloud.system.api.dto;
+package com.zsh.cloud.system.application.model.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

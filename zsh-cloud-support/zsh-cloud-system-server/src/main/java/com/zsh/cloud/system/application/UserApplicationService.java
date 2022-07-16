@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.application;
 
+import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserRoleCommand;
@@ -29,6 +30,13 @@ public interface UserApplicationService {
      * @param userCommand
      */
     void update(UserUpdateCommand userCommand);
+    
+    /**
+     * 变更
+     *
+     * @param userCommand
+     */
+    void update(CurrentUserCommand userCommand);
     
     /**
      * 批量删除.
