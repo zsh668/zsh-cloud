@@ -39,6 +39,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class OrgDataPermissionHandler implements DataPermissionHandler {
     
+    static final String ADMIN_ID = "1";
+    
     private Function<String, DataPermission> function;
     
     @SneakyThrows
@@ -59,6 +61,9 @@ public class OrgDataPermissionHandler implements DataPermissionHandler {
                 }
                 // 获取到用户的id
                 String userId = RequestUtils.getUserId();
+                if (StringUtils.equals(ADMIN_ID, userId)) {
+                    return where;
+                }
                 DataPermission dataPermission = function.apply(userId);
                 if (dataPermission == null) {
                     return where;
