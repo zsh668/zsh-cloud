@@ -1,4 +1,4 @@
-package com.zsh.cloud.common.web.excel;
+package com.zsh.cloud.common.web.excel.export;
 
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelWriter;
@@ -58,7 +58,7 @@ public class ExportExcelAspect {
      */
     private static final Long PART_EXPORT_NUM = 5000L;
     
-    @Pointcut("@annotation(com.zsh.cloud.common.web.excel.ExportExcel)")
+    @Pointcut("@annotation(com.zsh.cloud.common.web.excel.export.ExportExcel)")
     public void pointCut() {
     }
     
