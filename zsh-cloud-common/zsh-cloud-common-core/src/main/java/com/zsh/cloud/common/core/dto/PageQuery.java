@@ -16,8 +16,8 @@ import javax.validation.constraints.NotNull;
  * @date 2022/3/31 16:03
  */
 @ApiModel("分页参数")
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public abstract class PageQuery extends Query {
     
     private static final Long PAGE_NO = 1L;

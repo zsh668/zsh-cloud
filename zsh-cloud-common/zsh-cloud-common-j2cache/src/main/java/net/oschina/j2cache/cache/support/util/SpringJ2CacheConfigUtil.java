@@ -23,7 +23,7 @@ public class SpringJ2CacheConfigUtil {
      * @param environment configuration
      * @return j2cache configuration
      */
-    public final static J2CacheConfig initFromConfig(StandardEnvironment environment) {
+    public static final J2CacheConfig initFromConfig(StandardEnvironment environment) {
         J2CacheConfig config = new J2CacheConfig();
         config.setSerialization(environment.getProperty("j2cache.serialization"));
         config.setBroadcast(environment.getProperty("j2cache.broadcast"));
@@ -67,7 +67,8 @@ public class SpringJ2CacheConfigUtil {
                 if (a instanceof CompositePropertySource) {
                     CompositePropertySource c = (CompositePropertySource) a;
                     propertyNames = c.getPropertyNames();
-                } else if (a instanceof EnumerablePropertySource) { // TODO jar包中代码缺失问题，导致读取不到配置
+                } else if (a instanceof EnumerablePropertySource) {
+                    // TODO jar包中代码缺失问题，导致读取不到配置
                     EnumerablePropertySource c = (EnumerablePropertySource) a;
                     propertyNames = c.getPropertyNames();
                 }

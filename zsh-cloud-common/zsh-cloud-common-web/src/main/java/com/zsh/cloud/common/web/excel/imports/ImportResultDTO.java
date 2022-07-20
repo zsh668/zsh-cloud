@@ -4,6 +4,7 @@ import com.zsh.cloud.common.core.dto.DTO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.util.Collection;
 
@@ -16,23 +17,23 @@ import java.util.Collection;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@Accessors(chain = true)
 public class ImportResultDTO extends DTO {
     
     /**
      * 总数.
      */
-    private Integer total;
+    private Integer total = 0;
     
     /**
      * 成功数.
      */
-    private Integer success;
+    private Integer success = 0;
     
     /**
      * 失败数.
      */
-    private Integer fail;
+    private Integer fail = 0;
     
     /**
      * 错误信息.

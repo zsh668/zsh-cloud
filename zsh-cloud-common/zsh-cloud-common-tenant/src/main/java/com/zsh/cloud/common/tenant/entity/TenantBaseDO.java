@@ -11,8 +11,8 @@ import lombok.EqualsAndHashCode;
  * @version 1.0
  * @date 2022/3/24 14:18
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class TenantBaseDO extends BaseDO {
     
     /**

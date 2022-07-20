@@ -2,9 +2,14 @@ package com.zsh.cloud.common.j2cache.config;
 
 import net.oschina.j2cache.cache.support.J2CacheCacheManger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 覆盖 SpringCache 相关配置.
@@ -13,7 +18,11 @@ import org.springframework.cache.interceptor.KeyGenerator;
  * @version 1.0
  * @date 2022/4/24 13:53
  */
+@EnableCaching
 public class MyCacheConfig extends CachingConfigurerSupport {
+    
+    @Value("${spring.application.name:unknown}")
+    private String appName;
     
     @Autowired
     private J2CacheCacheManger j2CacheCacheManger;
@@ -32,6 +41,6 @@ public class MyCacheConfig extends CachingConfigurerSupport {
      */
     @Override
     public KeyGenerator keyGenerator() {
-        return (target, method, objects) -> "";
+        return (target, method, params) -> Stream.of(params).map(String::valueOf).collect(Collectors.joining(","));
     }
 }

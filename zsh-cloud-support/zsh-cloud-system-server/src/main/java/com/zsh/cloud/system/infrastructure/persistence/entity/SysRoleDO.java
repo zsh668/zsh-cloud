@@ -14,8 +14,8 @@ import lombok.EqualsAndHashCode;
  * @version 1.0
  * @date 2022/4/26 10:14
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("sys_role")
 public class SysRoleDO extends TenantBaseDO {
     
