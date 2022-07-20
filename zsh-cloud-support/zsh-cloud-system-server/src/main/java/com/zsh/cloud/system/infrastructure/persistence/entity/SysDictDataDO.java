@@ -14,8 +14,8 @@ import lombok.EqualsAndHashCode;
  * @version 1.0
  * @date 2022/4/25 09:45
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("sys_dict_data")
 public class SysDictDataDO extends TenantBaseDO {
     

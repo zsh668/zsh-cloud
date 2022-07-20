@@ -1,5 +1,6 @@
 package com.zsh.cloud.system.api;
 
+import com.alibaba.excel.EasyExcelFactory;
 import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
 import com.zsh.cloud.common.core.util.RequestUtils;
@@ -9,6 +10,7 @@ import com.zsh.cloud.common.web.excel.export.ExportExcel;
 import com.zsh.cloud.common.web.excel.imports.ImportResultDTO;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.common.web.util.ExcelUtils;
+import com.zsh.cloud.system.api.excel.UserImportListener;
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.UserQueryService;
 import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
@@ -38,8 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
 
 /**
  * 用户管理.
@@ -238,12 +239,12 @@ public class UserController {
      */
     @PostMapping("users/importExcel")
     @ApiOperation("导入")
-    public ImportResultDTO importExcel(@RequestParam(value = "file") MultipartFile file) {
+    public ImportResultDTO importExcel(@RequestParam(value = "file") MultipartFile file) throws IOException {
         ServiceAssert.notTrue(file.isEmpty(), GlobalErrorCode.BAD_REQUEST.getCode(), "导入内容为空");
         Long begin = System.currentTimeMillis();
-        // ImportResultDTO importResult = userService.importExcel(file);
-        ImportResultDTO importResult = ImportResultDTO.builder().total(3).success(1).fail(2)
-                .message(Arrays.asList("1账号为空", "2账号为空")).build();
+        ImportResultDTO importResult = new ImportResultDTO();
+        EasyExcelFactory.read(file.getInputStream(), UserImportExcelCommand.class, new UserImportListener(importResult))
+                .sheet().doRead();
         Long end = System.currentTimeMillis();
         log.info("导入excel 用时 :{}", (end - begin));
         return importResult;

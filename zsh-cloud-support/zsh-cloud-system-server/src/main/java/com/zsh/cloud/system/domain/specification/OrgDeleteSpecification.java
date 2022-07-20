@@ -30,7 +30,7 @@ public class OrgDeleteSpecification extends AbstractSpecification<Org> {
     @Override
     public boolean isSatisfiedBy(Org org) {
         // 是否存在 下级组织
-        Long count = sysOrgMapper.selectCount(SysOrgDO::getId, org.getParentId().getId());
+        Long count = sysOrgMapper.selectCount(SysOrgDO::getParentId, org.getOrgId().getId());
         ServiceAssert.notTrue(count > 0, ServiceErrorCode.ORG_VERIFICATION_ERROR.getCode(), "当前组织存在下级组织无法删除或禁用");
         // 当前组织是否存在 用户
         count = sysUserMapper.selectCount(SysUserDO::getOrgId, org.getOrgId().getId());

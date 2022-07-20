@@ -14,8 +14,8 @@ import lombok.EqualsAndHashCode;
  * @version 1.0
  * @date 2022/4/26 11:44
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("sys_station")
 public class SysStationDO extends TenantBaseDO {
     

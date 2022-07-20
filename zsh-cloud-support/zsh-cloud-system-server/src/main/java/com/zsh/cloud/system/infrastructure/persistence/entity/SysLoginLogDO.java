@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @date 2022/4/25 09:45
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("sys_login_log")
 public class SysLoginLogDO extends BaseDO {
     

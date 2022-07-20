@@ -27,7 +27,8 @@ public class UserDeleteSpecification extends AbstractSpecification<User> {
     @Override
     public boolean isSatisfiedBy(User user) {
         Tenant tenant = tenantRepository.find(user.getTenantId());
-        Assert.notTrue(tenant.getCreatorId().sameValueAs(user.getUserId()), ServiceErrorCode.TENANT_CREATOR_CHANGE);
+        Assert.notTrue(tenant != null && tenant.getCreatorId().sameValueAs(user.getUserId()),
+                ServiceErrorCode.TENANT_CREATOR_CHANGE);
         return true;
     }
 }

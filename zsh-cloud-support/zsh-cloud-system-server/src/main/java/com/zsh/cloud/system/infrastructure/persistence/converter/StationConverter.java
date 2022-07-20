@@ -46,6 +46,7 @@ public class StationConverter {
         Assert.notNull(station, ServiceErrorCode.STATION_NOT_EXISTS);
         SysStationDO sysStationDO = new SysStationDO();
         sysStationDO.setId(station.getStationId() == null ? null : station.getStationId().getId());
+        sysStationDO.setStationCode(station.getStationCode() == null ? null : station.getStationCode().getCode());
         sysStationDO.setStationName(station.getStationName() == null ? null : station.getStationName().getName());
         sysStationDO.setOrgId(station.getOrgId() == null ? null : station.getOrgId().getId());
         sysStationDO.setSortValue(station.getSortValue());

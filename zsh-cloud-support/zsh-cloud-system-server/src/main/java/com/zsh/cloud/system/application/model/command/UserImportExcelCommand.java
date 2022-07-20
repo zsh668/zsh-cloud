@@ -1,10 +1,9 @@
 package com.zsh.cloud.system.application.model.command;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.annotation.write.style.HeadStyle;
 import com.zsh.cloud.common.core.dto.Command;
 import com.zsh.cloud.common.web.excel.imports.ColumnHeader;
-import lombok.Builder;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@ApiModel(value = "批量导入用户", description = "批量导入用户")
 public class UserImportExcelCommand extends Command {
     
     /**
