@@ -263,6 +263,11 @@ public class User implements Entity<User> {
         this.roleIds = roleIds;
     }
     
+    public User(UserId userId, TenantId tenantId) {
+        this.userId = userId;
+        this.tenantId = tenantId;
+    }
+    
     public User(UserId userId, UserName userName, Mobile mobile, Email email, GenderEnum gender, String avatar,
             String workDescribe) {
         this.userId = userId;

@@ -48,6 +48,19 @@ public interface SysUserMapper extends BaseMapperExt<SysUserDO> {
     }
     
     /**
+     * 根据查询条件查询数据.
+     *
+     * @param query
+     * @param orgIds
+     * @return
+     */
+    default List<SysUserDO> selectList(UserPageQuery query, Collection<String> orgIds) {
+        return selectList(Wraps.<SysUserDO>lbQ().likeIfPresent(SysUserDO::getAccount, query.getAccount())
+                .likeIfPresent(SysUserDO::getUserName, query.getUserName()).inIfPresent(SysUserDO::getOrgId, orgIds)
+                .eqIfPresent(SysUserDO::getStatus, query.getStatus()));
+    }
+    
+    /**
      * 根据superior查询用户.
      *
      * @param superior

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 租户管理.
@@ -55,6 +56,20 @@ public class TenantController {
     @GetMapping("tenants")
     public Page<TenantPageDTO> page(TenantPageQuery tenantPageQuery) {
         return tenantQueryService.queryPage(tenantPageQuery);
+    }
+    
+    /**
+     * 查询租户列表.
+     *
+     * @param tenantPageQuery
+     * @return
+     */
+    @ApiOperation("查询租户列表")
+    @SysLog("查询租户列表")
+    @Translator
+    @GetMapping("tenants/list")
+    public List<TenantPageDTO> list(TenantPageQuery tenantPageQuery) {
+        return tenantQueryService.queryList(tenantPageQuery);
     }
     
     /**

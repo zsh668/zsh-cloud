@@ -8,6 +8,8 @@ import com.zsh.cloud.system.application.model.dto.UserDTO;
 import com.zsh.cloud.system.application.model.dto.UserPageDTO;
 import com.zsh.cloud.system.application.model.query.UserPageQuery;
 
+import java.util.List;
+
 /**
  * 用户查询服务接口.
  *
@@ -24,6 +26,14 @@ public interface UserQueryService {
      * @return
      */
     Page<UserPageDTO> queryPage(UserPageQuery query);
+    
+    /**
+     * 查询列表.
+     *
+     * @param query
+     * @return
+     */
+    List<UserPageDTO> queryList(UserPageQuery query);
     
     /**
      * 通过用户ID获取用户.

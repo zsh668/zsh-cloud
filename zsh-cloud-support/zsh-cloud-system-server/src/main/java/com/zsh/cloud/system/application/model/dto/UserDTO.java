@@ -150,6 +150,12 @@ public class UserDTO extends DTO {
     private String superiorName;
     
     /**
+     * 租户ID.
+     */
+    @ApiModelProperty(value = "租户ID")
+    private String tenantId;
+    
+    /**
      * 创建时间.
      */
     @ApiModelProperty(value = "创建时间")

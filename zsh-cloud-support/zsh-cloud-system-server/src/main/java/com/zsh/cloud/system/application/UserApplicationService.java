@@ -4,6 +4,7 @@ import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserRoleCommand;
+import com.zsh.cloud.system.application.model.command.UserTenantCommand;
 import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 
 import java.util.List;
@@ -66,5 +67,17 @@ public interface UserApplicationService {
      */
     void resetPassword(List<String> ids);
     
+    /**
+     * 分配角色.
+     *
+     * @param command
+     */
     void updateRole(UserRoleCommand command);
+    
+    /**
+     * 分配租户.
+     *
+     * @param command
+     */
+    void updateTenant(UserTenantCommand command);
 }

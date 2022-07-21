@@ -5,6 +5,8 @@ import com.zsh.cloud.system.application.model.dto.TenantDTO;
 import com.zsh.cloud.system.application.model.dto.TenantPageDTO;
 import com.zsh.cloud.system.application.model.query.TenantPageQuery;
 
+import java.util.List;
+
 /**
  * 租户查询服务接口.
  *
@@ -21,6 +23,13 @@ public interface TenantQueryService {
      * @return
      */
     Page<TenantPageDTO> queryPage(TenantPageQuery query);
+    
+    /**
+     *
+     * @param query
+     * @return
+     */
+    List<TenantPageDTO> queryList(TenantPageQuery query);
     
     /**
      * 通过用户ID获取用户.
