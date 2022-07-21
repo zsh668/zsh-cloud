@@ -1,10 +1,11 @@
 package com.zsh.cloud.system.application.assembler;
 
+import com.zsh.cloud.common.core.contex.TenantContext;
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.core.contex.TenantContext;
 import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
+import com.zsh.cloud.system.application.model.command.UserTenantCommand;
 import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.UserDTO;
 import com.zsh.cloud.system.application.model.dto.UserInfoDTO;
@@ -94,6 +95,7 @@ public interface UserDtoAssembler {
                 .setAvatar(user.getAvatar()).setWorkDescribe(user.getWorkDescribe())
                 .setPasswordExpireTime(user.getPasswordExpireTime()).setLastLoginTime(user.getLastLoginTime())
                 .setSuperior(user.getSuperior() == null ? "" : user.getSuperior().getId())
+                .setTenantId(user.getTenantId() == null ? "" : user.getTenantId().getId())
                 .setCreatedTime(user.getCreatedTime()).setUpdatedTime(user.getUpdatedTime());
         List<String> roleIds = new ArrayList<>();
         if (!CollectionUtils.isEmpty(user.getRoleIds())) {
@@ -179,5 +181,15 @@ public interface UserDtoAssembler {
                 new Mobile(userCommand.getMobile()), new Email(userCommand.getEmail()),
                 IDict.getByCode(GenderEnum.class, userCommand.getGender()), userCommand.getAvatar(),
                 userCommand.getWorkDescribe());
+    }
+    
+    /**
+     * 转换.
+     *
+     * @param userCommand
+     * @return
+     */
+    default User toUser(UserTenantCommand userCommand) {
+        return new User(new UserId(userCommand.getUserId()), new TenantId(userCommand.getTenantId()));
     }
 }

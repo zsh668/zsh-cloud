@@ -14,6 +14,8 @@ import com.zsh.cloud.system.infrastructure.persistence.mapper.SysTenantMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 租户查询服务实现类.
  *
@@ -36,6 +38,12 @@ public class TenantQueryServiceImpl implements TenantQueryService {
     @Override
     public Page<TenantPageDTO> queryPage(TenantPageQuery query) {
         Page<SysTenantDO> page = sysTenantMapper.selectPage(query);
+        return tenantDtoAssembler.toDto(page);
+    }
+    
+    @Override
+    public List<TenantPageDTO> queryList(TenantPageQuery query) {
+        List<SysTenantDO> page = sysTenantMapper.selectList(query);
         return tenantDtoAssembler.toDto(page);
     }
     

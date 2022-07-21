@@ -98,6 +98,7 @@ public class UserConverter {
         sysUserDO.setWorkDescribe(user.getWorkDescribe());
         sysUserDO.setOrgId(user.getOrgId() == null ? null : user.getOrgId().getId());
         sysUserDO.setStationId(user.getStationId() == null ? null : user.getStationId().getId());
+        sysUserDO.setTenantId(user.getTenantId() == null ? null : user.getTenantId().getId());
         return sysUserDO;
     }
 }

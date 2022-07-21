@@ -7,6 +7,8 @@ import com.zsh.cloud.system.application.model.query.TenantPageQuery;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysTenantDO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * 租户Mapper.
  *
@@ -28,5 +30,16 @@ public interface SysTenantMapper extends BaseMapperExt<SysTenantDO> {
                 Wraps.<SysTenantDO>lbQ().likeIfPresent(SysTenantDO::getTenantCode, query.getTenantCode())
                         .likeIfPresent(SysTenantDO::getTenantName, query.getTenantName()));
         
+    }
+    
+    /**
+     * 根据查询条件查询数据.
+     *
+     * @param query
+     * @return
+     */
+    default List<SysTenantDO> selectList(TenantPageQuery query) {
+        return selectList(Wraps.<SysTenantDO>lbQ().likeIfPresent(SysTenantDO::getTenantCode, query.getTenantCode())
+                .likeIfPresent(SysTenantDO::getTenantName, query.getTenantName()));
     }
 }

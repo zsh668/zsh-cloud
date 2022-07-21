@@ -19,6 +19,7 @@ import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserImportExcelCommand;
 import com.zsh.cloud.system.application.model.command.UserRoleCommand;
+import com.zsh.cloud.system.application.model.command.UserTenantCommand;
 import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.HierarchyDTO;
 import com.zsh.cloud.system.application.model.dto.LoginDTO;
@@ -41,6 +42,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 用户管理.
@@ -73,6 +75,20 @@ public class UserController {
     @GetMapping("users")
     public Page<UserPageDTO> page(UserPageQuery userPageQuery) {
         return userQueryService.queryPage(userPageQuery);
+    }
+    
+    /**
+     * 查询用户列表.
+     *
+     * @param userPageQuery
+     * @return
+     */
+    @ApiOperation("查询用户列表")
+    @SysLog("查询用户列表")
+    @Translator
+    @GetMapping("users/list")
+    public List<UserPageDTO> list(UserPageQuery userPageQuery) {
+        return userQueryService.queryList(userPageQuery);
     }
     
     /**
@@ -185,6 +201,20 @@ public class UserController {
     @PutMapping("users/role")
     public Boolean updateRole(@Valid @RequestBody UserRoleCommand command) {
         userApplicationService.updateRole(command);
+        return Boolean.TRUE;
+    }
+    
+    /**
+     * 分配租户.
+     *
+     * @param command
+     * @return
+     */
+    @ApiOperation(value = "分配租户", notes = "分配租户")
+    @SysLog("分配租户")
+    @PutMapping("users/tenant")
+    public Boolean updateTenant(@Valid @RequestBody UserTenantCommand command) {
+        userApplicationService.updateTenant(command);
         return Boolean.TRUE;
     }
     

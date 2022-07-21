@@ -7,6 +7,7 @@ import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserRoleCommand;
+import com.zsh.cloud.system.application.model.command.UserTenantCommand;
 import com.zsh.cloud.system.application.model.command.UserUpdateCommand;
 import com.zsh.cloud.system.domain.model.tenant.TenantRepository;
 import com.zsh.cloud.system.domain.model.user.User;
@@ -112,5 +113,11 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     public void updateRole(UserRoleCommand command) {
         UserRole user = userRoleDtoAssembler.toUser(command);
         userRoleRepository.store(user);
+    }
+    
+    @Override
+    public void updateTenant(UserTenantCommand command) {
+        User user = userDtoAssembler.toUser(command);
+        userRepository.store(user);
     }
 }

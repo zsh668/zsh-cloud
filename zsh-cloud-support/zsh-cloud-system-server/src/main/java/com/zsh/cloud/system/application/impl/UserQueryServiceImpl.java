@@ -83,6 +83,19 @@ public class UserQueryServiceImpl implements UserQueryService {
     }
     
     @Override
+    public List<UserPageDTO> queryList(UserPageQuery query) {
+        List<UserPageDTO> list = userDtoAssembler.toDto(
+                sysUserMapper.selectList(query, getOrgCondition(query.getOrgId())));
+        list.forEach(user -> {
+            List<Role> roles = roleRepository.find(new UserId(user.getId()));
+            List<String> roleNames = roles.stream().map(role -> role.getRoleName().getName())
+                    .collect(Collectors.toList());
+            user.setRoleNames(roleNames);
+        });
+        return list;
+    }
+    
+    @Override
     public UserDTO find(String userId) {
         User user = userRepository.find(new UserId(userId));
         return userDtoAssembler.fromUser(user);
