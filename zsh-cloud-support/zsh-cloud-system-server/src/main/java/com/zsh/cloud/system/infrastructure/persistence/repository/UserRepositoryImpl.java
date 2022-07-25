@@ -50,7 +50,7 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     
     @Override
     public List<User> find(Account account) {
-        return getUserList(baseMapper.queryUserNoTenantByAccount(account.getAccount()));
+        return getUserList(baseMapper.selectList(account.getAccount()));
     }
     
     @Override
@@ -63,11 +63,11 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     public UserId store(User user) {
         SysUserDO sysUserDO = UserConverter.fromUser(user);
         this.saveOrUpdate(sysUserDO);
-        String userId = sysUserDO.getId();
+        UserId userId = new UserId(sysUserDO.getId());
         if (user.getUpdatedUserRole()) {
-            userRoleRepository.store(new UserRole(user.getUserId(), user.getRoleIds()));
+            userRoleRepository.store(new UserRole(userId, user.getRoleIds()));
         }
-        return new UserId(userId);
+        return userId;
     }
     
     @Override

@@ -12,6 +12,7 @@ import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.common.web.util.ExcelUtils;
 import com.zsh.cloud.system.api.excel.UserImportListener;
 import com.zsh.cloud.system.application.UserApplicationService;
+import com.zsh.cloud.system.application.UserManageService;
 import com.zsh.cloud.system.application.UserQueryService;
 import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
 import com.zsh.cloud.system.application.model.command.IdsCommand;
@@ -61,6 +62,9 @@ public class UserController {
     
     @Autowired
     private UserApplicationService userApplicationService;
+    
+    @Autowired
+    private UserManageService userManageService;
     
     /**
      * 分页查询用户.
@@ -273,8 +277,8 @@ public class UserController {
         ServiceAssert.notTrue(file.isEmpty(), GlobalErrorCode.BAD_REQUEST.getCode(), "导入内容为空");
         Long begin = System.currentTimeMillis();
         ImportResultDTO importResult = new ImportResultDTO();
-        EasyExcelFactory.read(file.getInputStream(), UserImportExcelCommand.class, new UserImportListener(importResult))
-                .sheet().doRead();
+        EasyExcelFactory.read(file.getInputStream(), UserImportExcelCommand.class,
+                new UserImportListener(importResult, userManageService)).sheet().doRead();
         Long end = System.currentTimeMillis();
         log.info("导入excel 用时 :{}", (end - begin));
         return importResult;

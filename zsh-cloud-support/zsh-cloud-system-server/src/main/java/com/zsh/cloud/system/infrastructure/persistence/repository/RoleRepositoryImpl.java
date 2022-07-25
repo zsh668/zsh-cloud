@@ -23,6 +23,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 角色-Repository实现类.
@@ -63,6 +64,18 @@ public class RoleRepositoryImpl extends ServiceImpl<SysRoleMapper, SysRoleDO>
     public List<Role> find(UserId userId) {
         List<SysRoleDO> sysRoleDOList = baseMapper.queryUserRole(userId.getId());
         List<Role> roles = new ArrayList<>();
+        if (CollectionUtils.isEmpty(sysRoleDOList)) {
+            return roles;
+        }
+        sysRoleDOList.forEach(sysRoleDO -> roles.add(RoleConverter.toRole(sysRoleDO)));
+        return roles;
+    }
+    
+    @Override
+    public List<Role> find(List<RoleName> roleNames) {
+        List<String> names = roleNames.stream().map(roleName -> roleName.getName()).collect(Collectors.toList());
+        List<Role> roles = new ArrayList<>();
+        List<SysRoleDO> sysRoleDOList = baseMapper.selectList(SysRoleDO::getRoleName, names);
         if (CollectionUtils.isEmpty(sysRoleDOList)) {
             return roles;
         }
