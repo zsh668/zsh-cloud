@@ -71,11 +71,6 @@
             <version>${revision}</version>
         </dependency>
     
-        <!-- kaptcha验证码 -->
-        <dependency>
-            <groupId>com.github.penggle</groupId>
-            <artifactId>kaptcha</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.github.whvcse</groupId>
             <artifactId>easy-captcha</artifactId>

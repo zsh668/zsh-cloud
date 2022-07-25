@@ -19,14 +19,6 @@ public interface CaptchaService {
      * @param uuid
      * @return
      */
-    BufferedImage getCaptchaImage(String uuid);
-    
-    /**
-     * 生成验证码.
-     *
-     * @param uuid
-     * @return
-     */
     Captcha getCaptcha(String uuid);
     
     /**
