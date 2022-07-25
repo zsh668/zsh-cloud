@@ -2,7 +2,6 @@ package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.IDict;
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.core.util.BeanUtils;
 import com.zsh.cloud.common.log.enums.LogTypeEnum;
 import com.zsh.cloud.system.api.dto.OptLogDTO;
 import com.zsh.cloud.system.application.model.dto.OptLogInfoDTO;
@@ -13,6 +12,7 @@ import com.zsh.cloud.system.domain.model.user.UserName;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysOptLogDO;
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Mapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpMethod;
 
 import java.util.List;
@@ -65,7 +65,8 @@ public interface OptLogDtoAssembler {
         if (optLog == null) {
             return null;
         }
-        OptLogInfoDTO optInfo = BeanUtils.copyBeanNoException(optLog, OptLogInfoDTO.class);
+        OptLogInfoDTO optInfo = new OptLogInfoDTO();
+        BeanUtils.copyProperties(optLog, optInfo);
         optInfo.setId(optLog.getLogId() == null ? "" : optLog.getLogId().getId())
                 .setUserName(optLog.getUserName() == null ? "" : optLog.getUserName().getName())
                 .setType(optLog.getType().getCode()).setHttpMethod(optLog.getHttpMethod().name());

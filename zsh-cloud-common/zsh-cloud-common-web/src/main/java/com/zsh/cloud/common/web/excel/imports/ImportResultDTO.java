@@ -28,12 +28,12 @@ public class ImportResultDTO extends DTO {
     /**
      * 成功数.
      */
-    private Integer success = 0;
+    private Integer success;
     
     /**
      * 失败数.
      */
-    private Integer fail = 0;
+    private Integer fail;
     
     /**
      * 错误信息.

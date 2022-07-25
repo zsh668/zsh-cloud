@@ -1,13 +1,13 @@
 package com.zsh.cloud.system.application.assembler;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.common.core.util.BeanUtils;
 import com.zsh.cloud.system.application.model.dto.LoginLogDTO;
 import com.zsh.cloud.system.application.model.dto.LoginLogPageDTO;
 import com.zsh.cloud.system.domain.model.log.login.LoginLog;
 import com.zsh.cloud.system.domain.model.user.Account;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysLoginLogDO;
 import org.mapstruct.Mapper;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -49,7 +49,8 @@ public interface LoginLogDtoAssembler {
         if (loginLog == null) {
             return null;
         }
-        LoginLogPageDTO loginLogDTO = BeanUtils.copyBeanNoException(loginLog, LoginLogPageDTO.class);
+        LoginLogPageDTO loginLogDTO = new LoginLogPageDTO();
+        BeanUtils.copyProperties(loginLog, loginLogDTO);
         loginLogDTO.setId(loginLog.getLogId() == null ? "" : loginLog.getLogId().getId())
                 .setAccount(loginLog.getAccount() == null ? "" : loginLog.getAccount().getAccount())
                 .setUserName(loginLog.getUserName() == null ? "" : loginLog.getUserName().getName());

@@ -46,6 +46,14 @@ public interface RoleRepository {
     List<Role> find(UserId userId);
     
     /**
+     * 获取角色
+     *
+     * @param roleNames
+     * @return
+     */
+    List<Role> find(List<RoleName> roleNames);
+    
+    /**
      * 保存.
      *
      * @param role
