@@ -9,13 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -37,7 +36,6 @@ import java.util.Map;
  * @date 2022/4/13 11:04
  */
 @Configuration
-@EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     
     /**
@@ -54,27 +52,20 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.allowFormAuthenticationForClients();
     }
     
     /**
-     * 配置客户端详情(数据库)
+     * 配置客户端详情(数据库).
      *
      * @param clients
      * @throws Exception
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        RedisClientDetailsServiceImpl redisClientDetailsService = new RedisClientDetailsServiceImpl(dataSource);
-        redisClientDetailsService.setPasswordEncoder(passwordEncoder);
-        redisClientDetailsService.setFindClientDetailsSql(AuthConstants.FIND_CLIENT_DETAILS_SQL);
-        redisClientDetailsService.setSelectClientDetailsSql(AuthConstants.SELECT_CLIENT_DETAILS_SQL);
-        clients.withClientDetails(redisClientDetailsService);
+        clients.withClientDetails(jdbcClientDetailsService());
     }
     
     @Override
@@ -143,4 +134,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         };
     }
     
+    /**
+     * 配置通过数据的方式去读取client信息.
+     *
+     * @return
+     */
+    @Bean
+    public ClientDetailsService jdbcClientDetailsService() {
+        RedisClientDetailsServiceImpl redisClientDetailsService = new RedisClientDetailsServiceImpl(dataSource);
+        redisClientDetailsService.setFindClientDetailsSql(AuthConstants.FIND_CLIENT_DETAILS_SQL);
+        redisClientDetailsService.setSelectClientDetailsSql(AuthConstants.SELECT_CLIENT_DETAILS_SQL);
+        return redisClientDetailsService;
+    }
 }

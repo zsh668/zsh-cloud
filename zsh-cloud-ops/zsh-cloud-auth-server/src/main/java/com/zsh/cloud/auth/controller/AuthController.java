@@ -3,12 +3,14 @@ package com.zsh.cloud.auth.controller;
 import com.zsh.cloud.auth.sevice.LoginService;
 import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
 import com.zsh.cloud.common.core.util.Assert;
+import com.zsh.cloud.common.core.util.RSAUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -39,6 +41,9 @@ public class AuthController {
     @Autowired
     private LoginService loginService;
     
+    @Value("${zsh.cloud.security.rsa.privateKey}")
+    private String rsaPriKey;
+    
     /**
      * 登录.
      *
@@ -58,6 +63,8 @@ public class AuthController {
             @ApiImplicitParam(name = "password", defaultValue = "123456", value = "登录密码")})
     public OAuth2AccessToken postAccessToken(Principal principal, @RequestParam Map<String, String> parameters) {
         try {
+            String password = RSAUtil.decryptByPrivateKey(parameters.get("password"), rsaPriKey);
+            parameters.put("password", password);
             OAuth2AccessToken accessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
             // 重置 错误次数
             loginService.restErrorNum(parameters.get("username"));

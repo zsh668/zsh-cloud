@@ -315,6 +315,18 @@ public class User implements Entity<User> {
     }
     
     /**
+     * 密码是否正确.
+     *
+     * @param newPassword
+     * @param confirmPassword
+     * @return
+     */
+    public void checkPassword(String newPassword, String confirmPassword) {
+        ServiceAssert.isTrue(newPassword.equals(confirmPassword), ServiceErrorCode.USER_PASSWORD_ERROR.getCode(),
+                "新密码和确认密码不一致");
+    }
+    
+    /**
      * 修改密码.
      *
      * @param oldPasswordStr

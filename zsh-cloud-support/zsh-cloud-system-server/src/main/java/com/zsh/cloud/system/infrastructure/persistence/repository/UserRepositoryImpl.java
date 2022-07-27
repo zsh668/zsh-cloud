@@ -50,7 +50,7 @@ public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     
     @Override
     public List<User> find(Account account) {
-        return getUserList(baseMapper.selectList(account.getAccount()));
+        return getUserList(baseMapper.queryUserNoTenantByAccount(account.getAccount()));
     }
     
     @Override
