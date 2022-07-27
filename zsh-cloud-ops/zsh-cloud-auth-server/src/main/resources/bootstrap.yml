@@ -29,6 +29,9 @@ spring:
           - data-id: monitor.yaml
             group: DEFAULT_GROUP
             refresh: true
+          - data-id: security.yaml
+            group: DEFAULT_GROUP
+            refresh: true
       discovery:
         register-enabled: true
         enabled: true

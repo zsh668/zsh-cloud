@@ -35,7 +35,7 @@ public class LoginLogRepositoryImpl extends ServiceImpl<SysLoginLogMapper, SysLo
     @Override
     public void store(LoginLog loginLog) {
         SysLoginLogDO sysLoginLogDO = LoginLogConverter.fromLoginLog(loginLog);
-        List<SysUserDO> users = sysUserMapper.selectList(sysLoginLogDO.getAccount());
+        List<SysUserDO> users = sysUserMapper.queryUserNoTenantByAccount(sysLoginLogDO.getAccount());
         if (!CollectionUtils.isEmpty(users)) {
             SysUserDO sysUserDO = users.get(0);
             sysLoginLogDO.setUserId(sysUserDO.getId());

@@ -40,6 +40,7 @@
         
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <hutool.version>5.7.22</hutool.version>
+        <jodd.version>5.1.6</jodd.version>
         <ip2region.version>1.7.2</ip2region.version>
         <commons-io.version>2.11.0</commons-io.version>
         <easyexcel.version>3.0.5</easyexcel.version>
@@ -111,6 +112,12 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+    
+            <dependency>
+                <groupId>org.jodd</groupId>
+                <artifactId>jodd-core</artifactId>
+                <version>${jodd.version}</version>
             </dependency>
             
             <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
@@ -210,7 +217,7 @@
                 <artifactId>micrometer-registry-prometheus</artifactId>
                 <version>${micrometer.version}</version>
             </dependency>
-        
+ 
         </dependencies>
     </dependencyManagement>
 

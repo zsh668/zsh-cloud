@@ -1,5 +1,8 @@
 package com.zsh.cloud.system.application.impl;
 
+import com.zsh.cloud.common.core.exception.ServiceException;
+import com.zsh.cloud.common.core.exception.code.enums.ServiceErrorCode;
+import com.zsh.cloud.common.core.util.RSAUtil;
 import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.assembler.UserDtoAssembler;
 import com.zsh.cloud.system.application.assembler.UserRoleDtoAssembler;
@@ -19,6 +22,7 @@ import com.zsh.cloud.system.domain.specification.UserCreateSpecification;
 import com.zsh.cloud.system.domain.specification.UserDeleteSpecification;
 import com.zsh.cloud.system.domain.specification.UserUpdateSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +54,9 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     
     @Autowired
     private UserRoleDtoAssembler userRoleDtoAssembler;
+    
+    @Value("${zsh.cloud.security.rsa.privateKey}")
+    private String rsaPriKey;
     
     @Override
     public void save(UserCreateCommand userCommand) {
@@ -99,7 +106,18 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     @Override
     public void changePassword(PasswordCommand passwordCommand) {
         User user = userRepository.find(new UserId(passwordCommand.getUserId()));
-        user.changePassword(passwordCommand.getPassword(), passwordCommand.getNewPassword());
+        String password = "";
+        String newPassword = "";
+        String confirmPassword = "";
+        try {
+            password = RSAUtil.decryptByPrivateKey(passwordCommand.getPassword(), rsaPriKey);
+            newPassword = RSAUtil.decryptByPrivateKey(passwordCommand.getNewPassword(), rsaPriKey);
+            confirmPassword = RSAUtil.decryptByPrivateKey(passwordCommand.getConfirmPassword(), rsaPriKey);
+        } catch (Exception e) {
+            throw new ServiceException(ServiceErrorCode.USER_PASSWORD_ERROR.getCode(), "");
+        }
+        user.checkPassword(newPassword, confirmPassword);
+        user.changePassword(password, newPassword);
         user.expand();
         userRepository.store(user);
     }

@@ -63,6 +63,7 @@ secure:
       - "/swagger-resources"
       - "/assets/**"
       - "/favicon.ico"
+      - "/api/system/loginLogs/login/**"
 
 management:
   health:

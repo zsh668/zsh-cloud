@@ -1,9 +1,9 @@
 package com.zsh.cloud.auth.config;
 
 import com.zsh.cloud.auth.sevice.impl.UserDetailsServiceImpl;
+import com.zsh.cloud.common.core.domain.Result;
 import com.zsh.cloud.common.core.exception.code.enums.GlobalErrorCode;
 import com.zsh.cloud.common.core.util.JsonUtils;
-import com.zsh.cloud.common.core.domain.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
@@ -44,7 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll().and().authorizeRequests()
-                .antMatchers("/getPublicKey", "/oauth/logout", "/captcha", "/loginLog/login/**").permitAll()
+                // .antMatchers("/init").permitAll()
+                .antMatchers("/getPublicKey", "/oauth/logout", "/captcha", "/init").permitAll()
                 .antMatchers("/oauth/**", "/webjars/**", "/**.html", "/swagger-resources/**", "/v3/**").permitAll()
                 .antMatchers("/error").permitAll().anyRequest().authenticated().and().csrf().disable();
     }

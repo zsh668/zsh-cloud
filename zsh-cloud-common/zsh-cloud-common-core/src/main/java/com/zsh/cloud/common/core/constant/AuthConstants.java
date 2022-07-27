@@ -52,8 +52,8 @@ public interface AuthConstants {
     /**
      * 查询字段.
      */
-    String CLIENT_DETAILS_FIELDS = "client_id, CONCAT('{noop}', client_secret) as client_secret, resource_ids, scope, "
-            + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
+    String CLIENT_DETAILS_FIELDS = "client_id, client_secret, resource_ids, scope, authorized_grant_types, "
+            + "web_server_redirect_uri, authorities, access_token_validity, "
             + "refresh_token_validity, additional_information, autoapprove";
     
     /**
