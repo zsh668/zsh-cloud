@@ -3,54 +3,6 @@ server:
   servlet:
     context-path: /
 
-spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          # 获取JWT验签公钥请求路径
-          jwk-set-uri: 'http://127.0.0.1:8100/getPublicKey'
-
-  cloud:
-    gateway:
-      routes:
-        # 认证中心
-        - id: zsh-cloud-auth-server
-          uri: lb://zsh-cloud-auth-server
-          predicates:
-            - Path=/api/auth/**
-          filters:
-            - StripPrefix=2
-
-        # 用户
-        - id: zsh-cloud-system-server
-          uri: lb://zsh-cloud-system-server
-          predicates:
-            - Path=/api/system/**
-          filters:
-            - StripPrefix=2
-
-        # 微信
-        - id: zsh-cloud-weixin-server
-          uri: lb://zsh-cloud-weixin-server
-          predicates:
-            - Path=/api/wechat/**
-          filters:
-            - StripPrefix=2
-
-        # 监控admin
-        - id: zsh-cloud-monitor-server
-          uri: lb://zsh-cloud-monitor-server
-          predicates:
-            - Path=/api/monitor/**
-          filters:
-            - StripPrefix=2
-
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-
 management:
   health:
     redis:
@@ -65,5 +17,3 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-knife4j:
-  production: true

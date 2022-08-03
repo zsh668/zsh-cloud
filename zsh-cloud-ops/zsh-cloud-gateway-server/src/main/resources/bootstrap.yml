@@ -13,6 +13,9 @@ spring:
         file-extension: yaml
         enabled: true
         extension-configs:
+          - data-id: gateway.yaml
+            group: DEFAULT_GROUP
+            refresh: true
           - data-id: redis.yaml
             group: DEFAULT_GROUP
             refresh: true
