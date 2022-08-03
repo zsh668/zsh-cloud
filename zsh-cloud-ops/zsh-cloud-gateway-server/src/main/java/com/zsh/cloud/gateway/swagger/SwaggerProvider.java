@@ -7,6 +7,7 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.support.NameUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 
@@ -31,7 +32,9 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
     /**
      * 路径
      **/
-    public static final String API_URI = "v3/api-docs";
+    public static final String API_URI = "/v2/api-docs";
+    
+    public static final String OAS_URI = "/v3/api-docs";
     
     /**
      * 路由加载器
@@ -54,7 +57,7 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
                             .filter(predicateDefinition -> ("Path").equalsIgnoreCase(predicateDefinition.getName()))
                             .forEach(predicateDefinition -> resources.add(swaggerResource(route.getId(),
                                     predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0")
-                                            .replace("**", API_URI))));
+                                            .replace("/**", API_URI))));
                 });
         
         return resources;
@@ -65,7 +68,7 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
         swaggerResource.setLocation(location);
-        swaggerResource.setSwaggerVersion("3.0.3");
+        swaggerResource.setSwaggerVersion(DocumentationType.OAS_30.getVersion());
         return swaggerResource;
     }
 }

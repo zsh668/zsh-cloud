@@ -6,7 +6,7 @@ import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.UserGroupApplicationService;
 import com.zsh.cloud.system.application.UserGroupQueryService;
 import com.zsh.cloud.system.application.model.command.GroupUserCommand;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserGroupUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.UserGroupDTO;

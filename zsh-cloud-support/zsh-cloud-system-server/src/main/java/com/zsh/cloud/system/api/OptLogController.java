@@ -4,7 +4,7 @@ import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.system.application.OptLogApplicationService;
 import com.zsh.cloud.system.application.OptLogQueryService;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.dto.OptLogInfoDTO;
 import com.zsh.cloud.system.application.model.dto.OptLogPageDTO;
 import com.zsh.cloud.system.application.model.query.OptLogPageQuery;

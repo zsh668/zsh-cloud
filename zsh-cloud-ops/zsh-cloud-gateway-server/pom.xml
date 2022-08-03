@@ -17,12 +17,6 @@
     <dependencies>
         <dependency>
             <groupId>com.zsh.cloud</groupId>
-            <artifactId>zsh-cloud-common-swagger</artifactId>
-            <version>${revision}</version>
-        </dependency>
-    
-        <dependency>
-            <groupId>com.zsh.cloud</groupId>
             <artifactId>zsh-cloud-common-j2cache</artifactId>
             <version>${revision}</version>
         </dependency>
@@ -56,6 +50,11 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
     

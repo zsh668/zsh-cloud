@@ -1,4 +1,4 @@
-package com.zsh.cloud.system.application.model.command;
+package com.zsh.cloud.common.web.model;
 
 import com.zsh.cloud.common.core.dto.Command;
 import io.swagger.annotations.ApiModel;

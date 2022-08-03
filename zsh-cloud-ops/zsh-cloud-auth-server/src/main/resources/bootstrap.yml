@@ -32,6 +32,10 @@ spring:
           - data-id: security.yaml
             group: DEFAULT_GROUP
             refresh: true
+          - data-id: common.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+
       discovery:
         register-enabled: true
         enabled: true

@@ -5,7 +5,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.StationApplicationService;
 import com.zsh.cloud.system.application.StationQueryService;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.command.StationCreateCommand;
 import com.zsh.cloud.system.application.model.command.StationUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.StationDTO;

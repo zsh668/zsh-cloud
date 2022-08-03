@@ -5,7 +5,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.ResourceApplicationService;
 import com.zsh.cloud.system.application.ResourceQueryService;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.command.ResourceCreateCommand;
 import com.zsh.cloud.system.application.model.command.ResourceUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.ResourceDTO;

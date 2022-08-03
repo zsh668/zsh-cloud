@@ -38,7 +38,6 @@ dubbo:
   provider:
     filter: dubboExceptionFitler,-exception
 
-
 management:
   health:
     redis:

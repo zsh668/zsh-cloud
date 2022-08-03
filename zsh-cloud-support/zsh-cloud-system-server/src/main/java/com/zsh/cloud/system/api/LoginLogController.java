@@ -6,7 +6,7 @@ import com.zsh.cloud.common.core.domain.Page;
 import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.system.application.LoginLogApplicationService;
 import com.zsh.cloud.system.application.LoginLogQueryService;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.dto.LoginLogDTO;
 import com.zsh.cloud.system.application.model.dto.LoginLogPageDTO;
 import com.zsh.cloud.system.application.model.query.LoginLogPageQuery;

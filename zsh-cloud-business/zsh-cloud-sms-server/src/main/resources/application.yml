@@ -1,0 +1,32 @@
+server:
+  port: 9100
+
+
+
+
+zsh:
+  cloud:
+    tenant:
+      ignore-urls:
+        - /auth/*
+      ignore-tables:
+        - "sys_tenant"
+        - "sys_menu"
+        - "sys_resource"
+        - "sys_login_log"
+        - "sys_opt_log"
+
+    id-generator:
+      machine-code: 2  # id???????
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    tags:
+      application: ${spring.application.name}

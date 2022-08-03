@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "secure.white")
+@ConfigurationProperties(prefix = "zsh.cloud.secure.white")
 public class WhiteListConfig {
     
     private List<String> urls;

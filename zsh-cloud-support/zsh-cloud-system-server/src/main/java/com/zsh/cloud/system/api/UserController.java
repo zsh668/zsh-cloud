@@ -15,7 +15,7 @@ import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.UserManageService;
 import com.zsh.cloud.system.application.UserQueryService;
 import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserImportExcelCommand;

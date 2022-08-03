@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.zsh.cloud</groupId>
+        <artifactId>zsh-cloud-business</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>zsh-cloud-sms-server</artifactId>
+    
+    <name>zsh-cloud-sms-server</name>
+    <description>
+        短信中台
+    </description>
+    
+    <dependencies>
+        <!-- web环境 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-mybatis</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-tenant</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-log</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-web</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

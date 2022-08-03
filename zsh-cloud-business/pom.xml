@@ -17,6 +17,7 @@
 
     <modules>
         <module>zsh-cloud-weixin-server</module>
+        <module>zsh-cloud-sms-server</module>
     </modules>
     
     <dependencies>

@@ -4,7 +4,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.OrgApplicationService;
 import com.zsh.cloud.system.application.OrgQueryService;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.command.OrgCreateCommand;
 import com.zsh.cloud.system.application.model.command.OrgUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.OrgDTO;

@@ -38,16 +38,6 @@ dubbo:
 
 zsh:
   cloud:
-    tenant:
-      ignore-urls:
-        - /auth/*
-      ignore-tables:
-        - "sys_tenant"
-        - "sys_menu"
-        - "sys_resource"
-        - "sys_login_log"
-        - "sys_opt_log"
-
     id-generator:
       machine-code: 1  # id生成器机器掩码
 

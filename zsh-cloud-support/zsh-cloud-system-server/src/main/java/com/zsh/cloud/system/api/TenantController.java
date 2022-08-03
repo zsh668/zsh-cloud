@@ -5,7 +5,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.TenantApplicationService;
 import com.zsh.cloud.system.application.TenantQueryService;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.command.TenantCreateCommand;
 import com.zsh.cloud.system.application.model.command.TenantUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.TenantDTO;

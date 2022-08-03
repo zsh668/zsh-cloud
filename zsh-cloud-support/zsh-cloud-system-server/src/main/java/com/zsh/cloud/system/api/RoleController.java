@@ -6,7 +6,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.RoleApplicationService;
 import com.zsh.cloud.system.application.RoleQueryService;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.command.RoleAuthorityCommand;
 import com.zsh.cloud.system.application.model.command.RoleCreateCommand;
 import com.zsh.cloud.system.application.model.command.RoleUpdateCommand;

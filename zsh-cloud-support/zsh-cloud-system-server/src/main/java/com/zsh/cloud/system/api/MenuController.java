@@ -5,7 +5,7 @@ import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.system.application.MenuApplicationService;
 import com.zsh.cloud.system.application.MenuQueryService;
-import com.zsh.cloud.system.application.model.command.IdsCommand;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.command.MenuCreateCommand;
 import com.zsh.cloud.system.application.model.command.MenuUpdateCommand;
 import com.zsh.cloud.system.application.model.dto.MenuDTO;

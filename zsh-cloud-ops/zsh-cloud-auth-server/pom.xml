@@ -58,6 +58,12 @@
             <artifactId>zsh-cloud-common-web</artifactId>
             <version>${revision}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>com.zsh.cloud</groupId>
+            <artifactId>zsh-cloud-common-tenant</artifactId>
+            <version>${revision}</version>
+        </dependency>
     
         <dependency>
             <groupId>com.zsh.cloud</groupId>

@@ -23,10 +23,13 @@ public class Gen {
                             .outputDir("./tmp"); // 指定输出目录
                 }).packageConfig(builder -> {
                     builder.parent("com.zsh.cloud") // 设置父包名
-                            .moduleName("system") // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.xml, "./tmp")); // 设置mapperXml生成路径
+                            .moduleName("sms") // 设置父包模块名
+                            .pathInfo(Collections.singletonMap(OutputFile.xml, "./tmp/com/zsh/cloud/mapper/xml")); // 设置mapperXml生成路径
                 }).strategyConfig(builder -> {
-                    builder.addInclude("sys_login_log", "sys_opt_log") // 设置需要生成的表名
+                    builder.addInclude("sms_black_list", "sms_config", "sms_config_signature", "sms_config_template",
+                                    "sms_mail_group", "sms_mail_list", "sms_mail_list_group", "sms_manual_process", "sms_marketing",
+                                    "sms_platform", "sms_receive_log", "sms_send_log", "sms_sensitive_list", "sms_signature",
+                                    "sms_template", "sms_timing_push") // 设置需要生成的表名
                             .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                 }).templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();

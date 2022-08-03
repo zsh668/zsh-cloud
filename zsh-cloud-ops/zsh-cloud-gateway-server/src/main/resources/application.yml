@@ -20,7 +20,7 @@ spring:
           predicates:
             - Path=/api/auth/**
           filters:
-            - RewritePath=/api/auth/(?<segment>.*), /$\{segment}
+            - StripPrefix=2
 
         # 用户
         - id: zsh-cloud-system-server
@@ -28,7 +28,7 @@ spring:
           predicates:
             - Path=/api/system/**
           filters:
-            - RewritePath=/api/system/(?<segment>.*), /$\{segment}
+            - StripPrefix=2
 
         # 微信
         - id: zsh-cloud-weixin-server
@@ -36,7 +36,7 @@ spring:
           predicates:
             - Path=/api/wechat/**
           filters:
-            - RewritePath=/api/wechat/(?<segment>.*), /$\{segment}
+            - StripPrefix=2
 
         # 监控admin
         - id: zsh-cloud-monitor-server
@@ -44,26 +44,12 @@ spring:
           predicates:
             - Path=/api/monitor/**
           filters:
-            - RewritePath=/api/monitor/(?<segment>.*), /$\{segment}
+            - StripPrefix=2
 
       discovery:
         locator:
           enabled: true
-          lowerCaseServiceId: true
-
-# 配置白名单路径
-secure:
-  white:
-    urls:
-      - "/api/auth/**"
-      - "/actuator/**"
-      - "/*/*/v3/api-docs/**"
-      - "/doc.html"
-      - "/webjars/**"
-      - "/swagger-resources"
-      - "/assets/**"
-      - "/favicon.ico"
-      - "/api/system/loginLogs/login/**"
+          lower-case-service-id: true
 
 management:
   health:
@@ -79,3 +65,5 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+knife4j:
+  production: true

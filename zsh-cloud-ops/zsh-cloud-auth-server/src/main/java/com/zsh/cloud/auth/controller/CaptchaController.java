@@ -25,7 +25,7 @@ import java.io.IOException;
  * @date 2022/4/19 14:38
  */
 @Slf4j
-@Api(tags = "验证码管理")
+@Api(tags = "验证码")
 @RestController
 public class CaptchaController {
     
