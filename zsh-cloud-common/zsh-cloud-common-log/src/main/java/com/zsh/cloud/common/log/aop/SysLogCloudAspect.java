@@ -85,7 +85,13 @@ public class SysLogCloudAspect {
     private void saveSysLog(JoinPoint joinPoint) {
         // 开始时间
         OptLogDTO sysLog = get();
-        sysLog.setUserName(RequestUtils.getUserName());
+        String userName = "空";
+        try {
+            userName = RequestUtils.getUserName();
+        } catch (Exception e) {
+            log.error("获取当前登录者失败", e);
+        }
+        sysLog.setUserName(userName);
         String controllerDescription = "";
         Api api = joinPoint.getTarget().getClass().getAnnotation(Api.class);
         if (api != null) {

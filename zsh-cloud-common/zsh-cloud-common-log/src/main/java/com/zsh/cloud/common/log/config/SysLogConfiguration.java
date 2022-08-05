@@ -17,7 +17,7 @@ import java.util.function.Consumer;
  * @date 2022/5/9 18:54
  */
 @EnableAsync
-@Configuration
+// @Configuration
 public class SysLogConfiguration {
     
     /**

@@ -30,8 +30,8 @@ import javax.validation.ConstraintViolationException;
 public class GlobalExceptionHandler {
     
     /**
-     * 处理 SpringMVC 请求参数缺失
-     * <p>
+     * 处理 SpringMVC 请求参数缺失.
+     * </p>
      * 例如说，接口上设置了 @RequestParam("xx") 参数，结果并未传递 xx 参数
      */
     @ExceptionHandler(value = MissingServletRequestParameterException.class)
@@ -41,8 +41,8 @@ public class GlobalExceptionHandler {
     }
     
     /**
-     * 处理 SpringMVC 请求参数类型错误
-     * <p>
+     * 处理 SpringMVC 请求参数类型错误.
+     * </p>
      * 例如说，接口上设置了 @RequestParam("xx") 参数为 Integer，结果传递 xx 参数类型为 String
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
     }
     
     /**
-     * 处理 SpringMVC 参数校验不正确
+     * 处理 SpringMVC 参数校验不正确.
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result<?> methodArgumentNotValidExceptionExceptionHandler(MethodArgumentNotValidException ex) {
@@ -65,7 +65,7 @@ public class GlobalExceptionHandler {
     }
     
     /**
-     * 处理 SpringMVC 请求地址不存在
+     * 处理 SpringMVC 请求地址不存在.
      * </p>
      * 注意，它需要设置如下两个配置项：
      * </p>
@@ -85,8 +85,8 @@ public class GlobalExceptionHandler {
     }
     
     /**
-     * 处理 SpringMVC 请求方法不正确
-     * <p>
+     * 处理 SpringMVC 请求方法不正确.
+     * </p>
      * 例如说，A 接口的方法为 GET 方式，结果请求方法为 POST 方式，导致不匹配
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -96,7 +96,7 @@ public class GlobalExceptionHandler {
     }
     
     /**
-     * 处理 SpringMVC 参数绑定不正确，本质上也是通过 Validator 校验
+     * 处理 SpringMVC 参数绑定不正确，本质上也是通过 Validator 校验.
      */
     @ExceptionHandler(BindException.class)
     public Result<?> bindExceptionHandler(BindException ex) {
@@ -109,7 +109,7 @@ public class GlobalExceptionHandler {
     }
     
     /**
-     * 处理 Validator 校验不通过产生的异常
+     * 处理 Validator 校验不通过产生的异常.
      */
     @ExceptionHandler(value = ConstraintViolationException.class)
     public Result<?> constraintViolationExceptionHandler(ConstraintViolationException ex) {
@@ -132,7 +132,7 @@ public class GlobalExceptionHandler {
     }
     
     /**
-     * 处理异常 BaseUncheckedException
+     * 处理异常 BaseUncheckedException.
      */
     @ExceptionHandler(value = BaseUncheckedException.class)
     public Result<?> baseUncheckedException(BaseUncheckedException ex) {
@@ -141,7 +141,7 @@ public class GlobalExceptionHandler {
     }
     
     /**
-     * 处理业务异常 ServiceException
+     * 处理业务异常 ServiceException.
      */
     @ExceptionHandler(value = ServiceException.class)
     public Result<?> serviceExceptionHandler(ServiceException ex) {
@@ -150,7 +150,7 @@ public class GlobalExceptionHandler {
     }
     
     /**
-     * 处理系统异常，兜底处理所有的一切
+     * 处理系统异常，兜底处理所有的一切.
      *
      * @param e
      * @return com.zsh.cloud.common.core.pojo.Result<?>

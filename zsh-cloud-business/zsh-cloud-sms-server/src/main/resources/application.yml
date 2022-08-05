@@ -1,23 +1,45 @@
 server:
   port: 9100
+#  servlet:
+#    context-path: /sms
 
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
 
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 
+dubbo:
+  application:
+    id: zsh-cloud-sms-server
+    name: zsh-cloud-sms-server
+    qos-enable: false
+
+  registry:
+    address: nacos://127.0.0.1:8848
+    check: false
+    parameters:
+      # 命名空间ID
+      namespace: 9af03680-d667-47c6-9b1d-bc5f88bfd5fd
+
+  protocol:
+    name: dubbo
+    port: -1
+
+  provider:
+    filter: dubboExceptionFitler,-exception
+
+  scan:
+    basePackages: com.zsh.cloud.sms.application
 
 zsh:
   cloud:
-    tenant:
-      ignore-urls:
-        - /auth/*
-      ignore-tables:
-        - "sys_tenant"
-        - "sys_menu"
-        - "sys_resource"
-        - "sys_login_log"
-        - "sys_opt_log"
-
     id-generator:
-      machine-code: 2  # id???????
+      machine-code: 200  # id生成器机器掩码
 
 management:
   endpoint:

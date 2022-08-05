@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * 日志自动配置.
- * <p>
+ * </p>
  * 启动条件： 1，存在web环境 2，配置文件中zsh.cloud.log.enabled=true 3，配置文件中不存在：zsh.cloud.log.enabled 值
  *
  * @author zhangshuhang

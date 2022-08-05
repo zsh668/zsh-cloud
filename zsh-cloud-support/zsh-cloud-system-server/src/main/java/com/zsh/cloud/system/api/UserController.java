@@ -8,6 +8,7 @@ import com.zsh.cloud.common.core.util.ServiceAssert;
 import com.zsh.cloud.common.log.annotations.SysLog;
 import com.zsh.cloud.common.web.excel.export.ExportExcel;
 import com.zsh.cloud.common.web.excel.imports.ImportResultDTO;
+import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.common.web.translate.Translator;
 import com.zsh.cloud.common.web.util.ExcelUtils;
 import com.zsh.cloud.system.api.excel.UserImportListener;
@@ -15,7 +16,6 @@ import com.zsh.cloud.system.application.UserApplicationService;
 import com.zsh.cloud.system.application.UserManageService;
 import com.zsh.cloud.system.application.UserQueryService;
 import com.zsh.cloud.system.application.model.command.CurrentUserCommand;
-import com.zsh.cloud.common.web.model.IdsCommand;
 import com.zsh.cloud.system.application.model.command.PasswordCommand;
 import com.zsh.cloud.system.application.model.command.UserCreateCommand;
 import com.zsh.cloud.system.application.model.command.UserImportExcelCommand;
@@ -31,6 +31,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -274,13 +275,14 @@ public class UserController {
     @PostMapping("users/importExcel")
     @ApiOperation("导入")
     public ImportResultDTO importExcel(@RequestParam(value = "file") MultipartFile file) throws IOException {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start("导入excel-" + System.currentTimeMillis());
         ServiceAssert.notTrue(file.isEmpty(), GlobalErrorCode.BAD_REQUEST.getCode(), "导入内容为空");
-        Long begin = System.currentTimeMillis();
         ImportResultDTO importResult = new ImportResultDTO();
         EasyExcelFactory.read(file.getInputStream(), UserImportExcelCommand.class,
                 new UserImportListener(importResult, userManageService)).sheet().doRead();
-        Long end = System.currentTimeMillis();
-        log.info("导入excel 用时 :{}", (end - begin));
+        stopWatch.stop();
+        log.info("导入excel 用时 :{}", stopWatch.getLastTaskTimeMillis());
         return importResult;
     }
 }
