@@ -59,20 +59,4 @@ public enum GlobalErrorCode implements BaseErrorCode, IDict<Integer> {
     public String getMsg() {
         return msg;
     }
-    
-    /**
-     * 获取msg信息.
-     *
-     * @param code
-     * @return
-     */
-    public static String getMsgByCode(int code) {
-        for (GlobalErrorCode value : values()) {
-            if (value.getCode() == code) {
-                return value.getMsg();
-            }
-        }
-        return "";
-    }
-    
 }

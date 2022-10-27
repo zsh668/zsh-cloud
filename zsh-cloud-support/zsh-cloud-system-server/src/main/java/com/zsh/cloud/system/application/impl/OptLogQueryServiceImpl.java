@@ -1,17 +1,14 @@
 package com.zsh.cloud.system.application.impl;
 
 import com.zsh.cloud.common.core.domain.Page;
-import com.zsh.cloud.system.api.dto.OptLogDTO;
 import com.zsh.cloud.system.application.OptLogQueryService;
 import com.zsh.cloud.system.application.assembler.OptLogDtoAssembler;
 import com.zsh.cloud.system.application.model.dto.OptLogInfoDTO;
 import com.zsh.cloud.system.application.model.dto.OptLogPageDTO;
 import com.zsh.cloud.system.application.model.query.OptLogPageQuery;
 import com.zsh.cloud.system.domain.model.log.LogId;
-import com.zsh.cloud.system.domain.model.log.login.LoginLog;
 import com.zsh.cloud.system.domain.model.log.opt.OptLog;
 import com.zsh.cloud.system.domain.model.log.opt.OptLogRepository;
-import com.zsh.cloud.system.infrastructure.persistence.entity.SysLoginLogDO;
 import com.zsh.cloud.system.infrastructure.persistence.entity.SysOptLogDO;
 import com.zsh.cloud.system.infrastructure.persistence.mapper.SysOptLogMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -25,7 +25,7 @@ public class IdsCommand extends Command {
     /**
      * ID集合
      */
-    @ApiModelProperty(value = "ID集合")
+    @ApiModelProperty(value = "ID集合", required = true)
     @NotNull(message = "ID不能为空")
     @Size(min = 1, message = "最少选择一条数据")
     private List<String> ids;

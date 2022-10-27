@@ -2,8 +2,6 @@ package com.zsh.cloud.auth.sevice;
 
 import com.wf.captcha.base.Captcha;
 
-import java.awt.image.BufferedImage;
-
 /**
  * 验证码服务.
  *

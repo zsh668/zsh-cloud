@@ -6,7 +6,6 @@ import com.zsh.cloud.sms.application.model.dto.SignatureDTO;
 import com.zsh.cloud.sms.application.model.dto.SignaturePageDTO;
 import com.zsh.cloud.sms.application.model.query.SignaturePageQuery;
 import com.zsh.cloud.sms.domain.model.signature.SignatureRepository;
-import com.zsh.cloud.sms.infrastructure.persistence.mapper.SmsConfigSignatureMapper;
 import com.zsh.cloud.sms.infrastructure.persistence.mapper.SmsSignatureMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
