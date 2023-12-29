@@ -4,7 +4,6 @@ import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.converters.localdatetime.LocalDateTimeStringConverter;
 import com.zsh.cloud.common.core.dto.DTO;
-import com.zsh.cloud.common.core.enums.StatusEnum;
 import com.zsh.cloud.common.web.translate.Translate;
 import com.zsh.cloud.system.application.translate.ServiceImplTranslator;
 import com.zsh.cloud.system.domain.model.user.GenderEnum;
