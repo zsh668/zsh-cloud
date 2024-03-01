@@ -6,6 +6,7 @@
         <groupId>com.zsh.cloud</groupId>
         <artifactId>zsh-cloud</artifactId>
         <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>zsh-cloud-common</artifactId>
     <packaging>pom</packaging>
@@ -26,6 +27,7 @@
         <module>zsh-cloud-common-tenant</module>
         <module>zsh-cloud-common-web</module>
         <module>zsh-cloud-common-weixin</module>
+        <module>zsh-cloud-common-oss</module>
     </modules>
     
     <dependencies>

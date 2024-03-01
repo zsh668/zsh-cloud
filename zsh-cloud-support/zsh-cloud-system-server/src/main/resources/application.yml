@@ -40,6 +40,10 @@ zsh:
   cloud:
     id-generator:
       machine-code: 1  # id生成器机器掩码
+    oss:
+      endpoint: xxx
+      accessKey: xxx
+      secretKey: xxx
 
 management:
   endpoint:

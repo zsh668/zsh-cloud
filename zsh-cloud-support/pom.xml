@@ -6,6 +6,7 @@
         <groupId>com.zsh.cloud</groupId>
         <artifactId>zsh-cloud</artifactId>
         <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>zsh-cloud-support</artifactId>
     <packaging>pom</packaging>

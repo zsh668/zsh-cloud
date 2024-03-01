@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.zsh.cloud.common.oss.config.OssAutoConfiguration
