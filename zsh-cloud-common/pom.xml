@@ -28,6 +28,7 @@
         <module>zsh-cloud-common-web</module>
         <module>zsh-cloud-common-weixin</module>
         <module>zsh-cloud-common-oss</module>
+        <module>zsh-cloud-common-influxdb</module>
     </modules>
     
     <dependencies>
