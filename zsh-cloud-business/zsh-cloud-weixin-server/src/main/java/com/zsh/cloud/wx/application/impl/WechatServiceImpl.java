@@ -1,5 +1,7 @@
 package com.zsh.cloud.wx.application.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.zsh.cloud.common.core.util.JsonUtils;
 import com.zsh.cloud.common.weixin.util.aes.WxBizMsgCrypt;
 import com.zsh.cloud.common.weixin.util.xml.XmlUtils;
 import com.zsh.cloud.wx.application.WechatService;
@@ -16,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -48,25 +51,37 @@ public class WechatServiceImpl implements WechatService {
         
         WechatSignatureValidateService wechatSignatureValidateService = new WechatSignatureValidateService();
         return wechatSignatureValidateService.validate(
-                new TokenSignature(account.getToken(), signatureQuery.getTimestamp(), signatureQuery.getNonce()),
-                new Signature(signatureQuery.getSignature()));
+            new TokenSignature(account.getToken(), signatureQuery.getTimestamp(), signatureQuery.getNonce()),
+            new Signature(signatureQuery.getSignature()));
     }
     
     @Override
     public String replyMessage(String requestBody, String appid, WechatMessageQuery messageQuery) {
         Account account = accountRepository.find(new AppId(appid));
-    
+        
         WxBizMsgCrypt cmsCrypt = new WxBizMsgCrypt(account.getToken().getToken(), account.getAesKey(), appid);
-        if ("aes".equalsIgnoreCase(messageQuery.getEncrypt_type())) {
-            requestBody = cmsCrypt.decrypt(messageQuery.getMsg_signature(), messageQuery.getTimestamp(),
-                    messageQuery.getNonce(), requestBody);
+        Map<String, String> map;
+        if ("{".equals(requestBody)) {
+            map = JsonUtils.parseObject(requestBody, new TypeReference<HashMap<String, String>>() {
+            });
+            if ("aes".equalsIgnoreCase(messageQuery.getEncrypt_type())) {
+                requestBody =
+                    cmsCrypt.decryptJson(messageQuery.getMsg_signature(), messageQuery.getTimestamp(), messageQuery.getNonce(), map.get("Encrypt"));
+            }
+            map.putAll(JsonUtils.parseObject(requestBody, new TypeReference<HashMap<String, String>>() {
+            }));
+        } else {
+            if ("aes".equalsIgnoreCase(messageQuery.getEncrypt_type())) {
+                requestBody = cmsCrypt.decrypt(messageQuery.getMsg_signature(), messageQuery.getTimestamp(), messageQuery.getNonce(), requestBody);
+            }
+            map = XmlUtils.parseXml(requestBody);
         }
-        Map<String, String> map = XmlUtils.parseXml(requestBody);
         log.info("解析后信息: {}", map);
-        String msg = messageRepository.findReplyMessage(appid, map);
-        if ("aes".equalsIgnoreCase(messageQuery.getEncrypt_type())) {
-            msg = cmsCrypt.encrypt(msg);
-        }
-        return msg;
+        // String msg = messageRepository.findReplyMessage(appid, map);
+        // if ("aes".equalsIgnoreCase(messageQuery.getEncrypt_type())) {
+        //     msg = cmsCrypt.encrypt(msg);
+        // }
+        // return msg;
+        return "";
     }
 }

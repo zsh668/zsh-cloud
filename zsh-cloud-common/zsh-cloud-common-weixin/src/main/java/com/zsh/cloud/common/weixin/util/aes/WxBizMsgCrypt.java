@@ -285,4 +285,33 @@ public class WxBizMsgCrypt {
         // 解密
         return decrypt(encrypt);
     }
+    
+    /**
+     * 检验消息的真实性，并且获取解密后的明文.
+     * <ol>
+     * <li>利用收到的密文生成安全签名，进行签名验证</li>
+     * <li>若验证通过，则提取xml中的加密消息</li>
+     * <li>对消息进行解密</li>
+     * </ol>
+     *
+     * @param msgSignature 签名串，对应URL参数的msg_signature
+     * @param timeStamp    时间戳，对应URL参数的timestamp
+     * @param nonce        随机串，对应URL参数的nonce
+     * @param postData     密文，对应POST请求的数据
+     * @return 解密后的原文
+     */
+    public String decryptJson(String msgSignature, String timeStamp, String nonce, String postData) {
+        
+        // 密钥，公众账号的app secret
+        // 验证安全签名
+        String signature = SHA1.getSHA1(token, timeStamp, nonce, postData);
+        // 和URL中的签名比较是否相等
+        if (!signature.equals(msgSignature)) {
+            log.error("加密消息签名校验失败");
+            throw new RuntimeException("加密消息签名校验失败");
+        }
+        
+        // 解密
+        return decrypt(postData);
+    }
 }

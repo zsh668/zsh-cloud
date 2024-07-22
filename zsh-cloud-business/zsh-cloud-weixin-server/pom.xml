@@ -24,12 +24,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-    
-        <dependency>
-            <groupId>com.zsh.cloud</groupId>
-            <artifactId>zsh-cloud-common-core</artifactId>
-            <version>${revision}</version>
-        </dependency>
         
         <dependency>
             <groupId>com.zsh.cloud</groupId>
